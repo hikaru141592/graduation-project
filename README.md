@@ -66,3 +66,6 @@
 - **Hotwire(Turbo)**: 行動選択時や行動終了時の画面遷移・ページの更新を担当。ページ全体の再描画を避けて、必要な部分だけを更新します。
 - **Hotwire(Stimulus)**: 選択された行動に応じて、メッセージ進行や画像切り替えをし、また行動途中の特定のタイミングでステータスや所持アイテムの更新を非同期で行います。
 - **LINE Notify**: LINEのプッシュ通知を実装予定。
+
+## 画面遷移図リンク
+[画面遷移図](/mnt/c/Users/cocco/graduation-project/graduation-project)
