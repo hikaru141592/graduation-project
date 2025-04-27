@@ -68,4 +68,4 @@
 - **LINE Notify**: LINEのプッシュ通知を実装予定。
 
 ## 画面遷移図リンク
-[画面遷移図](/mnt/c/Users/cocco/graduation-project/graduation-project)
+[画面遷移図](https://www.figma.com/design/j33zpMCRp4KbB9VmqsrF9b/%E7%84%A1%E9%A1%8C?node-id=0-1&p=f&t=wYsR6KBsPAJCdJr3-0)
