@@ -72,7 +72,7 @@
 [画面遷移図](https://www.figma.com/design/j33zpMCRp4KbB9VmqsrF9b/%E7%84%A1%E9%A1%8C?node-id=0-1&p=f&t=wYsR6KBsPAJCdJr3-0)
 
 ## ER図リンク
-[ER図](https://drive.google.com/file/d/1UY7uaeIbL0X8oYmat126zvD7iamNS95k/view?usp=sharing)
+[ER図](https://drive.google.com/file/d/1wge7GApSMPxt3yF6GVhmmdnQhDLTt50c/view?usp=sharing)
 ※スクリーンショットでは縮小率が高くなってしまうため、draw.ioからエクスポートしたpngファイルをGoogleドライブにアップしています。
 ### 補足
 - ゲーム進行とロジックに関して、特殊な意味を持つ用語を定義しています。詳しくは[こちら](./game_logic.md)を参照してください。
