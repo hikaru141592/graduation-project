@@ -74,3 +74,13 @@
 
 ## ER図リンク
 [ER図](https://drive.google.com/file/d/1UY7uaeIbL0X8oYmat126zvD7iamNS95k/view?usp=sharing)
+※スクリーンショットでは縮小率が高くなってしまうため、draw.ioからエクスポートしたpngファイルをGoogleドライブにアップしています。
+### 補足
+- ゲーム進行とロジックに関して、特殊な意味を持つ用語を定義しています。詳しくは[こちら](./game_logic.md)を参照してください。
+- Action_resultsテーブルのpriorityは、「行動選択後の結果の分岐に関して、どのような順でそれらの分岐を判定をしていくか」を表す値を格納します。
+- Action_resultsテーブルのtrigger_conditionsは、「行動選択後の結果の分岐の判定を行うための判定条件」を表すJSONデータを格納します。
+- Action_resultsテーブルのnext_derivation_numberは、「行動選択後の結果によって得られるステータスや持ち物の所持数の変動値」を表すJSONデータを格納します。
+- Action_resultsテーブルのresolves_loopは、ループ解決を行う場合のみTRUEを格納します。
+- Cutsテーブルのpositionは、行動選択後フェーズにおける何番目のカットであるかを表します。
+- Solved_event_categoriesテーブルは、解決による一定時間のフラグ無効化を実現するためのテーブルです。
+- User_statusesテーブルは、ゲームプレイ上で使用される各ステータス値に加え、ループに入った際にループ突入時刻やそのイベントセットの種類の情報を格納します。
