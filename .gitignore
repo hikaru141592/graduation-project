@@ -32,3 +32,18 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Nodeパッケージ（コンテナ内で yarn install したときに生成される）
+/node_modules/
+
+# エディタやシェルの一時ファイル
+/.idea/
+/.vscode/
+/*.swp
+/.DS_Store
+
+# Rubyデバッガーの履歴ファイル
+/.byebug_history
+
+# テストカバレッジレポート
+/coverage/
