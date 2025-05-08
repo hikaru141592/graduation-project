@@ -8,7 +8,6 @@ on:
 jobs:
   scan_ruby:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -17,18 +16,25 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: true
+          bundler-cache: false
 
+      - name: Cache Ruby gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ruby-${{ github.sha }}-
+          
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install  # docker-composeで依存関係をインストール
+          docker-compose run --rm web bundle install
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: docker-compose run --rm web bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -37,11 +43,19 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: true
+          bundler-cache: false
+
+      - name: Cache Ruby gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ruby-${{ github.sha }}-
 
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install  # docker-composeで依存関係をインストール
+          docker-compose run --rm web bundle install
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: docker-compose run --rm web bin/importmap audit
@@ -56,18 +70,25 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: true
+          bundler-cache: false
+
+      - name: Cache Ruby gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ruby-${{ github.sha }}-
 
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install  # docker-composeで依存関係をインストール
+          docker-compose run --rm web bundle install
 
       - name: Lint code for consistent style
         run: docker-compose run --rm web bin/rubocop -f github
 
   test:
     runs-on: ubuntu-latest
-
     services:
       postgres:
         image: postgres
@@ -89,11 +110,19 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: true
+          bundler-cache: false
+
+      - name: Cache Ruby gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-ruby-${{ github.sha }}-
 
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install  # docker-composeで依存関係をインストール
+          docker-compose run --rm web bundle install
 
       - name: Run RSpec tests
         env:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_05_065648) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_07_122515) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -28,8 +28,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_05_065648) do
     t.boolean "line_notifications_enabled", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_login_at"
+    t.datetime "last_logout_at"
+    t.datetime "last_activity_at"
+    t.string "last_login_from_ip_address"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["friend_code"], name: "index_users_on_friend_code", unique: true
+    t.index ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at"
     t.index ["line_account"], name: "index_users_on_line_account", unique: true
     t.check_constraint "birth_day >= 1 AND birth_day <= 31", name: "birth_day_range"
     t.check_constraint "birth_month >= 1 AND birth_month <= 12", name: "birth_month_range"
