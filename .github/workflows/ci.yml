@@ -32,10 +32,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install  # docker-composeで依存関係をインストール
+          docker compose run --rm web bundle install  # docker-composeで依存関係をインストール
 
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: docker-compose run --rm web bin/brakeman --no-pager
+        run: docker compose run --rm web bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
@@ -60,10 +60,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install
+          docker compose run --rm web bundle install
 
       - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: docker-compose run --rm web bin/importmap audit
+        run: docker compose run --rm web bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
@@ -88,10 +88,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install
+          docker compose run --rm web bundle install
 
       - name: Lint code for consistent style
-        run: docker-compose run --rm web bin/rubocop -f github
+        run: docker compose run --rm web bin/rubocop -f github
 
   test:
     runs-on: ubuntu-latest
@@ -106,11 +106,7 @@ jobs:
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config google-chrome-stable
-
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
@@ -118,29 +114,18 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Cache Ruby gems
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
-          restore-keys: |
-            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
-            ${{ runner.os }}-ruby-
-
       - name: Install dependencies
-        run: |
-          docker-compose run --rm web bundle install
+        run: bundle install --jobs 4 --retry 3
 
-      - name: Run RSpec tests
+      - name: Prepare database
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        run: docker-compose run --rm web bundle exec rspec
+        run: |
+          bin/rails db:create db:migrate
 
-      - name: Keep screenshots from failed system tests
-        uses: actions/upload-artifact@v4
-        if: failure()
-        with:
-          name: screenshots
-          path: ${{ github.workspace }}/tmp/screenshots
-          if-no-files-found: ignore
+      - name: Run RSpec
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+        run: bundle exec rspec
