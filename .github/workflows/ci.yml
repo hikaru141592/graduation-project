@@ -24,7 +24,8 @@ jobs:
           path: vendor/bundle
           key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-ruby-${{ github.sha }}-
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
+            ${{ runner.os }}-ruby-
 
       - name: Install dependencies
         run: |
@@ -51,7 +52,8 @@ jobs:
           path: vendor/bundle
           key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-ruby-${{ github.sha }}-
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
+            ${{ runner.os }}-ruby-
 
       - name: Install dependencies
         run: |
@@ -78,7 +80,8 @@ jobs:
           path: vendor/bundle
           key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-ruby-${{ github.sha }}-
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
+            ${{ runner.os }}-ruby-
 
       - name: Install dependencies
         run: |
@@ -118,7 +121,8 @@ jobs:
           path: vendor/bundle
           key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-ruby-${{ github.sha }}-
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
+            ${{ runner.os }}-ruby-
 
       - name: Install dependencies
         run: |
