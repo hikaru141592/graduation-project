@@ -16,7 +16,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: false
+          bundler-cache: true
 
       - name: Cache Ruby gems
         uses: actions/cache@v2
@@ -25,10 +25,10 @@ jobs:
           key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
             ${{ runner.os }}-ruby-${{ github.sha }}-
-          
+
       - name: Install dependencies
         run: |
-          docker-compose run --rm web bundle install
+          docker-compose run --rm web bundle install  # docker-composeで依存関係をインストール
 
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: docker-compose run --rm web bin/brakeman --no-pager
@@ -43,7 +43,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: false
+          bundler-cache: true
 
       - name: Cache Ruby gems
         uses: actions/cache@v2
@@ -70,7 +70,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: false
+          bundler-cache: true
 
       - name: Cache Ruby gems
         uses: actions/cache@v2
@@ -110,7 +110,7 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
-          bundler-cache: false
+          bundler-cache: true
 
       - name: Cache Ruby gems
         uses: actions/cache@v2
