@@ -22,8 +22,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
 
       - name: Install dependencies
@@ -49,8 +50,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
 
       - name: Install dependencies
@@ -76,8 +78,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
 
       - name: Install dependencies
@@ -116,8 +119,9 @@ jobs:
         uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
           restore-keys: |
+            ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
 
       - name: Install dependencies
