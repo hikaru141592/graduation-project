@@ -1,0 +1,40 @@
+{
+  "name": "app",
+  "private": "true",
+  "scripts": {
+    "build:css:compile": "sass ./app/assets/stylesheets/application.bootstrap.scss:./app/assets/builds/application.css --no-source-map --load-path=node_modules",
+    "build:css:prefix": "postcss ./app/assets/builds/application.css --use=autoprefixer --output=./app/assets/builds/application.css",
+    "build:css": "npm run build:css:compile && npm run build:css:prefix",
+    "watch:css": "nodemon --watch ./app/assets/stylesheets --ext scss --exec \"npm run build:css\""
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "description": "## サービス概要 「たまごちゃん」と名付けられたキャラクターと日常生活の中でふれあいながら育てるふれあい中心のWebゲームです。   ユーザーはごはんをあげたり、なでたり、話しかけたりして、「たまごちゃん」とのつながりを深めていきます。   感情表現豊かなキャラクターとのふれあいを通じて、キャラクターへの親しみや愛着が深まる体験を提供します。",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hikaru141592/graduation-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hikaru141592/graduation-project/issues"
+  },
+  "homepage": "https://github.com/hikaru141592/graduation-project#readme",
+  "devDependencies": {
+    "@popperjs/core": "^2.11.8",
+    "autoprefixer": "^10.4.21",
+    "bootstrap": "^5.3.6",
+    "nodemon": "^3.1.10",
+    "postcss": "^8.5.3",
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.87.0"
+  }
+}

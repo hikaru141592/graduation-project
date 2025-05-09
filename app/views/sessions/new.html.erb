@@ -1,0 +1,25 @@
+<%= render 'shared/flash_message' %>
+
+<div class="container mt-5" style="max-width: 400px;">
+  <h1 class="mb-4">ログイン</h1>
+
+  <%= form_with url: login_path, local: true, html: { class: 'needs-validation' } do |f| %>
+    <div class="mb-3">
+      <%= f.label :email, 'メールアドレス', class: 'form-label' %>
+      <%= f.email_field :email, name: :email, class: 'form-control', required: true, placeholder: 'example@example.com' %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :password, 'パスワード', class: 'form-label' %>
+      <%= f.password_field :password, name: :password, class: 'form-control', required: true %>
+    </div>
+
+    <div class="d-grid mb-3">
+      <%= f.submit 'ログイン', class: 'btn btn-primary btn-lg' %>
+    </div>
+  <% end %>
+
+  <div class="text-center">
+    <%= link_to '新規登録はこちら', signup_path, class: 'btn btn-link' %>
+  </div>
+</div>

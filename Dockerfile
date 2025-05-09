@@ -4,14 +4,15 @@ ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 
 RUN apt-get update -qq \
- && apt-get install -y \
-    build-essential \
-    libpq-dev \
-    nodejs \
-    postgresql-client \
-    yarn \
-    tzdata \
- && rm -rf /var/lib/apt/lists/*
+  && apt-get install -y \
+     build-essential \
+     libpq-dev \
+     nodejs \
+     npm \
+     postgresql-client \
+     yarn \
+     tzdata \
+  && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /app
 WORKDIR /app

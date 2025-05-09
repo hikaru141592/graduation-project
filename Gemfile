@@ -38,6 +38,11 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 gem "sorcery"
+gem 'bootstrap', '~> 5.3.0'
+gem 'popper_js', '~> 2.11.8'
+# gem 'sassc-rails'
+gem 'cssbundling-rails'
+# gem 'dartsass-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
