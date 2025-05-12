@@ -125,7 +125,7 @@ jobs:
           bundle exec rails db:create db:migrate
 
       - name: Precompile assets
-        run: docker compose run --rm web RAILS_ENV=production bundle exec rake assets:precompile
+        run: docker compose run --rm web env RAILS_ENV=production bundle exec rake assets:precompile
 
       - name: Run RSpec
         env:
