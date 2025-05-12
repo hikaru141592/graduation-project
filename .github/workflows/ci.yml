@@ -25,7 +25,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}-${{ runner.os }}
           restore-keys: |
             ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
@@ -53,7 +53,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}-${{ runner.os }}
           restore-keys: |
             ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
@@ -81,7 +81,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: vendor/bundle
-          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}
+          key: ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-${{ github.sha }}-${{ runner.os }}
           restore-keys: |
             ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
@@ -123,6 +123,9 @@ jobs:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: |
           bundle exec rails db:create db:migrate
+
+      - name: Precompile assets
+        run: docker compose run --rm web RAILS_ENV=production bundle exec rake assets:precompile
 
       - name: Run RSpec
         env:
