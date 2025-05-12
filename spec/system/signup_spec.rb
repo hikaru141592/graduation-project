@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "サインアップ", type: :system do
-  before { driven_by(:rack_test) }
+  before { driven_by(:headless_chrome) }
 
   let(:user_attrs) { attributes_for(:user) }
 
@@ -14,7 +14,7 @@ RSpec.describe "サインアップ", type: :system do
   it "必須項目抜けだと同じページにとどまり、フォーム近くにエラーメッセージが出る" do
     sign_up_as(user_attrs.merge(email: "", birth_month: ""))
     expect(current_path).to eq(signup_path)
-    within(".field_with_errors input[name='user[email]'] + .error") do
+    within('.error_explanation') do
       expect(page).to have_content("メールアドレスを入力してください")
     end
   end

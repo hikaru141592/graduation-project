@@ -24,9 +24,9 @@ RSpec.describe "ユーザー登録", type: :request do
     end
 
     context "無効なパラメータの場合" do
-      it "200 OK で再描画され、インラインエラーが表示される" do
+      it "ステータス422で再描画され、インラインエラーが表示される" do
         post signup_path, params: { user: invalid_attributes }
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to include("メールアドレスを入力してください")
         expect(response.body).to include("誕生月は一覧にありません")
       end

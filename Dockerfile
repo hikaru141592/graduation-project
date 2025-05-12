@@ -12,6 +12,8 @@ RUN apt-get update -qq \
      postgresql-client \
      yarn \
      tzdata \
+     chromium \
+     chromium-driver \
   && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir /app
