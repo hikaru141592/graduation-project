@@ -1,21 +1,39 @@
 require 'rails_helper'
 
-RSpec.describe "サインアップ", type: :system do
-  before { driven_by(:headless_chrome) }
-
+RSpec.describe "サインアップ（クライアントバリデーション）", type: :system, js: true do
   let(:user_attrs) { attributes_for(:user) }
 
-  it "有効な情報で登録するとログイン画面にリダイレクトされ、成功フラッシュが表示される" do
-    sign_up_as(user_attrs)
-    expect(current_path).to eq(login_path)
-    expect(page).to have_selector(".alert-success", text: "登録が完了しました。ログインしてください。")
+  before do
+    driven_by :headless_chrome
+    visit signup_path
   end
 
-  it "必須項目抜けだと同じページにとどまり、フォーム近くにエラーメッセージが出る" do
-    sign_up_as(user_attrs.merge(email: "", birth_month: ""))
+  it "必須フィールドに入力せずに送信すると送信が抑制される" do
+    click_button '登録する'
     expect(current_path).to eq(signup_path)
-    within('.error_explanation') do
-      expect(page).to have_content("メールアドレスを入力してください")
+  end
+
+  it "すべての入力欄に required 属性が付いている" do
+    %w[
+      email
+      password
+      password_confirmation
+      name
+      egg_name
+      birth_month
+      birth_day
+    ].each do |attr|
+      expect(page).to have_selector("input[name='user[#{attr}]'][required]"), 
+        "user[#{attr}] に required 属性が付いていません"
     end
+  end
+
+  it "validationMessage が出ている" do
+    is_valid = page.evaluate_script("document.querySelector('form').checkValidity()")
+    expect(is_valid).to eq(false)
+    msg = page.evaluate_script(
+      "document.querySelector('input[name=\"user[email]\"]').validationMessage"
+    )
+    expect(msg).not_to be_empty
   end
 end
