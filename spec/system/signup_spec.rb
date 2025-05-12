@@ -23,7 +23,7 @@ RSpec.describe "サインアップ（クライアントバリデーション）"
       birth_month
       birth_day
     ].each do |attr|
-      expect(page).to have_selector("input[name='user[#{attr}]'][required]"), 
+      expect(page).to have_selector("input[name='user[#{attr}]'][required]"),
         "user[#{attr}] に required 属性が付いていません"
     end
   end

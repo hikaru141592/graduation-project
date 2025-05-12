@@ -38,10 +38,10 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 gem "sorcery"
-gem 'bootstrap', '~> 5.3.0'
-gem 'popper_js', '~> 2.11.8'
+gem "bootstrap", "~> 5.3.0"
+gem "popper_js", "~> 2.11.8"
 # gem 'sassc-rails'
-gem 'cssbundling-rails'
+gem "cssbundling-rails"
 # gem 'dartsass-rails'
 
 group :development, :test do
@@ -56,8 +56,8 @@ group :development, :test do
 
   gem "rspec-rails", "~> 6.0"
   gem "dotenv-rails", "~> 2.8"
-  gem 'factory_bot_rails'
-  gem 'faker'
+  gem "factory_bot_rails"
+  gem "faker"
 end
 
 group :development do
@@ -69,5 +69,5 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
   gem "selenium-webdriver"
-  #gem 'webdrivers'
+  # gem 'webdrivers'
 end
