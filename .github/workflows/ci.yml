@@ -131,6 +131,7 @@ jobs:
         env:
           RAILS_ENV: production
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
         run: bundle exec rspec
