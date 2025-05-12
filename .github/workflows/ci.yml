@@ -125,7 +125,12 @@ jobs:
           bundle exec rails db:create db:migrate
 
       - name: Precompile assets
-        run: docker compose run --rm web env RAILS_ENV=production bundle exec rake assets:precompile
+        run: |
+          docker compose run --rm \
+            -e RAILS_ENV=production \
+            -e SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
+            -e RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} \
+            web sh -c "bundle exec rake assets:precompile"
 
       - name: Run RSpec
         env:
