@@ -10,7 +10,7 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to login_path, success: "登録が完了しました。ログインしてください。"
     else
-      flash.now[:alert] = "入力に誤りがあります。"
+      flash.now[:danger] = "入力に誤りがあります。"
       render :new, status: :unprocessable_entity
     end
   end

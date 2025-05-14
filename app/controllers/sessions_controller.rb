@@ -9,13 +9,13 @@ class SessionsController < ApplicationController
     if @user
       redirect_to root_path, success: "ログインに成功しました。"
     else
-      flash.now[:alert] = "メールアドレスかパスワードが違います。"
+      flash.now[:danger] = "メールアドレスかパスワードが違います。"
       render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
     logout
-    redirect_to login_path, notice: "ログアウトしました。", status: :see_other
+    redirect_to login_path, danger: "ログアウトしました。", status: :see_other
   end
 end
