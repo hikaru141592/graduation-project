@@ -1,7 +1,6 @@
 <div class="container mt-5 text-center">
   <%= link_to "ログアウト", logout_path,
-      method: :delete,
-      data: { confirm: "本当にログアウトしますか？" },
+      data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" },
       class: "btn btn-outline-secondary mb-3" %>
   <h1>ゲームプレイ画面</h1>
   <p>ここにたまごちゃんゲームのUIを実装していきます。</p>
