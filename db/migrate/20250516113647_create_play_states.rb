@@ -1,18 +1,12 @@
-class CreateUserStatuses < ActiveRecord::Migration[8.0]
+class CreatePlayStates < ActiveRecord::Migration[8.0]
   def change
-    create_table :user_statuses do |t|
-      t.references :user, null: false, foreign_key: true,
-      t.integer :hunger_value,    null: false, default: 50
-      t.integer :happiness_value, null: false, default: 10
-      t.integer :love_value,      null: false, default: 0
-      t.integer :mood_value,      null: false, default: 0
-      t.integer :study_value,     null: false, default:   0
-      t.integer :sports_value,    null: false, default:   0
-      t.integer :art_value,       null: false, default:   0
-      t.integer :money,           null: false, default:   0
-      t.references :current_loop_event_set,
-                   foreign_key: { to_table: :event_sets }
-      t.datetime :current_loop_started_at
+    create_table :play_states do |t|
+      t.references :user, null: false, foreign_key: true
+      t.references :current_event, null: false, foreign_key: { to_table: :events }
+      t.integer :action_choices_position
+      t.integer :action_results_priority
+      t.integer :current_cut_position
+
       t.timestamps
     end
   end

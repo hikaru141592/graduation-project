@@ -3,7 +3,6 @@ class CreateEvents < ActiveRecord::Migration[8.0]
     create_table :events do |t|
       t.references :event_set, null: false, foreign_key: true
       t.string :name
-      t.text :message, null: false
       t.integer    :derivation_number, null: false, default: 0
       t.text       :message, null: false
       t.string     :character_image, null: false
