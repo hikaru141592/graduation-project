@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
-  before_validation :assign_friend_code, on: :create
+  before_validation :assign_friend_code, if: -> { new_record? && friend_code.blank? }
 
   validates :email, presence: true, uniqueness: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -14,6 +14,10 @@ class User < ApplicationRecord
   validates :birth_month, presence: true, inclusion: { in: 1..12 }
   validates :birth_day,   presence: true, inclusion: { in: 1..31 }
   validates :friend_code, presence: true, uniqueness: true, format: { with: /\A\d{8}\z/ }
+
+  validates :line_account,
+            uniqueness: true,
+            allow_nil:  true
 
   enum :role, { general: 0, admin: 1 }
 

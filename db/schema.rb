@@ -10,9 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_10_042255) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_16_114725) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "action_choices", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.integer "position", null: false
+    t.string "label"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_action_choices_on_event_id"
+    t.check_constraint "\"position\" >= 1 AND \"position\" <= 4", name: "action_choices_position_check"
+  end
+
+  create_table "action_results", force: :cascade do |t|
+    t.bigint "action_choice_id", null: false
+    t.integer "priority", null: false
+    t.jsonb "trigger_conditions", default: {}, null: false
+    t.jsonb "effects"
+    t.integer "next_derivation_number"
+    t.bigint "calls_event_set_id"
+    t.boolean "resolves_loop", default: false, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_choice_id", "priority"], name: "index_action_results_on_action_choice_id_and_priority", unique: true
+    t.index ["action_choice_id"], name: "index_action_results_on_action_choice_id"
+    t.index ["calls_event_set_id"], name: "index_action_results_on_calls_event_set_id"
+    t.check_constraint "NOT (next_derivation_number IS NOT NULL AND calls_event_set_id IS NOT NULL)", name: "action_results_mutual_exclusion_check"
+  end
 
   create_table "cable_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -24,9 +50,84 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_042255) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cuts", force: :cascade do |t|
+    t.bigint "action_result_id", null: false
+    t.integer "position", default: 1, null: false
+    t.text "message", null: false
+    t.string "character_image", null: false
+    t.string "background_image", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_result_id", "position"], name: "index_cuts_on_action_result_id_and_position", unique: true
+    t.index ["action_result_id"], name: "index_cuts_on_action_result_id"
+    t.check_constraint "\"position\" >= 1", name: "cuts_sequence_check"
+  end
+
+  create_table "event_categories", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "loop_minutes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_event_categories_on_name", unique: true
+  end
+
+  create_table "event_sets", force: :cascade do |t|
+    t.bigint "event_category_id", null: false
+    t.string "name", null: false
+    t.jsonb "trigger_conditions", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_category_id", "name"], name: "index_event_sets_on_event_category_id_and_name", unique: true
+    t.index ["event_category_id"], name: "index_event_sets_on_event_category_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.bigint "event_set_id", null: false
+    t.string "name"
+    t.integer "derivation_number", default: 0, null: false
+    t.text "message", null: false
+    t.string "character_image", null: false
+    t.string "background_image", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_set_id", "name"], name: "index_events_on_event_set_id_and_name", unique: true
+    t.index ["event_set_id"], name: "index_events_on_event_set_id"
+  end
+
+  create_table "play_states", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "current_event_id", null: false
+    t.integer "action_choices_position"
+    t.integer "action_results_priority"
+    t.integer "current_cut_position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["current_event_id"], name: "index_play_states_on_current_event_id"
+    t.index ["user_id"], name: "index_play_states_on_user_id"
+  end
+
   create_table "queue_tables", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_statuses", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "hunger_value", default: 50, null: false
+    t.integer "happiness_value", default: 10, null: false
+    t.integer "love_value", default: 0, null: false
+    t.integer "mood_value", default: 0, null: false
+    t.integer "study_value", default: 0, null: false
+    t.integer "sports_value", default: 0, null: false
+    t.integer "art_value", default: 0, null: false
+    t.integer "money", default: 0, null: false
+    t.bigint "current_loop_event_set_id"
+    t.datetime "current_loop_started_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["current_loop_event_set_id"], name: "index_user_statuses_on_current_loop_event_set_id"
+    t.index ["user_id"], name: "index_user_statuses_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,4 +156,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_10_042255) do
     t.check_constraint "birth_month >= 1 AND birth_month <= 12", name: "birth_month_range"
     t.check_constraint "friend_code::text ~ '^[0-9]{8}$'::text", name: "friend_code_format"
   end
+
+  add_foreign_key "action_choices", "events"
+  add_foreign_key "action_results", "action_choices"
+  add_foreign_key "action_results", "event_sets", column: "calls_event_set_id"
+  add_foreign_key "cuts", "action_results"
+  add_foreign_key "event_sets", "event_categories"
+  add_foreign_key "events", "event_sets"
+  add_foreign_key "play_states", "events", column: "current_event_id"
+  add_foreign_key "play_states", "users"
+  add_foreign_key "user_statuses", "event_sets", column: "current_loop_event_set_id"
+  add_foreign_key "user_statuses", "users"
 end

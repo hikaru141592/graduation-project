@@ -8,7 +8,7 @@ class CreateEvents < ActiveRecord::Migration[8.0]
       t.string     :character_image, null: false
       t.string     :background_image, null: false
       t.timestamps
-      t.index [:event_set_id, :name], unique: true
+      t.index [ :event_set_id, :name ], unique: true
     end
   end
 end

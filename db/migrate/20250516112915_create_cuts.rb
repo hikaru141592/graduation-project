@@ -7,7 +7,7 @@ class CreateCuts < ActiveRecord::Migration[8.0]
       t.string     :character_image, null: false
       t.string     :background_image, null: false
       t.timestamps
-      t.index [:action_result_id, :position], unique: true
+      t.index [ :action_result_id, :position ], unique: true
       t.check_constraint "position >= 1", name: "cuts_sequence_check"
     end
   end
