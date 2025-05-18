@@ -147,39 +147,39 @@ choices = [
   {
     event_set_name:    '何か言っている',
     derivation_number: 0,
-    labels:            ['はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる']
+    labels:            [ 'はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる' ]
   },
   {
     event_set_name:    '何かしたそう',
     derivation_number: 0,
-    labels:            ['ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする']
+    labels:            [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ]
   },
   {
     event_set_name:    '踊っている',
     derivation_number: 0,
-    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる']
+    labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる' ]
   },
   {
     event_set_name:    '泣いている(空腹)',
     derivation_number: 0,
-    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる']
+    labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
   },
   {
     event_set_name:    '泣いている(よしよし不足)',
     derivation_number: 0,
-    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる']
+    labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
   },
   {
     event_set_name:    '泣いている(ランダム)',
     derivation_number: 0,
-    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる']
+    labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
   }
 ]
 
 choices.each do |attrs|
   set   = EventSet.find_by!(name: attrs[:event_set_name])
   event = Event.find_by!(event_set: set, derivation_number: attrs[:derivation_number])
-  #event.action_choices.delete_all
+  # event.action_choices.delete_all
   attrs[:labels].each_with_index do |label, idx|
     choice = ActionChoice.find_or_initialize_by(event: event, position: idx + 1)
     choice.label = label

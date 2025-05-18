@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   has_one :user_status, dependent: :destroy
   has_one :play_state, dependent: :destroy
-  
+
   after_create :build_initial_game_states
 
   before_validation :assign_friend_code, if: -> { new_record? && friend_code.blank? }
@@ -46,7 +46,7 @@ class User < ApplicationRecord
       money:           0
 
     )
-    first_set   = EventSet.find_by!(name: '何か言っている')
+    first_set   = EventSet.find_by!(name: "何か言っている")
     first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
     create_play_state!(
       current_event:             first_event,
