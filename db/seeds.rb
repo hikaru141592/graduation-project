@@ -1,9 +1,574 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+categories = [
+  { name: '通常',     description: '何か言っている、何かしたそう',                         loop_minutes: nil  },
+  { name: 'ルンルン', description: '踊っている',                                           loop_minutes: 12   },
+  { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 60 },
+  { name: '怒っている', description: '怒っている',                                         loop_minutes: 60   },
+  { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: nil  },
+  { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
+  { name: '寝ている', description: '寝ている',                                             loop_minutes: 90   }
+]
+
+categories.each do |attrs|
+  category = EventCategory.find_or_initialize_by(name: attrs[:name])
+  category.description  = attrs[:description]
+  category.loop_minutes = attrs[:loop_minutes]
+  category.save!
+end
+
+event_sets = [
+  { category_name: '通常',      name: '何か言っている' },
+  { category_name: '通常',      name: '何かしたそう' },
+  { category_name: 'ルンルン',  name: '踊っている' },
+  { category_name: '泣いている', name: '泣いている(空腹)' },
+  { category_name: '泣いている', name: '泣いている(よしよし不足)' },
+  { category_name: '泣いている', name: '泣いている(ランダム)' },
+  { category_name: '怒っている', name: '怒っている' },
+  { category_name: '夢中',      name: 'ブロックのおもちゃに夢中' },
+  { category_name: '夢中',      name: 'マンガに夢中' },
+  { category_name: '眠そう',    name: '眠そう' },
+  { category_name: '寝ている',  name: '寝ている' }
+]
+
+event_sets.each do |attrs|
+  category = EventCategory.find_by!(name: attrs[:category_name])
+  set = EventSet.find_or_initialize_by(
+    event_category: category,
+    name:          attrs[:name]
+  )
+  set.trigger_conditions = { always: true }
+  set.save!
+end
+
+events = [
+  {
+    event_set_name:    '何か言っている',
+    name:              '何か言っている',
+    derivation_number: 0,
+    message:           '〈たまご〉がなにかいっているよ。',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '何かしたそう',
+    name:              '何かしたそう',
+    derivation_number: 0,
+    message:           '〈たまご〉はなにかしたそうだ。',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '踊っている',
+    name:              '踊っている',
+    derivation_number: 0,
+    message:           '〈たまご〉はおどっている！',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '泣いている(空腹)',
+    name:              '泣いている(空腹)',
+    derivation_number: 0,
+    message:           '〈たまご〉がないている！',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '泣いている(よしよし不足)',
+    name:              '泣いている(よしよし不足)',
+    derivation_number: 0,
+    message:           '〈たまご〉がないている！',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '泣いている(ランダム)',
+    name:              '泣いている(ランダム)',
+    derivation_number: 0,
+    message:           '〈たまご〉がないている！',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '怒っている',
+    name:              '怒っている',
+    derivation_number: 0,
+    message:           '〈たまご〉はおこっている！',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    'ブロックのおもちゃに夢中',
+    name:              'ブロックのおもちゃに夢中',
+    derivation_number: 0,
+    message:           '〈たまご〉はブロックのおもちゃにむちゅうだ。',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    'マンガに夢中',
+    name:              'マンガに夢中',
+    derivation_number: 0,
+    message:           '〈たまご〉はマンガをよむのにむちゅうだ',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '眠そう',
+    name:              '眠そう',
+    derivation_number: 0,
+    message:           '〈たまご〉はねむそうだ',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  },
+  {
+    event_set_name:    '寝ている',
+    name:              '寝ている',
+    derivation_number: 0,
+    message:           '〈たまご〉はねている',
+    character_image:   'placeholder_character.png',
+    background_image:  'placeholder_background.png'
+  }
+]
+
+events.each do |attrs|
+  set = EventSet.find_by!(name: attrs[:event_set_name])
+  event = Event.find_or_initialize_by(
+    event_set:         set,
+    derivation_number: attrs[:derivation_number]
+  )
+  event.name             = attrs[:name]
+  event.message          = attrs[:message]
+  event.character_image  = attrs[:character_image]
+  event.background_image = attrs[:background_image]
+  event.save!
+end
+
+choices = [
+  {
+    event_set_name:    '何か言っている',
+    derivation_number: 0,
+    labels:            ['はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる']
+  },
+  {
+    event_set_name:    '何かしたそう',
+    derivation_number: 0,
+    labels:            ['ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする']
+  },
+  {
+    event_set_name:    '踊っている',
+    derivation_number: 0,
+    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる']
+  },
+  {
+    event_set_name:    '泣いている(空腹)',
+    derivation_number: 0,
+    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる']
+  },
+  {
+    event_set_name:    '泣いている(よしよし不足)',
+    derivation_number: 0,
+    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる']
+  },
+  {
+    event_set_name:    '泣いている(ランダム)',
+    derivation_number: 0,
+    labels:            ['よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる']
+  }
+]
+
+choices.each do |attrs|
+  set   = EventSet.find_by!(name: attrs[:event_set_name])
+  event = Event.find_by!(event_set: set, derivation_number: attrs[:derivation_number])
+  #event.action_choices.delete_all
+  attrs[:labels].each_with_index do |label, idx|
+    choice = ActionChoice.find_or_initialize_by(event: event, position: idx + 1)
+    choice.label = label
+    choice.save!
+  end
+end
+
+action_results = [
+  {
+    event_set_name:        '何か言っている',
+    derivation_number:     0,
+    label:                 'はなしをきいてあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何か言っている',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何か言っている',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何か言っている',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              2,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何か言っている',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何か言っている',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              2,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     0,
+    label:                 'ボールあそびをする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     0,
+    label:                 'べんきょうする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     0,
+    label:                 'おえかきする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     0,
+    label:                 'ゲームする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '踊っている',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '踊っている',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              2,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '踊っている',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '踊っている',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              2,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '踊っている',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '踊っている',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              2,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(空腹)',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(空腹)',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(空腹)',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(空腹)',
+    derivation_number:     0,
+    label:                 'あそんであげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(よしよし不足)',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(よしよし不足)',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(よしよし不足)',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(よしよし不足)',
+    derivation_number:     0,
+    label:                 'あそんであげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'あそんであげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  }
+]
+
+action_results.each do |attrs|
+  set    = EventSet.find_by!(name: attrs[:event_set_name])
+  event  = Event.find_by!(event_set: set, derivation_number: attrs[:derivation_number])
+  choice = ActionChoice.find_by!(event: event, label: attrs[:label])
+
+  result = ActionResult.find_or_initialize_by(
+    action_choice: choice,
+    priority:      attrs[:priority]
+  )
+
+  result.trigger_conditions     = attrs[:trigger_conditions]
+  result.effects                = attrs[:effects]
+  result.next_derivation_number = attrs[:next_derivation_number]
+  if attrs[:calls_event_set_name].present?
+    called_set = EventSet.find_by!(name: attrs[:calls_event_set_name])
+    result.calls_event_set_id = called_set.id
+  else
+    result.calls_event_set_id = nil
+  end
+  result.resolves_loop = attrs[:resolves_loop]
+
+  result.save!
+end
+
+cuts = [
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 1, position: 1, message: '〈たまご〉がうれしそうにはなしている！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ボールあそびをする', priority: 1, position: 1, message: 'いっしょにあそんであげた！とてもよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'べんきょうする',     priority: 1, position: 1, message: 'おべんきょうをした！がんばったね！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 1, position: 1, message: 'おえかきをした！じょうずにかけたね！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'いっしょにあそんであげた！ゲームはたのしいね！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'ごはんをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'おやつをあげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'ごはんをあげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'よしよしする',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'おやつをあげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'ごはんをあげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'あそんであげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'おやつをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'ごはんをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' },
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'placeholder_character.png', background_image: 'placeholder_background.png' }
+]
+
+cuts.each do |attrs|
+  set    = EventSet.find_by!(name: attrs[:event_set_name])
+  event  = Event.find_by!(event_set: set, derivation_number: attrs[:derivation_number])
+  choice = ActionChoice.find_by!(event: event, label: attrs[:label])
+  result = ActionResult.find_by!(action_choice: choice, priority: attrs[:priority])
+
+  cut = Cut.find_or_initialize_by(action_result: result, position: attrs[:position])
+  cut.message          = attrs[:message]
+  cut.character_image  = attrs[:character_image]
+  cut.background_image = attrs[:background_image]
+  cut.save!
+end
