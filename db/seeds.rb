@@ -572,3 +572,25 @@ cuts.each do |attrs|
   cut.background_image = attrs[:background_image]
   cut.save!
 end
+
+User.find_each do |user|
+  UserStatus.find_or_create_by!(user: user) do |status|
+    status.hunger_value  = 50
+    status.happiness_value = 10
+    status.love_value     = 0
+    status.mood_value     = 0
+    status.study_value    = 0
+    status.sports_value   = 0
+    status.art_value      = 0
+    status.money          = 0
+  end
+
+  PlayState.find_or_create_by!(user: user) do |ps|
+    first_set   = EventSet.find_by!(name: '何か言っている')
+    first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
+    ps.current_event_id         = first_event.id
+    ps.action_choices_position  = nil
+    ps.action_results_priority  = nil
+    ps.current_cut_position     = nil
+  end
+end

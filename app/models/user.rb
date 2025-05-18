@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  has_one :user_status, dependent: :destroy
+  has_one :play_state, dependent: :destroy
+
   before_validation :assign_friend_code, if: -> { new_record? && friend_code.blank? }
 
   validates :email, presence: true, uniqueness: true,
