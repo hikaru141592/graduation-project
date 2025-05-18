@@ -3,6 +3,8 @@ class User < ApplicationRecord
 
   has_one :user_status, dependent: :destroy
   has_one :play_state, dependent: :destroy
+  
+  after_create :build_initial_game_states
 
   before_validation :assign_friend_code, if: -> { new_record? && friend_code.blank? }
 
@@ -30,5 +32,27 @@ class User < ApplicationRecord
       self.friend_code = rand(10**8).to_s.rjust(8, "0")
       break unless User.exists?(friend_code: friend_code)
     end
+  end
+
+  def build_initial_game_states
+    create_user_status!(
+      hunger_value:    50,
+      happiness_value: 10,
+      love_value:      0,
+      mood_value:      0,
+      study_value:     0,
+      sports_value:    0,
+      art_value:       0,
+      money:           0
+
+    )
+    first_set   = EventSet.find_by!(name: '何か言っている')
+    first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
+    create_play_state!(
+      current_event:             first_event,
+      action_choices_position:   nil,
+      action_results_priority:   nil,
+      current_cut_position:      nil
+    )
   end
 end
