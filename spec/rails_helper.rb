@@ -69,4 +69,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include AuthenticationMacros, type: :system
   config.include AuthenticationMacros, type: :request
+  config.before(:suite) do
+    Rails.application.load_seed
+  end
 end
