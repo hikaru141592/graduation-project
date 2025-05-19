@@ -2,6 +2,39 @@
   <%= link_to "ログアウト", logout_path,
       data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" },
       class: "btn btn-outline-secondary mb-3" %>
+
   <h1>ゲームプレイ画面</h1>
-  <p>ここにたまごちゃんゲームのUIを実装していきます。</p>
+
+  <!-- キャラクターと背景 -->
+  <div class="position-relative my-4">
+    <%= image_tag(@cut&.character_image || @event.character_image,
+          alt: "キャラクター",
+          class: "position-absolute top-50 start-50 translate-middle") %>
+    <%= image_tag(@cut&.background_image || @event.background_image,
+          alt: "背景",
+          class: "w-100") %>
+  </div>
+
+  <!-- メッセージ表示 -->
+  <div class="message-box mb-4">
+    <%= @cut&.message || @event.message %>
+  </div>
+
+  <!-- ４つのボタン（常に表示） -->
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <% 4.times do |i| %>
+      <% pos = i + 1 %>
+      <%# フェーズに応じて表示するラベルを決定 %>
+      <% if @phase == :select %>
+        <% label = @choices.find { |c| c.position == pos }&.label || "" %>
+      <% else %>
+        <% label = (pos == 1 ? "すすむ" : "") %>
+      <% end %>
+
+      <%# 全ボタンとも同じクラスを付与 %>
+      <button type="button" class="btn btn-primary" disabled>
+        <%= label %>
+      </button>
+    <% end %>
+  </div>
 </div>
