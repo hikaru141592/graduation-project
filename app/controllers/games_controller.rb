@@ -36,7 +36,7 @@ class GamesController < ApplicationController
 
   private
 
-  #モデル移動可
+  # モデル移動可
   def conditions_met?(conds, status)
     return true if conds["always"] == true
     op   = conds["operator"] || "and"
