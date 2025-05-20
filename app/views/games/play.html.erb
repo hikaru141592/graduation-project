@@ -4,37 +4,44 @@
       class: "btn btn-outline-secondary mb-3" %>
 
   <h1>ゲームプレイ画面</h1>
+  <%= turbo_frame_tag "game_play" do %>
+    <div class="position-relative my-4 mx-auto" style="width: 50%;">
+      <%= image_tag(
+            @cut&.background_image || @event.background_image,
+            alt: "背景",
+            class: "img-fluid"
+          ) %>
+      <%= image_tag(
+            @cut&.character_image || @event.character_image,
+            alt: "キャラクター",
+            class: "position-absolute top-50 start-50 translate-middle img-fluid w-50"
+          ) %>
+    </div>
 
-  <!-- キャラクターと背景 -->
-  <div class="position-relative my-4">
-    <%= image_tag(@cut&.character_image || @event.character_image,
-          alt: "キャラクター",
-          class: "position-absolute top-50 start-50 translate-middle") %>
-    <%= image_tag(@cut&.background_image || @event.background_image,
-          alt: "背景",
-          class: "w-100") %>
-  </div>
+    <div class="message-box mb-4">
+      <%= @cut&.message || @event.message %>
+    </div>
 
-  <!-- メッセージ表示 -->
-  <div class="message-box mb-4">
-    <%= @cut&.message || @event.message %>
-  </div>
-
-  <!-- ４つのボタン（常に表示） -->
-  <div class="d-grid gap-2 col-6 mx-auto">
-    <% 4.times do |i| %>
-      <% pos = i + 1 %>
-      <%# フェーズに応じて表示するラベルを決定 %>
-      <% if @phase == :select %>
-        <% label = @choices.find { |c| c.position == pos }&.label || "" %>
-      <% else %>
-        <% label = (pos == 1 ? "すすむ" : "") %>
-      <% end %>
-
-      <%# 全ボタンとも同じクラスを付与 %>
-      <button type="button" class="btn btn-primary" disabled>
-        <%= label %>
-      </button>
+    <%= form_with url: select_action_path, method: :post, data: { turbo_frame: "game_play" } do |f| %>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <% 4.times do |i| %>
+          <% pos   = i + 1 %>
+          <% label = @phase == :select ?
+                       (@choices.find { |c| c.position == pos }&.label) :
+                       (pos == 1 ? "すすむ" : "") %>
+          <% if @phase == :select && label.present? %>
+            <%= button_tag label,
+                type:  "submit",
+                name:  "position",
+                value: pos,
+                class: "btn btn-primary" %>
+          <% else %>
+            <button type="button" class="btn btn-primary" disabled>
+              <%= label.presence || "&nbsp;".html_safe %>
+            </button>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
-  </div>
+  <% end %>
 </div>

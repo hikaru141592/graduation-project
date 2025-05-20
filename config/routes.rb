@@ -6,5 +6,7 @@ Rails.application.routes.draw do
   post   "login",  to: "sessions#create"
   delete "logout", to: "sessions#destroy", as: "logout"
 
+  post "games/select_action", to: "games#select_action", as: "select_action"
+
   root to: "games#play"
 end
