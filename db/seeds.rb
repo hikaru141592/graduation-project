@@ -215,7 +215,17 @@ action_results = [
     derivation_number:     0,
     label:                 'おやつをあげる',
     priority:              1,
-    trigger_conditions:    { always: true },
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "status",
+                                  "attribute": "hunger_value",
+                                  "operator": ">=",
+                                  "value": 90
+                                }
+                              ]
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -237,7 +247,17 @@ action_results = [
     derivation_number:     0,
     label:                 'ごはんをあげる',
     priority:              1,
-    trigger_conditions:    { always: true },
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "status",
+                                  "attribute": "hunger_value",
+                                  "operator": ">=",
+                                  "value": 50
+                                }
+                              ]
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -303,7 +323,15 @@ action_results = [
     derivation_number:     0,
     label:                 'よしよしする',
     priority:              1,
-    trigger_conditions:    { always: true },
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "probability",
+                                  "percent": 6
+                                }
+                              ]
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -325,7 +353,17 @@ action_results = [
     derivation_number:     0,
     label:                 'おやつをあげる',
     priority:              1,
-    trigger_conditions:    { always: true },
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "status",
+                                  "attribute": "hunger_value",
+                                  "operator": ">=",
+                                  "value": 90
+                                }
+                              ]
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -347,7 +385,17 @@ action_results = [
     derivation_number:     0,
     label:                 'ごはんをあげる',
     priority:              1,
-    trigger_conditions:    { always: true },
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "status",
+                                  "attribute": "hunger_value",
+                                  "operator": ">=",
+                                  "value": 50
+                                }
+                              ]
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
