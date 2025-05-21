@@ -7,56 +7,67 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
   let(:password) { 'password' }
   let!(:user)    { create(:user, password: password, password_confirmation: password) }
 
-  before do
-    # ステータス・プレイステートを初期化
-    UserStatus.find_or_create_by!(user: user) do |status|
-      status.update!(hunger_value: 50, happiness_value: 10)
+  # ── 共通の期待 ─────────────────────────────
+  shared_examples '行動ボタンの共通挙動' do |labels:, expected_priority_for:|
+    labels.each do |label|
+      it "「#{label}」を押すと期待どおりの ActionResult が選ばれる" do
+        expect(page).to have_button(label, disabled: false)
+
+        click_button label
+        expect(page).to have_selector('button', text: 'すすむ', count: 1)
+
+        ps = user.play_state.reload
+        expect(ps.action_choices_position).to be_between(1, 4)
+        expect(ps.action_results_priority).to eq expected_priority_for.call(label)
+        expect(ps.current_cut_position).to eq 1
+
+        expect(page).to have_css('.message-box')
+      end
     end
-
-    PlayState.find_or_create_by!(user: user) do |ps|
-      first_set   = EventSet.find_by!(name: '何か言っている')
-      first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
-      ps.update!(
-        current_event_id:        first_event.id,
-        action_choices_position: nil,
-        action_results_priority: nil,
-        current_cut_position:    nil
-      )
-    end
-
-    driven_by :headless_chrome
-    login(user)
-
-    # ログイン成功を保証
-    expect(page).to have_current_path(root_path, ignore_query: true),
-                    'ログインに失敗しています'
   end
 
-  # テスト対象のラベル
-  LABELS = %w[
-    はなしをきいてあげる
-    よしよしする
-    おやつをあげる
-    ごはんをあげる
-  ].freeze
+  # ── ゲーム状態セットアップ ─────────────────
+  def setup_game(hunger:)
+    # UserStatus は毎回上書き
+    UserStatus.find_or_initialize_by(user: user)
+              .update!(hunger_value: hunger, happiness_value: 10)
 
-  LABELS.each do |label|
-    it "「#{label}」ボタンを押したら priority1 の ActionResult が選ばれカット1へ進む" do
-      # ボタンが存在し有効か
-      expect(page).to have_button(label, disabled: false)
+    # PlayState をリセットして作り直し
+    PlayState.where(user: user).delete_all
+    first_set   = EventSet.find_by!(name: '何か言っている')
+    first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
 
-      # ボタン押下
-      click_button label
-      expect(page).to have_selector('button', text: 'すすむ', count: 1)
+    PlayState.create!(
+      user:                    user,
+      current_event_id:        first_event.id,
+      action_choices_position: nil,
+      action_results_priority: nil,
+      current_cut_position:    nil
+    )
+  end
 
-      # play_states が更新されたか
-      ps = user.play_state.reload
-      expect(ps.action_choices_position).to be_between(1, 4)
-      expect(ps.action_results_priority).to eq 1
-      expect(ps.current_cut_position).to eq 1
+  # ── 共通ログイン ───────────────────────────
+  before do
+    driven_by :headless_chrome
+    login(user)
+    expect(page).to have_current_path(root_path, ignore_query: true), 'ログインに失敗しています'
+  end
 
-      # メッセージボックスが表示されているか
-      expect(page).to have_css('.message-box')
-    end
+  # ── 空腹値 50 ────────────────────────────────
+  context '空腹値が 50 のとき' do
+    before { setup_game(hunger: 50) }
+
+    include_examples '行動ボタンの共通挙動',
+                     labels: %w[はなしをきいてあげる よしよしする おやつをあげる ごはんをあげる],
+                     expected_priority_for: ->(_label) { 1 }
+  end
+
+  # ── 空腹値 80 ────────────────────────────────
+  context '空腹値が 80 のとき' do
+    before { setup_game(hunger: 80) }
+
+    include_examples '行動ボタンの共通挙動',
+                     labels: %w[おやつをあげる ごはんをあげる],
+                     expected_priority_for: ->(label) { label == 'ごはんをあげる' ? 2 : 1 }
   end
 end
