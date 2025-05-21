@@ -9,6 +9,8 @@ permissions:
   contents: write
 
 jobs:
+  env:
+    DATABASE_URL: postgres://postgres:postgres@localhost:5432/hikaru_test
   scan_ruby:
     runs-on: ubuntu-latest
     steps:
