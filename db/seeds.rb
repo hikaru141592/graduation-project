@@ -221,7 +221,7 @@ action_results = [
                                 {
                                   "type": "status",
                                   "attribute": "hunger_value",
-                                  "operator": ">=",
+                                  "operator": "<=",
                                   "value": 90
                                 }
                               ]
@@ -253,7 +253,7 @@ action_results = [
                                 {
                                   "type": "status",
                                   "attribute": "hunger_value",
-                                  "operator": ">=",
+                                  "operator": "<=",
                                   "value": 50
                                 }
                               ]
@@ -359,7 +359,7 @@ action_results = [
                                 {
                                   "type": "status",
                                   "attribute": "hunger_value",
-                                  "operator": ">=",
+                                  "operator": "<=",
                                   "value": 90
                                 }
                               ]
@@ -391,7 +391,7 @@ action_results = [
                                 {
                                   "type": "status",
                                   "attribute": "hunger_value",
-                                  "operator": ">=",
+                                  "operator": "<=",
                                   "value": 50
                                 }
                               ]
