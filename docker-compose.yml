@@ -20,7 +20,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgres://hikaru:hikaru_pass@db:5432/hikaru
+      # DATABASE_URL は渡さず、database.yml に委ねる
       TZ: Asia/Tokyo
     depends_on:
       - db

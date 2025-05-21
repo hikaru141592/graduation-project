@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :event do
     association :event_set
-    name { "テストイベント" }
+    sequence(:name) { |n| "イベント#{n}" }
     derivation_number { 0 }
-    message { "こんにちは！" }
-    character_image { "char.png" }
-    background_image { "bg.png" }
+    message           { "テストイベントです" }
+    character_image   { "character/kari-normal.png" }
+    background_image  { "background/kari-background.png" }
   end
 end

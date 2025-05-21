@@ -2,7 +2,7 @@
 FactoryBot.define do
   factory :event_set do
     association :event_category
-    name { "テストセット" }
+    sequence(:name) { |n| "イベントセット#{n}" }
     trigger_conditions { { always: true } }
   end
 end
