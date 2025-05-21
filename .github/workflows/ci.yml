@@ -120,7 +120,7 @@ jobs:
       - name: Prepare database
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/hikaru_test
         run: |
           bundle exec rails db:create db:migrate
 
@@ -135,7 +135,7 @@ jobs:
       - name: Run RSpec
         env:
           RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/hikaru_test
           SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
