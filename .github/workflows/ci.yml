@@ -131,6 +131,7 @@ jobs:
         run: |
           docker compose run --rm \
             -e RAILS_ENV=production \
+            -e DATABASE_URL=postgres://postgres:postgres@localhost:5432/hikaru_test \
             -e SECRET_KEY_BASE=${{ secrets.SECRET_KEY_BASE }} \
             -e RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY }} \
             web sh -c "bundle exec rake assets:precompile"
