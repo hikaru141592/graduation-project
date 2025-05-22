@@ -30,6 +30,7 @@ jobs:
             ${{ runner.os }}-ruby-${{ hashFiles('**/Gemfile.lock') }}-
             ${{ runner.os }}-ruby-
 
+#5.628 E: Unable to fetch some archives, maybe run apt-get update or try with --fix-missing?というエラーメッセージが怪しい、dependenciesってどこかで定義されてる？ここが不要なのでは。
       - name: Install dependencies
         run: |
           docker compose run --rm web bundle install  # docker-composeで依存関係をインストール
