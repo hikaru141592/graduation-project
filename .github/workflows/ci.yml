@@ -109,23 +109,29 @@ jobs:
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Build Docker image
-        run: |
-          docker compose build
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
 
-      - name: Prepare test database (inside Docker)
-        run: |
-          docker compose run --rm \
-            -e RAILS_ENV=test \
-            -e DATABASE_URL=postgres://postgres:postgres@localhost:5432/hikaru_test \
-            web bash -lc "bundle exec rails db:create db:migrate"
+      - name: Install dependencies
+        run: bundle install --jobs 4 --retry 3
 
-      - name: Run RSpec (inside Docker)
+      - name: Prepare database
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/hikaru_test
         run: |
-          docker compose run --rm \
-            -e RAILS_ENV=test \
-            -e DATABASE_URL=postgres://postgres:postgres@localhost:5432/hikaru_test \
-            web bash -lc "bundle exec rspec"
+          bundle exec rails db:create db:migrate
+
+      - name: Run RSpec
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/hikaru_test
+          SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+        run: bundle exec rspec
