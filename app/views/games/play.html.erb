@@ -22,14 +22,15 @@
       <%= @cut&.message || @event.message %>
     </div>
 
-    <%= form_with url: select_action_path, method: :post, data: { turbo_frame: "game_play" } do |f| %>
+    <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
       <div class="d-grid gap-2 col-6 mx-auto">
         <% 4.times do |i| %>
           <% pos   = i + 1 %>
           <% label = @phase == :select ?
                        (@choices.find { |c| c.position == pos }&.label) :
                        (pos == 1 ? "すすむ" : "") %>
-          <% if @phase == :select && label.present? %>
+          <% if (@phase == :select && label.present?) ||
+              (@phase == :cut    && pos == 1) %>
             <%= button_tag label,
                 type:  "submit",
                 name:  "position",
