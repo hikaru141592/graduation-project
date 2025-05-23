@@ -34,6 +34,31 @@ class GamesController < ApplicationController
     redirect_to root_path
   end
 
+  def advance_cut
+    play_state = current_user.play_state
+    current = play_state.current_cut_position.to_i
+    next_cut = current + 1
+    event   = play_state.current_event
+    choice  = event.action_choices.find_by!(position: play_state.action_choices_position)
+    result  = choice.action_results.find_by!(priority: play_state.action_results_priority)
+
+    if result.cuts.exists?(position: next_cut)
+      play_state.update!(current_cut_position: next_cut)
+    else
+      fixed_set   = EventSet.find_by!(name: '何かしたそう')
+      fixed_event = Event.find_by!(event_set: fixed_set, derivation_number: 0)
+
+      play_state.update!(
+        current_event_id:        fixed_event.id,
+        action_choices_position: nil,
+        action_results_priority: nil,
+        current_cut_position:    nil
+      )
+    end
+
+    redirect_to root_path
+  end
+
   private
 
   # モデル移動可
