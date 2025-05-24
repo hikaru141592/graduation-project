@@ -274,7 +274,7 @@ action_results = [
     label:                 'はなしをきいてあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -285,7 +285,8 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ,
+                                         { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -306,7 +307,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 } ,
+                                         { "attribute": "mood_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -338,7 +340,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -360,7 +362,7 @@ action_results = [
     label:                 'ボールあそびをする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -382,7 +384,7 @@ action_results = [
     label:                 'おえかきする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -393,7 +395,7 @@ action_results = [
     label:                 'ゲームする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -412,7 +414,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ,
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -423,7 +426,9 @@ action_results = [
     label:                 'よしよしする',
     priority:              2,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } , 
+                                         { "attribute": "happiness_value", "delta": 1 } ,
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -444,7 +449,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 } ,
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -476,7 +482,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ,
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -498,7 +505,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -509,7 +516,7 @@ action_results = [
     label:                 'おやつをあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -520,7 +527,7 @@ action_results = [
     label:                 'ごはんをあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 50 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -542,7 +549,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
