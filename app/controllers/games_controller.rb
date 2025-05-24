@@ -45,11 +45,12 @@ class GamesController < ApplicationController
     if result.cuts.exists?(position: next_cut)
       play_state.update!(current_cut_position: next_cut)
     else
-      fixed_set   = EventSet.find_by!(name: '何かしたそう')
-      fixed_event = Event.find_by!(event_set: fixed_set, derivation_number: 0)
+      selector   = EventSetSelector.new(current_user)
+      next_set   = selector.select_next
+      next_event = next_set.events.find_by!(derivation_number: 0)
 
       play_state.update!(
-        current_event_id:        fixed_event.id,
+        current_event_id:        next_event.id,
         action_choices_position: nil,
         action_results_priority: nil,
         current_cut_position:    nil

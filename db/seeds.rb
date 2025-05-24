@@ -39,6 +39,86 @@ event_sets.each do |attrs|
   set.save!
 end
 
+event_set_conditions = [
+  {
+    name: '泣いている(空腹)',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":      "status",
+          "attribute": "hunger_value",
+          "operator":  "<=",
+          "value":     20
+        }
+      ]
+    }
+  },
+  {
+    name: '泣いている(よしよし不足)',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":      "status",
+          "attribute": "love_value",
+          "operator":  "<=",
+          "value":     20
+        }
+      ]
+    }
+  },
+  {
+    name: '泣いている(ランダム)',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 0
+        }
+      ]
+    }
+  },
+  {
+    name: '踊っている',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":      "status",
+          "attribute": "mood_value",
+          "operator":  ">=",
+          "value":     80
+        }
+      ]
+    }
+  },
+  {
+    name: '何かしたそう',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 50
+        }
+      ]
+    }
+  },
+  {
+    name: '何か言っている',
+    trigger_conditions: {
+      "always": true
+    }
+  }
+]
+
+event_set_conditions.each do |attrs|
+  set = EventSet.find_by!(name: attrs[:name])
+  set.update!(trigger_conditions: attrs[:trigger_conditions])
+end
+
 events = [
   {
     event_set_name:    '何か言っている',
@@ -626,7 +706,7 @@ User.find_each do |user|
   UserStatus.find_or_create_by!(user: user) do |status|
     status.hunger_value  = 50
     status.happiness_value = 10
-    status.love_value     = 0
+    status.love_value     = 50
     status.mood_value     = 0
     status.study_value    = 0
     status.sports_value   = 0
