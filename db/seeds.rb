@@ -39,6 +39,86 @@ event_sets.each do |attrs|
   set.save!
 end
 
+event_set_conditions = [
+  {
+    name: '泣いている(空腹)',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":      "status",
+          "attribute": "hunger_value",
+          "operator":  "<=",
+          "value":     20
+        }
+      ]
+    }
+  },
+  {
+    name: '泣いている(よしよし不足)',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":      "status",
+          "attribute": "love_value",
+          "operator":  "<=",
+          "value":     20
+        }
+      ]
+    }
+  },
+  {
+    name: '泣いている(ランダム)',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 0
+        }
+      ]
+    }
+  },
+  {
+    name: '踊っている',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":      "status",
+          "attribute": "mood_value",
+          "operator":  ">=",
+          "value":     80
+        }
+      ]
+    }
+  },
+  {
+    name: '何かしたそう',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 50
+        }
+      ]
+    }
+  },
+  {
+    name: '何か言っている',
+    trigger_conditions: {
+      "always": true
+    }
+  }
+]
+
+event_set_conditions.each do |attrs|
+  set = EventSet.find_by!(name: attrs[:name])
+  set.update!(trigger_conditions: attrs[:trigger_conditions])
+end
+
 events = [
   {
     event_set_name:    '何か言っている',
@@ -194,7 +274,7 @@ action_results = [
     label:                 'はなしをきいてあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -205,7 +285,8 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+                                         { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -226,7 +307,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
+                                         { "attribute": "mood_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -258,7 +340,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -280,7 +362,7 @@ action_results = [
     label:                 'ボールあそびをする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -302,7 +384,7 @@ action_results = [
     label:                 'おえかきする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -313,7 +395,7 @@ action_results = [
     label:                 'ゲームする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -332,7 +414,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -343,7 +426,9 @@ action_results = [
     label:                 'よしよしする',
     priority:              2,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+                                         { "attribute": "happiness_value", "delta": 1 },
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -364,7 +449,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -396,7 +482,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 },
+                                         { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -418,7 +505,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -429,7 +516,7 @@ action_results = [
     label:                 'おやつをあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -440,7 +527,7 @@ action_results = [
     label:                 'ごはんをあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 50 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -462,7 +549,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -626,7 +713,7 @@ User.find_each do |user|
   UserStatus.find_or_create_by!(user: user) do |status|
     status.hunger_value  = 50
     status.happiness_value = 10
-    status.love_value     = 0
+    status.love_value     = 50
     status.mood_value     = 0
     status.study_value    = 0
     status.sports_value   = 0
