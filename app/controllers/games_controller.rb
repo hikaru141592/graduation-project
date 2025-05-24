@@ -91,21 +91,21 @@ class GamesController < ApplicationController
       attr  = e["attribute"]
       delta = e["delta"].to_i
       new_value = status[attr] + delta
-      new_value = [new_value, 0].max
-      unless ["happiness_value", "money"].include?(attr)
-        new_value = [new_value, 100].min
+      new_value = [ new_value, 0 ].max
+      unless [ "happiness_value", "money" ].include?(attr)
+        new_value = [ new_value, 100 ].min
       end
-      new_value = [new_value, 99_999_999].min
+      new_value = [ new_value, 99_999_999 ].min
       status[attr] = new_value
     end
     status.save!
 
-    #上限値下限値要設定(大事なものについても)
-    #(effects["items"] || []).each do |e|
-      #item  = current_user.user_items.find_or_initialize_by(code: e["item_code"])
-      #delta = e["delta"].to_i
-      #item.count = item.count.to_i + delta
-      #item.save!
-    #end
+    # 上限値下限値要設定(大事なものについても)
+    # (effects["items"] || []).each do |e|
+    # item  = current_user.user_items.find_or_initialize_by(code: e["item_code"])
+    # delta = e["delta"].to_i
+    # item.count = item.count.to_i + delta
+    # item.save!
+    # end
   end
 end

@@ -285,7 +285,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ,
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
                                          { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -307,7 +307,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 } ,
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
                                          { "attribute": "mood_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -414,7 +414,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ,
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -426,8 +426,8 @@ action_results = [
     label:                 'よしよしする',
     priority:              2,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } , 
-                                         { "attribute": "happiness_value", "delta": 1 } ,
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+                                         { "attribute": "happiness_value", "delta": 1 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -449,7 +449,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 } ,
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -482,7 +482,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ,
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
