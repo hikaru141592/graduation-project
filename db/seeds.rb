@@ -336,7 +336,7 @@ action_results = [
                                   "type": "status",
                                   "attribute": "hunger_value",
                                   "operator": "<=",
-                                  "value": 50
+                                  "value": 70
                                 }
                               ]
                             },
@@ -478,7 +478,7 @@ action_results = [
                                   "type": "status",
                                   "attribute": "hunger_value",
                                   "operator": "<=",
-                                  "value": 50
+                                  "value": 70
                                 }
                               ]
                             },

@@ -19,7 +19,8 @@
     </div>
 
     <div class="message-box mb-4">
-      <%= @cut&.message || @event.message %>
+      <% message = @cut&.message || @event.message %>
+      <%= message.gsub('〈たまご〉', current_user.egg_name) %>
     </div>
 
     <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
