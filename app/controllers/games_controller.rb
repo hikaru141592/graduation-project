@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   def play
     @play_state = current_user.play_state
-    #apply_automatic_decay!(@play_state)
+    # apply_automatic_decay!(@play_state)
 
     @event = @play_state.current_event
     if @play_state.current_cut_position.present?
@@ -127,8 +127,8 @@ class GamesController < ApplicationController
     love_ticks = (elapsed / 8.hours).floor
     status.love_value -= love_ticks * 18 if love_ticks > 0
 
-    status.hunger_value  = [[status.hunger_value, 0].max, 100].min
-    status.love_value    = [[status.love_value,   0].max, 100].min
+    status.hunger_value  = [ [ status.hunger_value, 0 ].max, 100 ].min
+    status.love_value    = [ [ status.love_value,   0 ].max, 100 ].min
 
     status.save!
 
