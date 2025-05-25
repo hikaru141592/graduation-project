@@ -1,6 +1,8 @@
 class GamesController < ApplicationController
   def play
     @play_state = current_user.play_state
+    #apply_automatic_decay!(@play_state)
+
     @event = @play_state.current_event
     if @play_state.current_cut_position.present?
       choice = @event.action_choices.find_by!(position: @play_state.action_choices_position)
@@ -15,6 +17,8 @@ class GamesController < ApplicationController
 
   def select_action
     play_state = current_user.play_state
+    apply_automatic_decay!(play_state)
+
     event = play_state.current_event
     position = params.require(:position).to_i
     choice = event.action_choices.find_by!(position: position)
@@ -43,9 +47,11 @@ class GamesController < ApplicationController
     result  = choice.action_results.find_by!(priority: play_state.action_results_priority)
 
     if result.cuts.exists?(position: next_cut)
+      apply_automatic_decay!(play_state)
       play_state.update!(current_cut_position: next_cut)
     else
       apply_effects!(result.effects)
+      apply_automatic_decay!(play_state)
 
       selector   = EventSetSelector.new(current_user)
       next_set   = selector.select_next
@@ -107,5 +113,25 @@ class GamesController < ApplicationController
     # item.count = item.count.to_i + delta
     # item.save!
     # end
+  end
+
+  def apply_automatic_decay!(play_state)
+    status    = current_user.user_status
+    now       = Time.current
+    last_time = play_state.updated_at
+    elapsed   = now - last_time
+
+    hunger_ticks = (elapsed / 15.minutes).floor
+    status.hunger_value -= hunger_ticks if hunger_ticks > 0
+
+    love_ticks = (elapsed / 8.hours).floor
+    status.love_value -= love_ticks * 18 if love_ticks > 0
+
+    status.hunger_value  = [[status.hunger_value, 0].max, 100].min
+    status.love_value    = [[status.love_value,   0].max, 100].min
+
+    status.save!
+
+    play_state.touch
   end
 end
