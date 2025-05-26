@@ -12,9 +12,8 @@ RSpec.describe 'ログイン・ログアウト機能', type: :system do
   context 'ログイン' do
     it '正しい認証情報でログインできる' do
       login(user)
-      # root_path (games#play) に遷移しているか
       Capybara.assert_current_path root_path, ignore_query: true
-      expect(page).to have_content 'ログインに成功しました。'
+      expect(page).to have_link 'ログアウト'
     end
 
     it '誤った認証情報ではログインできずエラーメッセージが表示される' do
