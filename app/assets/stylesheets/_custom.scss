@@ -14,13 +14,19 @@ body,
   background-color: $primary-btn-bg !important;
   color: $primary-btn-color !important;
   border-color: $primary-btn-bg !important;
-  padding: 0.75rem !important;
+  padding: 0.375rem !important;
   border-radius: 0.5rem !important;
 }
 
 .container {
   padding-left: 1rem;
   padding-right: 1rem;
+  max-width: 100%;
+}
+
+@media (min-width: 430px) {
+  .container { max-width: 430px !important; }
+  
 }
 
 header {
@@ -31,6 +37,7 @@ footer {
   font-size: 0.875rem;
   color: lighten($body-color, 30%);
   margin-top: 2rem;
+  padding-bottom: 1.5rem;
 }
 
 .btn-lg {
@@ -86,4 +93,17 @@ input.form-control[disabled],
 input.form-control[readonly] {
   background-color: #ffffff !important;
   opacity: 0.8;
+}
+
+.footer-divider {
+  width: 90%;
+  margin: 0 auto;
+  border: 0;
+  border-top: 1px solid #222222 !important;
+}
+
+/* ===== disabled の .btn-primary を濃いままにする ===== */
+.btn-primary:disabled,      // 擬似クラスで無効化された場合
+.btn-primary.disabled {     // クラスとして .disabled を付けた場合
+  opacity: 1 !important;    /* 不透明度100%に固定 */
 }

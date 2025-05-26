@@ -23,7 +23,9 @@
   </head>
 
   <body>
-    <%= render 'shared/flash_message' %>
+    <% unless controller_name == 'games' %>
+      <%= render 'shared/flash_message' %>
+    <% end %>
     <%= yield %>
   </body>
 
