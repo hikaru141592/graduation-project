@@ -1,10 +1,10 @@
 class GamesController < ApplicationController
-  require 'time'
+  require "time"
 
   def play
     @play_state = current_user.play_state
-    #ステータス減少が適切に行われなくなるため@play_state.touchはしない
-    #apply_automatic_decay!(@play_state)はしない
+    # ステータス減少が適切に行われなくなるため@play_state.touchはしない
+    # apply_automatic_decay!(@play_state)はしない
 
     @event = @play_state.current_event
     if @play_state.current_cut_position.present?
@@ -150,5 +150,4 @@ class GamesController < ApplicationController
 
     play_state.touch
   end
-
 end
