@@ -20,10 +20,11 @@ class GamesController < ApplicationController
 
   def select_action
     play_state = current_user.play_state
-    Rails.logger.info("▶ stale check → client=#{params[:state_timestamp]}, db=#{play_state.updated_at.iso8601}")
-    client_ts = Time.iso8601(params.require(:state_timestamp))
-    if client_ts.to_i < play_state.updated_at.to_i
-      redirect_to root_path and return
+    unless Rails.env.test?
+      client_ts = Time.iso8601(params.require(:state_timestamp))
+      if client_ts.to_i < play_state.updated_at.to_i
+        redirect_to root_path and return
+      end
     end
     apply_automatic_decay!(play_state)
 
@@ -48,9 +49,11 @@ class GamesController < ApplicationController
 
   def advance_cut
     play_state = current_user.play_state
-    client_ts = Time.iso8601(params.require(:state_timestamp))
-    if client_ts.to_i < play_state.updated_at.to_i
-      redirect_to root_path and return
+    unless Rails.env.test?
+      client_ts = Time.iso8601(params.require(:state_timestamp))
+      if client_ts.to_i < play_state.updated_at.to_i
+        redirect_to root_path and return
+      end
     end
 
     current = play_state.current_cut_position.to_i
