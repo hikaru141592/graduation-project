@@ -1,7 +1,10 @@
 class GamesController < ApplicationController
+  require 'time'
+
   def play
     @play_state = current_user.play_state
-    # apply_automatic_decay!(@play_state)
+    #ステータス減少が適切に行われなくなるため@play_state.touchはしない
+    #apply_automatic_decay!(@play_state)はしない
 
     @event = @play_state.current_event
     if @play_state.current_cut_position.present?
@@ -17,6 +20,11 @@ class GamesController < ApplicationController
 
   def select_action
     play_state = current_user.play_state
+    Rails.logger.info("▶ stale check → client=#{params[:state_timestamp]}, db=#{play_state.updated_at.iso8601}")
+    client_ts = Time.iso8601(params.require(:state_timestamp))
+    if client_ts.to_i < play_state.updated_at.to_i
+      redirect_to root_path and return
+    end
     apply_automatic_decay!(play_state)
 
     event = play_state.current_event
@@ -40,6 +48,11 @@ class GamesController < ApplicationController
 
   def advance_cut
     play_state = current_user.play_state
+    client_ts = Time.iso8601(params.require(:state_timestamp))
+    if client_ts.to_i < play_state.updated_at.to_i
+      redirect_to root_path and return
+    end
+
     current = play_state.current_cut_position.to_i
     next_cut = current + 1
     event   = play_state.current_event
@@ -134,4 +147,5 @@ class GamesController < ApplicationController
 
     play_state.touch
   end
+
 end
