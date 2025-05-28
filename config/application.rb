@@ -26,5 +26,6 @@ module App
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
     config.i18n.available_locales = [ :ja, :en ]
+    config.action_view.preload_links_header = false
   end
 end
