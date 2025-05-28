@@ -9,5 +9,7 @@ Rails.application.routes.draw do
   post "games/select_action", to: "games#select_action", as: "select_action"
   post "games/advance_cut",   to: "games#advance_cut",   as: "advance_cut"
 
+  get "/privacy_policy", to: "privacy_policies#show", as: :privacy_policy
+
   root to: "games#play"
 end
