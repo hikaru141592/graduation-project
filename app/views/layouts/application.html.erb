@@ -23,7 +23,7 @@
   </head>
 
   <body>
-    <% unless controller_name == 'games' %>
+    <% unless controller_name.in?(%w[games privacy_policies]) %>
       <%= render 'shared/flash_message' %>
     <% end %>
     <%= yield %>

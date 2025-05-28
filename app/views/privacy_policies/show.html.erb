@@ -1,0 +1,43 @@
+<section class="privacy-policy container my-5">
+  <div class="text-start mb-3">
+    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-outline-secondary mb-0' %>
+  </div>
+
+  <h3 class="mb-4">プライバシーポリシー</h3>
+
+  <h6>1. 収集情報と利用目的</h6>
+  <ul>
+    <li>
+      <strong>メールアドレス／パスワード（ハッシュ化）</strong><br>
+      ログイン認証のため
+    </li>
+    <li>
+      <strong>ユーザー名</strong><br>
+      将来的にゲーム内表示情報として利用
+    </li>
+    <li>
+      <strong>誕生月・誕生日</strong><br>
+      将来的に特殊なイベントのトリガーとして利用
+    </li>
+    <li>
+      <strong>プレイステート情報</strong><br>
+      ゲーム進行の保存・復元のため
+    </li>
+    <li>
+      <strong>Cookie</strong><br>
+      ログイン状態の維持のため
+    </li>
+  </ul>
+
+  <h6>2. 第三者提供について</h6>
+  <p>利用者の同意なく第三者に提供することはありません。</p>
+
+  <h6>3. 安全管理措置</h6>
+  <p>パスワードはハッシュ化して保存し、通信はHTTPSによって暗号化しています。</p>
+
+  <h6>4. データの保有期間と廃棄</h6>
+  <p>不要となった情報は適宜削除します。</p>
+
+  <h6>5. お問い合わせ先</h6>
+  <p>ご質問はGitHubリポジトリの <a href="https://github.com/hikaru141592/graduation-project/issues">Issue</a> までお願いいたします。</p>
+</section>
