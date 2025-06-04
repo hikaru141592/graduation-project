@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :birth_month, presence: true, inclusion: { in: 1..12 }
   validates :birth_day,   presence: true, inclusion: { in: 1..31 }
   validates :friend_code, presence: true, uniqueness: true, format: { with: /\A\d{8}\z/ }
+  validates :reset_password_token, uniqueness: true, allow_nil: true
 
   validates :line_account,
             uniqueness: true,
