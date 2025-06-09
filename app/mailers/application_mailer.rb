@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: (
+    Rails.env.production? ? ENV.fetch("MAILGUN_SMTP_LOGIN") : "from@example.com"
+  )
   layout "mailer"
 end
