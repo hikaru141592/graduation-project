@@ -8,6 +8,7 @@ class PasswordResetsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user
       user.deliver_reset_password_instructions!
+      UserMailer.reset_password_email(user).deliver_now
     end
     redirect_to password_resets_create_path, success: t('password_resets.create.success', default: 'パスワードリセット手順を送信しました')
   end
