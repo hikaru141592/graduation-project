@@ -1,32 +1,64 @@
 require 'rails_helper'
 
-RSpec.describe "PasswordResets", type: :request do
-  describe "GET /new" do
-    it "returns http success" do
-      get "/password_resets/new"
+RSpec.describe 'PasswordResets', type: :request do
+  let(:user) { create(:user) }
+
+  describe 'GET /password_resets/new' do
+    it '正常に表示される' do
+      get new_password_reset_path
       expect(response).to have_http_status(:success)
+      expect(response.body).to include('パスワード再発行')
     end
   end
 
-  describe "GET /create" do
-    it "returns http success" do
-      get "/password_resets/create"
+  describe 'POST /password_resets' do
+    it 'メール送信後 /password_resets/create へリダイレクトし、ビューが表示される' do
+      post password_resets_path, params: { email: user.email }
+
+      expect(response).to redirect_to password_resets_create_path
+      follow_redirect!
+
       expect(response).to have_http_status(:success)
+      expect(response.body).to include('パスワード再発行の案内メールを送信しました')
+      expect(response.body).to include('受信メールを確認してください')
     end
   end
 
-  describe "GET /edit" do
-    it "returns http success" do
-      get "/password_resets/edit"
+  describe 'GET /password_resets/create' do
+    it '確認ページが表示される' do
+      get password_resets_create_path
       expect(response).to have_http_status(:success)
+      expect(response.body).to include('パスワード再発行')
     end
   end
 
-  describe "GET /update" do
-    it "returns http success" do
-      get "/password_resets/update"
+  describe 'GET /password_resets/edit' do
+    it '正しいトークン付きで編集ページが表示される' do
+      user.deliver_reset_password_instructions!
+      get edit_password_reset_path, params: { token: user.reset_password_token }
+
       expect(response).to have_http_status(:success)
+      expect(response.body).to include('新しいパスワードの登録')
     end
   end
 
+  describe 'PATCH /password_resets/update' do
+    it 'パスワードを変更し完了ページへリダイレクトする' do
+      user.deliver_reset_password_instructions!
+      patch update_password_reset_path,
+            params: {
+              token: user.reset_password_token,
+              user: {
+                password:              'newpassword',
+                password_confirmation: 'newpassword'
+              }
+            }
+
+      expect(response).to redirect_to complete_update_password_reset_path
+      follow_redirect!
+
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include('パスワードの再登録が完了しました。')
+    end
+  end
 end

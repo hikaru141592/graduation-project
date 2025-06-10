@@ -9,10 +9,15 @@ require 'capybara/rspec'
 Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }
 
 begin
-  # テスト DB のスキーマを最新化
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
-  abort e.to_s.strip
+  puts "⚙️ Pending migrations detected. Running db:migrate for test environment..."
+  system('RAILS_ENV=test bin/rails db:migrate')
+  begin
+    ActiveRecord::Migration.maintain_test_schema!
+  rescue ActiveRecord::PendingMigrationError => e2
+    abort e2.to_s.strip
+  end
 end
 
 RSpec.configure do |config|
