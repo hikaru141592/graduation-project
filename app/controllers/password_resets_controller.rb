@@ -7,10 +7,10 @@ class PasswordResetsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user
-      #user.deliver_reset_password_instructions!
-      user.send(:set_reset_password_token)
-      user.save!
-      UserMailer.reset_password_email(user).deliver_now
+      user.deliver_reset_password_instructions!
+      #user.send(:set_reset_password_token)
+      #user.save!
+      #UserMailer.reset_password_email(user).deliver_now
     end
     redirect_to password_resets_create_path, success: t("password_resets.create.success", default: "パスワードリセット手順を送信しました")
   end
