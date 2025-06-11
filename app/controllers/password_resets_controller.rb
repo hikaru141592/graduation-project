@@ -7,6 +7,8 @@ class PasswordResetsController < ApplicationController
   def create
     user = User.find_by(email: params[:email])
     if user
+      user.send(:clear_reset_password_token)
+      user.save!
       user.deliver_reset_password_instructions!
       #user.send(:set_reset_password_token)
       #user.save!
