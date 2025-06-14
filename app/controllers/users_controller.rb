@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   def complete_profile
     @user = User.find(session[:user_id])
-    #flash.now[:name] = session[:pending_oauth]['name']
 
     if @user.profile_completed?
       redirect_to root_path, danger: 'そのページにはアクセスできません'

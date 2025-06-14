@@ -9,7 +9,7 @@ class User < ApplicationRecord
   after_create :build_initial_game_states
 
   before_validation :assign_friend_code, if: -> { new_record? && friend_code.blank? }
-  before_validation :truncate_name_to_6_chars, if: -> { name_changed? && name.present? }
+  #before_validation :truncate_name_to_6_chars, if: -> { name_changed? && name.present? }
 
   validates :email, presence: true, uniqueness: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP }
