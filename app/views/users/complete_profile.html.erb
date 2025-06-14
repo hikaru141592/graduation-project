@@ -1,0 +1,36 @@
+<div class="container mt-5" style="max-width: 600px;">
+  <div class="text-start mb-3">
+    <%= link_to 'もどる', login_path, class: 'btn btn-outline-secondary mb-0' %>
+  </div>
+
+  <h1 class="mb-4">プロフィール登録</h1>
+
+  <%= render 'shared/error_messages', object: @user %>
+
+  <%= form_with model: @user, url: update_profile_path, local: true, html: { class: 'needs-validation' } do |f| %>
+    <div class="mb-3">
+      <%= f.label :name, 'ユーザー名（6文字以内）', class: 'form-label' %>
+      <%= f.text_field :name, value: @user.name, class: 'form-control', maxlength: 6, required: true %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :egg_name, 'たまごちゃん名（6文字以内）', class: 'form-label' %>
+      <%= f.text_field :egg_name, class: 'form-control', maxlength: 6, required: true %>
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <%= f.label :birth_month, '誕生月', class: 'form-label' %>
+        <%= f.number_field :birth_month, class: 'form-control', in: 1..12, required: true %>
+      </div>
+      <div class="col">
+        <%= f.label :birth_day, '誕生日（日）', class: 'form-label' %>
+        <%= f.number_field :birth_day, class: 'form-control', in: 1..31, required: true %>
+      </div>
+    </div>
+
+    <div class="d-grid">
+      <%= f.submit '登録を完了する', class: 'btn btn-alt btn-lg' %>
+    </div>
+  <% end %>
+</div>

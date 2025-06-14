@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_02_110529) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_11_082355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -38,6 +38,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_02_110529) do
     t.index ["action_choice_id"], name: "index_action_results_on_action_choice_id"
     t.index ["calls_event_set_id"], name: "index_action_results_on_calls_event_set_id"
     t.check_constraint "NOT (next_derivation_number IS NOT NULL AND calls_event_set_id IS NOT NULL)", name: "action_results_mutual_exclusion_check"
+  end
+
+  create_table "authentications", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "provider", null: false
+    t.string "uid", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider", "uid"], name: "index_authentications_on_provider_and_uid"
   end
 
   create_table "cable_tables", force: :cascade do |t|
