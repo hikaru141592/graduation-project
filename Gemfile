@@ -44,6 +44,8 @@ gem "popper_js", "~> 2.11.8"
 # gem 'sassc-rails'
 gem "cssbundling-rails"
 # gem 'dartsass-rails'
+gem "omniauth-line"
+gem "omniauth-rails_csrf_protection"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

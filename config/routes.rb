@@ -18,6 +18,13 @@ Rails.application.routes.draw do
   patch "/password_resets/update", to: "password_resets#update", as: "update_password_reset"
   get "/password_resets/complete_update", to: "password_resets#complete_update", as: "complete_update_password_reset"
 
+  match "/auth/:provider/callback", to: "oauths#callback", via: %i[get post]
+  get "/auth/failure",            to: redirect("/")
+
+  get   "/complete_profile", to: "users#complete_profile", as: :complete_profile
+  patch "/complete_profile", to: "users#update_profile",   as: :update_profile
+  # match '/auth/:provider', to: 'oauths#oauth', via: %i[get post], as: :oauth_start
+
   root to: "games#play"
 
   if Rails.env.development?
