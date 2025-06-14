@@ -19,8 +19,8 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
 
     if @user.profile_completed?
-      redirect_to root_path, danger: 'そのページにはアクセスできません'
-      return
+      redirect_to root_path, danger: "そのページにはアクセスできません"
+      nil
     end
   end
 

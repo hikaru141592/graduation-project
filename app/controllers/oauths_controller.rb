@@ -7,9 +7,9 @@ class OauthsController < ApplicationController
   # end
 
   def callback
-    auth_hash = request.env['omniauth.auth']
+    auth_hash = request.env["omniauth.auth"]
     Rails.logger.debug "=== AUTH HASH ===\n#{auth_hash.to_h.inspect}\n================="
-    raw_name = auth_hash.info.name.to_s.presence || auth_hash.info['displayName'].to_s
+    raw_name = auth_hash.info.name.to_s.presence || auth_hash.info["displayName"].to_s
     truncated_name = raw_name.each_char.take(6).join
     authentication = Authentication.find_by(
       provider: auth_hash.provider,
@@ -20,9 +20,9 @@ class OauthsController < ApplicationController
     else
 
       user = User.new(
-        email:       auth_hash.info['email'].presence || "temp-#{SecureRandom.uuid}@example.com",
+        email:       auth_hash.info["email"].presence || "temp-#{SecureRandom.uuid}@example.com",
         name:        truncated_name,
-        egg_name:    '未登録',
+        egg_name:    "未登録",
         birth_month: 1,
         birth_day:   1
       )
@@ -42,7 +42,7 @@ class OauthsController < ApplicationController
       provider: auth_hash.provider,
       uid:      auth_hash.uid,
       name:     truncated_name,
-      email:    auth_hash.info['email']
+      email:    auth_hash.info["email"]
     }
 
     redirect_to complete_profile_path and return
@@ -54,5 +54,4 @@ class OauthsController < ApplicationController
   private def auth_params
     params.permit(:provider)
   end
-
 end

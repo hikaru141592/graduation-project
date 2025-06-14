@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   def redirect_if_incomplete_profile
     if session[:user_id] && current_user.nil?
       reset_session
-      return redirect_to login_path, danger: 'セッションが切れています。再度ログインしてください。'
+      return redirect_to login_path, danger: "セッションが切れています。再度ログインしてください。"
     end
     return unless current_user
     return if request.path == login_path
