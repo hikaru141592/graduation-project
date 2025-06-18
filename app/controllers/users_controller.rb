@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create complete_profile update_profile]
+  skip_before_action :require_login, only: %i[new create]
 
   def new
     @user = User.new
@@ -19,8 +19,8 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
 
     if @user.profile_completed?
-      redirect_to root_path, danger: "そのページにはアクセスできません"
-      nil
+      auto_login(@user)
+      redirect_to root_path
     end
   end
 

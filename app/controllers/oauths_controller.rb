@@ -45,10 +45,12 @@ class OauthsController < ApplicationController
       email:    auth_hash.info["email"]
     }
 
-    redirect_to complete_profile_path and return
-
-    auto_login(@user)
-    redirect_to root_path, success: "ログインに成功しました。"
+    if @user.profile_completed?
+      auto_login(@user)
+      redirect_to root_path, success: "ログインに成功しました。"
+    else
+      redirect_to complete_profile_path
+    end
   end
 
   private def auth_params

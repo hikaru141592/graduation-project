@@ -12,6 +12,12 @@
       <%= f.password_field :password, name: :password, class: 'form-control', required: true %>
     </div>
 
+    <div class="form-check mb-3">
+      <%= hidden_field_tag :remember, '0' %>
+      <%= check_box_tag   :remember, '1', params[:remember] == '1', id: 'remember', class: 'form-check-input' %>
+      <%= label_tag      :remember, '次回から自動ログインする', class: 'form-check-label' %>
+    </div>
+
     <div class="d-grid mb-3">
       <%= f.submit 'ログイン', class: 'btn btn-alt btn-lg' %>
     </div>
