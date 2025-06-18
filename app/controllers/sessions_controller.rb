@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
 
   def create
     Rails.logger.debug "🛠️  params[:remember]=#{params[:remember].inspect}"
-    if login(params[:email], params[:password], params[:remember] == '1')
+    if login(params[:email], params[:password], params[:remember] == "1")
       @user = current_user
       redirect_to root_path, success: "ログインに成功しました。"
     else
