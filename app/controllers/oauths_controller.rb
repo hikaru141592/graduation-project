@@ -6,6 +6,11 @@ class OauthsController < ApplicationController
   #   login_at(auth_params[:provider])
   # end
 
+  def line_login
+    session[:remember] = params[:remember]
+    redirect_to '/auth/line'
+  end
+
   def callback
     auth_hash = request.env["omniauth.auth"]
     Rails.logger.debug "=== AUTH HASH ===\n#{auth_hash.to_h.inspect}\n================="
@@ -36,6 +41,7 @@ class OauthsController < ApplicationController
       Authentication.create!(user: user, provider: auth_hash.provider, uid: auth_hash.uid)
       user
     end
+    remember_flag = session.delete(:remember)
     reset_session
     session[:user_id] = @user.id
     session[:pending_oauth] = {
@@ -47,6 +53,7 @@ class OauthsController < ApplicationController
 
     if @user.profile_completed?
       auto_login(@user)
+      remember_me! if remember_flag == '1'
       redirect_to root_path, success: "ログインに成功しました。"
     else
       redirect_to complete_profile_path

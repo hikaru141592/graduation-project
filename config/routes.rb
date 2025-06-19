@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   patch "/password_resets/update", to: "password_resets#update", as: "update_password_reset"
   get "/password_resets/complete_update", to: "password_resets#complete_update", as: "complete_update_password_reset"
 
+  get '/line_login', to: 'oauths#line_login', as: 'line_login'
   match "/auth/:provider/callback", to: "oauths#callback", via: %i[get post]
   get "/auth/failure",            to: redirect("/")
 
