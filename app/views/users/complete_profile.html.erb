@@ -1,9 +1,11 @@
+<% content_for :title, 'ユーザー登録' %>
+
 <div class="container mt-5" style="max-width: 600px;">
   <div class="text-start mb-3">
     <%= link_to 'もどる', login_path, class: 'btn btn-outline-secondary mb-0' %>
   </div>
 
-  <h1 class="mb-4">プロフィール登録</h1>
+  <h1 class="mb-4">ユーザー登録</h1>
 
   <%= render 'shared/error_messages', object: @user %>
 
