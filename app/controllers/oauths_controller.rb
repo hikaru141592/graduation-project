@@ -8,7 +8,7 @@ class OauthsController < ApplicationController
 
   def line_login
     session[:remember] = params[:remember]
-    redirect_to '/auth/line'
+    redirect_to "/auth/line"
   end
 
   def callback
@@ -53,7 +53,7 @@ class OauthsController < ApplicationController
 
     if @user.profile_completed?
       auto_login(@user)
-      remember_me! if remember_flag == '1'
+      remember_me! if remember_flag == "1"
       redirect_to root_path, success: "ログインに成功しました。"
     else
       redirect_to complete_profile_path
