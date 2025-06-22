@@ -9,6 +9,11 @@ body,
   background-color: rgba(0, 0, 0, 0.75) !important;
   color: $btn-primary-color !important;
 }
+@media (min-width: 768px) {
+  .message-box {
+    min-height: 100px;
+  }
+}
 
 .btn-primary {
   background-color: $primary-btn-bg !important;
@@ -22,11 +27,6 @@ body,
   padding-left: 1rem;
   padding-right: 1rem;
   max-width: 100%;
-}
-
-@media (min-width: 430px) {
-  .container { max-width: 430px !important; }
-  
 }
 
 header {
@@ -102,8 +102,23 @@ input.form-control[readonly] {
   border-top: 1px solid #222222 !important;
 }
 
-/* ===== disabled の .btn-primary を濃いままにする ===== */
-.btn-primary:disabled,      // 擬似クラスで無効化された場合
-.btn-primary.disabled {     // クラスとして .disabled を付けた場合
-  opacity: 1 !important;    /* 不透明度100%に固定 */
+.btn-primary:disabled,
+.btn-primary.disabled {
+  opacity: 1 !important;
+}
+
+.play-image-wrapper {
+  width: 80% !important;
+}
+
+@media (min-width: 768px) {
+  .play-image-wrapper {
+    width: 70% !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .pe-md-6 {
+    padding-inline-end: 7rem !important;
+  }
 }

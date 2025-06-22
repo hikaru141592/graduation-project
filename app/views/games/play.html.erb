@@ -3,51 +3,56 @@
     <%= link_to "ログアウト", logout_path,
         data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" },
         class: "btn btn-outline-secondary mb-0" %>
-
   </div>
 
   <%= turbo_frame_tag "game_play" do %>
-    <div class="position-relative my-2 mx-auto" style="width: 80%;">
-      <%= image_tag(
-            @cut&.background_image || @event.background_image,
-            alt: "背景",
-            class: "img-fluid"
-          ) %>
-      <%= image_tag(
-            @cut&.character_image || @event.character_image,
-            alt: "キャラクター",
-            class: "position-absolute top-50 start-50 translate-middle img-fluid",
-            style: "width: 80%;"
-          ) %>
-    </div>
 
-    <div class="message-box my-3 py-4">
-      <% message = @cut&.message || @event.message %>
-      <%= message.gsub('〈たまご〉', current_user.egg_name) %>
-    </div>
+    <div class="row gx-3 align-items-md-center">
+      <div class="col-12 col-md-8">
+        <div class="position-relative my-2 mx-auto play-image-wrapper">
+          <%= image_tag(
+                @cut&.background_image || @event.background_image,
+                alt: "背景",
+                class: "img-fluid"
+              ) %>
+          <%= image_tag(
+                @cut&.character_image || @event.character_image,
+                alt: "キャラクター",
+                class: "position-absolute top-50 start-50 translate-middle img-fluid",
+                style: "width: 80%;"
+              ) %>
+        </div>        
+      </div>
 
-    <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
-      <%= hidden_field_tag :state_timestamp, @play_state.updated_at.iso8601 %>
-      <div class="d-grid gap-2 mx-auto mt-4" style="width: 70%;">
-        <% 4.times do |i| %>
-          <% pos   = i + 1 %>
-          <% label = @phase == :select ?
-                       (@choices.find { |c| c.position == pos }&.label) :
-                       (pos == 1 ? "すすむ" : "") %>
-          <% if (@phase == :select && label.present?) ||
-              (@phase == :cut    && pos == 1) %>
-            <%= button_tag label,
-                type:  "submit",
-                name:  "position",
-                value: pos,
-                class: "btn btn-primary py-1 px-2" %>
-          <% else %>
-            <button type="button" class="btn btn-primary py-1 px-2" disabled>
-              <%= label.presence || "&nbsp;".html_safe %>
-            </button>
-          <% end %>
+      <div class="col-12 col-md-4 pe-md-6 d-grid gap-1 mt-2 mt-md-4">
+        <div class="message-box mb-1 py-4 d-flex align-items-center justify-content-center">
+          <% message = @cut&.message || @event.message %>
+          <%= message.gsub('〈たまご〉', current_user.egg_name) %>
+        </div>
+        <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
+          <%= hidden_field_tag :state_timestamp, @play_state.updated_at.iso8601 %>
+          <div class="d-grid gap-2 mx-auto mt-2" style="width: 70%;">
+            <% 4.times do |i| %>
+              <% pos   = i + 1 %>
+              <% label = @phase == :select ?
+                           (@choices.find { |c| c.position == pos }&.label) :
+                           (pos == 1 ? "すすむ" : "") %>
+              <% if (@phase == :select && label.present?) ||
+                  (@phase == :cut    && pos == 1) %>
+                <%= button_tag label,
+                    type:  "submit",
+                    name:  "position",
+                    value: pos,
+                    class: "btn btn-primary py-1 px-2" %>
+              <% else %>
+                <button type="button" class="btn btn-primary py-1 px-2" disabled>
+                  <%= label.presence || "&nbsp;".html_safe %>
+                </button>
+              <% end %>
+            <% end %>
+          </div>
         <% end %>
       </div>
-    <% end %>
+    </div>
   <% end %>
 </div>
