@@ -2,7 +2,7 @@
   <div class="text-start mb-3">
     <%= link_to "ログアウト", logout_path,
         data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" },
-        class: "btn btn-outline-secondary mb-0" %>
+        class: "btn btn-outline-secondary mb-0 ms-md-5" %>
   </div>
 
   <%= turbo_frame_tag "game_play" do %>
@@ -31,7 +31,7 @@
         </div>
         <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
           <%= hidden_field_tag :state_timestamp, @play_state.updated_at.iso8601 %>
-          <div class="d-grid gap-2 mx-auto mt-2" style="width: 70%;">
+          <div class="d-grid gap-2 mx-auto mt-2 mt-md-4" style="width: 70%;">
             <% 4.times do |i| %>
               <% pos   = i + 1 %>
               <% label = @phase == :select ?
