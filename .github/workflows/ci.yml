@@ -102,7 +102,7 @@ jobs:
       - name: Start DB container
         run: |
           docker compose up -d db
-          docker compose exec db pg_isready -U hikaru -t 30
+          docker compose exec db pg_isready -U hikaru -t 90
 
       - name: Debug DB status
         if: always()
