@@ -107,8 +107,9 @@ jobs:
       - name: Debug DB status
         if: always()
         run: |
-          docker compose exec db netstat -plnt
           docker compose logs db
+          docker compose exec db psql -U hikaru -c '\conninfo'
+          docker compose exec db pg_isready -U hikaru -d hikaru_test
 
       - name: Install deps, set up DB, run RSpec (inside container)
         run: |
