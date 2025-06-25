@@ -130,7 +130,7 @@ jobs:
             -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle \
             web bash -c '
               bundle install --jobs 4 --retry 3 &&
-              bundle exec rails propshaft:compile &&
+              rails assets:precompile &&
               bundle exec rails db:create db:migrate &&
               bundle exec rspec
             '
