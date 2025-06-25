@@ -105,6 +105,7 @@ jobs:
           docker compose exec db pg_isready -U hikaru -t 30
 
       - name: Debug DB status
+        if: always()
         run: |
           docker compose exec db netstat -plnt
           docker compose logs db
