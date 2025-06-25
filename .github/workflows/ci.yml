@@ -119,12 +119,19 @@ jobs:
           docker compose exec db psql -U hikaru -c '\conninfo'
           docker compose exec db pg_isready -U hikaru -d hikaru_test
 
+      - name: Install system deps for system spec
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y chromium-browser chromium-driver
+
       - name: Install deps, set up DB, run RSpec (inside container)
         run: |
           docker compose run --rm \
             -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle \
             web bash -c '
               bundle install --jobs 4 --retry 3 &&
+              bundle exec rails propshaft:clean &&
+              bundle exec rails propshaft:compile &&
               bundle exec rails db:create db:migrate &&
               bundle exec rspec
             '
