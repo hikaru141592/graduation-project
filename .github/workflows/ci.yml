@@ -102,7 +102,15 @@ jobs:
       - name: Start DB container
         run: |
           docker compose up -d db
-          docker compose exec db pg_isready -U hikaru -t 90
+          for i in $(seq 1 150); do
+            if docker compose exec db pg_isready -U hikaru -h db -p 5432; then
+              echo "DB is ready!"
+              exit 0
+            fi
+            echo "[$i] DB not ready yet…"
+            sleep 1
+          done
+          echo "Timed out waiting for DB" && exit 1
 
       - name: Debug DB status
         if: always()
