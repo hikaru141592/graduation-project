@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post "games/advance_cut",   to: "games#advance_cut",   as: "advance_cut"
 
   get "/privacy_policy", to: "privacy_policies#show", as: :privacy_policy
+  get "/term", to: "term#show", as: :term
 
   get  "/password_resets/new",     to: "password_resets#new",    as: "new_password_reset"
   post "/password_resets",         to: "password_resets#create", as: "password_resets"
@@ -24,7 +25,6 @@ Rails.application.routes.draw do
 
   get   "/complete_profile", to: "users#complete_profile", as: :complete_profile
   patch "/complete_profile", to: "users#update_profile",   as: :update_profile
-  # match '/auth/:provider', to: 'oauths#oauth', via: %i[get post], as: :oauth_start
 
   root to: "games#play"
 
