@@ -69,9 +69,18 @@ class GamesController < ApplicationController
       apply_effects!(result.effects)
       apply_automatic_decay!(play_state)
 
-      selector   = EventSetSelector.new(current_user)
-      next_set   = selector.select_next
-      next_event = next_set.events.find_by!(derivation_number: 0)
+      user_status = current_user.user_status
+      current_set = event.event_set
+      if in_loop?(current_user.user_status, current_set)
+        next_set = current_set
+        next_event = event
+      else
+        clear_loop_status(user_status)
+        selector   = EventSetSelector.new(current_user)
+        next_set   = selector.select_next
+        next_event = next_set.events.find_by!(derivation_number: 0)
+        record_loop_start(current_user.user_status, next_set)
+      end
 
       play_state.update!(
         current_event_id:        next_event.id,
@@ -149,5 +158,25 @@ class GamesController < ApplicationController
     status.save!
 
     play_state.touch
+  end
+
+  def in_loop?(user_status, event_set)
+    return false unless user_status.current_loop_event_set_id == event_set.id
+    user_status.current_loop_started_at > event_set.event_category.loop_minutes.minutes.ago
+  end
+
+  def record_loop_start(user_status, event_set)
+    return if event_set.event_category.loop_minutes.blank?
+    user_status.update!(
+      current_loop_event_set_id: event_set.id,
+      current_loop_started_at: Time.current
+    )
+  end
+
+  def clear_loop_status(user_status)
+    user_status.update!(
+      current_loop_event_set_id: nil,
+      current_loop_started_at: nil,
+    )
   end
 end
