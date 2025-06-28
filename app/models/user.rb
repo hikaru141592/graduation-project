@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_one :play_state, dependent: :destroy
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
+  has_many :user_event_category_invalidations, dependent: :destroy
 
   after_create :build_initial_game_states
 

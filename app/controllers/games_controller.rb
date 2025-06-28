@@ -72,6 +72,10 @@ class GamesController < ApplicationController
       user_status = current_user.user_status
       current_set = event.event_set
       resolves = result.resolves_loop?
+      current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
+      if result.resolves_loop?
+        event_category_invalidation(current_user, current_set.event_category, 2.hours.from_now)
+      end
       if continue_loop?(user_status, current_set, resolves)
         next_set = current_set
         next_event = event
@@ -184,5 +188,9 @@ class GamesController < ApplicationController
       current_loop_event_set_id: nil,
       current_loop_started_at: nil,
     )
+  end
+
+  def event_category_invalidation(user, event_category, expires_at)
+    user.user_event_category_invalidations.create!(event_category: event_category, expires_at: expires_at)
   end
 end

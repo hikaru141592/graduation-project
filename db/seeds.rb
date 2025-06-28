@@ -63,7 +63,7 @@ event_set_conditions = [
           "type":      "status",
           "attribute": "love_value",
           "operator":  "<=",
-          "value":     20
+          "value":     30
         }
       ]
     }
@@ -75,7 +75,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 20
+          "percent": 3
         }
       ]
     }
