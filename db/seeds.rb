@@ -75,7 +75,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 0
+          "percent": 20
         }
       ]
     }
@@ -626,10 +626,10 @@ action_results = [
     label:                 'あそんであげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   }
 ]
 

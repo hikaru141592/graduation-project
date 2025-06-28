@@ -71,7 +71,8 @@ class GamesController < ApplicationController
 
       user_status = current_user.user_status
       current_set = event.event_set
-      if in_loop?(current_user.user_status, current_set)
+      resolves = result.resolves_loop?
+      if continue_loop?(user_status, current_set, resolves)
         next_set = current_set
         next_event = event
       else
@@ -163,6 +164,11 @@ class GamesController < ApplicationController
   def in_loop?(user_status, event_set)
     return false unless user_status.current_loop_event_set_id == event_set.id
     user_status.current_loop_started_at > event_set.event_category.loop_minutes.minutes.ago
+  end
+
+  def continue_loop?(user_status, event_set, resolves_loop)
+    return false if resolves_loop
+    in_loop?(user_status, event_set)
   end
 
   def record_loop_start(user_status, event_set)
