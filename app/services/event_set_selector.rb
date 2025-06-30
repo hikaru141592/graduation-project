@@ -1,5 +1,6 @@
 class EventSetSelector
   PRIORITY_LIST = [
+    "寝ている",
     "泣いている(空腹)",
     "泣いている(よしよし不足)",
     "泣いている(ランダム)",
@@ -48,6 +49,16 @@ class EventSetSelector
              .find_by(code: c["item_code"])
              .try(:count).to_i
              .public_send(c["operator"], c["value"])
+      when "time_range"
+        now = Time.zone.now
+        current_total_min = now.hour * 60 + now.min
+        from_total_min = c["from_hour"].to_i * 60 + c["from_min"].to_i
+        to_total_min   = c["to_hour"].to_i   * 60 + c["to_min"].to_i
+        if from_total_min <= to_total_min
+          (from_total_min <= current_total_min) && (current_total_min < to_total_min)
+        else
+          (from_total_min <= current_total_min) || (current_total_min < to_total_min)
+        end
       else
         false
       end
