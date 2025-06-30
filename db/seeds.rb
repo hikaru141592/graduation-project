@@ -1,7 +1,7 @@
 categories = [
   { name: '通常',     description: '何か言っている、何かしたそう',                         loop_minutes: nil  },
   { name: 'ルンルン', description: '踊っている',                                           loop_minutes: 12   },
-  { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 60 },
+  { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 20 },
   { name: '怒っている', description: '怒っている',                                         loop_minutes: 60   },
   { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: nil  },
   { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
