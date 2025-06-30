@@ -12,6 +12,8 @@ class EventSetSelector
     @user       = user
     @status     = user.user_status
     @event_sets = EventSet.all.to_a
+
+    filter_invalid_categories!
   end
 
   def select_next
@@ -52,5 +54,10 @@ class EventSetSelector
     end
 
     op == "and" ? results.all? : results.any?
+  end
+
+  def filter_invalid_categories!
+    invalid_ids = @user.user_event_category_invalidations.pluck(:event_category_id)
+    @event_sets.reject! { |s| invalid_ids.include?(s.event_category_id) }
   end
 end

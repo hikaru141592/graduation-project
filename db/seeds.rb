@@ -1,7 +1,7 @@
 categories = [
   { name: '通常',     description: '何か言っている、何かしたそう',                         loop_minutes: nil  },
   { name: 'ルンルン', description: '踊っている',                                           loop_minutes: 12   },
-  { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 60 },
+  { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 20 },
   { name: '怒っている', description: '怒っている',                                         loop_minutes: 60   },
   { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: nil  },
   { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
@@ -63,7 +63,7 @@ event_set_conditions = [
           "type":      "status",
           "attribute": "love_value",
           "operator":  "<=",
-          "value":     20
+          "value":     40
         }
       ]
     }
@@ -75,7 +75,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 0
+          "percent": 3
         }
       ]
     }
@@ -285,7 +285,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
                                          { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -414,11 +414,11 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -426,12 +426,12 @@ action_results = [
     label:                 'よしよしする',
     priority:              2,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
                                          { "attribute": "happiness_value", "delta": 1 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -453,7 +453,7 @@ action_results = [
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -464,7 +464,7 @@ action_results = [
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -486,7 +486,7 @@ action_results = [
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -497,7 +497,7 @@ action_results = [
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '泣いている(空腹)',
@@ -530,7 +530,7 @@ action_results = [
     effects:               { "status": [ { "attribute": "hunger_value", "delta": 50 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '泣いている(空腹)',
@@ -541,95 +541,95 @@ action_results = [
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '泣いている(よしよし不足)',
     derivation_number:     0,
     label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 40 } ] },
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         true
+  },
+  {
+    event_set_name:        '泣いている(よしよし不足)',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(よしよし不足)',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(よしよし不足)',
+    derivation_number:     0,
+    label:                 'あそんであげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'おやつをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'ごはんをあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '泣いている(ランダム)',
+    derivation_number:     0,
+    label:                 'あそんであげる',
     priority:              1,
     trigger_conditions:    { always: true },
     effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
-  },
-  {
-    event_set_name:        '泣いている(よしよし不足)',
-    derivation_number:     0,
-    label:                 'おやつをあげる',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
-  },
-  {
-    event_set_name:        '泣いている(よしよし不足)',
-    derivation_number:     0,
-    label:                 'ごはんをあげる',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
-  },
-  {
-    event_set_name:        '泣いている(よしよし不足)',
-    derivation_number:     0,
-    label:                 'あそんであげる',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
-  },
-  {
-    event_set_name:        '泣いている(ランダム)',
-    derivation_number:     0,
-    label:                 'よしよしする',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
-  },
-  {
-    event_set_name:        '泣いている(ランダム)',
-    derivation_number:     0,
-    label:                 'おやつをあげる',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
-  },
-  {
-    event_set_name:        '泣いている(ランダム)',
-    derivation_number:     0,
-    label:                 'ごはんをあげる',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
-  },
-  {
-    event_set_name:        '泣いている(ランダム)',
-    derivation_number:     0,
-    label:                 'あそんであげる',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   }
 ]
 

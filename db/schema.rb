@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_16_114139) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_28_080525) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -121,6 +121,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_16_114139) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_event_category_invalidations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_category_id", null: false
+    t.datetime "expires_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_category_id"], name: "index_user_event_category_invalidations_on_event_category_id"
+    t.index ["user_id", "event_category_id"], name: "index_user_event_cat_invalidations_on_user_and_category", unique: true
+    t.index ["user_id"], name: "index_user_event_category_invalidations_on_user_id"
+  end
+
   create_table "user_statuses", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.integer "hunger_value", default: 50, null: false
@@ -181,6 +192,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_16_114139) do
   add_foreign_key "events", "event_sets"
   add_foreign_key "play_states", "events", column: "current_event_id"
   add_foreign_key "play_states", "users"
+  add_foreign_key "user_event_category_invalidations", "event_categories"
+  add_foreign_key "user_event_category_invalidations", "users"
   add_foreign_key "user_statuses", "event_sets", column: "current_loop_event_set_id"
   add_foreign_key "user_statuses", "users"
 end

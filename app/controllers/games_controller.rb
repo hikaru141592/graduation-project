@@ -5,6 +5,25 @@ class GamesController < ApplicationController
     @play_state = current_user.play_state
     # ステータス減少が適切に行われなくなるため@play_state.touchはしない
     # apply_automatic_decay!(@play_state)はしない
+    unless request.headers["Turbo-Visit"].present? || request.headers["Turbo-Frame"].present?
+      user_status = current_user.user_status
+      current_set = @play_state.current_event.event_set
+
+      if user_status.current_loop_event_set_id.present? && !in_loop?(user_status, current_set)
+        apply_automatic_decay!(@play_state)
+        current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
+        clear_loop_status(user_status)
+        next_set, next_event = pick_next_event_set_and_event
+        record_loop_start(current_user.user_status, next_set)
+
+        @play_state.update!(
+          current_event_id:        next_event.id,
+          action_choices_position: nil,
+          action_results_priority: nil,
+          current_cut_position:    nil
+        )
+      end
+    end
 
     @event = @play_state.current_event
     if @play_state.current_cut_position.present?
@@ -69,9 +88,22 @@ class GamesController < ApplicationController
       apply_effects!(result.effects)
       apply_automatic_decay!(play_state)
 
-      selector   = EventSetSelector.new(current_user)
-      next_set   = selector.select_next
-      next_event = next_set.events.find_by!(derivation_number: 0)
+      user_status = current_user.user_status
+      current_set = event.event_set
+      resolves = result.resolves_loop?
+
+      current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
+      if result.resolves_loop?
+        event_category_invalidation(current_user, current_set.event_category, 2.hours.from_now)
+      end
+      if continue_loop?(user_status, current_set, resolves)
+        next_set = current_set
+        next_event = event
+      else
+        clear_loop_status(user_status)
+        next_set, next_event = pick_next_event_set_and_event
+        record_loop_start(current_user.user_status, next_set)
+      end
 
       play_state.update!(
         current_event_id:        next_event.id,
@@ -149,5 +181,41 @@ class GamesController < ApplicationController
     status.save!
 
     play_state.touch
+  end
+
+  def in_loop?(user_status, event_set)
+    return false unless user_status.current_loop_event_set_id == event_set.id
+    user_status.current_loop_started_at > event_set.event_category.loop_minutes.minutes.ago
+  end
+
+  def continue_loop?(user_status, event_set, resolves_loop)
+    return false if resolves_loop
+    in_loop?(user_status, event_set)
+  end
+
+  def record_loop_start(user_status, event_set)
+    return if event_set.event_category.loop_minutes.blank?
+    user_status.update!(
+      current_loop_event_set_id: event_set.id,
+      current_loop_started_at: Time.current
+    )
+  end
+
+  def clear_loop_status(user_status)
+    user_status.update!(
+      current_loop_event_set_id: nil,
+      current_loop_started_at: nil,
+    )
+  end
+
+  def event_category_invalidation(user, event_category, expires_at)
+    user.user_event_category_invalidations.create!(event_category: event_category, expires_at: expires_at)
+  end
+
+  def pick_next_event_set_and_event
+    selector = EventSetSelector.new(current_user)
+    next_set = selector.select_next
+    next_event = next_set.events.find_by!(derivation_number: 0)
+    [next_set, next_event]
   end
 end
