@@ -14,6 +14,7 @@ class GamesController < ApplicationController
         current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
         clear_loop_status(user_status)
         next_set, next_event = pick_next_event_set_and_event
+        record_loop_start(current_user.user_status, next_set)
 
         @play_state.update!(
           current_event_id:        next_event.id,

@@ -418,7 +418,7 @@ action_results = [
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -431,7 +431,7 @@ action_results = [
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -453,7 +453,7 @@ action_results = [
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -464,7 +464,7 @@ action_results = [
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -486,7 +486,7 @@ action_results = [
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '踊っている',
@@ -497,7 +497,7 @@ action_results = [
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '泣いている(空腹)',
@@ -530,7 +530,7 @@ action_results = [
     effects:               { "status": [ { "attribute": "hunger_value", "delta": 50 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '泣いている(空腹)',
@@ -541,7 +541,7 @@ action_results = [
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '泣いている(よしよし不足)',
@@ -552,7 +552,7 @@ action_results = [
     effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '泣いている(よしよし不足)',
