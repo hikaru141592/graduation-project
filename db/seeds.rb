@@ -119,10 +119,24 @@ event_set_conditions = [
       "conditions": [
         {
           "type":      "time_range",
-          "from_hour": 1,
-          "from_min":  0,
-          "to_hour":   7,
-          "to_min":    0,
+          "from_hour": 0,
+          "from_min":  46,
+          "to_hour":   6,
+          "to_min":    38,
+          "offsets_by_day": [
+            {
+              "add":        43,
+              "mult":       17,
+              "mod":        60,
+              "target":     "to_min"
+            },
+            {
+              "add":        27,
+              "mult":       19,
+              "mod":        60,
+              "target":     "from_min"
+            }
+          ]
         }
       ]
     }
