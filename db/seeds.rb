@@ -63,7 +63,7 @@ event_set_conditions = [
           "type":      "status",
           "attribute": "love_value",
           "operator":  "<=",
-          "value":     30
+          "value":     40
         }
       ]
     }
@@ -285,7 +285,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
                                          { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -414,7 +414,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -426,7 +426,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              2,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
                                          { "attribute": "happiness_value", "delta": 1 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
@@ -549,7 +549,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ] },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 40 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         true
