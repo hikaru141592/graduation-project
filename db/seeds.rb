@@ -148,7 +148,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 2
+          "percent": 3
         }
       ]
     }
@@ -160,7 +160,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 90
+          "percent": 5
         }
       ]
     }
