@@ -216,6 +216,6 @@ class GamesController < ApplicationController
     selector = EventSetSelector.new(current_user)
     next_set = selector.select_next
     next_event = next_set.events.find_by!(derivation_number: 0)
-    [next_set, next_event]
+    [ next_set, next_event ]
   end
 end

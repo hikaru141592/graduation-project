@@ -5,7 +5,7 @@ categories = [
   { name: '怒っている', description: '怒っている',                                         loop_minutes: 60   },
   { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: nil  },
   { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
-  { name: '寝ている', description: '寝ている',                                             loop_minutes: 90   }
+  { name: '寝ている', description: '寝ている',                                             loop_minutes: 60   }
 ]
 
 categories.each do |attrs|
@@ -111,6 +111,35 @@ event_set_conditions = [
     trigger_conditions: {
       "always": true
     }
+  },
+  {
+    name: '寝ている',
+    trigger_conditions: {
+      "operator": "and",
+      "conditions": [
+        {
+          "type":      "time_range",
+          "from_hour": 0,
+          "from_min":  46,
+          "to_hour":   6,
+          "to_min":    38,
+          "offsets_by_day": [
+            {
+              "add":        43,
+              "mult":       17,
+              "mod":        60,
+              "target":     "to_min"
+            },
+            {
+              "add":        27,
+              "mult":       19,
+              "mod":        60,
+              "target":     "from_min"
+            }
+          ]
+        }
+      ]
+    }
   }
 ]
 
@@ -205,7 +234,7 @@ events = [
     name:              '寝ている',
     derivation_number: 0,
     message:           '〈たまご〉はねている',
-    character_image:   'character/kari-nikoniko.png',
+    character_image:   'character/kari-sleep.png',
     background_image:  'background/kari-background.png'
   }
 ]
@@ -253,6 +282,11 @@ choices = [
     event_set_name:    '泣いている(ランダム)',
     derivation_number: 0,
     labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
+  },
+  {
+    event_set_name:    '寝ている',
+    derivation_number: 0,
+    labels:            [ 'そっとする',        'よしよしする',     'たたきおこす' ]
   }
 ]
 
@@ -630,6 +664,39 @@ action_results = [
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         true
+  },
+  {
+    event_set_name:        '寝ている',
+    derivation_number:     0,
+    label:                 'そっとする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '寝ている',
+    derivation_number:     0,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 40 } ] },
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '寝ている',
+    derivation_number:     0,
+    label:                 'たたきおこす',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
   }
 ]
 
@@ -693,7 +760,11 @@ cuts = [
   { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
   { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'おやつをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
   { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'ごはんをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' }
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'きもちよさそうにねているなあ', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'りっぱにそだちますように', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'できるわけないだろ！！', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' }
 ]
 
 cuts.each do |attrs|

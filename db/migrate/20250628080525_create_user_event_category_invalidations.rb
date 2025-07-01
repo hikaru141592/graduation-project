@@ -7,6 +7,6 @@ class CreateUserEventCategoryInvalidations < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    add_index :user_event_category_invalidations, [:user_id, :event_category_id], unique: true, name: :index_user_event_cat_invalidations_on_user_and_category
+    add_index :user_event_category_invalidations, [ :user_id, :event_category_id ], unique: true, name: :index_user_event_cat_invalidations_on_user_and_category
   end
 end
