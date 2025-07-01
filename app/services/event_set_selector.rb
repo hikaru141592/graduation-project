@@ -96,7 +96,7 @@ class EventSetSelector
   def base_range(c)
     from = c["from_hour"].to_i * 60 + c["from_min"].to_i
     to   = c["to_hour"].to_i   * 60 + c["to_min"].to_i
-    [from, to]
+    [ from, to ]
   end
 
   def apply_offset_by_day(ob, from, to)
@@ -110,6 +110,6 @@ class EventSetSelector
       from = (from + delta) % (24 * 60)
     end
 
-    [from, to]
+    [ from, to ]
   end
 end
