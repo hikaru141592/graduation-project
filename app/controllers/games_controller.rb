@@ -102,6 +102,8 @@ class GamesController < ApplicationController
       else
         clear_loop_status(user_status)
         next_set, next_event = pick_next_event_set_and_event
+        next_set, next_event = apply_event_set_call(result, next_set, next_event)
+        next_set, next_event = apply_event_set_call(result, next_set, next_event)
         record_loop_start(current_user.user_status, next_set)
       end
 
@@ -217,5 +219,15 @@ class GamesController < ApplicationController
     next_set = selector.select_next
     next_event = next_set.events.find_by!(derivation_number: 0)
     [ next_set, next_event ]
+  end
+
+  def apply_event_set_call(action_result, default_set, default_event)
+    if action_result.calls_event_set_id.present?
+      event_set = EventSet.find(action_result.calls_event_set_id)
+      event = event_set.events.find_by!(derivation_number: 0)
+      [ event_set, event ]
+    else
+      [ default_set, default_event ]
+    end
   end
 end
