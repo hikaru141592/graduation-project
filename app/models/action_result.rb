@@ -10,7 +10,6 @@ class ActionResult < ApplicationRecord
 
   private
 
-  # next_derivation_number と calls_event_set_id は同時に存在しないよう検証
   def exclusive_derivation_or_call
     if next_derivation_number.present? && calls_event_set_id.present?
       errors.add(:base, "派生番号かイベントセットコールのどちらか一方のみ指定してください")

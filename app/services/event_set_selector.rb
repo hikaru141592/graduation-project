@@ -1,6 +1,7 @@
 class EventSetSelector
   PRIORITY_LIST = [
     "寝ている",
+    "眠そう",
     "泣いている(空腹)",
     "泣いている(よしよし不足)",
     "泣いている(ランダム)",
