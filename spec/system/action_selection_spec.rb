@@ -1,4 +1,3 @@
-# spec/system/action_selection_spec.rb
 require 'rails_helper'
 
 RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js: true do
@@ -7,7 +6,7 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
   let(:password) { 'password' }
   let!(:user)    { create(:user, password: password, password_confirmation: password) }
 
-  # ── 共通の期待 ─────────────────────────────
+  # 共通の期待
   shared_examples '行動ボタンの共通挙動' do |labels:, expected_priority_for:|
     labels.each do |label|
       it "「#{label}」を押すと期待どおりの ActionResult が選ばれる" do
@@ -26,13 +25,10 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
     end
   end
 
-  # ── ゲーム状態セットアップ ─────────────────
   def setup_game(hunger:)
-    # UserStatus は毎回上書き
     UserStatus.find_or_initialize_by(user: user)
               .update!(hunger_value: hunger, happiness_value: 10)
 
-    # PlayState をリセットして作り直し
     PlayState.where(user: user).delete_all
     first_set   = EventSet.find_by!(name: '何か言っている')
     first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
@@ -46,14 +42,13 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
     )
   end
 
-  # ── 共通ログイン ───────────────────────────
+  # 共通ログイン
   before do
     driven_by :headless_chrome
     login(user)
     expect(page).to have_current_path(root_path, ignore_query: true), 'ログインに失敗しています'
   end
 
-  # ── 空腹値 50 ────────────────────────────────
   context '空腹値が 50 のとき' do
     before { setup_game(hunger: 50) }
 
@@ -62,7 +57,6 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
                      expected_priority_for: ->(_label) { 1 }
   end
 
-  # ── 空腹値 80 ────────────────────────────────
   context '空腹値が 80 のとき' do
     before { setup_game(hunger: 80) }
 
