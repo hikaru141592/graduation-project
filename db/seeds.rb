@@ -602,7 +602,7 @@ action_results = [
                                   "percent": 20
                                 }
                               ]
-                            },,
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
