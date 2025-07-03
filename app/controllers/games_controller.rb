@@ -57,18 +57,20 @@ class GamesController < ApplicationController
 
     result ||= choice.action_results.order(priority: :desc).first
 
-    play_state.update!(
-      action_choices_position: position,
-      action_results_priority: result.priority,
-      current_cut_position:    1
-    )
-
-    redirect_to root_path
+    if result.cuts.exists?
+      play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: 1)
+      redirect_to root_path and return
+    else
+      play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: nil)
+      return advance_cut(skip_check: true)
+    end
   end
 
-  def advance_cut
+  def advance_cut(skip_check: false)
     play_state = current_user.play_state
-    unless Rails.env.test?
+
+    # select_actionでカット数0で呼び出された場合にタイムスタンプチェックをスキップする。
+    unless skip_check || Rails.env.test?
       client_ts = Time.iso8601(params.require(:state_timestamp))
       if client_ts.to_i < play_state.updated_at.to_i
         redirect_to root_path and return
