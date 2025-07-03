@@ -62,7 +62,7 @@ class GamesController < ApplicationController
       redirect_to root_path and return
     else
       play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: nil)
-      return advance_cut(skip_check: true)
+      advance_cut(skip_check: true)
     end
   end
 
