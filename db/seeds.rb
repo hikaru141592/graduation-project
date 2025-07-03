@@ -239,7 +239,7 @@ events = [
   {
     event_set_name:    '何かしたそう',
     name:              'べんきょうする',
-    derivation_number: 0,
+    derivation_number: 1,
     message:           'よし！なんのべんきょうをしよう？',
     character_image:   'character/kari-nikoniko2.png',
     background_image:  'background/kari-background.png'
@@ -651,7 +651,7 @@ action_results = [
                                   "percent": 20
                                 }
                               ]
-                            },,
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -700,7 +700,7 @@ action_results = [
                                   "percent": 20
                                 }
                               ]
-                            },,
+                            },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
