@@ -238,6 +238,14 @@ events = [
   },
   {
     event_set_name:    '何かしたそう',
+    name:              'べんきょうする',
+    derivation_number: 1,
+    message:           'よし！なんのべんきょうをしよう？',
+    character_image:   'character/kari-nikoniko2.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '何かしたそう',
     name:              '何かしたそう',
     derivation_number: 0,
     message:           '〈たまご〉はなにかしたそうだ。',
@@ -349,6 +357,11 @@ choices = [
     event_set_name:    '何かしたそう',
     derivation_number: 0,
     labels:            [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ]
+  },
+  {
+    event_set_name:    '何かしたそう',
+    derivation_number: 1,
+    labels:            [ 'さんすう',   'こくご',   'りか',     'しゃかい' ]
   },
   {
     event_set_name:    '踊っている',
@@ -520,7 +533,7 @@ action_results = [
     priority:              1,
     trigger_conditions:    { always: true },
     effects:               {},
-    next_derivation_number: nil,
+    next_derivation_number: 1,
     calls_event_set_name:  nil,
     resolves_loop:         false
   },
@@ -542,6 +555,164 @@ action_results = [
     priority:              1,
     trigger_conditions:    { always: true },
     effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'さんすう',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'こくご',
+    priority:              1,
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "probability",
+                                  "percent": 5
+                                }
+                              ]
+                            },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'こくご',
+    priority:              2,
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "probability",
+                                  "percent": 20
+                                }
+                              ]
+                            },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'こくご',
+    priority:              3,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'りか',
+    priority:              1,
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "probability",
+                                  "percent": 5
+                                }
+                              ]
+                            },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'りか',
+    priority:              2,
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "probability",
+                                  "percent": 20
+                                }
+                              ]
+                            },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'りか',
+    priority:              3,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'しゃかい',
+    priority:              1,
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "probability",
+                                  "percent": 5
+                                }
+                              ]
+                            },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'しゃかい',
+    priority:              2,
+    trigger_conditions:    {
+                              "operator": "and",
+                              "conditions": [
+                                {
+                                  "type": "probability",
+                                  "percent": 20
+                                }
+                              ]
+                            },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     1,
+    label:                 'しゃかい',
+    priority:              3,
+    trigger_conditions:    { always: true },
+    effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1286,9 +1457,45 @@ cuts = [
   { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'character/kari-normal.png', background_image: 'background/kari-background.png' },
 
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ボールあそびをする', priority: 1, position: 1, message: 'いっしょにあそんであげた！とてもよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'べんきょうする',     priority: 1, position: 1, message: 'おべんきょうをした！がんばったね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'べんきょうする',     priority: 1, position: 1, message: 'よし、べんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 1, position: 1, message: 'おえかきをした！じょうずにかけたね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'いっしょにあそんであげた！ゲームはたのしいね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'さんすう',     priority: 1, position: 1, message: 'さんすうのべんきょうをした！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 2, message: '・・・。',                   character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 3, message: '〈たまご〉はシェイクスピアのさくひんをよんだ！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 2, message: '・・・。',                   character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 3, message: '〈たまご〉は「はしれメロス」をよんだ！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 2, message: '・・・。',                   character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 3, message: '『どんぶらこー、どんぶらこー』', character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 4, message: '〈たまご〉はももたろうをよんだ！', character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 2, message: '・・・。',                   character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 3, message: '〈たまご〉はふろうふしになれるクスリをつくった！', character_image: 'character/kari-rika2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 2, message: '・・・。',                   character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 3, message: '！！！',                     character_image: 'character/kari-rika3.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 4, message: '・・・。',                   character_image: 'character/kari-rika4.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 2, message: '・・・。',                   character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 3, message: 'じっけんはしっぱいした！', character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 2, message: '・・・。',                                               character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 3, message: 'すっごいゆうめいなブショウがタイムスリップしてきた！すご！！', character_image: 'character/kari-busyou3.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 2, message: '・・・。',                                               character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 3, message: 'なまえをきいたことあるようなないようなブショウがタイムスリップしてきた！', character_image: 'character/kari-busyou2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 3, message: 'こんにちは！',                                           character_image: 'character/kari-busyou2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 2, message: '・・・。',                                               character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 3, message: 'むめいのブショウがタイムスリップしてきた！',                 character_image: 'character/kari-busyou1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 4, message: 'はやくかえって！',                                         character_image: 'character/kari-busyou1.png', background_image: 'background/kari-background.png' },
 
   { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },

@@ -57,18 +57,20 @@ class GamesController < ApplicationController
 
     result ||= choice.action_results.order(priority: :desc).first
 
-    play_state.update!(
-      action_choices_position: position,
-      action_results_priority: result.priority,
-      current_cut_position:    1
-    )
-
-    redirect_to root_path
+    if result.cuts.exists?
+      play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: 1)
+      redirect_to root_path and return
+    else
+      play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: nil)
+      advance_cut(skip_check: true)
+    end
   end
 
-  def advance_cut
+  def advance_cut(skip_check: false)
     play_state = current_user.play_state
-    unless Rails.env.test?
+
+    # select_actionでカット数0で呼び出された場合にタイムスタンプチェックをスキップする。
+    unless skip_check || Rails.env.test?
       client_ts = Time.iso8601(params.require(:state_timestamp))
       if client_ts.to_i < play_state.updated_at.to_i
         redirect_to root_path and return
@@ -93,18 +95,23 @@ class GamesController < ApplicationController
       resolves = result.resolves_loop?
 
       current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
-      if result.resolves_loop?
-        event_category_invalidation(current_user, current_set.event_category, 2.hours.from_now)
-      end
-      if continue_loop?(user_status, current_set, resolves)
-        next_set = current_set
-        next_event = event
+
+      if result.next_derivation_number.present?
+        next_set, next_event = apply_derivation(result)
       else
-        clear_loop_status(user_status)
-        next_set, next_event = pick_next_event_set_and_event
-        next_set, next_event = apply_event_set_call(result, next_set, next_event)
-        next_set, next_event = apply_event_set_call(result, next_set, next_event)
-        record_loop_start(current_user.user_status, next_set)
+        if resolves
+          event_category_invalidation(current_user, current_set.event_category, 2.hours.from_now)
+        end
+        if continue_loop?(user_status, current_set, resolves)
+          next_set = current_set
+          next_event = event
+        else
+          clear_loop_status(user_status)
+          next_set, next_event = pick_next_event_set_and_event
+          next_set, next_event = apply_event_set_call(result, next_set, next_event)
+          next_set, next_event = apply_event_set_call(result, next_set, next_event)
+          record_loop_start(current_user.user_status, next_set)
+        end
       end
 
       play_state.update!(
@@ -229,5 +236,17 @@ class GamesController < ApplicationController
     else
       [ default_set, default_event ]
     end
+  end
+
+  def apply_derivation(result)
+    derivation_num = result.next_derivation_number
+    event_set = result.action_choice.event.event_set
+    begin
+      derived_event = event_set.events.find_by!(derivation_number: derivation_num)
+    rescue ActiveRecord::RecordNotFound
+      Rails.logger.warn "Derivation event not found: set=#{event_set.id}, num=#{derivation_num}"
+      derived_event = event_set.events.find_by!(derivation_number: 0)
+    end
+    [ event_set, derived_event ]
   end
 end
