@@ -34,6 +34,10 @@ class GamesController < ApplicationController
     else
       @choices = @event.action_choices.order(:position)
       @phase = :select
+      if @event.event_set.name == "算数" && (1..4).include?(@event.derivation_number)
+        seed = @play_state.updated_at.to_i
+        @question_text, @options = ArithmeticQuiz.generate(seed: seed)
+      end
     end
   end
 

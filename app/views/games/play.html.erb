@@ -26,17 +26,35 @@
 
       <div class="col-12 col-md-4 pe-md-6 d-grid gap-1 mt-2 mt-md-4">
         <div class="message-box mb-1 py-4 d-flex align-items-center justify-content-center">
-          <% message = @cut&.message || @event.message %>
-          <%= message.gsub('〈たまご〉', current_user.egg_name) %>
+          <% 
+            message = @cut&.message || @event.message
+            if @question_text.present?
+              message = message.gsub('X 演算子 Y', @question_text)
+            end
+            message.gsub('〈たまご〉', current_user.egg_name)
+          %>
+          <%= message%>
         </div>
         <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
           <%= hidden_field_tag :state_timestamp, @play_state.updated_at.iso8601 %>
           <div class="d-grid gap-2 mx-auto mt-2 mt-md-4" style="width: 70%;">
             <% 4.times do |i| %>
               <% pos   = i + 1 %>
-              <% label = @phase == :select ?
-                           (@choices.find { |c| c.position == pos }&.label) :
-                           (pos == 1 ? "すすむ" : "") %>
+              <% label = 
+                if @phase == :select
+                  orig = (@choices.find { |c| c.position == pos }&.label || "").dup
+                  if @question_text.present?
+                    @options.each_with_index do |opt, idx|
+                      placeholder = "〈#{('A'.ord + idx).chr}〉"
+                      orig.gsub!(placeholder, opt.to_s)
+                    end
+                  end
+
+                  orig
+                else
+                  pos == 1 ? "すすむ" : ""
+                end %>
+                
               <% if (@phase == :select && label.present?) ||
                   (@phase == :cut    && pos == 1) %>
                 <%= button_tag label,
