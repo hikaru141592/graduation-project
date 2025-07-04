@@ -31,7 +31,7 @@
             if @question_text.present?
               message = message.gsub('X 演算子 Y', @question_text)
             end
-            message.gsub('〈たまご〉', current_user.egg_name)
+            message = message.gsub('〈たまご〉', current_user.egg_name)
           %>
           <%= message%>
         </div>
@@ -54,7 +54,7 @@
                 else
                   pos == 1 ? "すすむ" : ""
                 end %>
-                
+
               <% if (@phase == :select && label.present?) ||
                   (@phase == :cut    && pos == 1) %>
                 <%= button_tag label,
