@@ -2,7 +2,7 @@ class ArithmeticQuiz
   def self.generate(seed: nil)
     rng = seed ? Random.new(seed.to_i) : Random.new
     operator = [ :+, :* ][rng.rand(0..1)]
-    if operator == :+      
+    if operator == :+
       x = rng.rand(101..999)
       y = rng.rand(11..99)
     else
@@ -14,7 +14,7 @@ class ArithmeticQuiz
     dummy_result = result + rng.rand(1..9)
     distractors = [ result + 10, result - 10, dummy_result, dummy_result - 10 ].shuffle(random: rng).first(3)
     options = [ result ] + distractors
-    [question_text, options]
+    [ question_text, options ]
   end
 
   def self.operator_symbol(op)
