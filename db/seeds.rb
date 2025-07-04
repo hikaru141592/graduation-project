@@ -1540,7 +1540,7 @@ cuts = [
   { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'はなしかける',      priority: 2, position: 1, message: '〈たまご〉はニコニコしている。',                            character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
 
   { event_set_name: '眠そう', derivation_number: 0, label: 'ねかせる',          priority: 1, position: 1, message: 'きょうはもうねようね！〈たまご〉おやすみ！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ねかせる',          priority: 1, position: 1, message: 'まだもうちょっとおきてたいみたい。',        character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ねかせる',          priority: 2, position: 1, message: 'まだもうちょっとおきてたいみたい。',        character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はうれしそうだ！',               character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 2, message: '〈たまご〉はおふとんにはいってねた！',      character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はよろこんでいる！',             character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
