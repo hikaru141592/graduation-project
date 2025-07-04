@@ -6,7 +6,8 @@ categories = [
   { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: 12  },
   { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
   { name: '寝ている', description: '寝ている',                                             loop_minutes: 60   },
-  { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   }
+  { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
+  { name: '算数',     description: '算数',                                               loop_minutes: nil   }
 ]
 
 categories.each do |attrs|
@@ -28,7 +29,8 @@ event_sets = [
   { category_name: '夢中',      name: 'マンガに夢中' },
   { category_name: '眠そう',    name: '眠そう' },
   { category_name: '寝ている',  name: '寝ている' },
-  { category_name: '寝かせた',    name: '寝かせた' }
+  { category_name: '寝かせた',  name: '寝かせた' },
+  { category_name: '算数',      name: '算数' }
 ]
 
 event_sets.each do |attrs|
@@ -219,6 +221,18 @@ event_set_conditions = [
         }
       ]
     }
+  },
+  {
+    name: '算数',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 0
+        }
+      ]
+    }
   }
 ]
 
@@ -331,6 +345,46 @@ events = [
     message:           '〈たまご〉はねている。',
     character_image:   'character/kari-sleep.png',
     background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '算数',
+    name:              '出題前',
+    derivation_number: 0,
+    message:           'よし、さんすうのもんだいにちょうせんだ！',
+    character_image:   'character/kari-nikoniko2.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '算数',
+    name:              '1つ目が正解',
+    derivation_number: 1,
+    message:           '「X 演算子 Y」のこたえは？',
+    character_image:   'character/kari-kangaeru.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '算数',
+    name:              '2つ目が正解',
+    derivation_number: 2,
+    message:           '「X 演算子 Y」のこたえは？',
+    character_image:   'character/kari-kangaeru.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '算数',
+    name:              '3つ目が正解',
+    derivation_number: 3,
+    message:           '「X 演算子 Y」のこたえは？',
+    character_image:   'character/kari-kangaeru.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '算数',
+    name:              '4つ目が正解',
+    derivation_number: 4,
+    message:           '「X 演算子 Y」のこたえは？',
+    character_image:   'character/kari-kangaeru.png',
+    background_image:  'background/kari-background.png'
   }
 ]
 
@@ -412,6 +466,31 @@ choices = [
     event_set_name:    '怒っている',
     derivation_number: 0,
     labels:            [ 'よしよしする',       'おやつをあげる',   'へんがおをする', 'あやまる' ]
+  },
+  {
+    event_set_name:    '算数',
+    derivation_number: 0,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    '算数',
+    derivation_number: 1,
+    labels:            [ '〈A〉', '〈B〉', '〈C〉', '〈D〉' ]
+  },
+  {
+    event_set_name:    '算数',
+    derivation_number: 2,
+    labels:            [ '〈B〉', '〈A〉', '〈C〉', '〈D〉' ]
+  },
+  {
+    event_set_name:    '算数',
+    derivation_number: 3,
+    labels:            [ '〈B〉', '〈C〉', '〈A〉', '〈D〉' ]
+  },
+  {
+    event_set_name:    '算数',
+    derivation_number: 4,
+    labels:            [ '〈B〉', '〈C〉', '〈D〉', '〈A〉' ]
   }
 ]
 
@@ -567,7 +646,7 @@ action_results = [
     trigger_conditions:    { always: true },
     effects:               {},
     next_derivation_number: nil,
-    calls_event_set_name:  nil,
+    calls_event_set_name:  '算数',
     resolves_loop:         false
   },
   {
@@ -1419,6 +1498,126 @@ action_results = [
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
+  },
+  {
+    event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 25 } ] },
+    effects: {},
+    next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 2,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 33 } ] },
+    effects: {},
+    next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 3,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 50 } ] },
+    effects: {},
+    next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 4,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 1, label: '〈A〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 1, label: '〈B〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 1, label: '〈C〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 1, label: '〈D〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 2, label: '〈A〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 2, label: '〈B〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 2, label: '〈C〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 2, label: '〈D〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 3, label: '〈A〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 3, label: '〈B〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 3, label: '〈C〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 3, label: '〈D〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 4, label: '〈A〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 4, label: '〈B〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 4, label: '〈C〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '算数', derivation_number: 4, label: '〈D〉', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   }
 ]
 
@@ -1461,7 +1660,7 @@ cuts = [
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 1, position: 1, message: 'おえかきをした！じょうずにかけたね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'いっしょにあそんであげた！ゲームはたのしいね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
 
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'さんすう',     priority: 1, position: 1, message: 'さんすうのべんきょうをした！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+#  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'さんすう',     priority: 1, position: 1, message: 'さんすうのべんきょうをした！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
 
   { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 2, message: '・・・。',                   character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
@@ -1576,7 +1775,28 @@ cuts = [
   { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 1, position: 1, message: 'ごめんよ・・・。',                character_image: 'character/kari-gomen.png', background_image: 'background/kari-background.png' },
   { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
   { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 2, position: 1, message: 'ごめんよ・・・。',                character_image: 'character/kari-gomen.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 2, position: 2, message: '〈たまご〉はまだおこっている！',    character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' }
+  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 2, position: 2, message: '〈たまご〉はまだおこっている！',    character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+
 ]
 
 cuts.each do |attrs|
