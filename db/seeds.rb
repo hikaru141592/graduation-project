@@ -7,7 +7,8 @@ categories = [
   { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
   { name: '寝ている', description: '寝ている',                                             loop_minutes: 60   },
   { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
-  { name: '算数',     description: '算数',                                               loop_minutes: nil   }
+  { name: '算数',     description: '算数',                                               loop_minutes: nil   },
+  { name: '特訓',     description: '特訓',                                               loop_minutes: nil   }
 ]
 
 categories.each do |attrs|
@@ -30,7 +31,8 @@ event_sets = [
   { category_name: '眠そう',    name: '眠そう' },
   { category_name: '寝ている',  name: '寝ている' },
   { category_name: '寝かせた',  name: '寝かせた' },
-  { category_name: '算数',      name: '算数' }
+  { category_name: '算数',      name: '算数' },
+  { category_name: '特訓',      name: '特訓' }
 ]
 
 event_sets.each do |attrs|
@@ -105,7 +107,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 50
+          "percent": 5
         }
       ]
     }
@@ -224,6 +226,18 @@ event_set_conditions = [
   },
   {
     name: '算数',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 0
+        }
+      ]
+    }
+  },
+  {
+    name: '特訓',
     trigger_conditions: {
       "operator":   "and",
       "conditions": [
@@ -385,6 +399,22 @@ events = [
     message:           '「X 演算子 Y」のこたえは？',
     character_image:   'character/kari-kangaeru.png',
     background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '特訓',
+    name:              '特訓',
+    derivation_number: 0,
+    message:           'なんのとっくんをしよう？',
+    character_image:   'character/kari-kangaeru.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '特訓',
+    name:              '特訓終了',
+    derivation_number: 1,
+    message:           'ここまで！',
+    character_image:   'character/kari-tukareta.png',
+    background_image:  'background/kari-background.png'
   }
 ]
 
@@ -491,6 +521,16 @@ choices = [
     event_set_name:    '算数',
     derivation_number: 4,
     labels:            [ '〈B〉', '〈C〉', '〈D〉', '〈A〉' ]
+  },
+  {
+    event_set_name:    '特訓',
+    derivation_number: 0,
+    labels:            [ 'さんすう',       'ボールあそび' ]
+  },
+  {
+    event_set_name:    '特訓',
+    derivation_number: 1,
+    labels:            [ 'すすむ' ]
   }
 ]
 
@@ -511,10 +551,23 @@ action_results = [
     derivation_number:     0,
     label:                 'はなしをきいてあげる',
     priority:              1,
-    trigger_conditions:    { always: true },
+    trigger_conditions:    { "operator": "or", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": "<", "value": 10 },
+                                                               { "type": "status", "attribute": "arithmetic", "operator": "<", "value": 10 },
+                                                               { "type": "probability", "percent": 5 } ] },
     effects:               { "status": [ { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何か言っている',
+    derivation_number:     0,
+    label:                 'はなしをきいてあげる',
+    priority:              2,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  '特訓',
     resolves_loop:         false
   },
   {
@@ -1618,6 +1671,36 @@ action_results = [
     trigger_conditions: { always: true },
     effects: {},
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 0, label: 'さんすう', priority: 1,
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "arithmetic", "operator": ">=", "value": 10 } ] },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: '算数', resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 0, label: 'さんすう', priority: 2,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 0, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 1,
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": ">=", "value": 10 } ] },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 2,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 1, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   }
 ]
 
@@ -1648,6 +1731,8 @@ end
 cuts = [
   { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 1, position: 1, message: '〈たまご〉がうれしそうにはなしている！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 1, position: 2, message: '〈たまご〉「んに～！！」', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 2, position: 1, message: 'なになに？うんうん。', character_image: 'character/kari-komattakao.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 2, position: 2, message: '〈たまご〉はとっくんがしたいといっている！', character_image: 'character/kari-yaruki.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何か言っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
@@ -1795,8 +1880,13 @@ cuts = [
   { event_set_name: '算数',      derivation_number: 4,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
   { event_set_name: '算数',      derivation_number: 4,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
   { event_set_name: '算数',      derivation_number: 4,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 4,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' }
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
 
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 1, position: 1, message: 'とっくんはれんぞく20もんになるぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 1, position: 1, message: 'とっくんはしっぱいになるまでつづくぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                    character_image: 'character/kari-tukareta.png', background_image: 'background/kari-background.png' }
 ]
 
 cuts.each do |attrs|
@@ -1814,14 +1904,21 @@ end
 
 User.find_each do |user|
   UserStatus.find_or_create_by!(user: user) do |status|
-    status.hunger_value  = 50
+    status.hunger_value   = 50
     status.happiness_value = 10
     status.love_value     = 50
     status.mood_value     = 0
-    status.study_value    = 0
     status.sports_value   = 0
     status.art_value      = 0
     status.money          = 0
+    status.arithmetic         = 0
+    status.arithmetic_effort  = 0
+    status.japanese           = 0
+    status.japanese_effort    = 0
+    status.science            = 0
+    status.science_effort     = 0
+    status.social_studies     = 0
+    status.social_effort      = 0
   end
 
   PlayState.find_or_create_by!(user: user) do |ps|
@@ -1831,5 +1928,11 @@ User.find_each do |user|
     ps.action_choices_position  = nil
     ps.action_results_priority  = nil
     ps.current_cut_position     = nil
+  end
+
+  EventTemporaryDatum.find_or_create_by!(user: user) do |etd|
+    etd.reception_count = 0
+    etd.success_count = 0
+    etd.started_at = nil
   end
 end

@@ -4,7 +4,11 @@ class UserStatus < ApplicationRecord
 
   validates :hunger_value,    :happiness_value,
             :love_value,      :mood_value,
-            :study_value,     :sports_value,
+            :sports_value,
             :art_value,       :money,
+            :arithmetic,      :arithmetic_effort,
+            :japanese,        :japanese_effort,
+            :science,         :science_effort,
+            :social_studies,  :social_effort,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end

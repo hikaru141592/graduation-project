@@ -54,11 +54,7 @@ class GamesController < ApplicationController
     event = play_state.current_event
     position = params.require(:position).to_i
     choice = event.action_choices.find_by!(position: position)
-
-    result = choice.action_results.
-      order(:priority).
-      detect { |ar| conditions_met?(ar.trigger_conditions, current_user.user_status) }
-
+    result = choice.action_results.order(:priority).detect { |ar| conditions_met?(ar.trigger_conditions, current_user) }
     result ||= choice.action_results.order(priority: :desc).first
 
     if result.cuts.exists?
@@ -118,6 +114,8 @@ class GamesController < ApplicationController
         end
       end
 
+      next_set, next_event = training_event_process(result, next_set, next_event)
+
       play_state.update!(
         current_event_id:        next_event.id,
         action_choices_position: nil,
@@ -132,18 +130,20 @@ class GamesController < ApplicationController
   private
 
   # モデル移動可
-  def conditions_met?(conds, status)
+  def conditions_met?(conds, user)
     return true if conds["always"] == true
     op   = conds["operator"] || "and"
     list = conds["conditions"] || []
     results = list.map do |c|
       case c["type"]
       when "status"
-        status.send(c["attribute"]).public_send(c["operator"], c["value"])
+        user.user_status.send(c["attribute"]).public_send(c["operator"], c["value"])
       when "probability"
         rand(100) < c["percent"]
       when "item"
-        current_user.user_items.find_by(code: c["item_code"]).try(:count).to_i.public_send(c["operator"], c["value"])
+        user.user_items.find_by(code: c["item_code"]).try(:count).to_i.public_send(c["operator"], c["value"])
+      when "event_temporary_data"
+        user.event_temporary_datum.send(c["attribute"]).public_send(c["operator"], c["value"])
       else
         false
       end
@@ -153,13 +153,12 @@ class GamesController < ApplicationController
 
   def apply_effects!(effects)
     status = current_user.user_status
-
     (effects["status"] || []).each do |e|
       attr  = e["attribute"]
       delta = e["delta"].to_i
       new_value = status[attr] + delta
       new_value = [ new_value, 0 ].max
-      unless [ "happiness_value", "money" ].include?(attr)
+      if[ "hunger_value", "love_value", "mood_value" ].include?(attr)
         new_value = [ new_value, 100 ].min
       end
       new_value = [ new_value, 99_999_999 ].min
@@ -167,13 +166,16 @@ class GamesController < ApplicationController
     end
     status.save!
 
-    # 上限値下限値要設定(大事なものについても)
-    # (effects["items"] || []).each do |e|
-    # item  = current_user.user_items.find_or_initialize_by(code: e["item_code"])
-    # delta = e["delta"].to_i
-    # item.count = item.count.to_i + delta
-    # item.save!
-    # end
+#    event_temporary_data = current_user.event_temporary_datum
+#    (effects["event_temporary_data"] || []).each do |e|
+#      attr  = e["attribute"]
+#      delta = e["delta"].to_i
+#      new_value = event_temporary_data[attr] + delta
+#      new_value = [ new_value, 0 ].max
+#      new_value = [ new_value, 20 ].min
+#      event_temporary_data[attr] = new_value
+#    end
+#    event_temporary_data.save!
   end
 
   def apply_automatic_decay!(play_state)
@@ -252,5 +254,48 @@ class GamesController < ApplicationController
       derived_event = event_set.events.find_by!(derivation_number: 0)
     end
     [ event_set, derived_event ]
+  end
+
+  def start_training_event(result, temp)
+    temp.update!(reception_count: 0, success_count: 0, started_at: Time.current, ended_at: nil, special_condition: '算数特訓')
+    event_set = EventSet.find(result.calls_event_set_id)
+    event = event_set.events.find_by!(derivation_number: 0)
+    return [event_set, event]
+  end
+
+  def continue_training_event(result, temp)
+    temp.increment!(:reception_count)
+    temp.increment!(:success_count) if result.action_choice.label == '〈A〉'
+
+    event_set = result.action_choice.event.event_set
+    random_deriv = rand(1..4)
+    next_event = event_set.events.find_by!(derivation_number: random_deriv)
+    [event_set, next_event]
+  end
+
+  def end_training_event(result, temp)
+    temp.increment!(:reception_count)
+    temp.increment!(:success_count) if result.action_choice.label == '〈A〉'
+    temp.update!(ended_at: Time.current)
+
+    event_set = EventSet.find_by!(name: '特訓')
+    next_event = event_set.events.find_by!(derivation_number: 1)
+    [event_set, next_event]
+  end
+
+  def training_event_process(result, next_set, next_event)
+    temp = current_user.event_temporary_datum
+
+    if result.action_choice.event.event_set.name == '特訓' && result.action_choice.event.derivation_number == 0 &&
+       result.action_choice.label == 'さんすう' && result.priority == 1
+       return start_training_event(result, temp)
+    end
+    if temp.special_condition == '算数特訓' && temp.ended_at == nil && result.action_choice.event.derivation_number != 0
+      max_receptions = 3
+      return end_training_event(result, temp) if temp.reception_count >= (max_receptions - 1)
+      return continue_training_event(result, temp)
+    end
+
+    [next_set, next_event]
   end
 end
