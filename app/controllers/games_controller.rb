@@ -38,6 +38,7 @@ class GamesController < ApplicationController
         seed = @play_state.updated_at.to_i
         @question_text, @options = ArithmeticQuiz.generate(seed: seed)
       end
+      @temp = current_user.event_temporary_datum
     end
   end
 
@@ -114,8 +115,9 @@ class GamesController < ApplicationController
         end
       end
 
-      arithmetic_training_event_processor   = ArithmeticTrainingEventProcessor.new(current_user, result, next_set, next_event)
+      arithmetic_training_event_processor = ArithmeticTrainingEventProcessor.new(current_user, result, next_set, next_event)
       next_set, next_event = arithmetic_training_event_processor.call
+      arithmetic_training_event_processor.record_evaluation
 
       play_state.update!(
         current_event_id:        next_event.id,

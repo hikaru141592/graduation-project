@@ -32,6 +32,14 @@
               message = message.gsub('X 演算子 Y', @question_text)
             end
             message = message.gsub('〈たまご〉', current_user.egg_name)
+            if @event.event_set.name == '特訓' && [2,3,4].include?(@event.derivation_number)
+              success_count = @temp.success_count
+              message = message.gsub('〈X〉', success_count.to_s)
+              elapsed_sec = (@temp.ended_at - @temp.started_at).to_i
+              minutes, seconds = elapsed_sec.divmod(60)
+              time_str    = "#{minutes}分#{seconds}秒"
+              message     = message.gsub('〈Y〉分〈Z〉秒', time_str)
+            end
           %>
           <%= message%>
         </div>

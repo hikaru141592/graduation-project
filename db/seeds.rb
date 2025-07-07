@@ -415,6 +415,30 @@ events = [
     message:           'ここまで！',
     character_image:   'character/kari-tukareta.png',
     background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '特訓',
+    name:              '特訓結果優秀',
+    derivation_number: 2,
+    message:           '20もんちゅう〈X〉もんせいかい！〈Y〉分〈Z〉秒クリア！すごいね！',
+    character_image:   'character/kari-nikoniko.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '特訓',
+    name:              '特訓結果良し',
+    derivation_number: 3,
+    message:           '20もんちゅう〈X〉もんせいかい！よくがんばったね！',
+    character_image:   'character/kari-nikoniko2.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '特訓',
+    name:              '特訓結果微妙',
+    derivation_number: 4,
+    message:           '20もんちゅう〈X〉もんせいかい！またちょうせんしよう！',
+    character_image:   'character/kari-bimuyou.png',
+    background_image:  'background/kari-background.png'
   }
 ]
 
@@ -530,6 +554,21 @@ choices = [
   {
     event_set_name:    '特訓',
     derivation_number: 1,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    '特訓',
+    derivation_number: 2,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    '特訓',
+    derivation_number: 3,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    '特訓',
+    derivation_number: 4,
     labels:            [ 'すすむ' ]
   }
 ]
@@ -1698,6 +1737,24 @@ action_results = [
   },
   {
     event_set_name: '特訓', derivation_number: 1, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 2, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 3, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 4, label: 'すすむ', priority: 1,
     trigger_conditions:    { always: true },
     effects: {},
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_07_023520) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_07_120406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -165,6 +165,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_07_023520) do
     t.integer "science_effort", default: 0, null: false
     t.integer "social_studies", default: 0, null: false
     t.integer "social_effort", default: 0, null: false
+    t.integer "arithmetic_training_max_count"
+    t.integer "arithmetic_training_fastest_time"
     t.index ["current_loop_event_set_id"], name: "index_user_statuses_on_current_loop_event_set_id"
     t.index ["user_id"], name: "index_user_statuses_on_user_id"
   end
