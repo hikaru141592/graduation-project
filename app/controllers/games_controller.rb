@@ -114,7 +114,8 @@ class GamesController < ApplicationController
         end
       end
 
-      next_set, next_event = training_event_process(result, next_set, next_event)
+      arithmetic_training_event_processor   = ArithmeticTrainingEventProcessor.new(current_user, result, next_set, next_event)
+      next_set, next_event = arithmetic_training_event_processor.call
 
       play_state.update!(
         current_event_id:        next_event.id,
@@ -254,48 +255,5 @@ class GamesController < ApplicationController
       derived_event = event_set.events.find_by!(derivation_number: 0)
     end
     [ event_set, derived_event ]
-  end
-
-  def start_training_event(result, temp)
-    temp.update!(reception_count: 0, success_count: 0, started_at: Time.current, ended_at: nil, special_condition: '算数特訓')
-    event_set = EventSet.find(result.calls_event_set_id)
-    event = event_set.events.find_by!(derivation_number: 0)
-    return [event_set, event]
-  end
-
-  def continue_training_event(result, temp)
-    temp.increment!(:reception_count)
-    temp.increment!(:success_count) if result.action_choice.label == '〈A〉'
-
-    event_set = result.action_choice.event.event_set
-    random_deriv = rand(1..4)
-    next_event = event_set.events.find_by!(derivation_number: random_deriv)
-    [event_set, next_event]
-  end
-
-  def end_training_event(result, temp)
-    temp.increment!(:reception_count)
-    temp.increment!(:success_count) if result.action_choice.label == '〈A〉'
-    temp.update!(ended_at: Time.current)
-
-    event_set = EventSet.find_by!(name: '特訓')
-    next_event = event_set.events.find_by!(derivation_number: 1)
-    [event_set, next_event]
-  end
-
-  def training_event_process(result, next_set, next_event)
-    temp = current_user.event_temporary_datum
-
-    if result.action_choice.event.event_set.name == '特訓' && result.action_choice.event.derivation_number == 0 &&
-       result.action_choice.label == 'さんすう' && result.priority == 1
-       return start_training_event(result, temp)
-    end
-    if temp.special_condition == '算数特訓' && temp.ended_at == nil && result.action_choice.event.derivation_number != 0
-      max_receptions = 3
-      return end_training_event(result, temp) if temp.reception_count >= (max_receptions - 1)
-      return continue_training_event(result, temp)
-    end
-
-    [next_set, next_event]
   end
 end
