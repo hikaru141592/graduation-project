@@ -161,7 +161,7 @@ class GamesController < ApplicationController
       delta = e["delta"].to_i
       new_value = status[attr] + delta
       new_value = [ new_value, 0 ].max
-      if[ "hunger_value", "love_value", "mood_value" ].include?(attr)
+      if [ "hunger_value", "love_value", "mood_value" ].include?(attr)
         new_value = [ new_value, 100 ].min
       end
       new_value = [ new_value, 99_999_999 ].min
@@ -169,16 +169,16 @@ class GamesController < ApplicationController
     end
     status.save!
 
-#    event_temporary_data = current_user.event_temporary_datum
-#    (effects["event_temporary_data"] || []).each do |e|
-#      attr  = e["attribute"]
-#      delta = e["delta"].to_i
-#      new_value = event_temporary_data[attr] + delta
-#      new_value = [ new_value, 0 ].max
-#      new_value = [ new_value, 20 ].min
-#      event_temporary_data[attr] = new_value
-#    end
-#    event_temporary_data.save!
+    #    event_temporary_data = current_user.event_temporary_datum
+    #    (effects["event_temporary_data"] || []).each do |e|
+    #      attr  = e["attribute"]
+    #      delta = e["delta"].to_i
+    #      new_value = event_temporary_data[attr] + delta
+    #      new_value = [ new_value, 0 ].max
+    #      new_value = [ new_value, 20 ].min
+    #      event_temporary_data[attr] = new_value
+    #    end
+    #    event_temporary_data.save!
   end
 
   def apply_automatic_decay!(play_state)

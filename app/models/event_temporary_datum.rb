@@ -8,7 +8,7 @@ class EventTemporaryDatum < ApplicationRecord
   private
 
   def clamp_counts_to_zero
-    self.reception_count = [reception_count.to_i, 0].max
-    self.success_count = [success_count.to_i, 0].max
+    self.reception_count = [ reception_count.to_i, 0 ].max
+    self.success_count = [ success_count.to_i, 0 ].max
   end
 end
