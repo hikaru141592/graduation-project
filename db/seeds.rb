@@ -2119,7 +2119,7 @@ cuts = [
   { event_set_name: '算数',      derivation_number: 4,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
   { event_set_name: '算数',      derivation_number: 4,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
   { event_set_name: '算数',      derivation_number: 4,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  
+
   { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'character/kari-ball4.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball4.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball7.png', background_image: 'background/kari-background.png' },
