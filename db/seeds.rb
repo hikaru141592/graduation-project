@@ -8,6 +8,7 @@ categories = [
   { name: '寝ている', description: '寝ている',                                             loop_minutes: 60   },
   { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
+  { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
   { name: '特訓',     description: '特訓',                                               loop_minutes: nil   }
 ]
 
@@ -32,6 +33,7 @@ event_sets = [
   { category_name: '寝ている',  name: '寝ている' },
   { category_name: '寝かせた',  name: '寝かせた' },
   { category_name: '算数',      name: '算数' },
+  { category_name: 'ボール遊び',      name: 'ボール遊び' },
   { category_name: '特訓',      name: '特訓' }
 ]
 
@@ -237,6 +239,18 @@ event_set_conditions = [
     }
   },
   {
+    name: 'ボール遊び',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 0
+        }
+      ]
+    }
+  },
+  {
     name: '特訓',
     trigger_conditions: {
       "operator":   "and",
@@ -401,6 +415,46 @@ events = [
     background_image:  'background/kari-background.png'
   },
   {
+    event_set_name:    'ボール遊び',
+    name:              '投球前',
+    derivation_number: 0,
+    message:           'ボールなげるよー！',
+    character_image:   'character/kari-ball1.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'ボール遊び',
+    name:              '投球',
+    derivation_number: 1,
+    message:           'ブンッ！',
+    character_image:   'character/kari-ball2.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'ボール遊び',
+    name:              '左が成功',
+    derivation_number: 2,
+    message:           'ボールをなげた！〈たまご〉、そっちだ！',
+    character_image:   'character/kari-ball3.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'ボール遊び',
+    name:              '真ん中が成功',
+    derivation_number: 3,
+    message:           '〈たまご〉、そっちだ！',
+    character_image:   'character/kari-ball3.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'ボール遊び',
+    name:              '右が成功',
+    derivation_number: 4,
+    message:           '〈たまご〉、そっちだ！',
+    character_image:   'character/kari-ball3.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
     event_set_name:    '特訓',
     name:              '特訓',
     derivation_number: 0,
@@ -545,6 +599,31 @@ choices = [
     event_set_name:    '算数',
     derivation_number: 4,
     labels:            [ '〈B〉', '〈C〉', '〈D〉', '〈A〉' ]
+  },
+  {
+    event_set_name:    'ボール遊び',
+    derivation_number: 0,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    'ボール遊び',
+    derivation_number: 1,
+    labels:            [ 'ぜんりょくとうきゅう' ]
+  },
+  {
+    event_set_name:    'ボール遊び',
+    derivation_number: 2,
+    labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
+  },
+  {
+    event_set_name:    'ボール遊び',
+    derivation_number: 3,
+    labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
+  },
+  {
+    event_set_name:    'ボール遊び',
+    derivation_number: 4,
+    labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
   },
   {
     event_set_name:    '特訓',
@@ -692,9 +771,9 @@ action_results = [
     label:                 'ボールあそびをする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "mood_value", "delta": 20 } ] },
+    effects:               {},
     next_derivation_number: nil,
-    calls_event_set_name:  nil,
+    calls_event_set_name:  'ボール遊び',
     resolves_loop:         false
   },
   {
@@ -1712,6 +1791,108 @@ action_results = [
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
+    event_set_name: 'ボール遊び', derivation_number: 0, label: 'すすむ', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 1, label: 'ぜんりょくとうきゅう', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 33 } ] },
+    effects: {},
+    next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 1, label: 'ぜんりょくとうきゅう', priority: 2,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 50 } ] },
+    effects: {},
+    next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 1, label: 'ぜんりょくとうきゅう', priority: 3,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 2, label: 'ひだりだ！', priority: 1,
+    trigger_conditions: { always: true },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 50 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 2,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 2, label: 'みぎだ！', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 2,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 3, label: 'そこだ！', priority: 1,
+    trigger_conditions: { always: true },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 2,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 4, label: 'ひだりだ！', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 50 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 2,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボール遊び', derivation_number: 4, label: 'みぎだ！', priority: 1,
+    trigger_conditions: { always: true },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
     event_set_name: '特訓', derivation_number: 0, label: 'さんすう', priority: 1,
     trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "arithmetic", "operator": ">=", "value": 0 } ] },
     effects: {},
@@ -1721,7 +1902,7 @@ action_results = [
     event_set_name: '特訓', derivation_number: 0, label: 'さんすう', priority: 2,
     trigger_conditions:    { always: true },
     effects: {},
-    next_derivation_number: 0, calls_event_set_name: nil, resolves_loop: false
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 1,
@@ -1797,7 +1978,7 @@ cuts = [
   { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'character/kari-normal.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'character/kari-normal.png', background_image: 'background/kari-background.png' },
 
-  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ボールあそびをする', priority: 1, position: 1, message: 'いっしょにあそんであげた！とてもよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ボールあそびをする', priority: 1, position: 1, message: 'よし！ボールあそびをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
   #  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'べんきょうする',     priority: 1, position: 1, message: 'よし、べんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 1, position: 1, message: 'おえかきをした！じょうずにかけたね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'いっしょにあそんであげた！ゲームはたのしいね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
@@ -1938,6 +2119,38 @@ cuts = [
   { event_set_name: '算数',      derivation_number: 4,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
   { event_set_name: '算数',      derivation_number: 4,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
   { event_set_name: '算数',      derivation_number: 4,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'character/kari-ball4.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball4.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball7.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'みぎだ！',     priority: 1, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball10.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'ひだりだ！',   priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'みぎだ！',     priority: 1, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball8.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball5.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'そこだ！',     priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'character/kari-ball8.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball8.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball11.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball6.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball12.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball9.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'みぎだ！',     priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'character/kari-ball12.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'ひだりだ！',   priority: 1, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'みぎだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
 
   { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 1, position: 1, message: 'とっくんはれんぞく20もんになるぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
