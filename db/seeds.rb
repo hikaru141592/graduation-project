@@ -107,7 +107,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 5
+          "percent": 50
         }
       ]
     }
@@ -590,9 +590,9 @@ action_results = [
     derivation_number:     0,
     label:                 'はなしをきいてあげる',
     priority:              1,
-    trigger_conditions:    { "operator": "or", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": "<", "value": 10 },
-                                                               { "type": "status", "attribute": "arithmetic", "operator": "<", "value": 10 },
-                                                               { "type": "probability", "percent": 5 } ] },
+    trigger_conditions:    { "operator": "or", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": "<", "value": 0 },
+                                                               { "type": "status", "attribute": "arithmetic", "operator": "<", "value": 5 },
+                                                               { "type": "probability", "percent": 70 } ] },
     effects:               { "status": [ { "attribute": "mood_value", "delta": 10 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -755,7 +755,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "japanese", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -774,7 +774,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "japanese", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -785,7 +785,7 @@ action_results = [
     label:                 'こくご',
     priority:              3,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "japanese_effort", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -804,7 +804,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "science", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -823,7 +823,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "science", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -834,7 +834,7 @@ action_results = [
     label:                 'りか',
     priority:              3,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "science_effort", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -853,7 +853,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "social_studies", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -872,7 +872,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "social_studies", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -883,7 +883,7 @@ action_results = [
     label:                 'しゃかい',
     priority:              3,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "social_effort", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1618,97 +1618,97 @@ action_results = [
   {
     event_set_name: '算数', derivation_number: 1, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 1, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 1, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 1, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
