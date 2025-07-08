@@ -1713,7 +1713,7 @@ action_results = [
   },
   {
     event_set_name: '特訓', derivation_number: 0, label: 'さんすう', priority: 1,
-    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "arithmetic", "operator": ">=", "value": 10 } ] },
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "arithmetic", "operator": ">=", "value": 0 } ] },
     effects: {},
     next_derivation_number: nil, calls_event_set_name: '算数', resolves_loop: false
   },
@@ -1725,7 +1725,7 @@ action_results = [
   },
   {
     event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 1,
-    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": ">=", "value": 10 } ] },
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": ">=", "value": 0 } ] },
     effects: {},
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
