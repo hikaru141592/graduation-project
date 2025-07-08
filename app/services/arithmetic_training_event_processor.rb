@@ -1,5 +1,5 @@
 class ArithmeticTrainingEventProcessor
-  MAX_RECEPTIONS = 3
+  MAX_RECEPTIONS = 20
 
   def initialize(user, result, next_set, next_event)
     @user       = user
