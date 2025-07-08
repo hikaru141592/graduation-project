@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_28_080525) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_07_120406) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -91,6 +91,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_080525) do
     t.index ["event_category_id"], name: "index_event_sets_on_event_category_id"
   end
 
+  create_table "event_temporary_data", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.integer "reception_count", default: 0, null: false
+    t.integer "success_count", default: 0, null: false
+    t.datetime "started_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "special_condition"
+    t.datetime "ended_at"
+    t.index ["user_id"], name: "index_event_temporary_data_on_user_id"
+  end
+
   create_table "events", force: :cascade do |t|
     t.bigint "event_set_id", null: false
     t.string "name"
@@ -138,7 +150,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_080525) do
     t.integer "happiness_value", default: 10, null: false
     t.integer "love_value", default: 0, null: false
     t.integer "mood_value", default: 0, null: false
-    t.integer "study_value", default: 0, null: false
     t.integer "sports_value", default: 0, null: false
     t.integer "art_value", default: 0, null: false
     t.integer "money", default: 0, null: false
@@ -146,6 +157,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_080525) do
     t.datetime "current_loop_started_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "arithmetic", default: 0, null: false
+    t.integer "arithmetic_effort", default: 0, null: false
+    t.integer "japanese", default: 0, null: false
+    t.integer "japanese_effort", default: 0, null: false
+    t.integer "science", default: 0, null: false
+    t.integer "science_effort", default: 0, null: false
+    t.integer "social_studies", default: 0, null: false
+    t.integer "social_effort", default: 0, null: false
+    t.integer "arithmetic_training_max_count"
+    t.integer "arithmetic_training_fastest_time"
     t.index ["current_loop_event_set_id"], name: "index_user_statuses_on_current_loop_event_set_id"
     t.index ["user_id"], name: "index_user_statuses_on_user_id"
   end
@@ -189,6 +210,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_28_080525) do
   add_foreign_key "action_results", "event_sets", column: "calls_event_set_id"
   add_foreign_key "cuts", "action_results"
   add_foreign_key "event_sets", "event_categories"
+  add_foreign_key "event_temporary_data", "users"
   add_foreign_key "events", "event_sets"
   add_foreign_key "play_states", "events", column: "current_event_id"
   add_foreign_key "play_states", "users"

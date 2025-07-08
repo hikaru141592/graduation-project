@@ -38,6 +38,7 @@ class GamesController < ApplicationController
         seed = @play_state.updated_at.to_i
         @question_text, @options = ArithmeticQuiz.generate(seed: seed)
       end
+      @temp = current_user.event_temporary_datum
     end
   end
 
@@ -54,11 +55,7 @@ class GamesController < ApplicationController
     event = play_state.current_event
     position = params.require(:position).to_i
     choice = event.action_choices.find_by!(position: position)
-
-    result = choice.action_results.
-      order(:priority).
-      detect { |ar| conditions_met?(ar.trigger_conditions, current_user.user_status) }
-
+    result = choice.action_results.order(:priority).detect { |ar| conditions_met?(ar.trigger_conditions, current_user) }
     result ||= choice.action_results.order(priority: :desc).first
 
     if result.cuts.exists?
@@ -118,6 +115,10 @@ class GamesController < ApplicationController
         end
       end
 
+      arithmetic_training_event_processor = ArithmeticTrainingEventProcessor.new(current_user, result, next_set, next_event)
+      next_set, next_event = arithmetic_training_event_processor.call
+      arithmetic_training_event_processor.record_evaluation
+
       play_state.update!(
         current_event_id:        next_event.id,
         action_choices_position: nil,
@@ -132,18 +133,20 @@ class GamesController < ApplicationController
   private
 
   # モデル移動可
-  def conditions_met?(conds, status)
+  def conditions_met?(conds, user)
     return true if conds["always"] == true
     op   = conds["operator"] || "and"
     list = conds["conditions"] || []
     results = list.map do |c|
       case c["type"]
       when "status"
-        status.send(c["attribute"]).public_send(c["operator"], c["value"])
+        user.user_status.send(c["attribute"]).public_send(c["operator"], c["value"])
       when "probability"
         rand(100) < c["percent"]
       when "item"
-        current_user.user_items.find_by(code: c["item_code"]).try(:count).to_i.public_send(c["operator"], c["value"])
+        user.user_items.find_by(code: c["item_code"]).try(:count).to_i.public_send(c["operator"], c["value"])
+      when "event_temporary_data"
+        user.event_temporary_datum.send(c["attribute"]).public_send(c["operator"], c["value"])
       else
         false
       end
@@ -153,13 +156,12 @@ class GamesController < ApplicationController
 
   def apply_effects!(effects)
     status = current_user.user_status
-
     (effects["status"] || []).each do |e|
       attr  = e["attribute"]
       delta = e["delta"].to_i
       new_value = status[attr] + delta
       new_value = [ new_value, 0 ].max
-      unless [ "happiness_value", "money" ].include?(attr)
+      if [ "hunger_value", "love_value", "mood_value" ].include?(attr)
         new_value = [ new_value, 100 ].min
       end
       new_value = [ new_value, 99_999_999 ].min
@@ -167,13 +169,16 @@ class GamesController < ApplicationController
     end
     status.save!
 
-    # 上限値下限値要設定(大事なものについても)
-    # (effects["items"] || []).each do |e|
-    # item  = current_user.user_items.find_or_initialize_by(code: e["item_code"])
-    # delta = e["delta"].to_i
-    # item.count = item.count.to_i + delta
-    # item.save!
-    # end
+    #    event_temporary_data = current_user.event_temporary_datum
+    #    (effects["event_temporary_data"] || []).each do |e|
+    #      attr  = e["attribute"]
+    #      delta = e["delta"].to_i
+    #      new_value = event_temporary_data[attr] + delta
+    #      new_value = [ new_value, 0 ].max
+    #      new_value = [ new_value, 20 ].min
+    #      event_temporary_data[attr] = new_value
+    #    end
+    #    event_temporary_data.save!
   end
 
   def apply_automatic_decay!(play_state)

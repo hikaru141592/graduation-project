@@ -6,6 +6,7 @@ class User < ApplicationRecord
   has_many :authentications, dependent: :destroy
   accepts_nested_attributes_for :authentications
   has_many :user_event_category_invalidations, dependent: :destroy
+  has_one :event_temporary_datum, dependent: :destroy
 
   after_create :build_initial_game_states
 
@@ -49,11 +50,17 @@ class User < ApplicationRecord
       happiness_value: 10,
       love_value:      0,
       mood_value:      0,
-      study_value:     0,
       sports_value:    0,
       art_value:       0,
-      money:           0
-
+      money:           0,
+      arithmetic:      0,
+      arithmetic_effort: 0,
+      japanese:          0,
+      japanese_effort:   0,
+      science:           0,
+      science_effort:    0,
+      social_studies:    0,
+      social_effort:     0,
     )
     first_set   = EventSet.find_by!(name: "何か言っている")
     first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
@@ -62,6 +69,11 @@ class User < ApplicationRecord
       action_choices_position:   nil,
       action_results_priority:   nil,
       current_cut_position:      nil
+    )
+    create_event_temporary_datum!(
+      reception_count: 0,
+      success_count: 0,
+      started_at: Time.current
     )
   end
 
