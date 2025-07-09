@@ -16,7 +16,6 @@ class BallTrainingEventProcessor
       @temp.increment!(:reception_count)
       @temp.increment!(:success_count) if @result.effects.present?
       return end_process   if end_process?
-    else
       return continue_process
     end
     return evaluation if evaluation?
@@ -67,8 +66,7 @@ class BallTrainingEventProcessor
 
   def continue_process
     event_set = @result.action_choice.event.event_set
-    random_deriv = rand(2..4)
-    event = event_set.events.find_by!(derivation_number: random_deriv)
+    event = event_set.events.find_by!(derivation_number: 0)
     [ event_set, event ]
   end
 
@@ -78,9 +76,7 @@ class BallTrainingEventProcessor
 
   def evaluation
     event_set = EventSet.find_by!(name: "特訓")
-    
-    ratio      = r.zero? ? 0.0 : s.to_f / r
-    derivation = @temp.success_count >= 3 ? 5 : 5
+    derivation = @temp.success_count >= 3 ? 5 : 6
     event = event_set.events.find_by!(derivation_number: derivation)
     [ event_set, event ]
   end
