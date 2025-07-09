@@ -493,6 +493,22 @@ events = [
     message:           '20もんちゅう〈X〉もんせいかい！またちょうせんしよう！',
     character_image:   'character/kari-bimuyou.png',
     background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '特訓',
+    name:              'ボール遊び特訓結果良し',
+    derivation_number: 5,
+    message:           '〈X〉かいせいこう！よくがんばったね！',
+    character_image:   'character/kari-nikoniko2.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '特訓',
+    name:              'ボール遊び特訓結果微妙',
+    derivation_number: 6,
+    message:           '〈X〉かいせいこう！またちょうせんしよう！',
+    character_image:   'character/kari-bimuyou.png',
+    background_image:  'background/kari-background.png'
   }
 ]
 
@@ -648,6 +664,16 @@ choices = [
   {
     event_set_name:    '特訓',
     derivation_number: 4,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    '特訓',
+    derivation_number: 5,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    '特訓',
+    derivation_number: 6,
     labels:            [ 'すすむ' ]
   }
 ]
@@ -1908,7 +1934,7 @@ action_results = [
     event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 1,
     trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": ">=", "value": 0 } ] },
     effects: {},
-    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+    next_derivation_number: nil, calls_event_set_name: 'ボール遊び', resolves_loop: false
   },
   {
     event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 2,
@@ -1936,6 +1962,18 @@ action_results = [
   },
   {
     event_set_name: '特訓', derivation_number: 4, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 5, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '特訓', derivation_number: 6, label: 'すすむ', priority: 1,
     trigger_conditions:    { always: true },
     effects: {},
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
@@ -2154,7 +2192,7 @@ cuts = [
 
   { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 1, position: 1, message: 'とっくんはれんぞく20もんになるぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 1, position: 1, message: 'とっくんはしっぱいになるまでつづくぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 1, position: 1, message: 'とっくんは3かいしっぱいするまでつづくぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
   { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                    character_image: 'character/kari-tukareta.png', background_image: 'background/kari-background.png' }
 ]

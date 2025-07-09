@@ -119,6 +119,10 @@ class GamesController < ApplicationController
       next_set, next_event = arithmetic_training_event_processor.call
       arithmetic_training_event_processor.record_evaluation
 
+      ball_training_event_processor = BallTrainingEventProcessor.new(current_user, result, next_set, next_event)
+      next_set, next_event = ball_training_event_processor.call
+      ball_training_event_processor.record_evaluation
+
       play_state.update!(
         current_event_id:        next_event.id,
         action_choices_position: nil,
