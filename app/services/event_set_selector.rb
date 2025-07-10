@@ -1,6 +1,7 @@
 class EventSetSelector
   PRIORITY_LIST = [
     "寝ている",
+    "寝起き",
     "眠そう",
     "泣いている(空腹)",
     "泣いている(よしよし不足)",
@@ -17,7 +18,9 @@ class EventSetSelector
     @status     = user.user_status
     @event_sets = EventSet.all.to_a
 
+    cleanup_event_set_old_limit_counts
     filter_invalid_categories!
+    filter_daily_limits!
   end
 
   def select_next
@@ -25,13 +28,40 @@ class EventSetSelector
       set = @event_sets.find { |s| s.name == name }
       next unless set
       conds = set.trigger_conditions
-      return set if conditions_met?(conds)
+      if conditions_met?(conds)
+        record_occurrence(set)
+        return set
+      end
     end
 
     @event_sets.find { |s| s.name == "何か言っている" }
   end
 
   private
+
+  def cleanup_event_set_old_limit_counts
+    DailyLimitEventSetCount.where(user: @user).where("occurred_on < ?", Date.current).delete_all
+  end
+
+  def filter_daily_limits!
+    @event_sets.reject! do |set|
+      limit = set.daily_limit
+      next false if limit.nil?
+      today_count(set) >= limit
+    end
+  end
+
+  def today_count(set)
+    rec = DailyLimitEventSetCount.find_by(user: @user, event_set: set, occurred_on: Date.current)
+    rec&.count.to_i
+  end
+
+  def record_occurrence(set)
+    return if set.daily_limit.nil?
+    rec = DailyLimitEventSetCount.find_or_initialize_by(user: @user, event_set: set, occurred_on: Date.current)
+    rec.count += 1
+    rec.save!
+  end
 
   def conditions_met?(conds)
     return true if conds["always"] == true
