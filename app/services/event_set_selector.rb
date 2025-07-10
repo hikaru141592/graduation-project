@@ -30,7 +30,7 @@ class EventSetSelector
       conds = set.trigger_conditions
       if conditions_met?(conds)
         record_occurrence(set)
-        return set 
+        return set
       end
     end
 
@@ -40,7 +40,7 @@ class EventSetSelector
   private
 
   def cleanup_event_set_old_limit_counts
-    DailyLimitEventSetCount.where(user: @user).where('occurred_on < ?', Date.current).delete_all
+    DailyLimitEventSetCount.where(user: @user).where("occurred_on < ?", Date.current).delete_all
   end
 
   def filter_daily_limits!

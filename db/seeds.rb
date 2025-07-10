@@ -1778,7 +1778,7 @@ action_results = [
     next_derivation_number: 0,
     calls_event_set_name:  nil,
     resolves_loop:         false
-  },  
+  },
   {
     event_set_name:        '怒っている',
     derivation_number:     0,

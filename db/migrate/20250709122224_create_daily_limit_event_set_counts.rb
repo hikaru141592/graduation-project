@@ -8,7 +8,7 @@ class CreateDailyLimitEventSetCounts < ActiveRecord::Migration[8.0]
 
       t.timestamps
 
-      t.index [:user_id, :event_set_id, :occurred_on], unique: true, name: 'index_daily_limit_counts_on_user_event_set_date'
+      t.index [ :user_id, :event_set_id, :occurred_on ], unique: true, name: 'index_daily_limit_counts_on_user_event_set_date'
     end
   end
 end
