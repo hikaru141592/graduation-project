@@ -218,12 +218,13 @@ event_set_conditions = [
   },
   {
     name: '寝起き',
+    daily_limit: 1,
     trigger_conditions: {
       "operator": "and",
       "conditions": [
         {
           "type":      "time_range",
-          "from_hour": 6,
+          "from_hour": 12,
           "from_min":  38,
           "to_hour":   7,
           "to_min":    38,
@@ -297,7 +298,7 @@ event_set_conditions = [
 
 event_set_conditions.each do |attrs|
   set = EventSet.find_by!(name: attrs[:name])
-  set.update!(trigger_conditions: attrs[:trigger_conditions])
+  set.update!(trigger_conditions: attrs[:trigger_conditions], daily_limit: attrs[:daily_limit])
 end
 
 events = [
@@ -415,23 +416,15 @@ events = [
   },
   {
     event_set_name:    '寝起き',
-    name:              '寝起き',
-    derivation_number: 0,
-    message:           '〈たまご〉がおきたようだ！',
-    character_image:   'character/kari-wakeup.png',
-    background_image:  'background/kari-background.png'
-  },
-  {
-    event_set_name:    '寝起き',
-    name:              '寝起き',
+    name:              '起こす、1回目の警告',
     derivation_number: 1,
-    message:           'めがさめるかもしれないし、みずをかけちゃう？。',
+    message:           'おきにいりのハードロックミュージックでもかけっちゃおっかなー？。',
     character_image:   'character/kari-wakeup.png',
     background_image:  'background/kari-background.png'
   },
   {
     event_set_name:    '寝起き',
-    name:              '寝起き',
+    name:              '起こす、2回目の警告',
     derivation_number: 2,
     message:           'ほんとにかけるの？',
     character_image:   'character/kari-wakeup.png',
@@ -439,9 +432,9 @@ events = [
   },
   {
     event_set_name:    '寝起き',
-    name:              '寝起き',
+    name:              '起こす、3回目の警告',
     derivation_number: 3,
-    message:           'ほんとにいいんだね！？',
+    message:           'ほんとにいいんですね？',
     character_image:   'character/kari-wakeup.png',
     background_image:  'background/kari-background.png'
   },
@@ -660,7 +653,7 @@ choices = [
   {
     event_set_name:    '寝起き',
     derivation_number: 0,
-    labels:            [ 'そっとする',        'よしよしする',     'きがえさせる',     'みずをかける' ]
+    labels:            [ 'そっとする',        'よしよしする',     'きがえさせる',     'ばくおんをながす' ]
   },
   {
     event_set_name:    '寝起き',
@@ -1712,7 +1705,7 @@ action_results = [
   {
     event_set_name:        '寝起き',
     derivation_number:     0,
-    label:                 'みずをかける',
+    label:                 'ばくおんをながす',
     priority:              1,
     trigger_conditions:    { always: true },
     effects:               {},

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_09_061446) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_09_122224) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -72,6 +72,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_061446) do
     t.check_constraint "\"position\" >= 1", name: "cuts_sequence_check"
   end
 
+  create_table "daily_limit_event_set_counts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_set_id", null: false
+    t.date "occurred_on", null: false
+    t.integer "count", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_set_id"], name: "index_daily_limit_event_set_counts_on_event_set_id"
+    t.index ["user_id", "event_set_id", "occurred_on"], name: "index_daily_limit_counts_on_user_event_set_date", unique: true
+    t.index ["user_id"], name: "index_daily_limit_event_set_counts_on_user_id"
+  end
+
   create_table "event_categories", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -87,6 +99,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_061446) do
     t.jsonb "trigger_conditions", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "daily_limit"
     t.index ["event_category_id", "name"], name: "index_event_sets_on_event_category_id_and_name", unique: true
     t.index ["event_category_id"], name: "index_event_sets_on_event_category_id"
   end
@@ -210,6 +223,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_061446) do
   add_foreign_key "action_results", "action_choices"
   add_foreign_key "action_results", "event_sets", column: "calls_event_set_id"
   add_foreign_key "cuts", "action_results"
+  add_foreign_key "daily_limit_event_set_counts", "event_sets"
+  add_foreign_key "daily_limit_event_set_counts", "users"
   add_foreign_key "event_sets", "event_categories"
   add_foreign_key "event_temporary_data", "users"
   add_foreign_key "events", "event_sets"
