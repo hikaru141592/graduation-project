@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_09_122224) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_10_110605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,6 +67,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_09_122224) do
     t.string "background_image", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.jsonb "messages", default: [], null: false
     t.index ["action_result_id", "position"], name: "index_cuts_on_action_result_id_and_position", unique: true
     t.index ["action_result_id"], name: "index_cuts_on_action_result_id"
     t.check_constraint "\"position\" >= 1", name: "cuts_sequence_check"
