@@ -7,6 +7,8 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :authentications
   has_many :user_event_category_invalidations, dependent: :destroy
   has_one :event_temporary_datum, dependent: :destroy
+  has_many :daily_limit_event_set_counts, dependent: :destroy
+  has_many :counted_event_sets, through: :daily_limit_event_set_counts, source: :event_set
 
   after_create :build_initial_game_states
 

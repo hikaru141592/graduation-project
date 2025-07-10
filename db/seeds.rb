@@ -224,7 +224,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":      "time_range",
-          "from_hour": 12,
+          "from_hour": 6,
           "from_min":  38,
           "to_hour":   7,
           "to_min":    38,
@@ -418,7 +418,7 @@ events = [
     event_set_name:    '寝起き',
     name:              '起こす、1回目の警告',
     derivation_number: 1,
-    message:           'おきにいりのハードロックミュージックでもかけっちゃおっかなー？。',
+    message:           'おきにいりのハードロックミュージックでもかけっちゃおっかなー？',
     character_image:   'character/kari-wakeup.png',
     background_image:  'background/kari-background.png'
   },
@@ -1766,7 +1766,7 @@ action_results = [
     effects:               { "status": [ { "attribute": "happiness_value", "delta": -2 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '怒っている',
-    resolves_loop:         false
+    resolves_loop:         true
   },
   {
     event_set_name:        '寝起き',

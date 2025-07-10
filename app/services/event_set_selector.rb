@@ -1,6 +1,7 @@
 class EventSetSelector
   PRIORITY_LIST = [
     "寝ている",
+    "寝起き",
     "眠そう",
     "泣いている(空腹)",
     "泣いている(よしよし不足)",
@@ -57,7 +58,7 @@ class EventSetSelector
 
   def record_occurrence(set)
     return if set.daily_limit.nil?
-    rec = DailyLimitEventSetCount.find_by(user: @user, event_set: set, occurred_on: Date.current)
+    rec = DailyLimitEventSetCount.find_or_initialize_by(user: @user, event_set: set, occurred_on: Date.current)
     rec.count += 1
     rec.save!
   end

@@ -231,7 +231,9 @@ class GamesController < ApplicationController
   end
 
   def event_category_invalidation(user, event_category, expires_at)
-    user.user_event_category_invalidations.create!(event_category: event_category, expires_at: expires_at)
+    inv = user.user_event_category_invalidations.find_or_initialize_by(event_category: event_category)
+    inv.expires_at = expires_at
+    inv.save!
   end
 
   def pick_next_event_set_and_event
