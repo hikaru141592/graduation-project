@@ -27,7 +27,7 @@
       <div class="col-12 col-md-4 pe-md-6 d-grid gap-1 mt-2 mt-md-4">
         <div class="message-box mb-1 py-4 d-flex align-items-center justify-content-center">
           <% 
-            message = @cut&.message || @event.message
+            message = @cut&.random_message(@play_state.updated_at) || @event.message
             if @question_text.present?
               message = message.gsub('X 演算子 Y', @question_text)
             end
