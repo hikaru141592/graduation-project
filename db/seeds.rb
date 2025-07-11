@@ -162,7 +162,7 @@ event_set_conditions = [
         {
           "type":    "probability",
           "percent": 100
-        },{
+        }, {
           "type":      "time_range",
           "from_hour": 11,
           "from_min":  0,
@@ -194,7 +194,7 @@ event_set_conditions = [
         {
           "type":    "probability",
           "percent": 2
-        },{
+        }, {
           "type":      "time_range",
           "from_hour": 10,
           "from_min":  0,
@@ -294,7 +294,7 @@ event_set_conditions = [
           "from_hour": 6,
           "from_min":  0,
           "to_hour":   11,
-          "to_min":    0,
+          "to_min":    0
         },
         {
           "type":    "probability",
