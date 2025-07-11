@@ -155,12 +155,33 @@ event_set_conditions = [
   },
   {
     name: 'ブロックのおもちゃに夢中',
+    daily_limit: 1,
     trigger_conditions: {
       "operator":   "and",
       "conditions": [
         {
           "type":    "probability",
-          "percent": 2
+          "percent": 100
+        },{
+          "type":      "time_range",
+          "from_hour": 11,
+          "from_min":  0,
+          "to_hour":   13,
+          "to_min":    0,
+          "offsets_by_day": [
+            {
+              "add":        11,
+              "mult":       77,
+              "mod":        360,
+              "target":     "from_min"
+            },
+            {
+              "add":        11,
+              "mult":       77,
+              "mod":        360,
+              "target":     "to_min"
+            }
+          ]
         }
       ]
     }
@@ -172,7 +193,21 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 5
+          "percent": 2
+        },{
+          "type":      "time_range",
+          "from_hour": 10,
+          "from_min":  0,
+          "to_hour":   23,
+          "to_min":    30,
+          "offsets_by_day": [
+            {
+              "add":        4,
+              "mult":       7,
+              "mod":        30,
+              "target":     "from_min"
+            }
+          ]
         }
       ]
     }
@@ -250,7 +285,7 @@ event_set_conditions = [
   },
   {
     name: '占い',
-    daily_limit: nil,
+    daily_limit: 1,
     trigger_conditions: {
       "operator": "and",
       "conditions": [
