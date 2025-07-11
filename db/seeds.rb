@@ -8,6 +8,7 @@ categories = [
   { name: '寝ている', description: '寝ている',                                             loop_minutes: 5   },
   { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
   { name: '寝起き',   description: '寝起き',                                             loop_minutes: 15   },
+  { name: '占い',     description: '占い',                                               loop_minutes: nil   },
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
   { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
   { name: '特訓',     description: '特訓',                                               loop_minutes: nil   }
@@ -34,6 +35,7 @@ event_sets = [
   { category_name: '寝ている',  name: '寝ている' },
   { category_name: '寝かせた',  name: '寝かせた' },
   { category_name: '寝起き',    name: '寝起き' },
+  { category_name: '占い',      name: '占い' },
   { category_name: '算数',      name: '算数' },
   { category_name: 'ボール遊び', name: 'ボール遊び' },
   { category_name: '特訓',      name: '特訓' }
@@ -247,6 +249,26 @@ event_set_conditions = [
     }
   },
   {
+    name: '占い',
+    daily_limit: nil,
+    trigger_conditions: {
+      "operator": "and",
+      "conditions": [
+        {
+          "type":      "time_range",
+          "from_hour": 6,
+          "from_min":  0,
+          "to_hour":   11,
+          "to_min":    0,
+        },
+        {
+          "type":    "probability",
+          "percent": 33
+        }
+      ]
+    }
+  },
+  {
     name: '怒っている',
     trigger_conditions: {
       "operator":   "and",
@@ -436,6 +458,14 @@ events = [
     derivation_number: 3,
     message:           'ほんとにいいんですね？',
     character_image:   'character/kari-wakeup.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '占い',
+    name:              '占い',
+    derivation_number: 0,
+    message:           'テレビでうらないをやってる！',
+    character_image:   'character/kari-TV1.png',
     background_image:  'background/kari-background.png'
   },
   {
@@ -669,6 +699,11 @@ choices = [
     event_set_name:    '寝起き',
     derivation_number: 3,
     labels:            [ 'はい',              'いいえ' ]
+  },
+  {
+    event_set_name:    '占い',
+    derivation_number: 0,
+    labels:            [ 'すすむ' ]
   },
   {
     event_set_name:    '怒っている',
@@ -1780,6 +1815,24 @@ action_results = [
     resolves_loop:         false
   },
   {
+    event_set_name: '占い', derivation_number: 0, label: 'すすむ', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 10 } ] },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '占い', derivation_number: 0, label: 'すすむ', priority: 2,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 33 } ] },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '占い', derivation_number: 0, label: 'すすむ', priority: 3,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
     event_set_name:        '怒っている',
     derivation_number:     0,
     label:                 'よしよしする',
@@ -2295,6 +2348,25 @@ cuts = [
   { event_set_name: '寝起き',             derivation_number: 0, label: 'きがえさせる',     priority: 1, position: 1, message: '〈たまご〉はふくなんかきていない！',      character_image: 'character/kari-wakeup.png', background_image: 'background/kari-background.png' },
   { event_set_name: '寝起き',             derivation_number: 3, label: 'はい',            priority: 1, position: 1, message: '〈たまご〉はおこってしまった！',           character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
 
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 1, message: '『ほんじつのあなたはすっごくラッキー！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 2, message: '『ちょっかんにしたがうと、おもわぬいいことが！』', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png',
+   messages: [ '『ちょっかんにしたがうと、おもわぬいいことがありそう！』', '『せっきょくてきにうごくと、とってもいいことがおこりそう！』', '『おいしいものをたべると、きんうんアップ！』', '『ふだんとへんかのあるこうどうをいしきしよう！』', '『まわりのひとからかんしゃされそうなよかん！』',
+               '『なにをやってもうまくいきそう！』', '『いつもはしっぱいすることも、きょうならうまくいきそう！』', '『じぶんのとくいなことにうちこんでみよう！』', '『ひとのえがおにふれると、うんきがアップ！』', '『まわりへのおもいやりを、いつもいじょうにだいじにしよう！』' ] },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 3, message: 'だそうだ！', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 1, message: '『ほんじつのあなたはそこそこラッキー！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 2, message: '『あんまりふかくかんがえすぎず、こうどうしよう！』', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png',
+   messages: [ '『あんまりふかくかんがえすぎず、こうどうしよう！』', '『ごぜんちゅうから、かっぱつてきにこうどうしよう！』', '『あまいものをたべると、いいことがあるかも！』', '『じぶんをかざらず、すごしてみよう！』', '『コミュニケーションがじゅうようないちにちになりそう！』',
+               '『けんこうてきないちにちをすごすのがポイント！』', '『ちょうせんがうまくいきそうなよかん！』', '『じぶんのにがてなことにうちこんでみよう！』', '『たまにはのんびりすごすのもいいかも！』', '『にんげんかんけいがうまくいきそう！』' ] },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 3, message: 'だそうだ！', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 1, message: '『ほんじつのあなたはちょっぴりラッキー！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 2, message: '『でもマンホールのうえにはきをつけよう！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png',
+   messages: [ '『でもマンホールのうえにはきをつけよう！』', '『みぎかひだりだったら、ひだりをえらぼう！』', '『みぎかひだりだったら、みぎをえらぼう！』', '『おとしよりにやさしくするのがポイント！』', '『にがてなたべものをがんばってたべてみよう！』',
+               '『うんどうをするといいことがあるかも？』', '『トイレはがまんしないほうがよさそう！』', '『せいじつなきもちをもっていれば、いいいちにちになりそう！』', '『きょうはいそがしいかもしればいけど、がんばってみよう！』', '『でもひとのわるぐちをいうと、うんきがガクッとさがるよ！』',
+               '『ラッキーカラーはきいろ！』', '『ラッキーカラーはあお！』', '『ラッキーカラーはあか！』', '『ラッキーカラーはみどり！』', '『ニコニコすることをこころがけよう！』' ] },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 3, message: 'だそうだ！', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
+
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'そっとする',      priority: 1, position: 1, message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'character/kari-building_blocks.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ちょっかいをだす', priority: 1, position: 1, message: '〈たまご〉がおこってしまった！',                       character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
@@ -2416,6 +2488,9 @@ cuts.each do |attrs|
 
   cut = Cut.find_or_initialize_by(action_result: result, position: attrs[:position])
   cut.message          = attrs[:message]
+  if attrs[:messages].present?
+    cut.messages = attrs[:messages]
+  end
   cut.character_image  = attrs[:character_image]
   cut.background_image = attrs[:background_image]
   cut.save!
