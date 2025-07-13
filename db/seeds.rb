@@ -9,6 +9,7 @@ categories = [
   { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
   { name: '寝起き',   description: '寝起き',                                             loop_minutes: 15   },
   { name: '占い',     description: '占い',                                               loop_minutes: nil   },
+  { name: 'テレビ',   description: 'テレビ',                                             loop_minutes: 20   },
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
   { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
   { name: '特訓',     description: '特訓',                                               loop_minutes: nil   }
@@ -36,6 +37,9 @@ event_sets = [
   { category_name: '寝かせた',  name: '寝かせた' },
   { category_name: '寝起き',    name: '寝起き' },
   { category_name: '占い',      name: '占い' },
+  { category_name: 'テレビ',      name: 'タマモン' },
+  { category_name: 'テレビ',      name: 'タマえもん' },
+  { category_name: 'テレビ',      name: 'ニワトリビアの湖' },
   { category_name: '算数',      name: '算数' },
   { category_name: 'ボール遊び', name: 'ボール遊び' },
   { category_name: '特訓',      name: '特訓' }
@@ -304,6 +308,66 @@ event_set_conditions = [
     }
   },
   {
+    name: 'タマモン',
+    daily_limit: 1,
+    trigger_conditions: {
+      "operator": "and",
+      "conditions": [
+        {
+          "type":      "time_range",
+          "from_hour": 19,
+          "from_min":  0,
+          "to_hour":   20,
+          "to_min":    0
+        },
+        {
+          "type": "weekday",
+          "value": [1]
+        }
+      ]
+    }
+  },
+  {
+    name: 'タマえもん',
+    daily_limit: 1,
+    trigger_conditions: {
+      "operator": "and",
+      "conditions": [
+        {
+          "type":      "time_range",
+          "from_hour": 19,
+          "from_min":  0,
+          "to_hour":   20,
+          "to_min":    0
+        },
+        {
+          "type": "weekday",
+          "value": [5]
+        }
+      ]
+    }
+  },
+  {
+    name: 'ニワトリビアの湖',
+    daily_limit: 1,
+    trigger_conditions: {
+      "operator": "and",
+      "conditions": [
+        {
+          "type":      "time_range",
+          "from_hour": 20,
+          "from_min":  0,
+          "to_hour":   21,
+          "to_min":    0
+        },
+        {
+          "type": "weekday",
+          "value": [3]
+        }
+      ]
+    }
+  },
+  {
     name: '怒っている',
     trigger_conditions: {
       "operator":   "and",
@@ -501,6 +565,54 @@ events = [
     derivation_number: 0,
     message:           'テレビでうらないをやってる！',
     character_image:   'character/kari-TV1.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'タマモン',
+    name:              'タマモンがやっている',
+    derivation_number: 0,
+    message:           '〈たまご〉はタマモンがみたいらしい。どうする？',
+    character_image:   'character/kari-TV3.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'タマモン',
+    name:              'タマモンを見ている',
+    derivation_number: 1,
+    message:           '〈たまご〉はタマモンをみている！',
+    character_image:   'character/kari-TV6.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'タマえもん',
+    name:              'タマえもんがやっている',
+    derivation_number: 0,
+    message:           '〈たまご〉はタマえもんがみたいらしい。どうする？',
+    character_image:   'character/kari-TV3.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'タマえもん',
+    name:              'タマえもんを見ている',
+    derivation_number: 1,
+    message:           '〈たまご〉はタマえもんをみている！',
+    character_image:   'character/kari-TV6.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'ニワトリビアの湖',
+    name:              'ニワトリビアの湖がやっている',
+    derivation_number: 0,
+    message:           '〈たまご〉はニワトリビアのみずうみがみたいらしい。どうする？',
+    character_image:   'character/kari-TV3.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    'ニワトリビアの湖',
+    name:              'ニワトリビアの湖を見ている',
+    derivation_number: 1,
+    message:           '〈たまご〉はニワトリビアのみずうみをみている！',
+    character_image:   'character/kari-TV6.png',
     background_image:  'background/kari-background.png'
   },
   {
@@ -739,6 +851,36 @@ choices = [
     event_set_name:    '占い',
     derivation_number: 0,
     labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    'タマモン',
+    derivation_number: 0,
+    labels:            [ 'みていいよ',         'みさせてあげない' ]
+  },
+  {
+    event_set_name:    'タマモン',
+    derivation_number: 1,
+    labels:            [ 'いっしょにみる' ]
+  },
+  {
+    event_set_name:    'タマえもん',
+    derivation_number: 0,
+    labels:            [ 'みていいよ',         'みさせてあげない' ]
+  },
+  {
+    event_set_name:    'タマえもん',
+    derivation_number: 1,
+    labels:            [ 'いっしょにみる' ]
+  },
+  {
+    event_set_name:    'ニワトリビアの湖',
+    derivation_number: 0,
+    labels:            [ 'みていいよ',         'みさせてあげない' ]
+  },
+  {
+    event_set_name:    'ニワトリビアの湖',
+    derivation_number: 1,
+    labels:            [ 'いっしょにみる' ]
   },
   {
     event_set_name:    '怒っている',
@@ -1868,6 +2010,60 @@ action_results = [
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
+    event_set_name: 'タマモン', derivation_number: 0, label: 'みていいよ', priority: 1,
+    trigger_conditions: { always: true },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'タマモン', derivation_number: 0, label: 'みさせてあげない', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+  },
+  {
+    event_set_name: 'タマモン', derivation_number: 1, label: 'いっしょにみる', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'タマえもん', derivation_number: 0, label: 'みていいよ', priority: 1,
+    trigger_conditions: { always: true },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'タマえもん', derivation_number: 0, label: 'みさせてあげない', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+  },
+  {
+    event_set_name: 'タマえもん', derivation_number: 1, label: 'いっしょにみる', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ニワトリビアの湖', derivation_number: 0, label: 'みていいよ', priority: 1,
+    trigger_conditions: { always: true },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ニワトリビアの湖', derivation_number: 0, label: 'みさせてあげない', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+  },
+  {
+    event_set_name: 'ニワトリビアの湖', derivation_number: 1, label: 'いっしょにみる', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
     event_set_name:        '怒っている',
     derivation_number:     0,
     label:                 'よしよしする',
@@ -2401,6 +2597,27 @@ cuts = [
                '『うんどうをするといいことがあるかも？』', '『トイレはがまんしないほうがよさそう！』', '『せいじつなきもちをもっていれば、いいいちにちになりそう！』', '『きょうはいそがしいかもしればいけど、がんばってみよう！』', '『でもひとのわるぐちをいうと、うんきがガクッとさがるよ！』',
                '『ラッキーカラーはきいろ！』', '『ラッキーカラーはあお！』', '『ラッキーカラーはあか！』', '『ラッキーカラーはみどり！』', '『ニコニコすることをこころがけよう！』' ] },
   { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 3, message: 'だそうだ！', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: 'タマモン',               derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',              character_image: 'character/kari-TV4.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'タマモン',               derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                              character_image: 'character/kari-TV5.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'タマモン',               derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『でばんだ、タマチュウ！』', character_image: 'character/kari-TV6.png', background_image: 'background/kari-background.png',
+   messages: [ '『でばんだ、タマチュウ！』', '『これからたびにでるぞ！』', '『タマモンマスターへのみちはながい！』', '『タマチュウがつよくなってきた！』', '『バトルだタマチュウ！』',
+               '『タマチュウにげるぞ！』', '『タマチュウ！かえってこい！』', '『タマチュウきょうはちょうしわるいか？』', '『タマチュウ！たたかってくれ！』', '『これがタマチュウ？』',
+               '『タマチュウ、さいきんふとった？』', '『あのタマモンつかまえよう！』', '『あー、にげられた！』', '『あのやまをこえないと！』', '『タマチュウ、これからもよろしくな！』' ] },
+
+  { event_set_name: 'タマえもん',               derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',           character_image: 'character/kari-TV4.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'タマえもん',               derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                           character_image: 'character/kari-TV5.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'タマえもん',               derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『たすけてタマえもん！』', character_image: 'character/kari-TV6.png', background_image: 'background/kari-background.png',
+   messages: [ '『たすけてタマえもん！』', '『タマえもーん！』', '『タマえもんにどうにかしてもらおう！』', '『タマえもんとケンカしてしまった・・・。』', '『タメえもんにもできないことがあるんだね』',
+               '『しっかりしてよタマえもん！』', '『いそいでかえらないと！』', '『タマえもん、これどうやってつかえばいいの？』', '『いつもありがとうね、タマえもん！』', '『きょうはがっこうにいきたくないなあ』',
+               '『こうえんにあそびにいこう！』', '『タマえもん、またあしたね！』', '『いそいでタマえもんのところにいかないと！』', '『タマえもん、さっきはごめんね！』', '『タマえもん、これからもよろしくね！』' ] },
+
+  { event_set_name: 'ニワトリビアの湖',           derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',           character_image: 'character/kari-TV4.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ニワトリビアの湖',           derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                           character_image: 'character/kari-TV5.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ニワトリビアの湖',           derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『コケーコケーコケー、100コケー！』', character_image: 'character/kari-TV6.png', background_image: 'background/kari-background.png',
+   messages: [ '『コケーコケーコケー、97コケー！』', '『コケーコケーコケー、91コケー！』', '『コケーコケーコケー、88コケー！』', '『コケーコケーコケー、84コケー！』', '『コケーコケーコケー、75コケー！』',
+               '『コケーコケーコケー、69コケー！』', '『コケーコケーコケー、61コケー！』', '『コケーコケーコケー、54コケー！』', '『コケーコケーコケー、46コケー！』', '『コケーコケーコケー、43コケー！』', '『コケーコケーコケー、36コケー！』', '『コケーコケーコケー、35コケー！』',
+               '『コケーコケーコケー、27コケー！』', '『コケーコケーコケー、14コケー！』', '『コケーコケーコケー、7コケー！』', '『0コケー！』' ] },
 
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'そっとする',      priority: 1, position: 1, message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'character/kari-building_blocks.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
