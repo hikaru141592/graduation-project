@@ -8,6 +8,9 @@ class EventSetSelector
     "泣いている(ランダム)",
     "踊っている",
     "占い",
+    "タマモン",
+    "タマえもん",
+    "ニワトリビアの湖",
     "ブロックのおもちゃに夢中",
     "マンガに夢中",
     "何かしたそう",
@@ -85,6 +88,9 @@ class EventSetSelector
              .public_send(c["operator"], c["value"])
       when "time_range"
         time_range_met?(c)
+      when "weekday"
+        today = Date.current.wday
+        c["value"].include?(today)
       else
         false
       end
