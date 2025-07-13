@@ -322,7 +322,7 @@ event_set_conditions = [
         },
         {
           "type": "weekday",
-          "value": [1]
+          "value": [ 1 ]
         }
       ]
     }
@@ -342,7 +342,7 @@ event_set_conditions = [
         },
         {
           "type": "weekday",
-          "value": [5]
+          "value": [ 5 ]
         }
       ]
     }
@@ -362,7 +362,7 @@ event_set_conditions = [
         },
         {
           "type": "weekday",
-          "value": [3]
+          "value": [ 3 ]
         }
       ]
     }

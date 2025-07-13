@@ -40,6 +40,8 @@ class GamesController < ApplicationController
       end
       @temp = current_user.event_temporary_datum
     end
+
+    set_base_background_image
   end
 
   def select_action
@@ -263,5 +265,18 @@ class GamesController < ApplicationController
       derived_event = event_set.events.find_by!(derivation_number: 0)
     end
     [ event_set, derived_event ]
+  end
+
+  def set_base_background_image
+    current_hour = Time.zone.now.hour
+    @base_background_image =
+      case current_hour
+      when 6...17
+        "base_background/kari-base_background1.png"
+      when 17...18
+        "base_background/kari-base_background2.png"
+      else
+        "base_background/kari-base_background3.png"
+      end
   end
 end
