@@ -3,13 +3,13 @@ categories = [
   { name: 'ルンルン', description: '踊っている',                                           loop_minutes: 3   },
   { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 20 },
   { name: '怒っている', description: '怒っている',                                         loop_minutes: 20   },
-  { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: 12  },
+  { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: 10  },
   { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
   { name: '寝ている', description: '寝ている',                                             loop_minutes: 5   },
   { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
   { name: '寝起き',   description: '寝起き',                                             loop_minutes: 15   },
   { name: '占い',     description: '占い',                                               loop_minutes: nil   },
-  { name: 'テレビ',   description: 'テレビ',                                             loop_minutes: 20   },
+  { name: 'テレビ',   description: 'テレビ',                                             loop_minutes: 15   },
   { name: '扇風機',   description: '扇風機',                                             loop_minutes: 10   },
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
   { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
@@ -172,19 +172,19 @@ event_set_conditions = [
           "type":      "time_range",
           "from_hour": 11,
           "from_min":  0,
-          "to_hour":   13,
+          "to_hour":   14,
           "to_min":    0,
           "offsets_by_day": [
             {
               "add":        11,
               "mult":       77,
-              "mod":        360,
+              "mod":        300,
               "target":     "from_min"
             },
             {
               "add":        11,
               "mult":       77,
-              "mod":        360,
+              "mod":        300,
               "target":     "to_min"
             }
           ]
@@ -199,7 +199,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 2
+          "percent": 5
         }, {
           "type":      "time_range",
           "from_hour": 10,
