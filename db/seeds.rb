@@ -377,7 +377,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":      "time_range",
-          "from_hour": 10,
+          "from_hour": 11,
           "from_min":  0,
           "to_hour":   17,
           "to_min":    0,
@@ -403,7 +403,7 @@ event_set_conditions = [
         },
         {
           "type":    "probability",
-          "percent": 20
+          "percent": 25
         }
       ]
     }
@@ -659,7 +659,7 @@ events = [
   {
     event_set_name:    '扇風機',
     name:              '扇風機',
-    derivation_number: 1,
+    derivation_number: 0,
     message:           '〈たまご〉はすずんでいる！',
     character_image:   'character/kari-senpuuki1.png',
     background_image:  'background/kari-background.png'
@@ -933,7 +933,7 @@ choices = [
   },
   {
     event_set_name:    '扇風機',
-    derivation_number: 1,
+    derivation_number: 0,
     labels:            [ 'よしよしする',       'スイカをあげる',   'せんぷうきをとめる',   'そっとする' ]
   },
   {

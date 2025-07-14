@@ -12,6 +12,7 @@ class EventSetSelector
     "タマえもん",
     "ニワトリビアの湖",
     "ブロックのおもちゃに夢中",
+    "扇風機",
     "マンガに夢中",
     "何かしたそう",
     "何か言っている"
@@ -157,8 +158,9 @@ class EventSetSelector
 
   def date_range_met?(c)
     today = Date.current
-    from  = Date.new(today.year, cond[ "from" ][ "month" ], cond[ "from" ][ "day" ])
-    to    = Date.new(today.year, cond[ "to" ][ "month" ],   cond[ "to" ][ "day" ])
+    from  = Date.new(today.year, c[ "from" ][ "month" ], c[ "from" ][ "day" ])
+    to    = Date.new(today.year, c[ "to" ][ "month" ],   c[ "to" ][ "day" ])
     to    = to.next_year if from > to
     (from..to).cover?(today)
+  end
 end
