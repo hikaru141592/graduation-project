@@ -91,6 +91,8 @@ class EventSetSelector
       when "weekday"
         today = Date.current.wday
         c["value"].include?(today)
+      when "date_range"
+        date_range_met?(c)
       else
         false
       end
@@ -152,4 +154,11 @@ class EventSetSelector
 
     [ from, to ]
   end
+
+  def date_range_met?(c)
+    today = Date.current
+    from  = Date.new(today.year, cond[ "from" ][ "month" ], cond[ "from" ][ "day" ])
+    to    = Date.new(today.year, cond[ "to" ][ "month" ],   cond[ "to" ][ "day" ])
+    to    = to.next_year if from > to
+    (from..to).cover?(today)
 end
