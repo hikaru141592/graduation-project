@@ -14,6 +14,7 @@ categories = [
   { name: 'こたつ',   description: 'こたつ',                                             loop_minutes: 10   },
   { name: '花見',     description: '花見',                                               loop_minutes: nil   },
   { name: '紅葉',     description: '紅葉',                                               loop_minutes: nil   },
+  { name: '年始',     description: '年始',                                               loop_minutes: nil   },
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
   { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
   { name: '特訓',     description: '特訓',                                               loop_minutes: nil   }
@@ -48,6 +49,7 @@ event_sets = [
   { category_name: 'こたつ',      name: 'こたつ' },
   { category_name: '花見',        name: '花見' },
   { category_name: '紅葉',        name: '紅葉' },
+  { category_name: '年始',        name: '年始' },
   { category_name: '算数',      name: '算数' },
   { category_name: 'ボール遊び', name: 'ボール遊び' },
   { category_name: '特訓',      name: '特訓' }
@@ -532,6 +534,20 @@ event_set_conditions = [
     }
   },
   {
+    name: '年始',
+    daily_limit: 1,
+    trigger_conditions: {
+      "operator": "and",
+      "conditions": [
+        {
+          "type": "date_range",
+          "from": { "month": 7, "day": 15 },
+          "to":   { "month": 7, "day": 15 }
+        }
+      ]
+    }
+  },
+  {
     name: '怒っている',
     trigger_conditions: {
       "operator":   "and",
@@ -809,6 +825,14 @@ events = [
     derivation_number: 0,
     message:           '〈たまご〉はコウヨウをみにいきたいみたい。',
     character_image:   'character/kari-normal.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '年始',
+    name:              '年始',
+    derivation_number: 0,
+    message:           '〈たまご〉「にー！！」',
+    character_image:   'character/kari-nikoniko2.png',
     background_image:  'background/kari-background.png'
   },
   {
@@ -1097,6 +1121,11 @@ choices = [
     event_set_name:    '紅葉',
     derivation_number: 0,
     labels:            [ 'つれていく',       'いかない' ]
+  },
+  {
+    event_set_name:    '年始',
+    derivation_number: 0,
+    labels:            [ 'すすむ' ]
   },
   {
     event_set_name:    '怒っている',
@@ -2364,6 +2393,12 @@ action_results = [
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
+    event_set_name: '年始', derivation_number: 0, label: 'すすむ', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
     event_set_name:        '怒っている',
     derivation_number:     0,
     label:                 'よしよしする',
@@ -2951,6 +2986,11 @@ cuts = [
                '〈たまご〉はニコニコだ！', '〈たまご〉はあきがすきらしい！', '〈たまご〉はこれからもっといろんなものをみたいらしい！', '〈たまご〉はおちばをじまんしている！', '〈たまご〉はなぜはっぱのいろがうつりかわるのか、ふしぎなようだ！', 'またこんどもこようね！』',
                '〈たまご〉はふってくるおちばをつかまえるのがすきらしい！', '〈たまご〉はここにいるとココロがおちつくようだ！', '〈たまご〉はまたつれてきてねといっている！', '〈たまご〉はせいめいのとうとさをかんじているようだ！' ] },
   { event_set_name: '紅葉',                   derivation_number: 0, label: 'いかない',         priority: 1, position: 1, message: 'しょぼん。',                    character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 1, message: '〈たまご〉「ににににに、んにににー！」',                    character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 2, message: '〈たまご〉「にににに、ににににー！」',                     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 3, message: 'あけましておめでとう！',                                 character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 4, message: 'ことしもよろしくね、〈たまご〉！',                                   character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
 
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'そっとする',      priority: 1, position: 1, message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'character/kari-building_blocks.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
