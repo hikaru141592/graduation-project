@@ -12,6 +12,7 @@ categories = [
   { name: 'テレビ',   description: 'テレビ',                                             loop_minutes: 15   },
   { name: '扇風機',   description: '扇風機',                                             loop_minutes: 10   },
   { name: 'こたつ',   description: 'こたつ',                                             loop_minutes: 10   },
+  { name: '花見',     description: '花見',                                               loop_minutes: nil   },
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
   { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
   { name: '特訓',     description: '特訓',                                               loop_minutes: nil   }
@@ -44,6 +45,7 @@ event_sets = [
   { category_name: 'テレビ',      name: 'ニワトリビアの湖' },
   { category_name: '扇風機',      name: '扇風機' },
   { category_name: 'こたつ',      name: 'こたつ' },
+  { category_name: '花見',        name: '花見' },
   { category_name: '算数',      name: '算数' },
   { category_name: 'ボール遊び', name: 'ボール遊び' },
   { category_name: '特訓',      name: '特訓' }
@@ -450,6 +452,45 @@ event_set_conditions = [
     }
   },
   {
+    name: '花見',
+    daily_limit: 1,
+    trigger_conditions: {
+      "operator": "and",
+      "conditions": [
+        {
+          "type":      "time_range",
+          "from_hour": 10,
+          "from_min":  30,
+          "to_hour":   16,
+          "to_min":    30,
+          "offsets_by_day": [
+            {
+              "add":        27,
+              "mult":       51,
+              "mod":        120,
+              "target":     "to_min"
+            },
+            {
+              "add":        27,
+              "mult":       6,
+              "mod":        15,
+              "target":     "from_min"
+            }
+          ]
+        },
+        {
+          "type": "date_range",
+          "from": { "month": 3, "day": 16 },
+          "to":   { "month": 4, "day": 15 }
+        },
+        {
+          "type":    "probability",
+          "percent": 30
+        }
+      ]
+    }
+  },
+  {
     name: '怒っている',
     trigger_conditions: {
       "operator":   "and",
@@ -711,6 +752,14 @@ events = [
     derivation_number: 0,
     message:           '〈たまご〉はこたつでヌクヌクしている！',
     character_image:   'character/kari-kotatu1.png',
+    background_image:  'background/kari-background.png'
+  },
+  {
+    event_set_name:    '花見',
+    name:              '花見',
+    derivation_number: 0,
+    message:           '〈たまご〉はおはなみにいきたいみたい。',
+    character_image:   'character/kari-normal.png',
     background_image:  'background/kari-background.png'
   },
   {
@@ -989,6 +1038,11 @@ choices = [
     event_set_name:    'こたつ',
     derivation_number: 0,
     labels:            [ 'よしよしする',       'ミカンをあげる',    'こたつをとめる',      'そっとする' ]
+  },
+  {
+    event_set_name:    '花見',
+    derivation_number: 0,
+    labels:            [ 'つれていく',       'いかない' ]
   },
   {
     event_set_name:    '怒っている',
@@ -2232,6 +2286,18 @@ action_results = [
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
+    event_set_name: '花見', derivation_number: 0, label: 'つれていく', priority: 1,
+    trigger_conditions: { always: true },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '花見', derivation_number: 0, label: 'いかない', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
     event_set_name:        '怒っている',
     derivation_number:     0,
     label:                 'よしよしする',
@@ -2798,7 +2864,18 @@ cuts = [
   { event_set_name: 'こたつ',                 derivation_number: 0, label: 'ミカンをあげる',    priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいみたい。',            character_image: 'character/kari-kotatu4.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'こたつ',                 derivation_number: 0, label: 'こたつをとめる',    priority: 1, position: 1, message: '〈たまご〉「・・・！」',                       character_image: 'character/kari-bikkuri.png',   background_image: 'background/kari-background.png' },
   { event_set_name: 'こたつ',                 derivation_number: 0, label: 'そっとする',        priority: 1, position: 1, message: '〈たまご〉はきもちよさそう！',                 character_image: 'character/kari-kotatu1.png', background_image: 'background/kari-background.png' },
- 
+
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 1, message: 'よし！おはなみにいこっか！',                    character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 2, message: 'おはなみにきた！',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 3, message: '〈たまご〉「にー！んににー！」',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 4, message: '〈たまご〉「にににーに、んにににに！」',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 5, message: '〈たまご〉「にー！んにー、んにに！」',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 6, message: '〈たまご〉はたのしんでいるようだ！',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png',
+   messages: [ '〈たまご〉はたのしんでいるようだ！', '〈たまご〉はさくらがきょうみぶかいみたい！', '〈たまご〉はさくらがきれいだといっている！', '〈たまご〉はしあわせをかんじているようだ！', '〈たまご〉はしぜんをだいじにしていきたいといっている！',
+               '〈たまご〉はたこやきがたべたいようだ！', '〈たまご〉ははるがすきらしい！', '〈たまご〉はこれからもっといろんなものをみたいらしい！', '〈たまご〉はたわいもないことをたのしそうにはなしている！', '〈たまご〉はきいてほしいはなしがいっぱいあるようだ！', '〈たまご〉はおこのみやきがたべたいようだ！』',
+               '〈たまご〉はふってくるさくらをがんばってつかもうとしている！', '〈たまご〉はずっとむこうまでみにいきたいらしい！！', '〈たまご〉はまたつれてきてねといっている！', '〈たまご〉はやさしいきもちでいっぱいなようだ！' ] },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'いかない',         priority: 1, position: 1, message: 'しょぼん。',                    character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'そっとする',      priority: 1, position: 1, message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'character/kari-building_blocks.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ちょっかいをだす', priority: 1, position: 1, message: '〈たまご〉がおこってしまった！',                       character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
