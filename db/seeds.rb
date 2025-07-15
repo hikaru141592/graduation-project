@@ -75,7 +75,7 @@ event_set_conditions = [
           "type":      "status",
           "attribute": "hunger_value",
           "operator":  "<=",
-          "value":     20
+          "value":     5
         }
       ]
     }
@@ -207,7 +207,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 5
+          "percent": 6
         }, {
           "type":      "time_range",
           "from_hour": 10,
