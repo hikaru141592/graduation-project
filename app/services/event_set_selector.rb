@@ -6,11 +6,16 @@ class EventSetSelector
     "泣いている(空腹)",
     "泣いている(よしよし不足)",
     "泣いている(ランダム)",
+    "年始",
     "踊っている",
     "占い",
+    "花見",
+    "紅葉",
     "タマモン",
     "タマえもん",
     "ニワトリビアの湖",
+    "扇風機",
+    "こたつ",
     "ブロックのおもちゃに夢中",
     "マンガに夢中",
     "何かしたそう",
@@ -91,6 +96,8 @@ class EventSetSelector
       when "weekday"
         today = Date.current.wday
         c["value"].include?(today)
+      when "date_range"
+        date_range_met?(c)
       else
         false
       end
@@ -151,5 +158,13 @@ class EventSetSelector
     end
 
     [ from, to ]
+  end
+
+  def date_range_met?(c)
+    today = Date.current
+    from  = Date.new(today.year, c["from"]["month"], c["from"]["day"])
+    to    = Date.new(today.year, c["to"]["month"],   c["to"]["day"])
+    to    = to.next_year if from > to
+    (from..to).cover?(today)
   end
 end
