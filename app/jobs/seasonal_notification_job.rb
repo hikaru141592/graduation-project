@@ -24,9 +24,6 @@ class SeasonalNotificationJob < ApplicationJob
       line_client.push_message(push_message_request: push_req)
     end
 
-    uids.each do |uid|  
-    end
-
     Rails.logger.info "[SeasonalNotificationJob] #{today}の通知を完了しました。"
   end
 
