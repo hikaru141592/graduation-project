@@ -20,7 +20,6 @@ class SeasonalNotificationJob < ApplicationJob
         .where(authentications: { provider: 'line' })
         .pluck('authentications.uid')
         .each do |uid|
-      line_client.push_message(uid, message)
       push_req = Line::Bot::V2::MessagingApi::PushMessageRequest.new(to: uid, messages: [text_message])
       line_client.push_message(push_message_request: push_req)
     end
