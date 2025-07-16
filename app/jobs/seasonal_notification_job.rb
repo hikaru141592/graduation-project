@@ -34,9 +34,8 @@ class SeasonalNotificationJob < ApplicationJob
   private
 
   def line_client
-    @line_client ||= Line::Bot::V2::MessagingApi::ApiClient.new do |config|
-      config.channel_secret = ENV['LINE_CHANNEL_SECRET']
-      config.channel_token  = ENV['LINE_CHANNEL_TOKEN']
-    end
+    @line_client ||= Line::Bot::V2::MessagingApi::ApiClient.new(
+      channel_access_token: ENV.fetch('LINE_CHANNEL_TOKEN')
+    )
   end
 end
