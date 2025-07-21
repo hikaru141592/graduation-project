@@ -26,6 +26,10 @@ Rails.application.routes.draw do
   get   "/complete_profile", to: "users#complete_profile", as: :complete_profile
   patch "/complete_profile", to: "users#update_profile",   as: :update_profile
 
+  get   "/settings", to: "settings#show", as: :settings
+  get   "/settings/line_notification", to: "line_notification_settings#show", as: :settings_line_notification
+  patch "/settings/line_notification", to: "line_notification_settings#update"
+
   root to: "games#play"
 
   if Rails.env.development?

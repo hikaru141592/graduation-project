@@ -3,6 +3,8 @@
     <%= link_to "ログアウト", logout_path,
         data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" },
         class: "btn btn-outline-secondary mb-0 ms-md-5" %>
+    <%= link_to "設定", settings_path,
+        class: "btn btn-outline-secondary mb-0 ms-md-0" %>
   </div>
 
   <%= turbo_frame_tag "game_play" do %>
