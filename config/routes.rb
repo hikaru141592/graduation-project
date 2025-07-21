@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   get   "/settings/line_notification", to: "line_notification_settings#show", as: :settings_line_notification
   patch "/settings/line_notification", to: "line_notification_settings#update"
 
+  post "/webhooks/line", to:"line_webhooks#callback"
+
   root to: "games#play"
 
   if Rails.env.development?

@@ -28,10 +28,6 @@ class User < ApplicationRecord
   validates :friend_code, presence: true, uniqueness: true, format: { with: /\A\d{8}\z/ }
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
-  validates :line_account,
-            uniqueness: true,
-            allow_nil:  true
-
   enum :role, { general: 0, admin: 1 }
 
   def profile_completed?
