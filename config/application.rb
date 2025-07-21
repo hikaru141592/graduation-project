@@ -27,5 +27,6 @@ module App
     config.i18n.default_locale = :ja
     config.i18n.available_locales = [ :ja, :en ]
     config.action_view.preload_links_header = false
+    config.active_job.queue_adapter = :async
   end
 end

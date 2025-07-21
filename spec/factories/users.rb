@@ -10,7 +10,7 @@ FactoryBot.define do
 
     friend_code           { Faker::Number.number(digits: 8) }
 
-    line_account                         { nil }
+    line_friend_linked                   { false }
     line_notifications_enabled           { false }
     last_login_at                        { nil }
     last_logout_at                       { nil }

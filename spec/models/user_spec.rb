@@ -105,16 +105,4 @@ RSpec.describe User, type: :model do
       expect(dup.errors.details[:friend_code]).to include(a_hash_including(error: :taken))
     end
   end
-
-  it 'line_account は nil でも有効' do
-    user = build(:user, valid_attrs.merge(line_account: nil))
-    expect(user).to be_valid
-  end
-
-  it 'line_account が重複すると無効' do
-    existing_user.update!(line_account: "LINE123")
-    dup = build(:user, valid_attrs.merge(line_account: "LINE123"))
-    expect(dup).not_to be_valid
-    expect(dup.errors.details[:line_account]).to include(a_hash_including(error: :taken))
-  end
 end
