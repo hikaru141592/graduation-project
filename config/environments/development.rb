@@ -6,10 +6,9 @@ Rails.application.configure do
   # Make code changes take effect immediately without server restart.
   config.enable_reloading = true
 
-  # Do not eager load code on boot.
-  config.eager_load = true
-  
-  config.cache_classes = true
+  # Webhookの検証の時だけそれぞれtrueに
+  config.eager_load = false
+  config.cache_classes = false
 
   # Show full error reports.
   config.consider_all_requests_local = true
@@ -76,4 +75,5 @@ Rails.application.configure do
 
   config.hosts << /[a-z0-9\-]+\.ngrok-free\.app\z/
   config.log_level = :debug
+  config.file_watcher = ActiveSupport::FileUpdateChecker
 end
