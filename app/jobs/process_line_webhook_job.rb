@@ -12,12 +12,12 @@ class ProcessLineWebhookJob < ApplicationJob
     end
     events.each do |event|
       case event
-      when Line::Bot::V2::Webhook::Event::Follow
-        user = User.find_by(provider: "line", uid: event.source["userId"])
-        user&.update!(line_friend_linked: true)
-      when Line::Bot::V2::Webhook::Event::Unfollow
-        user = User.find_by(provider: "line", uid: event.source["userId"])
-        user&.update!(line_friend_linked: false)
+      when Line::Bot::V2::Webhook::FollowEvent
+        auth = Authentication.find_by(provider: "line", uid: event.source.user_id)
+        auth&.user&.update!(line_friend_linked: true)
+      when Line::Bot::V2::Webhook::UnfollowEvent
+        auth = Authentication.find_by(provider: "line", uid: event.source.user_id)
+        auth&.user&.update!(line_friend_linked: false)
       end
     end
   end

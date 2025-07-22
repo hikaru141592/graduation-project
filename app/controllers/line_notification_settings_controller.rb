@@ -10,7 +10,7 @@ class LineNotificationSettingsController < ApplicationController
     if @user.update(user_params)
       redirect_to settings_line_notification_path
     else
-      render :show,status: :unprocessable_entity
+      render :show, status: :unprocessable_entity
     end
   end
 
@@ -23,6 +23,6 @@ class LineNotificationSettingsController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:line_notification_enabled)
+    params.require(:user).permit(:line_notifications_enabled)
   end
 end

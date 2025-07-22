@@ -1,8 +1,8 @@
 <% content_for :title, 'LINE通知設定' %>
 
-<section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 1200px;">
+<section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 1200px;>
   <div class="text-start mb-3">
-    <%= link_to 'もどる', (settings_path), class: 'btn btn-outline-secondary mb-0' %>
+    <%= link_to 'もどる', (settings_path), class: 'btn btn-outline-secondary mb-3' %>
   </div>
 
   <h3 class="mb-4">LINE通知設定</h3>
@@ -10,5 +10,29 @@
   <li class="mb-2">
     LINE通知機能を利用するにはLINEともだち追加が必要になります。
   </li>
-  <%= link_to "LINE ともだち追加", "https://page.line.me/632btqcb", class: "btn btn-success", target: "_blank", rel: "noopeneer" %>
+
+  <div class="d-flex align-items-center mb-3">
+    <%= link_to "LINE ともだち追加", "https://page.line.me/632btqcb", class: "btn btn-success", target: "_blank", rel: "noopeneer", style: 'width: 180px;' %>
+    <% if current_user.line_friend_linked? %>
+      <span class="text-primary ms-1 fw-bold">（追加中）</span>
+    <% else %>
+      <span class="text-danger  ms-1 fw-bold">（未追加）</span>
+    <% end %>
+  </div>
+
+  <li class="mb-2">
+    必要に応じてLINE通知ON/OFFの切り替えを行ってください。
+  </li>
+  <div class="d-flex align-items-center mb-3">
+    <%= button_to(current_user.line_notifications_enabled? ? '通知をOFFにする' : '通知をONにする',
+                  settings_line_notification_path(user: { line_notifications_enabled: !current_user.line_notifications_enabled?}),
+                  method: :patch,
+                  class: 'btn btn-primary', 
+                  style: 'width: 180px;') %>
+    <% if current_user.line_notifications_enabled? %>
+      <span class="text-primary ms-1 fw-bold">（現在ON）</span>
+    <% else %>
+      <span class="text-danger  ms-1 fw-bold">（現在OFF）</span>
+    <% end %>
+  </div>
 </section>
