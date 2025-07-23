@@ -62,7 +62,7 @@ class ProcessLineWebhookJob < ApplicationJob
     case text
     when /\A(?:ご飯|ごはん|ゴハン|食事|しょくじ|お食事|おしょくじ|飯|めし|メシ)(?:だよ|ですよ|だ|だぜ)?ー?[!！]?\z/
       handle_feed(user)
-    when "よしよし！"
+    when /\A(?:よしよし|よーしよーし|ヨシヨシ|ヨーシヨーシ|ﾖｼﾖｼ|ﾖｰｼﾖｰｼ|なでなで|なーでなーで|ナデナデ|ナーデナーデ|ﾅﾃﾞﾅﾃﾞ|ﾅｰﾃﾞﾅｰﾃﾞ)[!！]?\z/
       handle_pet(user)
     else
       default_reply
@@ -87,6 +87,21 @@ class ProcessLineWebhookJob < ApplicationJob
 
   def default_reply
     "んににー！にーににー！"
+    replies = [
+      "んににー！にーににー！",
+      "にー！ににに！",
+      "にに？にーにー！",
+      "んに！ににに、んにー！",
+      "にーに、んににににー！",
+      "にににー！にーに！",
+      "んにんに！にーにー！",
+      "にーんにー・・・！ににに！",
+      "にに！？にんにーに！",
+      "にーにー、んににんに。",
+      "にににー！にい！",
+      "んににんにー！に！にーに！"
+    ]
+    replies.sample
   end
 
   def send_reply(reply_token, reply_message, client)
