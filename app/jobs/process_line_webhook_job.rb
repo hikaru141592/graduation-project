@@ -40,7 +40,7 @@ class ProcessLineWebhookJob < ApplicationJob
   end
 
   def handle_message(user, event, client)
-    if sleepy_time?
+    if sleepy_time?(user)
       reply_message = sleepy_reply_message
     else
       text = event.message.text
@@ -49,9 +49,104 @@ class ProcessLineWebhookJob < ApplicationJob
     send_reply(event.reply_token, reply_message, client)
   end
 
-  def sleepy_time?
-    now = Time.current
-    now.hour >= 23 || now.hour < 7
+  def sleepy_time?(user)
+    if definitely_asleep?
+      true
+    elsif possibility_of_slept?
+      handle_possibility_of_slept(user)
+    elsif possibility_of_not_awake?
+      handle_possibility_of_not_awake(user)
+    else
+      false
+    end
+  end
+
+  def definitely_asleep?
+    definitely_slept? && definitely_not_awake?(Time.current)
+  end
+
+  def definitely_slept?
+    Time.current.hour > 1 || (Time.current.hour == 1 && Time.current.min >= 58)
+  end
+
+  def definitely_not_awake?(time)
+    time.hour < 6 || (time.hour == 6 && time.min < 38)
+  end
+
+  def possibility_of_slept?
+    possibility_of_slept_start?(Time.current) || possibility_of_slept_end?
+  end
+
+  def possibility_of_slept_start?(time)
+    time.hour > 22 || (time.hour == 22 && time.min >= 14)
+  end
+
+  def possibility_of_slept_end?
+    !definitely_slept?
+  end
+
+  def possibility_of_not_awake?
+    possibility_of_not_awake_start?(Time.current) && possibility_of_not_awake_end?
+  end
+
+  def possibility_of_not_awake_start?(time)
+    !definitely_not_awake?(time)
+  end
+
+  def possibility_of_not_awake_end?
+    Time.current.hour < 8 || (Time.current.hour == 8 && Time.current.min < 53)
+  end
+
+  def handle_possibility_of_slept(user)
+    if before_midnight?
+      handle_before_midnight(user)
+    else
+      handle_after_midnight(user)
+    end
+  end
+
+  def before_midnight?
+    Time.current.hour >= 12
+  end
+
+  def handle_before_midnight(user)
+    if play_state_updated_tonight?(user)
+      handle_asleep_or_awake(user)
+    else
+      false
+    end
+  end
+
+  def play_state_updated_tonight?(user)
+    updated_time = user.play_state.updated_at
+    updated_time.to_date == Date.current && possibility_of_slept_start?(updated_time)
+  end
+
+  def handle_asleep_or_awake(user)
+    category_name = user.play_state.current_event.event_set.event_category.name
+    %w[寝ている 寝かせた].include?(category_name)
+  end
+
+  def handle_after_midnight(user)
+    if play_state_updated_last_night?(user)
+      handle_asleep_or_awake(user)
+    else
+      false
+    end
+  end
+
+  def play_state_updated_last_night?(user)
+    updated_time = user.play_state.updated_at
+    updated_time.to_date == Date.current || (updated_time.to_date == (Date.current - 1) && possibility_of_slept_start?(updated_time))
+  end
+
+  def handle_possibility_of_not_awake(user)
+    updated_time = user.play_state.updated_at
+    if updated_time.to_date == Date.current && possibility_of_not_awake_start?(updated_time)
+      handle_asleep_or_awake(user)
+    else
+      true
+    end
   end
 
   def sleepy_reply_message
