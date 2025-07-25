@@ -4,7 +4,7 @@ class ProcessLineWebhookJob < ApplicationJob
   def perform(raw_body, signature)
     client, events = initialize_line_client_and_events(raw_body, signature)
     return if events.empty?
-    
+
     events.each do |event|
       case event
       when Line::Bot::V2::Webhook::FollowEvent, Line::Bot::V2::Webhook::UnfollowEvent
@@ -20,14 +20,14 @@ class ProcessLineWebhookJob < ApplicationJob
     parser = Line::Bot::V2::WebhookParser.new(channel_secret: ENV.fetch("LINE_CHANNEL_SECRET"))
     client = Line::Bot::V2::MessagingApi::ApiClient.new(channel_access_token: ENV.fetch("LINE_CHANNEL_TOKEN"))
     events = parser.parse(body: raw_body, signature: signature)
-    [client, events]
+    [ client, events ]
   rescue Line::Bot::V2::WebhookParser::InvalidSignatureError => e
     Rails.logger.warn("[LINE] Invalid signature: #{e.message}")
-    [client, [ ]]
+    [ client, [] ]
   end
 
   def process_follow_unfollow_event(event)
-    auth = Authentication.find_by(provider: "line", uid: event.source.user_id) 
+    auth = Authentication.find_by(provider: "line", uid: event.source.user_id)
     linked = event.is_a?(Line::Bot::V2::Webhook::FollowEvent)
     auth&.user&.update!(line_friend_linked: linked)
   end
@@ -100,7 +100,7 @@ class ProcessLineWebhookJob < ApplicationJob
   end
 
   def send_reply(reply_token, reply_message, client)
-    reply_req = Line::Bot::V2::MessagingApi::ReplyMessageRequest.new(reply_token: reply_token, messages: [Line::Bot::V2::MessagingApi::TextMessage.new(text: reply_message)])
+    reply_req = Line::Bot::V2::MessagingApi::ReplyMessageRequest.new(reply_token: reply_token, messages: [ Line::Bot::V2::MessagingApi::TextMessage.new(text: reply_message) ])
     client.reply_message(reply_message_request: reply_req)
   end
 end
