@@ -272,11 +272,11 @@ class GamesController < ApplicationController
     @base_background_image =
       case current_hour
       when 6...17
-        "base_background/kari-base_background1.png"
+        "temp-base_background/temp-base_background1.png"
       when 17...18
-        "base_background/kari-base_background2.png"
+        "temp-base_background/temp-base_background2.png"
       else
-        "base_background/kari-base_background3.png"
+        "temp-base_background/temp-base_background3.png"
       end
   end
 end
