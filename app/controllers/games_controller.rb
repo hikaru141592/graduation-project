@@ -200,7 +200,7 @@ class GamesController < ApplicationController
     status.love_value -= love_ticks * 25 if love_ticks > 0
 
     vitality_ticks = (elapsed / 5.minutes).floor
-    status.temp_vitality += vitality_ticks * 10 if love_ticks > 0
+    status.temp_vitality += vitality_ticks * 10 if vitality_ticks > 0
 
     status.hunger_value  = [ [ status.hunger_value, 0 ].max, 100 ].min
     status.love_value    = [ [ status.love_value,   0 ].max, 100 ].min
