@@ -4,13 +4,13 @@ class GamesController < ApplicationController
   def play
     @play_state = current_user.play_state
     # ステータス減少が適切に行われなくなるため@play_state.touchはしない
-    # apply_automatic_decay!(@play_state)はしない
+    # apply_automatic_update!(@play_state)はしない
     unless request.headers["Turbo-Visit"].present? || request.headers["Turbo-Frame"].present?
       user_status = current_user.user_status
       current_set = @play_state.current_event.event_set
 
       if user_status.current_loop_event_set_id.present? && !in_loop?(user_status, current_set)
-        apply_automatic_decay!(@play_state)
+        apply_automatic_update!(@play_state)
         current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
         clear_loop_status(user_status)
         next_set, next_event = pick_next_event_set_and_event
@@ -52,7 +52,7 @@ class GamesController < ApplicationController
         redirect_to root_path and return
       end
     end
-    apply_automatic_decay!(play_state)
+    apply_automatic_update!(play_state)
 
     event = play_state.current_event
     position = params.require(:position).to_i
@@ -87,11 +87,11 @@ class GamesController < ApplicationController
     result  = choice.action_results.find_by!(priority: play_state.action_results_priority)
 
     if result.cuts.exists?(position: next_cut)
-      apply_automatic_decay!(play_state)
+      apply_automatic_update!(play_state)
       play_state.update!(current_cut_position: next_cut)
     else
       apply_effects!(result.effects)
-      apply_automatic_decay!(play_state)
+      apply_automatic_update!(play_state)
 
       user_status = current_user.user_status
       current_set = event.event_set
@@ -187,7 +187,7 @@ class GamesController < ApplicationController
     #    event_temporary_data.save!
   end
 
-  def apply_automatic_decay!(play_state)
+  def apply_automatic_update!(play_state)
     status    = current_user.user_status
     now       = Time.current
     last_time = play_state.updated_at
@@ -197,10 +197,14 @@ class GamesController < ApplicationController
     status.hunger_value -= hunger_ticks if hunger_ticks > 0
 
     love_ticks = (elapsed / 8.hours).floor
-    status.love_value -= love_ticks * 18 if love_ticks > 0
+    status.love_value -= love_ticks * 25 if love_ticks > 0
+
+    vitality_ticks = (elapsed / 5.minutes).floor
+    status.temp_vitality += vitality_ticks * 10 if love_ticks > 0
 
     status.hunger_value  = [ [ status.hunger_value, 0 ].max, 100 ].min
     status.love_value    = [ [ status.love_value,   0 ].max, 100 ].min
+    status.temp_vitality = [ status.temp_vitality, status.vitality ].min
 
     status.save!
 
