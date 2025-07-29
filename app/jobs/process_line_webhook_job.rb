@@ -59,6 +59,8 @@ class ProcessLineWebhookJob < ApplicationJob
       handle_feed(user)
     when /\A(?:よしよし|よーしよーし|ヨシヨシ|ヨーシヨーシ|ﾖｼﾖｼ|ﾖｰｼﾖｰｼ|なでなで|なーでなーで|ナデナデ|ナーデナーデ|ﾅﾃﾞﾅﾃﾞ|ﾅｰﾃﾞﾅｰﾃﾞ)[!！]?\z/
       handle_pet(user)
+    when "35894421"
+      handle_change_image(user)
     else
       default_reply
     end
@@ -78,6 +80,11 @@ class ProcessLineWebhookJob < ApplicationJob
     status = user.user_status
     status.update!(love_value: [ status.love_value + 10, 100 ].min)
     "にー！\nにににーにー！\n----（訳）----\nわーい！\nうれしいなあ！"
+  end
+
+  def handle_change_image(user)
+    user.update!(image_change: !user.image_change)
+    "にに！にににーに！？\nにーににーに、んにーににににに！\nんににに、にににーに！\n----（訳）----\nあれ！どうしてそのコードを知ってるの！？\nゲーム中の画像データがさし変わるよ！\n戻したいときは同じコードを使ってね！"
   end
 
   def default_reply

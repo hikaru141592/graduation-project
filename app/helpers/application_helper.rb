@@ -27,4 +27,13 @@ module ApplicationHelper
     end
     tags
   end
+
+  def effective_image_path(path)
+    original = path.to_s
+    return original unless current_user.image_change?
+
+    changed = original.gsub(/temp-/, "")
+    asset_path = Rails.root.join("app", "assets", "images", changed)
+    File.exist?(asset_path) ? changed : original
+  end
 end

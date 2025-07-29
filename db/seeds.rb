@@ -608,368 +608,368 @@ events = [
     name:              '何か言っている',
     derivation_number: 0,
     message:           '〈たまご〉がなにかいっているよ。',
-    character_image:   'character/kari-normal.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '何かしたそう',
     name:              'べんきょうする',
     derivation_number: 1,
     message:           'よし！なんのべんきょうをしよう？',
-    character_image:   'character/kari-nikoniko2.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-nikoniko2.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '何かしたそう',
     name:              '何かしたそう',
     derivation_number: 0,
     message:           '〈たまご〉はなにかしたそうだ。',
-    character_image:   'character/kari-normal.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '踊っている',
     name:              '踊っている',
     derivation_number: 0,
     message:           '〈たまご〉はおどっている！',
-    character_image:   'character/kari-dance.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-dance.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '泣いている(空腹)',
     name:              '泣いている(空腹)',
     derivation_number: 0,
     message:           '〈たまご〉がないている！',
-    character_image:   'character/kari-naku.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-naku.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '泣いている(よしよし不足)',
     name:              '泣いている(よしよし不足)',
     derivation_number: 0,
     message:           '〈たまご〉がないている！',
-    character_image:   'character/kari-naku.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-naku.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '泣いている(ランダム)',
     name:              '泣いている(ランダム)',
     derivation_number: 0,
     message:           '〈たまご〉がないている！',
-    character_image:   'character/kari-naku.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-naku.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '怒っている',
     name:              '怒っている',
     derivation_number: 0,
     message:           '〈たまご〉はおこっている！',
-    character_image:   'character/kari-okoru.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-okoru.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '寝ている',
     name:              '寝ている',
     derivation_number: 0,
     message:           '〈たまご〉はねている。',
-    character_image:   'character/kari-sleep.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-sleep.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ブロックのおもちゃに夢中',
     name:              'ブロックのおもちゃに夢中',
     derivation_number: 0,
     message:           '〈たまご〉はブロックのおもちゃにむちゅうだ。',
-    character_image:   'character/kari-building_blocks.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-building_blocks.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'マンガに夢中',
     name:              'マンガに夢中',
     derivation_number: 0,
     message:           '〈たまご〉はマンガをよんでいる。',
-    character_image:   'character/kari-comics.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-comics.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '眠そう',
     name:              '眠そう',
     derivation_number: 0,
     message:           '〈たまご〉はねむそうにしている。',
-    character_image:   'character/kari-sleepy.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-sleepy.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '寝かせた',
     name:              '寝かせた',
     derivation_number: 0,
     message:           '〈たまご〉はねている。',
-    character_image:   'character/kari-sleep.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-sleep.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '寝起き',
     name:              '寝起き',
     derivation_number: 0,
     message:           '〈たまご〉がおきたようだ！',
-    character_image:   'character/kari-wakeup.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-wakeup.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '寝起き',
     name:              '起こす、1回目の警告',
     derivation_number: 1,
     message:           'おきにいりのハードロックミュージックでもかけっちゃおっかなー？',
-    character_image:   'character/kari-wakeup.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-wakeup.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '寝起き',
     name:              '起こす、2回目の警告',
     derivation_number: 2,
     message:           'ほんとにかけるの？',
-    character_image:   'character/kari-wakeup.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-wakeup.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '寝起き',
     name:              '起こす、3回目の警告',
     derivation_number: 3,
     message:           'ほんとにいいんですね？',
-    character_image:   'character/kari-wakeup.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-wakeup.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '占い',
     name:              '占い',
     derivation_number: 0,
     message:           'テレビでうらないをやってる！',
-    character_image:   'character/kari-TV1.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-TV1.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'タマモン',
     name:              'タマモンがやっている',
     derivation_number: 0,
     message:           '〈たまご〉はタマモンがみたいらしい。どうする？',
-    character_image:   'character/kari-TV3.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-TV3.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'タマモン',
     name:              'タマモンを見ている',
     derivation_number: 1,
     message:           '〈たまご〉はタマモンをみている！',
-    character_image:   'character/kari-TV6.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-TV6.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'タマえもん',
     name:              'タマえもんがやっている',
     derivation_number: 0,
     message:           '〈たまご〉はタマえもんがみたいらしい。どうする？',
-    character_image:   'character/kari-TV3.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-TV3.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'タマえもん',
     name:              'タマえもんを見ている',
     derivation_number: 1,
     message:           '〈たまご〉はタマえもんをみている！',
-    character_image:   'character/kari-TV6.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-TV6.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ニワトリビアの湖',
     name:              'ニワトリビアの湖がやっている',
     derivation_number: 0,
     message:           '〈たまご〉はニワトリビアのみずうみがみたいらしい。どうする？',
-    character_image:   'character/kari-TV3.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-TV3.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ニワトリビアの湖',
     name:              'ニワトリビアの湖を見ている',
     derivation_number: 1,
     message:           '〈たまご〉はニワトリビアのみずうみをみている！',
-    character_image:   'character/kari-TV6.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-TV6.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '扇風機',
     name:              '扇風機',
     derivation_number: 0,
     message:           '〈たまご〉はすずんでいる！',
-    character_image:   'character/kari-senpuuki1.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-senpuuki1.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'こたつ',
     name:              'こたつ',
     derivation_number: 0,
     message:           '〈たまご〉はこたつでヌクヌクしている！',
-    character_image:   'character/kari-kotatu1.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-kotatu1.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '花見',
     name:              '花見',
     derivation_number: 0,
     message:           '〈たまご〉はおはなみにいきたいみたい。',
-    character_image:   'character/kari-normal.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '紅葉',
     name:              '紅葉',
     derivation_number: 0,
     message:           '〈たまご〉はコウヨウをみにいきたいみたい。',
-    character_image:   'character/kari-normal.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '年始',
     name:              '年始',
     derivation_number: 0,
     message:           '〈たまご〉「にー！！」',
-    character_image:   'character/kari-nikoniko2.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-nikoniko2.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '算数',
     name:              '出題前',
     derivation_number: 0,
     message:           'よし、さんすうのもんだいにちょうせんだ！',
-    character_image:   'character/kari-nikoniko2.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-nikoniko2.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '算数',
     name:              '1つ目が正解',
     derivation_number: 1,
     message:           '「X 演算子 Y」のこたえは？',
-    character_image:   'character/kari-kangaeru.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-kangaeru.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '算数',
     name:              '2つ目が正解',
     derivation_number: 2,
     message:           '「X 演算子 Y」のこたえは？',
-    character_image:   'character/kari-kangaeru.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-kangaeru.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '算数',
     name:              '3つ目が正解',
     derivation_number: 3,
     message:           '「X 演算子 Y」のこたえは？',
-    character_image:   'character/kari-kangaeru.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-kangaeru.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '算数',
     name:              '4つ目が正解',
     derivation_number: 4,
     message:           '「X 演算子 Y」のこたえは？',
-    character_image:   'character/kari-kangaeru.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-kangaeru.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ボール遊び',
     name:              '投球前',
     derivation_number: 0,
     message:           'ボールなげるよー！',
-    character_image:   'character/kari-ball1.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-ball1.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ボール遊び',
     name:              '投球',
     derivation_number: 1,
     message:           'ブンッ！',
-    character_image:   'character/kari-ball2.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-ball2.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ボール遊び',
     name:              '左が成功',
     derivation_number: 2,
     message:           'ボールをなげた！〈たまご〉、そっちだ！',
-    character_image:   'character/kari-ball3.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-ball3.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ボール遊び',
     name:              '真ん中が成功',
     derivation_number: 3,
     message:           '〈たまご〉、そっちだ！',
-    character_image:   'character/kari-ball3.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-ball3.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    'ボール遊び',
     name:              '右が成功',
     derivation_number: 4,
     message:           '〈たまご〉、そっちだ！',
-    character_image:   'character/kari-ball3.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-ball3.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '特訓',
     name:              '特訓',
     derivation_number: 0,
     message:           'なんのとっくんをしよう？',
-    character_image:   'character/kari-kangaeru.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-kangaeru.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '特訓',
     name:              '特訓終了',
     derivation_number: 1,
     message:           'ここまで！',
-    character_image:   'character/kari-tukareta.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-tukareta.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '特訓',
     name:              '特訓結果優秀',
     derivation_number: 2,
     message:           '20もんちゅう〈X〉もんせいかい！〈Y〉分〈Z〉秒クリア！すごいね！',
-    character_image:   'character/kari-nikoniko.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-nikoniko.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '特訓',
     name:              '特訓結果良し',
     derivation_number: 3,
     message:           '20もんちゅう〈X〉もんせいかい！よくがんばったね！',
-    character_image:   'character/kari-nikoniko2.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-nikoniko2.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '特訓',
     name:              '特訓結果微妙',
     derivation_number: 4,
     message:           '20もんちゅう〈X〉もんせいかい！またちょうせんしよう！',
-    character_image:   'character/kari-bimuyou.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-bimuyou.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '特訓',
     name:              'ボール遊び特訓結果良し',
     derivation_number: 5,
     message:           '〈X〉かいせいこう！よくがんばったね！',
-    character_image:   'character/kari-nikoniko2.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-nikoniko2.png',
+    background_image:  'temp-background/temp-background.png'
   },
   {
     event_set_name:    '特訓',
     name:              'ボール遊び特訓結果微妙',
     derivation_number: 6,
     message:           '〈X〉かいせいこう！またちょうせんしよう！',
-    character_image:   'character/kari-bimuyou.png',
-    background_image:  'background/kari-background.png'
+    character_image:   'temp-character/temp-bimuyou.png',
+    background_image:  'temp-background/temp-background.png'
   }
 ]
 
@@ -2829,280 +2829,280 @@ action_results.each do |attrs|
 end
 
 cuts = [
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 1, position: 1, message: '〈たまご〉がうれしそうにはなしている！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 1, position: 2, message: '〈たまご〉「んに～！！」', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 2, position: 1, message: 'なになに？うんうん。', character_image: 'character/kari-komattakao.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 2, position: 2, message: '〈たまご〉はとっくんがしたいといっている！', character_image: 'character/kari-yaruki.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 1, position: 1, message: '〈たまご〉がうれしそうにはなしている！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 1, position: 2, message: '〈たまご〉「んに～！！」', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 2, position: 1, message: 'なになに？うんうん。', character_image: 'temp-character/temp-komattakao.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'はなしをきいてあげる', priority: 2, position: 2, message: '〈たまご〉はとっくんがしたいといっている！', character_image: 'temp-character/temp-yaruki.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'character/kari-normal.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'character/kari-normal.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何か言っている', derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ボールあそびをする', priority: 1, position: 1, message: 'よし！ボールあそびをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  #  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'べんきょうする',     priority: 1, position: 1, message: 'よし、べんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 1, position: 1, message: 'おえかきをした！じょうずにかけたね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'いっしょにあそんであげた！ゲームはたのしいね！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ボールあそびをする', priority: 1, position: 1, message: 'よし！ボールあそびをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  #  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'べんきょうする',     priority: 1, position: 1, message: 'よし、べんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 1, position: 1, message: 'おえかきをした！じょうずにかけたね！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'いっしょにあそんであげた！ゲームはたのしいね！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
-  #  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'さんすう',     priority: 1, position: 1, message: 'さんすうのべんきょうをした！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  #  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'さんすう',     priority: 1, position: 1, message: 'さんすうのべんきょうをした！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 2, message: '・・・。',                   character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 3, message: '〈たまご〉はシェイクスピアのさくひんをよんだ！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 2, message: '・・・。',                   character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 3, message: '〈たまご〉は「はしれメロス」をよんだ！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 2, message: '・・・。',                   character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 3, message: '『どんぶらこー、どんぶらこー』', character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 4, message: '〈たまご〉はももたろうをよんだ！', character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 3, message: '〈たまご〉はシェイクスピアのさくひんをよんだ！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 2, position: 3, message: '〈たまご〉は「はしれメロス」をよんだ！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 3, message: '『どんぶらこー、どんぶらこー』', character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 3, position: 4, message: '〈たまご〉はももたろうをよんだ！', character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 2, message: '・・・。',                   character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 3, message: '〈たまご〉はふろうふしになれるクスリをつくった！', character_image: 'character/kari-rika2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 2, message: '・・・。',                   character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 3, message: '！！！',                     character_image: 'character/kari-rika3.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 4, message: '・・・。',                   character_image: 'character/kari-rika4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 2, message: '・・・。',                   character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 3, message: 'じっけんはしっぱいした！', character_image: 'character/kari-rika.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 1, position: 3, message: '〈たまご〉はふろうふしになれるクスリをつくった！', character_image: 'temp-character/temp-rika2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 3, message: '！！！',                     character_image: 'temp-character/temp-rika3.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 2, position: 4, message: '・・・。',                   character_image: 'temp-character/temp-rika4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 1, message: 'りかのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'りか',       priority: 3, position: 3, message: 'じっけんはしっぱいした！', character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 2, message: '・・・。',                                               character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 3, message: 'すっごいゆうめいなブショウがタイムスリップしてきた！すご！！', character_image: 'character/kari-busyou3.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 2, message: '・・・。',                                               character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 3, message: 'なまえをきいたことあるようなないようなブショウがタイムスリップしてきた！', character_image: 'character/kari-busyou2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 4, message: 'こんにちは！',                                           character_image: 'character/kari-busyou2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 2, message: '・・・。',                                               character_image: 'character/kari-study.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 3, message: 'むめいのブショウがタイムスリップしてきた！',                 character_image: 'character/kari-busyou1.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 4, message: 'はやくかえって！',                                         character_image: 'character/kari-busyou1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 2, message: '・・・。',                                               character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 1, position: 3, message: 'すっごいゆうめいなブショウがタイムスリップしてきた！すご！！', character_image: 'temp-character/temp-busyou3.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 2, message: '・・・。',                                               character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 3, message: 'なまえをきいたことあるようなないようなブショウがタイムスリップしてきた！', character_image: 'temp-character/temp-busyou2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 2, position: 4, message: 'こんにちは！',                                           character_image: 'temp-character/temp-busyou2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 1, message: 'しゃかいのべんきょうをしよう！',                           character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 2, message: '・・・。',                                               character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 3, message: 'むめいのブショウがタイムスリップしてきた！',                 character_image: 'temp-character/temp-busyou1.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 1, label: 'しゃかい',       priority: 3, position: 4, message: 'はやくかえって！',                                         character_image: 'temp-character/temp-busyou1.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '踊っている',     derivation_number: 0, label: 'ごはんをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'ごはんをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'character/kari-normal.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '踊っている',     derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'character/kari-normal.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '踊っている',     derivation_number: 0, label: 'ごはんをあげる',     priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'おやつをあげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'ごはんをあげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'おやつをあげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'ごはんをあげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(空腹)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'よしよしする',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'おやつをあげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'ごはんをあげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'あそんであげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'よしよしする',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'おやつをあげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'ごはんをあげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(よしよし不足)', derivation_number: 0, label: 'あそんであげる', priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'おやつをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'ごはんをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'character/kari-naku.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'おやつをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'ごはんをあげる',   priority: 1, position: 1, message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '寝ている',           derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'きもちよさそうにねている。', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝ている',           derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: '〈たまご〉がちょっともぞもぞした。', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝ている',           derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'それはひとでなしのすることだ！！', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'きもちよさそうにねている。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: '〈たまご〉がちょっともぞもぞした。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'それはひとでなしのすることだ！！', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '寝起き',             derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'まだねむいみたいだからそっとしておこう！', character_image: 'character/kari-wakeup.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝起き',             derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: '〈たまご〉がよろこんでいる！おはよう！',   character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝起き',             derivation_number: 0, label: 'よしよしする',     priority: 2, position: 1, message: 'よしよし！',                            character_image: 'character/kari-wakeup.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝起き',             derivation_number: 0, label: 'きがえさせる',     priority: 1, position: 1, message: '〈たまご〉はふくなんかきていない！',      character_image: 'character/kari-wakeup.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝起き',             derivation_number: 3, label: 'はい',            priority: 1, position: 1, message: '〈たまご〉はおこってしまった！',           character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '寝起き',             derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'まだねむいみたいだからそっとしておこう！', character_image: 'temp-character/temp-wakeup.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝起き',             derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: '〈たまご〉がよろこんでいる！おはよう！',   character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝起き',             derivation_number: 0, label: 'よしよしする',     priority: 2, position: 1, message: 'よしよし！',                            character_image: 'temp-character/temp-wakeup.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝起き',             derivation_number: 0, label: 'きがえさせる',     priority: 1, position: 1, message: '〈たまご〉はふくなんかきていない！',      character_image: 'temp-character/temp-wakeup.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝起き',             derivation_number: 3, label: 'はい',            priority: 1, position: 1, message: '〈たまご〉はおこってしまった！',           character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 1, message: '『ほんじつのあなたはすっごくラッキー！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 2, message: '『ちょっかんにしたがうと、おもわぬいいことが！』', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png',
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 1, message: '『ほんじつのあなたはすっごくラッキー！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 2, message: '『ちょっかんにしたがうと、おもわぬいいことが！』', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png',
    messages: [ '『ちょっかんにしたがうと、おもわぬいいことがありそう！』', '『せっきょくてきにうごくと、とってもいいことがおこりそう！』', '『おいしいものをたべると、きんうんアップ！』', '『ふだんとへんかのあるこうどうをいしきしよう！』', '『まわりのひとからかんしゃされそうなよかん！』',
                '『なにをやってもうまくいきそう！』', '『いつもはしっぱいすることも、きょうならうまくいきそう！』', '『じぶんのとくいなことにうちこんでみよう！』', '『ひとのえがおにふれると、うんきがアップ！』', '『まわりへのおもいやりを、いつもいじょうにだいじにしよう！』' ] },
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 3, message: 'だそうだ！', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 1, position: 3, message: 'だそうだ！', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 1, message: '『ほんじつのあなたはそこそこラッキー！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 2, message: '『あんまりふかくかんがえすぎず、こうどうしよう！』', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png',
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 1, message: '『ほんじつのあなたはそこそこラッキー！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 2, message: '『あんまりふかくかんがえすぎず、こうどうしよう！』', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png',
    messages: [ '『あんまりふかくかんがえすぎず、こうどうしよう！』', '『ごぜんちゅうから、かっぱつてきにこうどうしよう！』', '『あまいものをたべると、いいことがあるかも！』', '『じぶんをかざらず、すごしてみよう！』', '『コミュニケーションがじゅうようないちにちになりそう！』',
                '『けんこうてきないちにちをすごすのがポイント！』', '『ちょうせんがうまくいきそうなよかん！』', '『じぶんのにがてなことにうちこんでみよう！』', '『たまにはのんびりすごすのもいいかも！』', '『にんげんかんけいがうまくいきそう！』' ] },
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 3, message: 'だそうだ！', character_image: 'character/kari-TV2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 2, position: 3, message: 'だそうだ！', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 1, message: '『ほんじつのあなたはちょっぴりラッキー！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 2, message: '『でもマンホールのうえにはきをつけよう！』', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png',
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 1, message: '『ほんじつのあなたはちょっぴりラッキー！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 2, message: '『でもマンホールのうえにはきをつけよう！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png',
    messages: [ '『でもマンホールのうえにはきをつけよう！』', '『みぎかひだりだったら、ひだりをえらぼう！』', '『みぎかひだりだったら、みぎをえらぼう！』', '『おとしよりにやさしくするのがポイント！』', '『にがてなたべものをがんばってたべてみよう！』',
                '『うんどうをするといいことがあるかも？』', '『トイレはがまんしないほうがよさそう！』', '『せいじつなきもちをもっていれば、いいいちにちになりそう！』', '『きょうはいそがしいかもしればいけど、がんばってみよう！』', '『でもひとのわるぐちをいうと、うんきがガクッとさがるよ！』',
                '『ラッキーカラーはきいろ！』', '『ラッキーカラーはあお！』', '『ラッキーカラーはあか！』', '『ラッキーカラーはみどり！』', '『ニコニコすることをこころがけよう！』' ] },
-  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 3, message: 'だそうだ！', character_image: 'character/kari-TV1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '占い',               derivation_number: 0, label: 'すすむ',          priority: 3, position: 3, message: 'だそうだ！', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'タマモン',               derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',              character_image: 'character/kari-TV4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'タマモン',               derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                              character_image: 'character/kari-TV5.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'タマモン',               derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『でばんだ、タマチュウ！』', character_image: 'character/kari-TV6.png', background_image: 'background/kari-background.png',
+  { event_set_name: 'タマモン',               derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',              character_image: 'temp-character/temp-TV4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'タマモン',               derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                              character_image: 'temp-character/temp-TV5.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'タマモン',               derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『でばんだ、タマチュウ！』', character_image: 'temp-character/temp-TV6.png', background_image: 'temp-background/temp-background.png',
    messages: [ '『でばんだ、タマチュウ！』', '『これからたびにでるぞ！』', '『タマモンマスターへのみちはながい！』', '『タマチュウがつよくなってきた！』', '『バトルだタマチュウ！』',
                '『タマチュウにげるぞ！』', '『タマチュウ！かえってこい！』', '『タマチュウきょうはちょうしわるいか？』', '『タマチュウ！たたかってくれ！』', '『これがタマチュウ？』',
                '『タマチュウ、さいきんふとった？』', '『あのタマモンつかまえよう！』', '『あー、にげられた！』', '『あのやまをこえないと！』', '『タマチュウ、これからもよろしくな！』' ] },
 
-  { event_set_name: 'タマえもん',               derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',           character_image: 'character/kari-TV4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'タマえもん',               derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                           character_image: 'character/kari-TV5.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'タマえもん',               derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『たすけてタマえもん！』', character_image: 'character/kari-TV6.png', background_image: 'background/kari-background.png',
+  { event_set_name: 'タマえもん',               derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',           character_image: 'temp-character/temp-TV4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'タマえもん',               derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                           character_image: 'temp-character/temp-TV5.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'タマえもん',               derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『たすけてタマえもん！』', character_image: 'temp-character/temp-TV6.png', background_image: 'temp-background/temp-background.png',
    messages: [ '『たすけてタマえもん！』', '『タマえもーん！』', '『タマえもんにどうにかしてもらおう！』', '『タマえもんとケンカしてしまった・・・。』', '『タメえもんにもできないことがあるんだね』',
                '『しっかりしてよタマえもん！』', '『いそいでかえらないと！』', '『タマえもん、これどうやってつかえばいいの？』', '『いつもありがとうね、タマえもん！』', '『きょうはがっこうにいきたくないなあ』',
                '『こうえんにあそびにいこう！』', '『タマえもん、またあしたね！』', '『いそいでタマえもんのところにいかないと！』', '『タマえもん、さっきはごめんね！』', '『タマえもん、これからもよろしくね！』' ] },
 
-  { event_set_name: 'ニワトリビアの湖',           derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',           character_image: 'character/kari-TV4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ニワトリビアの湖',           derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                           character_image: 'character/kari-TV5.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ニワトリビアの湖',           derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『コケーコケーコケー、100コケー！』', character_image: 'character/kari-TV6.png', background_image: 'background/kari-background.png',
+  { event_set_name: 'ニワトリビアの湖',           derivation_number: 0, label: 'みていいよ',          priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',           character_image: 'temp-character/temp-TV4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ニワトリビアの湖',           derivation_number: 0, label: 'みさせてあげない',     priority: 1, position: 1, message: 'しょぼん。',                           character_image: 'temp-character/temp-TV5.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ニワトリビアの湖',           derivation_number: 1, label: 'いっしょにみる',       priority: 1, position: 1, message: '『コケーコケーコケー、100コケー！』', character_image: 'temp-character/temp-TV6.png', background_image: 'temp-background/temp-background.png',
    messages: [ '『コケーコケーコケー、97コケー！』', '『コケーコケーコケー、91コケー！』', '『コケーコケーコケー、88コケー！』', '『コケーコケーコケー、84コケー！』', '『コケーコケーコケー、75コケー！』',
                '『コケーコケーコケー、69コケー！』', '『コケーコケーコケー、61コケー！』', '『コケーコケーコケー、54コケー！』', '『コケーコケーコケー、46コケー！』', '『コケーコケーコケー、43コケー！』', '『コケーコケーコケー、36コケー！』', '『コケーコケーコケー、35コケー！』',
                '『コケーコケーコケー、27コケー！』', '『コケーコケーコケー、14コケー！』', '『コケーコケーコケー、7コケー！』', '『0コケー！』' ] },
 
-  { event_set_name: '扇風機',                 derivation_number: 0, label: 'よしよしする',      priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',                 character_image: 'character/kari-senpuuki2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '扇風機',                 derivation_number: 0, label: 'スイカをあげる',    priority: 1, position: 1, message: '〈たまご〉はおいしそうにたべている！',          character_image: 'character/kari-senpuuki3.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '扇風機',                 derivation_number: 0, label: 'スイカをあげる',    priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいみたい。',            character_image: 'character/kari-senpuuki4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '扇風機',                 derivation_number: 0, label: 'せんぷうきをとめる', priority: 1, position: 1, message: '〈たまご〉「・・・！」',                       character_image: 'character/kari-bikkuri.png',   background_image: 'background/kari-background.png' },
-  { event_set_name: '扇風機',                 derivation_number: 0, label: 'そっとする',        priority: 1, position: 1, message: '〈たまご〉はきもちよさそう！',                 character_image: 'character/kari-senpuuki1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '扇風機',                 derivation_number: 0, label: 'よしよしする',      priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',                 character_image: 'temp-character/temp-senpuuki2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '扇風機',                 derivation_number: 0, label: 'スイカをあげる',    priority: 1, position: 1, message: '〈たまご〉はおいしそうにたべている！',          character_image: 'temp-character/temp-senpuuki3.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '扇風機',                 derivation_number: 0, label: 'スイカをあげる',    priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいみたい。',            character_image: 'temp-character/temp-senpuuki4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '扇風機',                 derivation_number: 0, label: 'せんぷうきをとめる', priority: 1, position: 1, message: '〈たまご〉「・・・！」',                       character_image: 'temp-character/temp-bikkuri.png',   background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '扇風機',                 derivation_number: 0, label: 'そっとする',        priority: 1, position: 1, message: '〈たまご〉はきもちよさそう！',                 character_image: 'temp-character/temp-senpuuki1.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'よしよしする',      priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',                 character_image: 'character/kari-kotatu2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'ミカンをあげる',    priority: 1, position: 1, message: '〈たまご〉はおいしそうにたべている！',          character_image: 'character/kari-kotatu3.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'ミカンをあげる',    priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいみたい。',            character_image: 'character/kari-kotatu4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'こたつをとめる',    priority: 1, position: 1, message: '〈たまご〉「・・・！」',                       character_image: 'character/kari-bikkuri.png',   background_image: 'background/kari-background.png' },
-  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'そっとする',        priority: 1, position: 1, message: '〈たまご〉はきもちよさそう！',                 character_image: 'character/kari-kotatu1.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'よしよしする',      priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',                 character_image: 'temp-character/temp-kotatu2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'ミカンをあげる',    priority: 1, position: 1, message: '〈たまご〉はおいしそうにたべている！',          character_image: 'temp-character/temp-kotatu3.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'ミカンをあげる',    priority: 2, position: 1, message: '〈たまご〉はおなかいっぱいみたい。',            character_image: 'temp-character/temp-kotatu4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'こたつをとめる',    priority: 1, position: 1, message: '〈たまご〉「・・・！」',                       character_image: 'temp-character/temp-bikkuri.png',   background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'こたつ',                 derivation_number: 0, label: 'そっとする',        priority: 1, position: 1, message: '〈たまご〉はきもちよさそう！',                 character_image: 'temp-character/temp-kotatu1.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 1, message: 'よし！おはなみにいこっか！',                    character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 2, message: 'おはなみにきた！',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
-  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 3, message: '〈たまご〉「にー！んににー！」',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
-  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 4, message: '〈たまご〉「にににーに、んにににに！」',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
-  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 5, message: '〈たまご〉「にー！んにー、んにに！」',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png' },
-  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 6, message: '〈たまご〉はたのしんでいるようだ！',                             character_image: 'character/kari-hanami.png', background_image: 'background/kari-hanami.png',
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 1, message: 'よし！おはなみにいこっか！',                    character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 2, message: 'おはなみにきた！',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 3, message: '〈たまご〉「にー！んににー！」',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 4, message: '〈たまご〉「にににーに、んにににに！」',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 5, message: '〈たまご〉「にー！んにー、んにに！」',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 6, message: '〈たまご〉はたのしんでいるようだ！',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png',
    messages: [ '〈たまご〉はたのしんでいるようだ！', '〈たまご〉はさくらがきょうみぶかいみたい！', '〈たまご〉はさくらがきれいだといっている！', '〈たまご〉はしあわせをかんじているようだ！', '〈たまご〉はしぜんをだいじにしていきたいといっている！',
                '〈たまご〉はたこやきがたべたいようだ！', '〈たまご〉ははるがすきらしい！', '〈たまご〉はこれからもっといろんなものをみたいらしい！', '〈たまご〉はたわいもないことをたのしそうにはなしている！', '〈たまご〉はきいてほしいはなしがいっぱいあるようだ！', '〈たまご〉はおこのみやきがたべたいようだ！』',
                '〈たまご〉はふってくるさくらをがんばってつかもうとしている！', '〈たまご〉はずっとむこうまでみにいきたいらしい！！', '〈たまご〉はまたつれてきてねといっている！', '〈たまご〉はやさしいきもちでいっぱいなようだ！' ] },
-  { event_set_name: '花見',                   derivation_number: 0, label: 'いかない',         priority: 1, position: 1, message: 'しょぼん。',                    character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '花見',                   derivation_number: 0, label: 'いかない',         priority: 1, position: 1, message: 'しょぼん。',                    character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 1, message: 'よし！コウヨウをみにいこっか！',                    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 2, message: 'コウヨウをみにきた！',                             character_image: 'character/kari-kouyou.png', background_image: 'background/kari-kouyou.png' },
-  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 3, message: '〈たまご〉「んにー！」',                             character_image: 'character/kari-kouyou.png', background_image: 'background/kari-kouyou.png' },
-  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 4, message: '〈たまご〉「んにに！にー！」',                             character_image: 'character/kari-kouyou.png', background_image: 'background/kari-kouyou.png' },
-  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 5, message: '〈たまご〉はたのしんでいるようだ！',                             character_image: 'character/kari-kouyou.png', background_image: 'background/kari-kouyou.png',
+  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 1, message: 'よし！コウヨウをみにいこっか！',                    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 2, message: 'コウヨウをみにきた！',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png' },
+  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 3, message: '〈たまご〉「んにー！」',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png' },
+  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 4, message: '〈たまご〉「んにに！にー！」',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png' },
+  { event_set_name: '紅葉',                   derivation_number: 0, label: 'つれていく',       priority: 1, position: 5, message: '〈たまご〉はたのしんでいるようだ！',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png',
    messages: [ '〈たまご〉はたのしんでいるようだ！', '〈たまご〉はおちばをあつめている！', '〈たまご〉はおおはしゃぎ！', '〈たまご〉はいまのコウヨウのいろみがすきなようだ！', '〈たまご〉はコウヨウのうつくしさにかんどうしている！',
                '〈たまご〉はニコニコだ！', '〈たまご〉はあきがすきらしい！', '〈たまご〉はこれからもっといろんなものをみたいらしい！', '〈たまご〉はおちばをじまんしている！', '〈たまご〉はなぜはっぱのいろがうつりかわるのか、ふしぎなようだ！', 'またこんどもこようね！』',
                '〈たまご〉はふってくるおちばをつかまえるのがすきらしい！', '〈たまご〉はここにいるとココロがおちつくようだ！', '〈たまご〉はまたつれてきてねといっている！', '〈たまご〉はせいめいのとうとさをかんじているようだ！' ] },
-  { event_set_name: '紅葉',                   derivation_number: 0, label: 'いかない',         priority: 1, position: 1, message: 'しょぼん。',                    character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '紅葉',                   derivation_number: 0, label: 'いかない',         priority: 1, position: 1, message: 'しょぼん。',                    character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 1, message: '〈たまご〉「ににににに、んにににー！」',                    character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 2, message: '〈たまご〉「にににに、ににににー！」',                     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 3, message: 'あけましておめでとう！',                                 character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 4, message: 'ことしもよろしくね、〈たまご〉！',                                   character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 1, message: '〈たまご〉「ににににに、んにににー！」',                    character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 2, message: '〈たまご〉「にににに、ににににー！」',                     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 3, message: 'あけましておめでとう！',                                 character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 4, message: 'ことしもよろしくね、〈たまご〉！',                                   character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'そっとする',      priority: 1, position: 1, message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'character/kari-building_blocks.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ちょっかいをだす', priority: 1, position: 1, message: '〈たまご〉がおこってしまった！',                       character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ブロックをくずす', priority: 1, position: 1, message: 'あー！ほんとにブロックをくずしちゃった！これはひどい！', character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'そっとする',      priority: 1, position: 1, message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'temp-character/temp-building_blocks.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ちょっかいをだす', priority: 1, position: 1, message: '〈たまご〉がおこってしまった！',                       character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ブロックをくずす', priority: 1, position: 1, message: 'あー！ほんとにブロックをくずしちゃった！これはひどい！', character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ちょっかいをだす', priority: 2, position: 1, message: '〈たまご〉はちょっといやそう。', character_image: 'character/kari-hukigen.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ブロックをくずす', priority: 2, position: 1, message: '〈たまご〉にそしされた。',       character_image: 'character/kari-building_blocks.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ちょっかいをだす', priority: 2, position: 1, message: '〈たまご〉はちょっといやそう。', character_image: 'temp-character/temp-hukigen.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ブロックをくずす', priority: 2, position: 1, message: '〈たまご〉にそしされた。',       character_image: 'temp-character/temp-building_blocks.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'そっとする',        priority: 1, position: 1, message: '〈たまご〉はマンガがおもしろいようだ。',                     character_image: 'character/kari-comics.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'よしよしする',      priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                                  character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'はなしかける',      priority: 1, position: 1, message: '〈たまご〉はマンガにしゅうちゅうしたいみたい。ごめんごめん。', character_image: 'character/kari-hukigen.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'マンガをとりあげる', priority: 1, position: 1, message: '〈たまご〉がおこってしまった！',                            character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'そっとする',        priority: 1, position: 1, message: '〈たまご〉はマンガがおもしろいようだ。',                     character_image: 'temp-character/temp-comics.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'よしよしする',      priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                                  character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'はなしかける',      priority: 1, position: 1, message: '〈たまご〉はマンガにしゅうちゅうしたいみたい。ごめんごめん。', character_image: 'temp-character/temp-hukigen.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'マンガをとりあげる', priority: 1, position: 1, message: '〈たまご〉がおこってしまった！',                            character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'はなしかける',      priority: 2, position: 1, message: '〈たまご〉はニコニコしている。',                            character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'マンガに夢中', derivation_number: 0, label: 'はなしかける',      priority: 2, position: 1, message: '〈たまご〉はニコニコしている。',                            character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ねかせる',          priority: 1, position: 1, message: 'きょうはもうねようね！〈たまご〉おやすみ！', character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ねかせる',          priority: 2, position: 1, message: 'まだもうちょっとおきてたいみたい。',        character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はうれしそうだ！',               character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 2, message: '〈たまご〉はおふとんにはいってねた！',      character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はよろこんでいる！',             character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 1, position: 1, message: 'よし、よくみがこうね！',                   character_image: 'character/kari-hamigaki.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 1, position: 2, message: '〈たまご〉はちゃんとはみがきした！',        character_image: 'character/kari-hamigaki.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 2, position: 1, message: 'はみがきしたくないみたい。まったくー！',     character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 1, message: 'チーターががけから・・・',                 character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 2, message: 'おっこちーたー！！',                       character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 3, message: '〈たまご〉はおおわらいした！',             character_image: 'character/kari-warau.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 2, position: 1, message: 'アルミかんのうえに・・・',                 character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 2, position: 2, message: 'あるミカン！！',                          character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 2, position: 3, message: '〈たまご〉がちょっとひいてる・・・。',      character_image: 'character/kari-donbiki.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 1, message: 'ふとんが・・・',                          character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 2, message: 'ふっとんだ！！',                          character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 3, message: 'わらわない・・・。',                       character_image: 'character/kari-sleepy.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ねかせる',          priority: 1, position: 1, message: 'きょうはもうねようね！〈たまご〉おやすみ！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ねかせる',          priority: 2, position: 1, message: 'まだもうちょっとおきてたいみたい。',        character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はうれしそうだ！',               character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 2, message: '〈たまご〉はおふとんにはいってねた！',      character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はよろこんでいる！',             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 1, position: 1, message: 'よし、よくみがこうね！',                   character_image: 'temp-character/temp-hamigaki.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 1, position: 2, message: '〈たまご〉はちゃんとはみがきした！',        character_image: 'temp-character/temp-hamigaki.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 2, position: 1, message: 'はみがきしたくないみたい。まったくー！',     character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 1, message: 'チーターががけから・・・',                 character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 2, message: 'おっこちーたー！！',                       character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 3, message: '〈たまご〉はおおわらいした！',             character_image: 'temp-character/temp-warau.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 2, position: 1, message: 'アルミかんのうえに・・・',                 character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 2, position: 2, message: 'あるミカン！！',                          character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 2, position: 3, message: '〈たまご〉がちょっとひいてる・・・。',      character_image: 'temp-character/temp-donbiki.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 1, message: 'ふとんが・・・',                          character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 2, message: 'ふっとんだ！！',                          character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 3, message: 'わらわない・・・。',                       character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '寝かせた', derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'きもちよさそうにねているなあ。', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝かせた', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'りっぱにそだちますように。', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '寝かせた', derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'できるわけないだろ！！', character_image: 'character/kari-sleep.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'きもちよさそうにねているなあ。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'りっぱにそだちますように。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'できるわけないだろ！！', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',     character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はゆるしてくれない！！', character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',     character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: 'おやつじゃゆるしてくれない！',     character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 1, position: 1, message: 'こんしんのへんがお！',             character_image: 'character/kari-hengao.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 1, position: 2, message: '〈たまご〉「キャッキャッ！」',      character_image: 'character/kari-warau.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 1, position: 3, message: '大ウケした！',                    character_image: 'character/kari-warau.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 2, position: 1, message: 'こんしんのへんがお！',             character_image: 'character/kari-hengao.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 2, position: 2, message: '〈たまご〉「・・・。」',             character_image: 'character/kari-donbiki.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 2, position: 3, message: 'すべった。',                      character_image: 'character/kari-donbiki.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 1, position: 1, message: 'ごめんよ・・・。',                character_image: 'character/kari-gomen.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 2, position: 1, message: 'ごめんよ・・・。',                character_image: 'character/kari-gomen.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 2, position: 2, message: '〈たまご〉はまだおこっている！',    character_image: 'character/kari-okoru.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',     character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はゆるしてくれない！！', character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',     character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'おやつをあげる',     priority: 2, position: 1, message: 'おやつじゃゆるしてくれない！',     character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 1, position: 1, message: 'こんしんのへんがお！',             character_image: 'temp-character/temp-hengao.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 1, position: 2, message: '〈たまご〉「キャッキャッ！」',      character_image: 'temp-character/temp-warau.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 1, position: 3, message: '大ウケした！',                    character_image: 'temp-character/temp-warau.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 2, position: 1, message: 'こんしんのへんがお！',             character_image: 'temp-character/temp-hengao.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 2, position: 2, message: '〈たまご〉「・・・。」',             character_image: 'temp-character/temp-donbiki.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'へんがおをする',     priority: 2, position: 3, message: 'すべった。',                      character_image: 'temp-character/temp-donbiki.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 1, position: 1, message: 'ごめんよ・・・。',                character_image: 'temp-character/temp-gomen.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 2, position: 1, message: 'ごめんよ・・・。',                character_image: 'temp-character/temp-gomen.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '怒っている', derivation_number: 0, label: 'あやまる',           priority: 2, position: 2, message: '〈たまご〉はまだおこっている！',    character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '算数',      derivation_number: 1,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 1,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 1,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 1,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 1,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '算数',      derivation_number: 2,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 2,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 2,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 2,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 2,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '算数',      derivation_number: 3,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 3,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 3,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 3,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 3,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '算数',      derivation_number: 4,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'character/kari-nikoniko2.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 4,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 4,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '算数',      derivation_number: 4,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'character/kari-ochikomu.png', background_image: 'background/kari-background.png' },
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈A〉',                priority: 1, position: 1, message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈B〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈C〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '算数',      derivation_number: 4,  label: '〈D〉',                priority: 1, position: 1, message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'character/kari-ball4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball4.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball7.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'みぎだ！',     priority: 1, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball10.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'temp-character/temp-ball4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball4.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'temp-character/temp-ball7.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'みぎだ！',     priority: 1, position: 1, message: 'あちゃー！',                  character_image: 'temp-character/temp-ball10.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'ひだりだ！',   priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'みぎだ！',     priority: 1, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'ひだりだ！',   priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'そこだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 2,  label: 'みぎだ！',     priority: 1, position: 2, message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball8.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball5.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'そこだ！',     priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'character/kari-ball8.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball8.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball11.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball8.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'temp-character/temp-ball5.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'そこだ！',     priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'temp-character/temp-ball8.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball8.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'temp-character/temp-ball11.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'ひだりだ！',   priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 3,  label: 'みぎだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball6.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'character/kari-ball12.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'character/kari-ball9.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'みぎだ！',     priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'character/kari-ball12.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'ひだりだ！',   priority: 1, position: 1, message: 'あちゃー！',                  character_image: 'temp-character/temp-ball6.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 1, position: 1, message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball12.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 2, position: 1, message: 'あちゃー！',                  character_image: 'temp-character/temp-ball9.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'みぎだ！',     priority: 1, position: 1, message: 'おー！きれいにキャッチ！',     character_image: 'temp-character/temp-ball12.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'ひだりだ！',   priority: 1, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
-  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'みぎだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'character/kari-nikoniko.png', background_image: 'background/kari-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'ひだりだ！',   priority: 1, position: 2, message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'みぎだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 1, position: 1, message: 'とっくんはれんぞく20もんになるぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 1, position: 1, message: 'とっくんは3かいしっぱいするまでつづくぞ！', character_image: 'character/kari-bikkuri.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'character/kari-gakkari.png', background_image: 'background/kari-background.png' },
-  { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                    character_image: 'character/kari-tukareta.png', background_image: 'background/kari-background.png' }
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 1, position: 1, message: 'とっくんはれんぞく20もんになるぞ！', character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 1, position: 1, message: 'とっくんは3かいしっぱいするまでつづくぞ！', character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                    character_image: 'temp-character/temp-tukareta.png', background_image: 'temp-background/temp-background.png' }
 ]
 
 cuts.each do |attrs|
