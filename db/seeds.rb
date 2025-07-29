@@ -1316,7 +1316,8 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ] },
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 },
+                                         { "attribute": "vitality", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1617,6 +1618,7 @@ action_results = [
                               ]
                             },
     effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 },
+                                         { "attribute": "vitality", "delta": 1 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -1661,7 +1663,8 @@ action_results = [
     label:                 'ごはんをあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "hunger_value", "delta": 50 } ] },
+    effects:               { "status": [ { "attribute": "hunger_value", "delta": 50 },
+                                         { "attribute": "vitality", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         true
@@ -2317,7 +2320,7 @@ action_results = [
   {
     event_set_name: '扇風機', derivation_number: 0, label: 'スイカをあげる', priority: 1,
     trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 90 } ] },
-    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 } ] },
+    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 3 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2347,7 +2350,7 @@ action_results = [
   {
     event_set_name: 'こたつ', derivation_number: 0, label: 'ミカンをあげる', priority: 1,
     trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 90 } ] },
-    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 } ] },
+    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
