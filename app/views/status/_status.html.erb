@@ -1,14 +1,34 @@
 <div class="card">
   <div class="card-body">
-    <h4 class="card-title">ステータス</h4>
-    <ul class="list-unstyled mb-0">
-      <li>なまえ: <%= user.egg_name %></li>
-      <li>たいりょく: <%= "#{user_status.temp_vitality}/#{user_status.vitality}" %></li>
-      <li>うんどう: <%= user_status.sports_value %></li>
-      <li>さんすう: <%= user_status.arithmetic %></li>
-      <li>こくご:   <%= user_status.japanese %></li>
-      <li>りか:     <%= user_status.science %></li>
-      <li>しゃかい: <%= user_status.social_studies %></li>
+    <ul class="list-unstyled mb-0 status-list">
+      <li>
+        <span class="status-label">なまえ</span>
+        <span class="status-value"><%= user.egg_name %></span>
+      </li>
+      <li>
+        <span class="status-label">たいりょく</span>
+        <span class="status-value"><%= "#{user_status.temp_vitality}/#{user_status.vitality}" %></span>
+      </li>
+      <li>
+        <span class="status-label">うんどう</span>
+        <span class="status-value"><%= user_status.sports_value %></span>
+      </li>
+      <li>
+        <span class="status-label">さんすう</span>
+        <span class="status-value"><%= user_status.arithmetic %></span>
+      </li>
+      <li>
+        <span class="status-label">こくご</span>
+        <span class="status-value"><%= user_status.japanese %></span>
+      </li>
+      <li>
+        <span class="status-label">りか</span>
+        <span class="status-value"><%= user_status.science %></span>
+      </li>
+      <li>
+        <span class="status-label">しゃかい</span>
+        <span class="status-value"><%= user_status.social_studies %></span>
+      </li>
     </ul>
   </div>
 </div>
