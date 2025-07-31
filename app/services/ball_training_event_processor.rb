@@ -13,8 +13,9 @@ class BallTrainingEventProcessor
   def call
     return start_process if start_process?
     if continue_process?
+      statuses = @result.effects["status"] || []
       @temp.increment!(:reception_count)
-      @temp.increment!(:success_count) if @result.effects.present?
+      @temp.increment!(:success_count) if statuses.any? { |status| status["attribute"] == "sports_value" }
       return end_process   if end_process?
       return continue_process
     end

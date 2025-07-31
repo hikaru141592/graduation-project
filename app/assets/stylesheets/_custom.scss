@@ -140,3 +140,57 @@ input.form-control[readonly] {
     max-width: none !important;
   }
 }
+
+.modal-content {
+  background-color: $primary-btn-bg;
+  color: #ffffff;
+  text-align: left;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.modal-content .card {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.modal-content .card-body {
+  background-color: transparent !important;
+  padding: 0;
+}
+
+.modal-content .card-title {
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.modal-content .list-unstyled {
+  color: #ffffff;
+  padding-left: 0;
+}
+
+.modal-content .list-unstyled li {
+  margin-bottom: 0.25rem;
+}
+
+.status-list li {
+  display: flex;
+  margin-bottom: 0.25rem;
+}
+
+.status-list .status-label {
+  display: inline-block;
+  width: 5.5em;
+  margin-right: 0.5em;
+  margin-left: 0.5em;
+}
+
+.status-list .status-label::after {
+  content: "：";
+}
+
+.status-list .status-value {
+  flex: 1;
+}

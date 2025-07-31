@@ -1,10 +1,17 @@
-<div class="container mt-3 text-center">
+<div class="container mt-3 text-center" data-controller="status">
   <div class="text-start mb-3">
     <%= link_to "ログアウト", logout_path,
         data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" },
-        class: "btn btn-outline-secondary mb-0 ms-md-5" %>
+        class: "btn btn-outline-secondary ms-md-5" %>
     <%= link_to "設定", settings_path,
-        class: "btn btn-outline-secondary mb-0 ms-md-0" %>
+        class: "btn btn-outline-secondary" %>
+    <button type="button"
+            class="btn btn-outline-secondary"
+            data-action="click->status#open"
+            data-bs-toggle="modal"
+            data-bs-target="#statusModal">
+      ステータス
+    </button>
   </div>
 
   <%= turbo_frame_tag "game_play" do %>
@@ -90,4 +97,18 @@
       </div>
     </div>
   <% end %>
+  <div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true" data-status-target="modal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">ステータス</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="閉じる"></button>
+        </div>
+        <div class="modal-body">
+          <turbo-frame id="status_frame" data-status-target="frame">
+          </turbo-frame>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
