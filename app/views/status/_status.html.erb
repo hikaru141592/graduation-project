@@ -5,29 +5,29 @@
         <span class="status-label">なまえ</span>
         <span class="status-value"><%= user.egg_name %></span>
       </li>
-      <li>
+      <li class="mb-4">
         <span class="status-label">たいりょく</span>
-        <span class="status-value"><%= "#{user_status.temp_vitality}/#{user_status.vitality}" %></span>
-      </li>
-      <li>
-        <span class="status-label">うんどう</span>
-        <span class="status-value"><%= user_status.sports_value %></span>
+        <span class="status-value"><%= vitality_point(user_status.temp_vitality, user_status.vitality) %></span>
       </li>
       <li>
         <span class="status-label">さんすう</span>
-        <span class="status-value"><%= user_status.arithmetic %></span>
+        <span class="status-value"><%= study_evaluate(user_status.arithmetic, user_status.arithmetic_effort) %></span>
       </li>
       <li>
         <span class="status-label">こくご</span>
-        <span class="status-value"><%= user_status.japanese %></span>
+        <span class="status-value"><%= study_evaluate(user_status.japanese, user_status.japanese_effort) %></span>
       </li>
       <li>
         <span class="status-label">りか</span>
-        <span class="status-value"><%= user_status.science %></span>
+        <span class="status-value"><%= study_evaluate(user_status.science, user_status.science_effort) %></span>
       </li>
       <li>
         <span class="status-label">しゃかい</span>
-        <span class="status-value"><%= user_status.social_studies %></span>
+        <span class="status-value"><%= study_evaluate(user_status.social_studies, user_status.social_effort) %></span>
+      </li>
+      <li>
+        <span class="status-label">うんどう</span>
+        <span class="status-value"><%= study_evaluate(user_status.sports_value, user_status.social_effort) %></span>
       </li>
     </ul>
   </div>
