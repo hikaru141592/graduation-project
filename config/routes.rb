@@ -32,7 +32,7 @@ Rails.application.routes.draw do
 
   post "/webhooks/line", to: "line_webhooks#callback"
 
-  get   "/status", to: "status#show", as: :status
+  get "/status", to: "status#show", as: :status
 
   root to: "games#play"
 
