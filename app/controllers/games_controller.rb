@@ -3,26 +3,10 @@ class GamesController < ApplicationController
 
   def play
     @play_state = current_user.play_state
+    @user_status = current_user.user_status
     # ステータス減少が適切に行われなくなるため@play_state.touchはしない
-    # apply_automatic_update!(@play_state)はしない
-    unless request.headers["Turbo-Visit"].present? || request.headers["Turbo-Frame"].present?
-      user_status = current_user.user_status
-      current_set = @play_state.current_event.event_set
-      if loop_timeout?(user_status, current_set) || normal_event_timeout?(user_status, @play_state)
-        apply_automatic_update!(@play_state)
-        current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
-        clear_loop_status(user_status)
-        next_set, next_event = pick_next_event_set_and_event
-        record_loop_start(current_user.user_status, next_set)
-
-        @play_state.update!(
-          current_event_id:        next_event.id,
-          action_choices_position: nil,
-          action_results_priority: nil,
-          current_cut_position:    nil
-        )
-      end
-    end
+    # @play_state.apply_automatic_update!はしない
+    handle_timeouts
 
     @event = @play_state.current_event
     if @play_state.current_cut_position.present?
@@ -51,7 +35,7 @@ class GamesController < ApplicationController
         redirect_to root_path and return
       end
     end
-    apply_automatic_update!(play_state)
+    play_state.apply_automatic_update!
 
     event = play_state.current_event
     position = params.require(:position).to_i
@@ -86,17 +70,17 @@ class GamesController < ApplicationController
     result  = choice.action_results.find_by!(priority: play_state.action_results_priority)
 
     if result.cuts.exists?(position: next_cut)
-      apply_automatic_update!(play_state)
+      play_state.apply_automatic_update!
       play_state.update!(current_cut_position: next_cut)
     else
       apply_effects!(result.effects)
-      apply_automatic_update!(play_state)
+      play_state.apply_automatic_update!
 
       user_status = current_user.user_status
       current_set = event.event_set
       resolves = result.resolves_loop?
 
-      current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
+      current_user.clear_event_category_invalidations!
 
       if result.next_derivation_number.present?
         next_set, next_event = apply_derivation(result)
@@ -108,11 +92,11 @@ class GamesController < ApplicationController
           next_set = current_set
           next_event = event
         else
-          clear_loop_status(user_status)
-          next_set, next_event = pick_next_event_set_and_event
+          user_status.clear_loop_status!
+          next_set, next_event = current_user.pick_next_event_set_and_event
           next_set, next_event = apply_event_set_call(result, next_set, next_event)
           next_set, next_event = apply_event_set_call(result, next_set, next_event)
-          record_loop_start(current_user.user_status, next_set)
+          user_status.record_loop_start!
         end
       end
 
@@ -124,12 +108,7 @@ class GamesController < ApplicationController
       next_set, next_event = ball_training_event_processor.call
       ball_training_event_processor.record_evaluation
 
-      play_state.update!(
-        current_event_id:        next_event.id,
-        action_choices_position: nil,
-        action_results_priority: nil,
-        current_cut_position:    nil
-      )
+      play_state.start_new_event!(next_event)
     end
 
     redirect_to root_path
@@ -186,74 +165,15 @@ class GamesController < ApplicationController
     #    event_temporary_data.save!
   end
 
-  def apply_automatic_update!(play_state)
-    status    = current_user.user_status
-    now       = Time.current
-    last_time = play_state.updated_at
-    elapsed   = now - last_time
-
-    hunger_ticks = (elapsed / 15.minutes).floor
-    status.hunger_value -= hunger_ticks if hunger_ticks > 0
-
-    love_ticks = (elapsed / 8.hours).floor
-    status.love_value -= love_ticks * 25 if love_ticks > 0
-
-    vitality_ticks = (elapsed / 5.minutes).floor
-    status.temp_vitality += vitality_ticks * 10 if vitality_ticks > 0
-
-    status.hunger_value  = [ [ status.hunger_value, 0 ].max, 100 ].min
-    status.love_value    = [ [ status.love_value,   0 ].max, 100 ].min
-    status.temp_vitality = [ status.temp_vitality, status.vitality ].min
-
-    status.save!
-
-    play_state.touch
-  end
-
-  def in_loop?(user_status, event_set)
-    return false unless user_status.current_loop_event_set_id == event_set.id
-    user_status.current_loop_started_at > event_set.event_category.loop_minutes.minutes.ago
-  end
-
   def continue_loop?(user_status, event_set, resolves_loop)
     return false if resolves_loop
-    in_loop?(user_status, event_set)
-  end
-
-  def loop_timeout?(user_status, current_set)
-    user_status.current_loop_event_set_id.present? && !in_loop?(user_status, current_set)
-  end
-
-  def normal_event_timeout?(user_status, play_state)
-    user_status.current_loop_event_set_id.blank? && play_state.event_timeout?
-  end
-
-  def record_loop_start(user_status, event_set)
-    return if event_set.event_category.loop_minutes.blank?
-    user_status.update!(
-      current_loop_event_set_id: event_set.id,
-      current_loop_started_at: Time.current
-    )
-  end
-
-  def clear_loop_status(user_status)
-    user_status.update!(
-      current_loop_event_set_id: nil,
-      current_loop_started_at: nil,
-    )
+    user_status.in_loop?
   end
 
   def event_category_invalidation(user, event_category, expires_at)
     inv = user.user_event_category_invalidations.find_or_initialize_by(event_category: event_category)
     inv.expires_at = expires_at
     inv.save!
-  end
-
-  def pick_next_event_set_and_event
-    selector = EventSetSelector.new(current_user)
-    next_set = selector.select_next
-    next_event = next_set.events.find_by!(derivation_number: 0)
-    [ next_set, next_event ]
   end
 
   def apply_event_set_call(action_result, default_set, default_event)
@@ -289,5 +209,34 @@ class GamesController < ApplicationController
       else
         "temp-base_background/temp-base_background3.png"
       end
+  end
+
+  # ここからhandle_timeouts関連privateメソッド
+  def handle_timeouts
+    return if turbo_request?
+    return unless timeout?
+    execute_timeout_flow
+  end
+
+  def turbo_request?
+    request.headers["Turbo-Visit"].present? || request.headers["Turbo-Frame"].present?
+  end
+
+  def timeout?
+    current_set = @play_state.current_event.event_set
+    @user_status.loop_timeout? || normal_event_timeout?(@user_status, @play_state)
+  end
+
+  def normal_event_timeout?(user_status, play_state)
+    user_status.current_loop_event_set_id.blank? && play_state.event_timeout?
+  end
+
+  def execute_timeout_flow
+    @play_state.apply_automatic_update!
+    current_user.clear_event_category_invalidations!
+    @user_status.clear_loop_status!
+    next_set, next_event = current_user.pick_next_event_set_and_event
+    @user_status.record_loop_start!
+    @play_state.start_new_event!(next_event)
   end
 end
