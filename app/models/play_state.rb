@@ -5,4 +5,10 @@ class PlayState < ApplicationRecord
   validates :action_choices_position, numericality: { only_integer: true }, allow_nil: true
   validates :action_results_priority, numericality: { only_integer: true }, allow_nil: true
   validates :current_cut_position,    numericality: { only_integer: true }, allow_nil: true
+
+  TIMEOUT = 2.hours
+
+  def event_timeout?
+    updated_at < TIMEOUT.ago
+  end
 end

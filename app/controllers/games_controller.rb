@@ -8,8 +8,7 @@ class GamesController < ApplicationController
     unless request.headers["Turbo-Visit"].present? || request.headers["Turbo-Frame"].present?
       user_status = current_user.user_status
       current_set = @play_state.current_event.event_set
-
-      if user_status.current_loop_event_set_id.present? && !in_loop?(user_status, current_set)
+      if loop_timeout?(user_status, current_set) || normal_event_timeout?(user_status, @play_state)
         apply_automatic_update!(@play_state)
         current_user.user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
         clear_loop_status(user_status)
@@ -219,6 +218,14 @@ class GamesController < ApplicationController
   def continue_loop?(user_status, event_set, resolves_loop)
     return false if resolves_loop
     in_loop?(user_status, event_set)
+  end
+
+  def loop_timeout?(user_status, current_set)
+    user_status.current_loop_event_set_id.present? && !in_loop?(user_status, current_set)
+  end
+
+  def normal_event_timeout?(user_status, play_state)
+    user_status.current_loop_event_set_id.blank? && play_state.event_timeout?
   end
 
   def record_loop_start(user_status, event_set)
