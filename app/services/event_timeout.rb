@@ -30,6 +30,7 @@ class EventTimeout
   def execute_timeout_flow
     @play_state.apply_automatic_update!
     @user.clear_event_category_invalidations!
+    @user.reset_event_temporary_data!
     @user_status.clear_loop_status!
     next_set, next_event = @user.pick_next_event_set_and_event
     @user_status.record_loop_start!

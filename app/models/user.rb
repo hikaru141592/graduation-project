@@ -45,6 +45,16 @@ class User < ApplicationRecord
     [ next_set, next_event ]
   end
 
+  def reset_event_temporary_data!
+    event_temporary_datum.update!(
+      reception_count: 0,
+      success_count: 0,
+      started_at: nil,
+      special_condition: nil,
+      ended_at: nil,
+    )
+  end
+
   private
   def assign_friend_code
     loop do
