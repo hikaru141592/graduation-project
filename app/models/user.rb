@@ -34,6 +34,27 @@ class User < ApplicationRecord
     egg_name != "未登録"
   end
 
+  def clear_event_category_invalidations!
+    user_event_category_invalidations.where("expires_at < ?", Time.current).delete_all
+  end
+
+  def pick_next_event_set_and_event
+    selector = EventSetSelector.new(self)
+    next_set = selector.select_next
+    next_event = next_set.events.find_by!(derivation_number: 0)
+    [ next_set, next_event ]
+  end
+
+  def reset_event_temporary_data!
+    event_temporary_datum.update!(
+      reception_count: 0,
+      success_count: 0,
+      started_at: nil,
+      special_condition: nil,
+      ended_at: nil,
+    )
+  end
+
   private
   def assign_friend_code
     loop do
