@@ -15,7 +15,7 @@ class UserStatus < ApplicationRecord
             :science,         :science_effort,
             :social_studies,  :social_effort,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
-            
+
   def clear_loop_status!
     update!(
       current_loop_event_set_id: nil,
