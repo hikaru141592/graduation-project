@@ -52,10 +52,10 @@ class UserStatus < ApplicationRecord
     save!
   end
 
-  def record_loop_start!
-    return if event_category.loop_minutes.blank?
+  def record_loop_start!(next_set)
+    return if next_set.event_category.loop_minutes.blank?
     update!(
-      current_loop_event_set_id: event_set.id,
+      current_loop_event_set_id: next_set.id,
       current_loop_started_at: Time.current
     )
   end
