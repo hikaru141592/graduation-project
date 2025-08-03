@@ -33,7 +33,7 @@ class EventTimeout
     @user.reset_event_temporary_data!
     @user_status.clear_loop_status!
     next_set, next_event = @user.pick_next_event_set_and_event
-    @user_status.record_loop_start!
+    @user_status.record_loop_start!(next_set)
     @play_state.start_new_event!(next_event)
   end
 end

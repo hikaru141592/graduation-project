@@ -95,8 +95,7 @@ class GamesController < ApplicationController
           user_status.clear_loop_status!
           next_set, next_event = current_user.pick_next_event_set_and_event
           next_set, next_event = apply_event_set_call(result, next_set, next_event)
-          next_set, next_event = apply_event_set_call(result, next_set, next_event)
-          user_status.record_loop_start!
+          user_status.record_loop_start!(next_set)
         end
       end
 

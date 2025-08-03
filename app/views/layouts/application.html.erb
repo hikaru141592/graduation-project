@@ -24,7 +24,7 @@
   </head>
 
   <body>
-    <% unless controller_name.in?(%w[games privacy_policies term settings line_notification_settings status]) %>
+    <% unless controller_name.in?(%w[games privacy_policies term settings line_notification_settings status delete_account]) %>
       <%= render 'shared/flash_message' %>
     <% end %>
     <%= yield %>
