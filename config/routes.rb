@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   get   "/settings", to: "settings#show", as: :settings
   get   "/settings/line_notification", to: "line_notification_settings#show", as: :settings_line_notification
   patch "/settings/line_notification", to: "line_notification_settings#update"
+  get   "/settings/delete_account", to: "delete_account#show", as: :delete_account
+  delete "/settings/delete_account", to: "delete_account#destroy"
 
   post "/webhooks/line", to: "line_webhooks#callback"
 
