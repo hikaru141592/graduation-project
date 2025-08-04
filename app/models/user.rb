@@ -29,6 +29,7 @@ class User < ApplicationRecord
   validates :reset_password_token, uniqueness: true, allow_nil: true
 
   enum :role, { general: 0, admin: 1 }
+  enum :name_suffix, { no_suffix: 0, chan: 1, kun: 2, sama: 3 }
 
   def profile_completed?
     egg_name != "未登録"
@@ -53,6 +54,23 @@ class User < ApplicationRecord
       special_condition: nil,
       ended_at: nil,
     )
+  end
+
+  def egg_name_with_suffix
+    suffix_map = {
+      'no_suffix' => '',
+      'kun'       => 'くん',
+      'chan'      => 'ちゃん',
+      'sama'      => 'さま'
+    }
+
+    self.egg_name + suffix_map[self.name_suffix]
+  end
+
+  def name_suffix_change!(event, position)
+    return unless event.name == 'たまごのなまえ'
+    self.name_suffix = position - 1
+    save!
   end
 
   private

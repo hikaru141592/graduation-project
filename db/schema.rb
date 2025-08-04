@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_29_070321) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_04_014656) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -212,6 +212,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_29_070321) do
     t.datetime "remember_me_token_expires_at"
     t.boolean "line_friend_linked", default: false, null: false
     t.boolean "image_change", default: true, null: false
+    t.integer "name_suffix", default: 0, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["friend_code"], name: "index_users_on_friend_code", unique: true
     t.index ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at"
