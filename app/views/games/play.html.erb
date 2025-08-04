@@ -43,16 +43,19 @@
       <div class="col-12 col-md-4 pe-md-6 d-grid gap-1 mt-2 mt-md-4">
         <div class="message-box mb-1 py-4 d-flex align-items-center justify-content-center">
           <%
-            message = @cut&.random_message(@play_state.updated_at) || @event.message
+            play_state = current_user.play_state
+            current_event = play_state.current_event
+            message = play_state.current_cut&.random_message(play_state.updated_at) || play_state.current_event.message
             if @question_text.present?
               message = message.gsub('X 演算子 Y', @question_text)
             end
             message = message.gsub('〈たまご〉', current_user.egg_name_with_suffix)
             message = message.gsub('〈ユーザー〉', current_user.name)
-            if @event.event_set.name == '特訓' && (2..6).include?(@event.derivation_number)
-              success_count = @temp.success_count
+            if current_event.event_set.name == '特訓' && (2..6).include?(current_event.derivation_number)
+              temp = current_user.event_temporary_datum
+              success_count = temp.success_count
               message = message.gsub('〈X〉', success_count.to_s)
-              elapsed_sec = (@temp.ended_at - @temp.started_at).to_i
+              elapsed_sec = (temp.ended_at - temp.started_at).to_i
               minutes, seconds = elapsed_sec.divmod(60)
               time_str    = "#{minutes}ふん#{seconds}びょう"
               message     = message.gsub('〈Y〉分〈Z〉秒', time_str)

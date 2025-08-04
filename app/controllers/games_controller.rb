@@ -21,7 +21,6 @@ class GamesController < ApplicationController
         seed = @play_state.updated_at.to_i
         @question_text, @options = ArithmeticQuiz.generate(seed: seed)
       end
-      @temp = current_user.event_temporary_datum
     end
 
     set_base_background_image
