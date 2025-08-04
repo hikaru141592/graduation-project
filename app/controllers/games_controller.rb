@@ -21,7 +21,6 @@ class GamesController < ApplicationController
         seed = @play_state.updated_at.to_i
         @question_text, @options = ArithmeticQuiz.generate(seed: seed)
       end
-      @temp = current_user.event_temporary_datum
     end
 
     set_base_background_image
@@ -42,6 +41,8 @@ class GamesController < ApplicationController
     choice = event.action_choices.find_by!(position: position)
     result = choice.action_results.order(:priority).detect { |ar| conditions_met?(ar.trigger_conditions, current_user) }
     result ||= choice.action_results.order(priority: :desc).first
+
+    current_user.name_suffix_change!(event, position)
 
     if result.cuts.exists?
       play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: 1)

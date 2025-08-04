@@ -50,7 +50,10 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
   end
 
   context '空腹値が 50 のとき' do
-    before { setup_game(hunger: 50) }
+    before do
+      setup_game(hunger: 50)
+      visit current_path
+    end
 
     include_examples '行動ボタンの共通挙動',
                      labels: %w[はなしをきいてあげる よしよしする おやつをあげる ごはんをあげる],
@@ -58,7 +61,10 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
   end
 
   context '空腹値が 80 のとき' do
-    before { setup_game(hunger: 80) }
+    before do
+      setup_game(hunger: 80)
+      visit current_path
+    end
 
     include_examples '行動ボタンの共通挙動',
                      labels: %w[おやつをあげる ごはんをあげる],

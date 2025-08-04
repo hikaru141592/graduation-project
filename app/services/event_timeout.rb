@@ -8,6 +8,7 @@ class EventTimeout
 
   def handle_timeouts
     return if turbo_request?
+    return if important_event?
     return unless timeout?
     execute_timeout_flow
   end
@@ -16,6 +17,10 @@ class EventTimeout
 
   def turbo_request?
     @headers["Turbo-Visit"].present? || @headers["Turbo-Frame"].present?
+  end
+
+  def important_event?
+    @play_state.current_event.event_set.name == "イントロ"
   end
 
   def timeout?

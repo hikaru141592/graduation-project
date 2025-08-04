@@ -1,4 +1,5 @@
 categories = [
+  { name: 'イントロ', description: 'イントロ',                                        loop_minutes: nil  },
   { name: '通常',     description: '何か言っている、何かしたそう',                         loop_minutes: nil  },
   { name: 'ルンルン', description: '踊っている',                                           loop_minutes: 3   },
   { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 20 },
@@ -28,6 +29,7 @@ categories.each do |attrs|
 end
 
 event_sets = [
+  { category_name: 'イントロ', name: 'イントロ' },
   { category_name: '通常',      name: '何か言っている' },
   { category_name: '通常',      name: '何かしたそう' },
   { category_name: 'ルンルン',  name: '踊っている' },
@@ -594,6 +596,18 @@ event_set_conditions = [
         }
       ]
     }
+  },
+  {
+    name: 'イントロ',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 100
+        }
+      ]
+    }
   }
 ]
 
@@ -970,6 +984,70 @@ events = [
     message:           '〈X〉かいせいこう！またちょうせんしよう！',
     character_image:   'temp-character/temp-bimuyou.png',
     background_image:  'temp-background/temp-background.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              'イントロ開始',
+    derivation_number: 0,
+    message:           'よくきた！まちくたびれたぞ！',
+    character_image:   'temp-character/temp-hiyoko-magao.png',
+    background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              'かっこいい？',
+    derivation_number: 1,
+    message:           'かっこいいだろ！',
+    character_image:   'temp-character/temp-hiyoko-nikoniko.png',
+    background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              'そんなことはさておき',
+    derivation_number: 2,
+    message:           'まあ、そんなことはさておきだな。',
+    character_image:   'temp-character/temp-hiyoko-nikoniko.png',
+    background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              'たまごのなまえ',
+    derivation_number: 3,
+    message:           '〈たまご〉、だったな！',
+    character_image:   'temp-character/temp-hiyoko-tamago-shokai.png',
+    background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              'たまごのかいせつ',
+    derivation_number: 4,
+    message:           '〈たまご〉はとってもなきむしだ。',
+    character_image:   'temp-character/temp-hiyoko-magao.png',
+    background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              '声かけ1回目',
+    derivation_number: 5,
+    message:           '〈たまご〉！',
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              '声かけ2回目',
+    derivation_number: 6,
+    message:           'もういちどこえをかけてみよう！',
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    'イントロ',
+    name:              '声かけ3回目',
+    derivation_number: 7,
+    message:           'ぜんぜんしゃべってくれない！',
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-in-house.png'
   }
 ]
 
@@ -1216,6 +1294,46 @@ choices = [
     event_set_name:    '特訓',
     derivation_number: 6,
     labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 0,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 1,
+    labels:            [ 'えっ？', 'まさか！', 'うーん', 'かっこいいです' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 2,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 3,
+    labels:            [ 'いいなまえ！', 'ちゃんをつけて！', 'くんをつけて！', 'さまをつけて！' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 4,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 5,
+    labels:            [ 'こんにちは！', 'なかよくしてね！' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 6,
+    labels:            [ 'よっ！',       'なかよくたのむぜ！' ]
+  },
+  {
+    event_set_name:    'イントロ',
+    derivation_number: 7,
+    labels:            [ 'こんにちは！', 'なかよくしてね！', 'よしよし' ]
   }
 ]
 
@@ -2827,6 +2945,114 @@ action_results = [
     trigger_conditions:    { always: true },
     effects: {},
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 0, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 1, label: 'えっ？', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 1, label: 'まさか！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 1, label: 'うーん', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 1, label: 'かっこいいです', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 2, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 3, label: 'いいなまえ！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 3, label: 'ちゃんをつけて！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 3, label: 'くんをつけて！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 3, label: 'さまをつけて！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 4, label: 'すすむ', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 5, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 5, label: 'こんにちは！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 6, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 5, label: 'なかよくしてね！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 6, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 6, label: 'よっ！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 6, label: 'なかよくたのむぜ！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 7, label: 'こんにちは！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 7, label: 'なかよくしてね！', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'イントロ', derivation_number: 7, label: 'よしよし', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: '何か言っている', resolves_loop: false
   }
 ]
 
@@ -3129,7 +3355,50 @@ cuts = [
   { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 1, position: 1, message: 'とっくんは3かいしっぱいするまでつづくぞ！', character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                    character_image: 'temp-character/temp-tukareta.png', background_image: 'temp-background/temp-background.png' }
+  { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                    character_image: 'temp-character/temp-tukareta.png', background_image: 'temp-background/temp-background.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 0,  label: 'すすむ',                priority: 1, position: 1, message: 'あんたが・・・',                  character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 0,  label: 'すすむ',                priority: 1, position: 2, message: '〈ユーザー〉だな！',               character_image: 'temp-character/temp-niwatori.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 0,  label: 'すすむ',                priority: 1, position: 3, message: 'これからよろしくな！',             character_image: 'temp-character/temp-niwatori.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 0,  label: 'すすむ',                priority: 1, position: 4, message: 'おれはみてのとおり、ヒヨコだ！',    character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 1,  label: 'えっ？',                priority: 1, position: 1, message: 'えっ・・・。',                      character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 1,  label: 'まさか！',               priority: 1, position: 1, message: 'なに・・・！？',                    character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 1,  label: 'うーん',                priority: 1, position: 1, message: 'こら、うそでもかっこいいですといえ！', character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 1,  label: 'かっこいいです',         priority: 1, position: 1, message: 'そうだろ？うんうん！',               character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 2,  label: 'すすむ',                priority: 1, position: 1, message: 'きょうからあんたには、このたまごといっしょにくらしてもらうぞ！', character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 2,  label: 'すすむ',                priority: 1, position: 2, message: 'なまえはたしか・・・。',                                     character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 3,  label: 'ちゃんをつけて！',       priority: 1, position: 1, message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 3,  label: 'くんをつけて！',         priority: 1, position: 1, message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 3,  label: 'さまをつけて！',         priority: 1, position: 1, message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 1, message: 'おなかがへってもなくし、さびしくなってもなく！', character_image: 'temp-character/temp-hiyoko-tuyoimagao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 2, message: 'またよるはとうぜんねむくなるし、じかんたいによってこうどうパターンがかわるぞ。', character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 3, message: 'あとおなじことをしてあげても、はんのうがそのときそのときでかわったりするから',   character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 4, message: 'まあとにかくたくさんせっしてみてくれよな。',                                  character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 5, message: 'おっと、いけねえ。',                                                        character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 6, message: 'このあとちょっとよていがあるから、オレはもういくな。',                         character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 7, message: '〈たまご〉のこと、だいじにしてくれよ！',                                      character_image: 'temp-character/temp-hiyoko-nikoniko.png',  background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 8, message: 'いってしまった。',                                                          character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 8, message: '〈たまご〉のめんどう、うまくみれるかな～。',                                   character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 9, message: '・・・。',                                                                 character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 10, message: 'とりあえず、まずはこえをかけてみよう。',                                     character_image: 'temp-character/temp-normal.png',           background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 5,  label: 'こんにちは！',           priority: 1, position: 1, message: 'あ！へんじしてくれなかった！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 5,  label: 'なかよくしてね！',        priority: 1, position: 1, message: 'あ！へんじしてくれなかった！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 6,  label: 'よっ！',              priority: 1, position: 1, message: 'あ！まためをそらした！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 6,  label: 'なかよくたのむぜ！',   priority: 1, position: 1, message: 'あ！まためをそらした！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'こんにちは！',           priority: 1, position: 1, message: 'うぐぐ～！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'なかよくしてね！',        priority: 1, position: 1, message: 'うぐぐ～！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 1, message: '〈たまご〉「んに～！」',         character_image: 'temp-character/temp-nikoniko.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 2, message: '・・・！',                     character_image: 'temp-character/temp-nikoniko.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 3, message: 'なんだ！けっこうすなおじゃん！',                    character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 4, message: 'とにかく、ちょっときょりがちじまったきがする！',      character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 5, message: 'これからよろしくね、〈たまご〉！',                    character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' }
 ]
 
 cuts.each do |attrs|
@@ -3168,7 +3437,7 @@ User.find_each do |user|
   end
 
   PlayState.find_or_create_by!(user: user) do |ps|
-    first_set   = EventSet.find_by!(name: '何か言っている')
+    first_set   = EventSet.find_by!(name: 'イントロ')
     first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
     ps.current_event_id         = first_event.id
     ps.action_choices_position  = nil
