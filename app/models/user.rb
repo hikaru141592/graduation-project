@@ -99,7 +99,7 @@ class User < ApplicationRecord
       social_studies:    0,
       social_effort:     0,
     )
-    first_set   = EventSet.find_by!(name: "何か言っている")
+    first_set   = EventSet.find_by!(name: "イントロ")
     first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
     create_play_state!(
       current_event:             first_event,

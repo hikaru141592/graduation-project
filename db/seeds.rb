@@ -3437,7 +3437,7 @@ User.find_each do |user|
   end
 
   PlayState.find_or_create_by!(user: user) do |ps|
-    first_set   = EventSet.find_by!(name: '何か言っている')
+    first_set   = EventSet.find_by!(name: 'イントロ')
     first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
     ps.current_event_id         = first_event.id
     ps.action_choices_position  = nil
