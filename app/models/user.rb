@@ -58,17 +58,17 @@ class User < ApplicationRecord
 
   def egg_name_with_suffix
     suffix_map = {
-      'no_suffix' => '',
-      'kun'       => 'くん',
-      'chan'      => 'ちゃん',
-      'sama'      => 'さま'
+      "no_suffix" => "",
+      "kun"       => "くん",
+      "chan"      => "ちゃん",
+      "sama"      => "さま"
     }
 
     self.egg_name + suffix_map[self.name_suffix]
   end
 
   def name_suffix_change!(event, position)
-    return unless event.name == 'たまごのなまえ'
+    return unless event.name == "たまごのなまえ"
     self.name_suffix = position - 1
     save!
   end

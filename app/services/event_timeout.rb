@@ -20,7 +20,7 @@ class EventTimeout
   end
 
   def important_event?
-    @play_state.current_event.event_set.name == 'イントロ'
+    @play_state.current_event.event_set.name == "イントロ"
   end
 
   def timeout?
