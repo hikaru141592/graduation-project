@@ -16,7 +16,7 @@ class ConditionEvaluator
     results = list.map do |c|
       case c["type"]
       when "status"       then status_judge?(c)
-      when "probability"  then probability_judge(c)
+      when "probability"  then probability_judge?(c)
       when "item"         then item_judge?(c)
       when "time_range"   then TimeRangeChecker.new(c, now: @now).time_range_met?
       when "weekday"      then weekday_judge?(c)
