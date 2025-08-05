@@ -37,7 +37,7 @@ class EventSetSelector
       set = @event_sets.find { |s| s.name == name }
       next unless set
       conds = set.trigger_conditions
-      if conditions_met?(conds)
+      if ConditionEvaluator.new(@user, conds, now: Time.current).conditions_met?
         record_occurrence(set)
         return set
       end
@@ -72,50 +72,8 @@ class EventSetSelector
     rec.save!
   end
 
-  def conditions_met?(conds)
-    return true if conds["always"] == true
-
-    op   = conds["operator"] || "and"
-    list = conds["conditions"] || []
-
-    results = list.map do |c|
-      case c["type"]
-      when "status"
-        @status
-          .public_send(c["attribute"])
-          .public_send(c["operator"], c["value"])
-      when "probability"
-        rand(100) < c["percent"]
-      when "item"
-        @user.user_items
-             .find_by(code: c["item_code"])
-             .try(:count).to_i
-             .public_send(c["operator"], c["value"])
-      when "time_range"
-        TimeRangeChecker.new(c).time_range_met?
-      when "weekday"
-        today = Date.current.wday
-        c["value"].include?(today)
-      when "date_range"
-        date_range_met?(c)
-      else
-        false
-      end
-    end
-
-    op == "and" ? results.all? : results.any?
-  end
-
   def filter_invalid_categories!
     invalid_ids = @user.user_event_category_invalidations.pluck(:event_category_id)
     @event_sets.reject! { |s| invalid_ids.include?(s.event_category_id) }
-  end
-
-  def date_range_met?(c)
-    today = Date.current
-    from  = Date.new(today.year, c["from"]["month"], c["from"]["day"])
-    to    = Date.new(today.year, c["to"]["month"],   c["to"]["day"])
-    to    = to.next_year if from > to
-    (from..to).cover?(today)
   end
 end
