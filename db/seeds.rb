@@ -18,7 +18,8 @@ categories = [
   { name: '年始',     description: '年始',                                               loop_minutes: nil   },
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
   { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
-  { name: '特訓',     description: '特訓',                                               loop_minutes: nil   }
+  { name: '特訓',     description: '特訓',                                               loop_minutes: nil   },
+  { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   }
 ]
 
 categories.each do |attrs|
@@ -54,7 +55,8 @@ event_sets = [
   { category_name: '年始',        name: '年始' },
   { category_name: '算数',      name: '算数' },
   { category_name: 'ボール遊び', name: 'ボール遊び' },
-  { category_name: '特訓',      name: '特訓' }
+  { category_name: '特訓',      name: '特訓' },
+  { category_name: '誕生日',     name: '誕生日' }
 ]
 
 event_sets.each do |attrs|
@@ -604,7 +606,20 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 100
+          "percent": 0
+        }
+      ]
+    }
+  },
+  {
+    name: '誕生日',
+    daily_limit: 1,
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 0
         }
       ]
     }
@@ -1048,6 +1063,22 @@ events = [
     message:           'ぜんぜんしゃべってくれない！',
     character_image:   'temp-character/temp-normal.png',
     background_image:  'temp-background/temp-in-house.png'
+  },
+  {
+    event_set_name:    '誕生日',
+    name:              '誕生日',
+    derivation_number: 0,
+    message:           '〈たまご〉「にー！」',
+    character_image:   'temp-character/temp-nikoniko2.png',
+    background_image:  'temp-background/temp-background.png'
+  },
+  {
+    event_set_name:    '誕生日',
+    name:              'どういう一年にする？',
+    derivation_number: 1,
+    message:           '「これからのいちねん、どうすごしたい？」ってきいてるよ。',
+    character_image:   'temp-character/temp-nikoniko2.png',
+    background_image:  'temp-background/temp-background.png'
   }
 ]
 
@@ -1334,6 +1365,16 @@ choices = [
     event_set_name:    'イントロ',
     derivation_number: 7,
     labels:            [ 'こんにちは！', 'なかよくしてね！', 'よしよし' ]
+  },
+  {
+    event_set_name:    '誕生日',
+    derivation_number: 0,
+    labels:            [ 'すすむ' ]
+  },
+  {
+    event_set_name:    '誕生日',
+    derivation_number: 1,
+    labels:            [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ]
   }
 ]
 
@@ -3053,6 +3094,26 @@ action_results = [
     trigger_conditions:    { always: true },
     effects: {},
     next_derivation_number: nil, calls_event_set_name: '何か言っている', resolves_loop: false
+  },
+  {
+    event_set_name: '誕生日', derivation_number: 0, label: 'すすむ', priority: 1, trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '誕生日', derivation_number: 1, label: 'たのしくすごす！', priority: 1, trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '誕生日', derivation_number: 1, label: 'えがおですごす！', priority: 1, trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '誕生日', derivation_number: 1, label: 'せいちょうする！', priority: 1, trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: '誕生日', derivation_number: 1, label: 'ひとをだいじにする！', priority: 1, trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   }
 ]
 
@@ -3398,7 +3459,21 @@ cuts = [
   { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 2, message: '・・・！',                     character_image: 'temp-character/temp-nikoniko.png',    background_image: 'temp-background/temp-in-house.png' },
   { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 3, message: 'なんだ！けっこうすなおじゃん！',                    character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
   { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 4, message: 'とにかく、ちょっときょりがちじまったきがする！',      character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 5, message: 'これからよろしくね、〈たまご〉！',                    character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' }
+  { event_set_name: 'イントロ',   derivation_number: 7,  label: 'よしよし',               priority: 1, position: 5, message: 'これからよろしくね、〈たまご〉！',                    character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
+
+  { event_set_name: '誕生日',     derivation_number: 0,  label: 'すすむ',                 priority: 1, position: 1, message: '〈たまご〉「にににーに・・・」', character_image: 'temp-character/temp-maekagami.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 0,  label: 'すすむ',                 priority: 1, position: 2, message: '〈たまご〉「ににににー！！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 0,  label: 'すすむ',                 priority: 1, position: 3, message: 'あ！〈たまご〉がたんじょうびをいわってくれた！', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 0,  label: 'すすむ',                 priority: 1, position: 4, message: '〈たまご〉「ににににに、んににに、ににーに？」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'たのしくすごす！',        priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'たのしくすごす！',        priority: 1, position: 2, message: 'ワクワクがいっぱいのいちねんになりますよう！',      character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'えがおですごす！',        priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'えがおですごす！',        priority: 1, position: 2, message: 'ワクワクがいっぱいのいちねんになりますよう！',      character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'せいちょうする！',        priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'せいちょうする！',        priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
 ]
 
 cuts.each do |attrs|
