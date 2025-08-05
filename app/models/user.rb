@@ -73,6 +73,15 @@ class User < ApplicationRecord
     save!
   end
 
+  def birthday?
+    today = Time.current.to_date
+    if self.birth_month == 2 && self.birth_day == 29 && !Date.leap?(today.year)
+      today.month == 2 && today.day == 28
+    else
+      today.month == self.birth_month && today.day == self.birth_day
+    end
+  end
+
   private
   def assign_friend_code
     loop do

@@ -7,6 +7,7 @@ class EventSetSelector
     "泣いている(よしよし不足)",
     "泣いている(ランダム)",
     "年始",
+    "誕生日",
     "踊っている",
     "占い",
     "花見",
@@ -36,8 +37,7 @@ class EventSetSelector
     PRIORITY_LIST.each do |name|
       set = @event_sets.find { |s| s.name == name }
       next unless set
-      conds = set.trigger_conditions
-      if ConditionEvaluator.new(@user, conds, now: Time.current).conditions_met?
+      if event_triggerable?(set)
         record_occurrence(set)
         return set
       end
@@ -63,6 +63,10 @@ class EventSetSelector
   def today_count(set)
     rec = DailyLimitEventSetCount.find_by(user: @user, event_set: set, occurred_on: Date.current)
     rec&.count.to_i
+  end
+
+  def event_triggerable?(set)
+    ConditionEvaluator.new(@user, set.trigger_conditions, now: Time.current).conditions_met? || (set.name == "誕生日" && @user.birthday?)
   end
 
   def record_occurrence(set)
