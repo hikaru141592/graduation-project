@@ -3473,7 +3473,7 @@ cuts = [
   { event_set_name: '誕生日',     derivation_number: 1,  label: 'せいちょうする！',        priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
   { event_set_name: '誕生日',     derivation_number: 1,  label: 'せいちょうする！',        priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
   { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' }
 ]
 
 cuts.each do |attrs|
