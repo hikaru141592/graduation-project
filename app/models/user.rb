@@ -94,7 +94,7 @@ class User < ApplicationRecord
     create_user_status!(
       hunger_value:    50,
       happiness_value: 10,
-      love_value:      0,
+      love_value:      50,
       mood_value:      0,
       sports_value:    0,
       art_value:       0,
