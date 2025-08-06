@@ -3093,7 +3093,7 @@ action_results = [
     event_set_name: 'イントロ', derivation_number: 7, label: 'よしよし', priority: 1,
     trigger_conditions:    { always: true },
     effects: {},
-    next_derivation_number: nil, calls_event_set_name: '何か言っている', resolves_loop: false
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '誕生日', derivation_number: 0, label: 'すすむ', priority: 1, trigger_conditions: { always: true },
