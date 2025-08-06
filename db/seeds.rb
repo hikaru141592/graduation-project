@@ -134,11 +134,11 @@ event_set_conditions = [
   },
   {
     name: 'ニコニコしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 28 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 42 } ] }
   },
   {
     name: 'ゴロゴロしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 20 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 37 } ] }
   },
   {
     name: '何かしたそう',
