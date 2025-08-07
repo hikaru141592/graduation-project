@@ -1339,7 +1339,7 @@ choices = [
   {
     event_set_name:    '特訓',
     derivation_number: 0,
-    labels:            [ 'さんすう',       'ボールあそび' ]
+    labels:            [ 'さんすう', 'ボールあそび', 'やっぱやめておく' ]
   },
   {
     event_set_name:    '特訓',
@@ -3049,6 +3049,12 @@ action_results = [
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
+    event_set_name: '特訓', derivation_number: 0, label: 'やっぱやめておく', priority: 1,
+    trigger_conditions:    { always: true },
+    effects: {},
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
     event_set_name: '特訓', derivation_number: 1, label: 'すすむ', priority: 1,
     trigger_conditions:    { always: true },
     effects: {},
@@ -3525,11 +3531,12 @@ cuts = [
   { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'そこだ！',     priority: 2, position: 2, message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: 'ボール遊び',      derivation_number: 4,  label: 'みぎだ！',     priority: 1, position: 2, message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 1, position: 1, message: 'とっくんはれんぞく20もんになるぞ！', character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 1, position: 1, message: 'とっくんはれんぞく20もんになるぞ！',      character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'さんすう',              priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 1, position: 1, message: 'とっくんは3かいしっぱいするまでつづくぞ！', character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '特訓',      derivation_number: 0,  label: 'ボールあそび',          priority: 2, position: 1, message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                    character_image: 'temp-character/temp-tukareta.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '特訓',      derivation_number: 0,  label: 'やっぱやめておく',       priority: 1, position: 1, message: 'いや、いまはやっぱやめておこう。',        character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '特訓',      derivation_number: 1,  label: 'すすむ',                priority: 1, position: 1, message: 'けっかは・・・。',                      character_image: 'temp-character/temp-tukareta.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: 'イントロ',   derivation_number: 0,  label: 'すすむ',                priority: 1, position: 1, message: 'あんたが・・・',                  character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
   { event_set_name: 'イントロ',   derivation_number: 0,  label: 'すすむ',                priority: 1, position: 2, message: '〈ユーザー〉だな！',               character_image: 'temp-character/temp-niwatori.png',    background_image: 'temp-background/temp-in-house.png' },
