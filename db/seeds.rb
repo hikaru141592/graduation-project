@@ -20,7 +20,8 @@ categories = [
   { name: '算数',     description: '算数',                                               loop_minutes: nil   },
   { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
   { name: '特訓',     description: '特訓',                                               loop_minutes: nil   },
-  { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   }
+  { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   },
+  { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   }
 ]
 
 categories.each do |attrs|
@@ -60,7 +61,8 @@ event_sets = [
   { category_name: '算数',      name: '算数' },
   { category_name: 'ボール遊び', name: 'ボール遊び' },
   { category_name: '特訓',      name: '特訓' },
-  { category_name: '誕生日',     name: '誕生日' }
+  { category_name: '誕生日',     name: '誕生日' },
+  { category_name: 'ゲーム',     name: 'タマモンカート' }
 ]
 
 event_sets.each do |attrs|
@@ -629,6 +631,18 @@ event_set_conditions = [
         }
       ]
     }
+  },
+  {
+    name: 'タマモンカート',
+    trigger_conditions: {
+      "operator":   "and",
+      "conditions": [
+        {
+          "type":    "probability",
+          "percent": 0
+        }
+      ]
+    }
   }
 ]
 
@@ -1109,6 +1123,14 @@ events = [
     message:           '「これからのいちねん、どうすごしたい？」ってきいてるよ。',
     character_image:   'temp-character/temp-nikoniko2.png',
     background_image:  'temp-background/temp-background.png'
+  },
+  {
+    event_set_name:    'タマモンカート',
+    name:              'タマモンカート',
+    derivation_number: 0,
+    message:           '〈たまご〉はたのしそうにゲームであそんでいる！',
+    character_image:   'temp-character/temp-game-nikoniko.png',
+    background_image:  'temp-background/temp-background.png'
   }
 ]
 
@@ -1420,6 +1442,11 @@ choices = [
     event_set_name:    '誕生日',
     derivation_number: 1,
     labels:            [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ]
+  },
+  {
+    event_set_name:    'タマモンカート',
+    derivation_number: 0,
+    labels:            [ 'ながめている' ]
   }
 ]
 
@@ -1620,7 +1647,7 @@ action_results = [
     trigger_conditions:    { always: true },
     effects:               {},
     next_derivation_number: nil,
-    calls_event_set_name:  nil,
+    calls_event_set_name:  'タマモンカート',
     resolves_loop:         false
   },
   {
@@ -3217,6 +3244,15 @@ action_results = [
   {
     event_set_name: '誕生日', derivation_number: 1, label: 'ひとをだいじにする！', priority: 1, trigger_conditions: { always: true },
     effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'タマモンカート', derivation_number: 0, label: 'ながめている', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 85 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'タマモンカート', derivation_number: 0, label: 'ながめている', priority: 2, trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   }
 ]
 
@@ -3268,7 +3304,7 @@ cuts = [
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 3, position: 1, message: 'おえかきをした！これはなんだろう？',                 character_image: 'temp-character/temp-ewokaita3.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 4, position: 1, message: 'おえかきをした！ん！？なにかいてんだー！',            character_image: 'temp-character/temp-ewokaita4.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 5, position: 1, message: 'おえかきをした！ん！？てんさいてきだーーー！！！',     character_image: 'temp-character/temp-ewokaita5.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'いっしょにあそんであげた！ゲームはたのしいね！',       character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'ゲームであそぼっか！30ぷんまでだよー！',       character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
@@ -3593,7 +3629,14 @@ cuts = [
   { event_set_name: '誕生日',     derivation_number: 1,  label: 'せいちょうする！',        priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
   { event_set_name: '誕生日',     derivation_number: 1,  label: 'せいちょうする！',        priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
   { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 1, message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' }
+  { event_set_name: '誕生日',     derivation_number: 1,  label: 'ひとをだいじにする！',    priority: 1, position: 2, message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+
+  { event_set_name: 'タマモンカート', derivation_number: 0,  label: 'ながめている',        priority: 1, position: 1, message: '〈たまご〉「ににー！」',                          character_image: 'temp-character/temp-game-nikoniko.png', background_image: 'temp-background/temp-background.png',
+   messages: [ '〈たまご〉「ににー！」', '〈たまご〉「にっにに～！」', '〈たまご〉「んにー！ににー！」', 'いま、だいにんきのタマモンカートだ！', 'いいぞ！はやいぞー！', 'おいぬけー！', 'アイテムをとった！これはきょうりょく！', 'さいきんのレースゲームは、りんじょうかんがすごい！', 'はやすぎてめがまわるー！',
+               'ライバルにおいぬかれた！まけるなー', 'ふくざつなコースだ！ぶつからずはしれるか！？', '〈たまご〉はレースゲームにだいこうふん！', '〈たまご〉はレースゲームがだいすき！おとなになったら、ほんとのクルマものりたいね！', 'いいスタートだ！はやいぞー！', 'レースゲームなのにコースにバナナのかわがおちている！あぶないなあ！』',
+               'いいドリフト！かっこいいー！', 'いいカソク！そのままおいぬけー！', 'げんざいトップだ！ライバルをきりはなせ！', 'あー！カートがカベにぶつかってる！！', 'はやいぞー！・・・って、ぎゃくそうしてない！？', 'レースゲームといったら、やっぱこのタマモンカートだよね！' ] },
+  { event_set_name: 'タマモンカート', derivation_number: 0,  label: 'ながめている',        priority: 2, position: 1, message: '〈たまご〉「ににー！」',                          character_image: 'temp-character/temp-game-ochikomu.png', background_image: 'temp-background/temp-background.png',
+   messages: [ 'あちゃー！おいぬかれたー！', 'あー！ビリじゃんー！', 'ライバルにこうげきされた！あちゃー！', 'なかなかいいアイテムがでないようだ！', 'カートがスピンしちゃった！あれれー！' ] }
 ]
 
 cuts.each do |attrs|
