@@ -164,13 +164,13 @@ event_set_conditions = [
               "add":        43,
               "mult":       17,
               "mod":        60,
-              "target":     "to_min"
+              "target":     "from_min"
             },
             {
               "add":        27,
               "mult":       19,
               "mod":        60,
-              "target":     "from_min"
+              "target":     "to_min"
             }
           ]
         }
@@ -252,13 +252,13 @@ event_set_conditions = [
               "add":        14,
               "mult":       43,
               "mod":        60,
-              "target":     "to_min"
+              "target":     "from_min"
             },
             {
               "add":        5,
               "mult":       17,
               "mod":        60,
-              "target":     "from_min"
+              "target":     "to_min"
             }
           ]
         }
@@ -294,13 +294,13 @@ event_set_conditions = [
               "add":        27,
               "mult":       19,
               "mod":        60,
-              "target":     "to_min"
+              "target":     "from_min"
             },
             {
               "add":        27,
               "mult":       19,
               "mod":        60,
-              "target":     "from_min"
+              "target":     "to_min"
             }
           ]
         }
@@ -404,13 +404,13 @@ event_set_conditions = [
               "add":        27,
               "mult":       4,
               "mod":        15,
-              "target":     "to_min"
+              "target":     "from_min"
             },
             {
               "add":        27,
               "mult":       4,
               "mod":        15,
-              "target":     "from_min"
+              "target":     "to_min"
             }
           ]
         },
@@ -443,13 +443,13 @@ event_set_conditions = [
               "add":        27,
               "mult":       4,
               "mod":        15,
-              "target":     "to_min"
+              "target":     "from_min"
             },
             {
               "add":        27,
               "mult":       4,
               "mod":        15,
-              "target":     "from_min"
+              "target":     "to_min"
             }
           ]
         },
@@ -480,15 +480,15 @@ event_set_conditions = [
           "offsets_by_day": [
             {
               "add":        27,
-              "mult":       51,
-              "mod":        120,
-              "target":     "to_min"
-            },
-            {
-              "add":        27,
               "mult":       6,
               "mod":        15,
               "target":     "from_min"
+            },
+            {
+              "add":        27,
+              "mult":       51,
+              "mod":        120,
+              "target":     "to_min"
             }
           ]
         },
@@ -519,15 +519,15 @@ event_set_conditions = [
           "offsets_by_day": [
             {
               "add":        27,
-              "mult":       51,
-              "mod":        120,
-              "target":     "to_min"
-            },
-            {
-              "add":        27,
               "mult":       6,
               "mod":        15,
               "target":     "from_min"
+            },
+            {
+              "add":        27,
+              "mult":       51,
+              "mod":        120,
+              "target":     "to_min"
             }
           ]
         },
