@@ -781,6 +781,14 @@ events = [
     background_image:  'temp-background/temp-background.png'
   },
   {
+    event_set_name:    '寝かせた',
+    name:              '寝かせた（ゴミ箱なし）',
+    derivation_number: 1,
+    message:           '〈たまご〉はねている。',
+    character_image:   'temp-character/temp-sleep.png',
+    background_image:  'temp-background/temp-background.png'
+  },
+  {
     event_set_name:    '寝起き',
     name:              '寝起き',
     derivation_number: 0,
@@ -1221,6 +1229,11 @@ choices = [
   {
     event_set_name:    '寝かせた',
     derivation_number: 0,
+    labels:            [ 'そっとする',        'よしよしする',     'たたきおこす',     'ゴミばこのなかをのぞく' ]
+  },
+  {
+    event_set_name:    '寝かせた',
+    derivation_number: 1,
     labels:            [ 'そっとする',        'よしよしする',     'たたきおこす' ]
   },
   {
@@ -1623,7 +1636,7 @@ action_results = [
   },
   {
     event_set_name: '何かしたそう', derivation_number: 0, label: 'おえかきする', priority: 3,
-    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "probability", "percent": 75 } ] },
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "probability", "percent": 88 } ] },
     effects:               {},
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
@@ -2409,13 +2422,57 @@ action_results = [
     priority:              1,
     trigger_conditions:    { always: true },
     effects:               {},
-    next_derivation_number: nil,
+    next_derivation_number: 1,
     calls_event_set_name:  nil,
     resolves_loop:         false
   },
   {
     event_set_name:        '寝かせた',
     derivation_number:     0,
+    label:                 'たたきおこす',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: 1,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '寝かせた',
+    derivation_number:     0,
+    label:                 'ゴミばこのなかをのぞく',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: 1,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '寝かせた',
+    derivation_number:     1,
+    label:                 'そっとする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '寝かせた',
+    derivation_number:     1,
+    label:                 'よしよしする',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '寝かせた',
+    derivation_number:     1,
     label:                 'たたきおこす',
     priority:              1,
     trigger_conditions:    { always: true },
@@ -3374,8 +3431,8 @@ cuts = [
   { event_set_name: '泣いている(ランダム)', derivation_number: 0, label: 'あそんであげる',   priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: '寝ている',           derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'きもちよさそうにねている。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '寝ている',           derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: '〈たまご〉がちょっともぞもぞした。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '寝ている',           derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'それはひとでなしのすることだ！！', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'おこさないように、やさしくなでた。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝ている',           derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'ひとでなし！！', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: '寝起き',             derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'まだねむいみたいだからそっとしておこう！', character_image: 'temp-character/temp-wakeup.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '寝起き',             derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: '〈たまご〉がよろこんでいる！おはよう！',   character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
@@ -3482,7 +3539,7 @@ cuts = [
   { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 2, message: '〈たまご〉はおふとんにはいってねた！',      character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'よしよしする',       priority: 2, position: 1, message: '〈たまご〉はよろこんでいる！',             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 1, position: 1, message: 'よし、よくみがこうね！',                   character_image: 'temp-character/temp-hamigaki.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 1, position: 2, message: '〈たまご〉はちゃんとはみがきした！',        character_image: 'temp-character/temp-hamigaki.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 1, position: 2, message: '〈たまご〉はちゃんとはみがきしておやすみした！', character_image: 'temp-character/temp-hamigaki.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'はみがきをさせる',   priority: 2, position: 1, message: 'はみがきしたくないみたい。まったくー！',     character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 1, message: 'チーターががけから・・・',                 character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 1, position: 2, message: 'おっこちーたー！！',                       character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
@@ -3494,9 +3551,16 @@ cuts = [
   { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 2, message: 'ふっとんだ！！',                          character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '眠そう', derivation_number: 0, label: 'ダジャレをいう',     priority: 3, position: 3, message: 'わらわない・・・。',                       character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
 
-  { event_set_name: '寝かせた', derivation_number: 0, label: 'そっとする',       priority: 1, position: 1, message: 'きもちよさそうにねているなあ。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '寝かせた', derivation_number: 0, label: 'よしよしする',     priority: 1, position: 1, message: 'りっぱにそだちますように。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '寝かせた', derivation_number: 0, label: 'たたきおこす',     priority: 1, position: 1, message: 'できるわけないだろ！！', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 0, label: 'そっとする',            priority: 1, position: 1, message: 'きもちよさそうにねているなあ。',      character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 0, label: 'よしよしする',          priority: 1, position: 1, message: 'よしよし、りっぱにそだちますように。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 0, label: 'たたきおこす',          priority: 1, position: 1, message: 'できるわけないだろ！！',              character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 0, label: 'ゴミばこのなかをのぞく', priority: 1, position: 1, message: 'はなをかんだティッシュがいっぱい！',   character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png',
+   messages: [ 'はなをかんだティッシュがいっぱい！', 'だが、からっぽだ！', 'しっかりブンベツされている！', 'テレビばんぐみひょうだ。うらないばんぐみは、まいあさやっているようだ。」', 'テレビばんぐみひょうだ。『タマモン』は、げつようびのよる7じからやっているようだ。','テレビばんぐみひょうだ。『ニワトリビアのいずみ』は、すいようびのよる8じからやっているようだ。','テレビばんぐみひょうだ。『タマえもん』は、きんようびのよる7じからやっているようだ。',
+               'メモがきだ。「とっくんをしたくなると、はなしかけようとしてくる」だって。', 'メモがきだ。「れんぞくでべんきょうや、ボールあそびするとつかれちゃう」だって。', 'メモがきだ。「つかれても、じかんがたてばもとどおり」だって。', 'メモがきだ。「ごはんをあげると、ちょっとずつたいりょくがつく」だって。', 'メモがきだ。「おやつではたいりょくはつかない」だって。', 'メモがきだ。「げいじゅつせいはバクハツからやってくる」だって。', 'メモがきだ。「ダジャレがウケなくても、あきらめるな」だって。',
+               'メモがきだ。「このあたりは、はるになるとサクラがきれい」だって。', 'メモがきだ。「このあたりは、あきになるとコウヨウがきれい」だって。', 'メモがきだ。「せんぷうき、あります」だって。', 'メモがきだ。「コタツ、あります」だって。', 'メモがきだ。「しっぱいしたって、せいちょうしないわけじゃない」だって。', 'メモがきだ。「L-I-N-E/35894421」だって。', 'メモがきだ。「メモがきをゴミばこにすてておこう」だって。', 'メモがきだ。「メモがきのなかにはゴクヒのものもある」だって。' ] },
+  { event_set_name: '寝かせた', derivation_number: 1, label: 'そっとする',            priority: 1, position: 1, message: 'きもちよさそうにねているなあ。',      character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 1, label: 'よしよしする',          priority: 1, position: 1, message: 'よしよし、りっぱにそだちますように。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '寝かせた', derivation_number: 1, label: 'たたきおこす',          priority: 1, position: 1, message: 'できるわけないだろ！！',              character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！',     character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '怒っている', derivation_number: 0, label: 'よしよしする',       priority: 1, position: 2, message: '〈たまご〉はゆるしてくれた！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
