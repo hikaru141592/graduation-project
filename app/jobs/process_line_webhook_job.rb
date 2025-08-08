@@ -71,8 +71,8 @@ class ProcessLineWebhookJob < ApplicationJob
     status = user.user_status.reload
 
     if status.hunger_value <= 70
-      status.update!(hunger_value: [ status.hunger_value + 40 , 100 ].min)
-      status.update!(vitality:     [ status.vitality + 1      , 99_999_999 ].min)
+      status.update!(hunger_value: [ status.hunger_value + 40, 100 ].min)
+      status.update!(vitality:     [ status.vitality + 1, 99_999_999 ].min)
       "にー！ににーにー！\nににににー！\n----（訳）----\nわーい！ごはんだー！\nありがとう！"
     else
       "ににー！\nんににに～！\n----（訳）----\nうー！\n今はお腹いっぱいだよー！"

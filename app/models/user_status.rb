@@ -34,7 +34,7 @@ class UserStatus < ApplicationRecord
 
   def apply_automatic_update!(play_state_updated_at, last_line_update_at)
     now         = Time.current
-    latest_time = [play_state_updated_at, last_line_update_at].compact.max
+    latest_time = [ play_state_updated_at, last_line_update_at ].compact.max
     elapsed     = now - latest_time
 
     hunger_ticks = (elapsed / 15.minutes).floor
