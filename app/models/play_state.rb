@@ -45,4 +45,16 @@ class PlayState < ApplicationRecord
     user_status.apply_automatic_update!(updated_at, last_line_update_at)
     touch
   end
+
+  def record_last_line_update_at!
+    self.last_line_update_at = Time.current
+    save!
+  end
+
+  def line_apply_automatic_update!
+    self.class.transaction do
+      apply_automatic_update!
+      record_last_line_update_at!
+    end
+  end
 end

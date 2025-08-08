@@ -68,6 +68,8 @@ class ProcessLineWebhookJob < ApplicationJob
 
   def handle_feed(user)
     status = user.user_status
+    user.play_state.line_apply_automatic_update!
+
     if status.hunger_value <= 70
       status.update!(hunger_value: [ status.hunger_value + 40, 100 ].min)
       "にー！ににーにー！\nににににー！\n----（訳）----\nわーい！ごはんだー！\nありがとう！"
@@ -78,6 +80,7 @@ class ProcessLineWebhookJob < ApplicationJob
 
   def handle_pet(user)
     status = user.user_status
+    user.play_state.line_apply_automatic_update!
     status.update!(love_value: [ status.love_value + 10, 100 ].min)
     "にー！\nにににーにー！\n----（訳）----\nわーい！\nうれしいなあ！"
   end
