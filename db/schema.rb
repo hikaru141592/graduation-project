@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_05_113140) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_08_044915) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -138,6 +138,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_05_113140) do
     t.integer "current_cut_position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_line_update_at"
     t.index ["current_event_id"], name: "index_play_states_on_current_event_id"
     t.index ["user_id"], name: "index_play_states_on_user_id"
   end
