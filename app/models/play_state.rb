@@ -47,8 +47,7 @@ class PlayState < ApplicationRecord
   end
 
   def record_last_line_update_at!
-    self.last_line_update_at = Time.current
-    save!
+    update_column(:last_line_update_at, Time.current)
   end
 
   def line_apply_automatic_update!
