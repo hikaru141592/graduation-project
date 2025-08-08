@@ -41,9 +41,9 @@ class PlayState < ApplicationRecord
     )
   end
 
-  def apply_automatic_update!
+  def apply_automatic_update!(perform_touch: true)
     user_status.apply_automatic_update!(updated_at, last_line_update_at)
-    touch
+    touch if perform_touch
   end
 
   def record_last_line_update_at!
@@ -52,7 +52,7 @@ class PlayState < ApplicationRecord
 
   def line_apply_automatic_update!
     self.class.transaction do
-      apply_automatic_update!
+      apply_automatic_update!(perform_touch: false)
       record_last_line_update_at!
     end
   end
