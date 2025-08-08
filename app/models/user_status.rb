@@ -32,9 +32,10 @@ class UserStatus < ApplicationRecord
     current_loop_event_set_id.present? && !in_loop?
   end
 
-  def apply_automatic_update!(play_state_updated_at)
-    now       = Time.current
-    elapsed   = now - play_state_updated_at
+  def apply_automatic_update!(play_state_updated_at, last_line_update_at)
+    now         = Time.current
+    latest_time = [play_state_updated_at, last_line_update_at].compact.max
+    elapsed     = now - latest_time
 
     hunger_ticks = (elapsed / 15.minutes).floor
     self.hunger_value -= hunger_ticks if hunger_ticks > 0

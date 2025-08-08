@@ -42,7 +42,7 @@ class PlayState < ApplicationRecord
   end
 
   def apply_automatic_update!
-    user_status.apply_automatic_update!(updated_at)
+    user_status.apply_automatic_update!(updated_at, last_line_update_at)
     touch
   end
 end
