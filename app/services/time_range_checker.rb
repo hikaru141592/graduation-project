@@ -1,5 +1,6 @@
 class TimeRangeChecker
-  def initialize(condition_hash, now: Time.current)
+  def initialize(user, condition_hash, now: Time.current)
+    @user_id    = user.id
     @condition  = condition_hash
     @now        = now
     @day        = now.to_date.day
@@ -32,7 +33,7 @@ class TimeRangeChecker
   end
 
   def apply_offset_by_day(ob, from, to)
-    delta = ((@day + ob["add"].to_i) * ob["mult"].to_i) % ob["mod"].to_i
+    delta = ((@day + @user_id + ob["add"].to_i) * ob["mult"].to_i) % ob["mod"].to_i
 
     case ob["target"]
     when "to_min"

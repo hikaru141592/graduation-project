@@ -18,7 +18,7 @@ class ConditionEvaluator
       when "status"       then status_judge?(c)
       when "probability"  then probability_judge?(c)
       when "item"         then item_judge?(c)
-      when "time_range"   then TimeRangeChecker.new(c, now: @now).time_range_met?
+      when "time_range"   then TimeRangeChecker.new(@user, c, now: @now).time_range_met?
       when "weekday"      then weekday_judge?(c)
       when "date_range"   then date_range_judge?(c)
       else false
