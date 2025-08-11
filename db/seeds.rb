@@ -3519,7 +3519,7 @@ cuts = [
   { event_set_name: '年始',                   derivation_number: 0, label: 'すすむ',           priority: 1, position: 4, message: 'ことしもよろしくね、〈たまご〉！',                                   character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'そっとする',      priority: 1, position: 1, message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'temp-character/temp-building_blocks.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'よしよしする',    priority: 1, position: 1, message: '〈たまご〉はうれしそう！',                             character_image: 'temp-character/temp-building_blocks_nikoniko.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ちょっかいをだす', priority: 1, position: 1, message: '〈たまご〉がおこってしまった！',                       character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: 'ブロックのおもちゃに夢中', derivation_number: 0, label: 'ブロックをくずす', priority: 1, position: 1, message: 'あー！ほんとにブロックをくずしちゃった！これはひどい！', character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
 
