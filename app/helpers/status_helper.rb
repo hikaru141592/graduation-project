@@ -4,13 +4,13 @@ module StatusHelper
     case evaluate_value
     when 0..5     then "ふつう"
     when 6..10    then "ちょっといいかんじかも"
-    when 11..15   then "ちょっといいかんじ"
-    when 16..25   then "そこそこできる"
-    when 26..40   then "すごくできる"
-    when 41..60   then "できすぎ！"
-    when 61..90   then "てんさい？"
-    when 91..150  then "てんさい！"
-    when 151..250 then "てんさいすぎ！"
+    when 11..20   then "ちょっといいかんじ"
+    when 20..35   then "そこそこできる"
+    when 35..50   then "すごくできる"
+    when 51..80   then "できすぎ！"
+    when 81..120   then "てんさい？"
+    when 121..250  then "てんさい！"
+    when 251..450 then "てんさいすぎ！"
     else                "かみさま"
     end
   end
