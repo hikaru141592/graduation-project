@@ -208,6 +208,12 @@ event_set_conditions = [
               "target":     "to_min"
             }
           ]
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -219,7 +225,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 6
+          "percent": 5
         }, {
           "type":      "time_range",
           "from_hour": 10,
@@ -234,6 +240,12 @@ event_set_conditions = [
               "target":     "from_min"
             }
           ]
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -424,6 +436,12 @@ event_set_conditions = [
         {
           "type":    "probability",
           "percent": 25
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -463,6 +481,12 @@ event_set_conditions = [
         {
           "type":    "probability",
           "percent": 25
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
