@@ -208,6 +208,12 @@ event_set_conditions = [
               "target":     "to_min"
             }
           ]
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -219,7 +225,7 @@ event_set_conditions = [
       "conditions": [
         {
           "type":    "probability",
-          "percent": 6
+          "percent": 5
         }, {
           "type":      "time_range",
           "from_hour": 10,
@@ -234,6 +240,12 @@ event_set_conditions = [
               "target":     "from_min"
             }
           ]
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -424,6 +436,12 @@ event_set_conditions = [
         {
           "type":    "probability",
           "percent": 25
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -463,6 +481,12 @@ event_set_conditions = [
         {
           "type":    "probability",
           "percent": 25
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -673,6 +697,14 @@ events = [
     name:              '何かしたそう',
     derivation_number: 0,
     message:           '〈たまご〉はなにかしたそうだ。',
+    character_image:   'temp-character/temp-normal.png',
+    background_image:  'temp-background/temp-background.png'
+  },
+  {
+    event_set_name:    '何かしたそう',
+    name:              'ゲームさせてあげる？',
+    derivation_number: 2,
+    message:           '（30ぷんかん、かまってもらえなくなるけどいい？）',
     character_image:   'temp-character/temp-normal.png',
     background_image:  'temp-background/temp-background.png'
   },
@@ -1136,7 +1168,7 @@ events = [
     event_set_name:    'タマモンカート',
     name:              'タマモンカート',
     derivation_number: 0,
-    message:           '〈たまご〉はたのしそうにゲームであそんでいる！',
+    message:           '〈たまご〉はゲーム『タマモンカート』であそんでいる！',
     character_image:   'temp-character/temp-game-nikoniko.png',
     background_image:  'temp-background/temp-background.png'
   }
@@ -1165,6 +1197,11 @@ choices = [
     event_set_name:    '何かしたそう',
     derivation_number: 0,
     labels:            [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ]
+  },
+  {
+    event_set_name:    '何かしたそう',
+    derivation_number: 2,
+    labels:            [ 'ゲームさせてあげる',   'やっぱやめよう' ]
   },
   {
     event_set_name:    'ボーっとしている',
@@ -1659,8 +1696,30 @@ action_results = [
     priority:              1,
     trigger_conditions:    { always: true },
     effects:               {},
+    next_derivation_number: 2,
+    calls_event_set_name:  nil,
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     2,
+    label:                 'ゲームさせてあげる',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  'タマモンカート',
+    resolves_loop:         false
+  },
+  {
+    event_set_name:        '何かしたそう',
+    derivation_number:     2,
+    label:                 'やっぱやめよう',
+    priority:              1,
+    trigger_conditions:    { always: true },
+    effects:               {},
+    next_derivation_number: nil,
+    calls_event_set_name:  nil,
     resolves_loop:         false
   },
   {
@@ -3361,7 +3420,9 @@ cuts = [
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 3, position: 1, message: 'おえかきをした！これはなんだろう？',                 character_image: 'temp-character/temp-ewokaita3.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 4, position: 1, message: 'おえかきをした！ん！？なにかいてんだー！',            character_image: 'temp-character/temp-ewokaita4.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 0, label: 'おえかきする',       priority: 5, position: 1, message: 'おえかきをした！ん！？てんさいてきだーーー！！！',     character_image: 'temp-character/temp-ewokaita5.png', background_image: 'temp-background/temp-background.png' },
-  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'ゲームであそぼっか！30ぷんまでだよー！',       character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 0, label: 'ゲームする',         priority: 1, position: 1, message: 'テレビゲームであそばせてあげよっかな！',              character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 2, label: 'ゲームさせてあげる',  priority: 1, position: 1, message: 'テレビゲームであそんでいいよ！30ぷんかんね！',         character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: '何かしたそう',   derivation_number: 2, label: 'やっぱやめよう',     priority: 1, position: 1, message: 'やっぱゲームはまたこんどかな！',                      character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 1, message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '何かしたそう',   derivation_number: 1, label: 'こくご',       priority: 1, position: 2, message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
@@ -3655,17 +3716,25 @@ cuts = [
   { event_set_name: 'イントロ',   derivation_number: 3,  label: 'くんをつけて！',         priority: 1, position: 1, message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
   { event_set_name: 'イントロ',   derivation_number: 3,  label: 'さまをつけて！',         priority: 1, position: 1, message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
 
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 1, message: 'おなかがへってもなくし、さびしくなってもなく！', character_image: 'temp-character/temp-hiyoko-tuyoimagao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 1, message: 'おなかがへってもなくし、さびしくなってもなく！',                              character_image: 'temp-character/temp-hiyoko-tuyoimagao.png',    background_image: 'temp-background/temp-in-house.png' },
   { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 2, message: 'またよるはとうぜんねむくなるし、じかんたいによってこうどうパターンがかわるぞ。', character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 3, message: 'あとおなじことをしてあげても、はんのうがそのときそのときでかわったりするから',   character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 4, message: 'まあとにかくたくさんせっしてみてくれよな。',                                  character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 5, message: 'おっと、いけねえ。',                                                        character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 6, message: 'このあとちょっとよていがあるから、オレはもういくな。',                         character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 7, message: '〈たまご〉のこと、だいじにしてくれよ！',                                      character_image: 'temp-character/temp-hiyoko-nikoniko.png',  background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 8, message: 'いってしまった。',                                                          character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 8, message: '〈たまご〉のめんどう、うまくみれるかな～。',                                   character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 9, message: '・・・。',                                                                 character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
-  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 10, message: 'とりあえず、まずはこえをかけてみよう。',                                     character_image: 'temp-character/temp-normal.png',           background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 3, message: '〈たまご〉はあそびだしたり、なにかにムチュウになると',                        character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 4, message: 'しばらくそれにしかキョウミがなくなるが',                                     character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 5, message: 'そういうときはしばらくそっとしてやってくれ。じかんをあけて、ようすをみてあげるんだ。', character_image: 'temp-character/temp-hiyoko-nikoniko.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 6, message: 'あとおなじことをしてあげても、はんのうがそのときそのときでかわったりするから',   character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 7, message: 'まあとにかくたくさんせっしてみてくれよな。',                                  character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 8, message: 'そうそう。',                                                               character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 9, message: 'これは『LINEログイン』をりようしているばあいのはなしなんだが、',                character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 10, message: 'じつは『LINE』をつうじて〈たまご〉とおはなしすることができるんだ！',            character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 11, message: '『せってい』がめんから『LINEともだちついか』ができるからカクニンしてみてくれよな。', character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 12, message: '『ごはんだよ！』とメッセージをおくるとごはんをあげられたり、なにかとべんりだぞ。', character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 13, message: 'おっと、いけねえ。',                                                        character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 14, message: 'このあとちょっとよていがあるから、オレはもういくな。',                         character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 15, message: '〈たまご〉のこと、だいじにしてくれよ！',                                      character_image: 'temp-character/temp-hiyoko-nikoniko.png',  background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 16, message: 'いってしまった。',                                                          character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 17, message: '〈たまご〉のめんどう、うまくみれるかな～。',                                   character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 18, message: '・・・。',                                                                 character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
+  { event_set_name: 'イントロ',   derivation_number: 4,  label: 'すすむ',                priority: 1, position: 19, message: 'とりあえず、まずはこえをかけてみよう。',                                     character_image: 'temp-character/temp-normal.png',           background_image: 'temp-background/temp-in-house.png' },
 
   { event_set_name: 'イントロ',   derivation_number: 5,  label: 'こんにちは！',           priority: 1, position: 1, message: 'あ！へんじしてくれなかった！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
   { event_set_name: 'イントロ',   derivation_number: 5,  label: 'なかよくしてね！',        priority: 1, position: 1, message: 'あ！へんじしてくれなかった！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
@@ -3697,8 +3766,8 @@ cuts = [
 
   { event_set_name: 'タマモンカート', derivation_number: 0,  label: 'ながめている',        priority: 1, position: 1, message: '〈たまご〉「ににー！」',                          character_image: 'temp-character/temp-game-nikoniko.png', background_image: 'temp-background/temp-background.png',
    messages: [ '〈たまご〉「ににー！」', '〈たまご〉「にっにに～！」', '〈たまご〉「んにー！ににー！」', 'いま、だいにんきのタマモンカートだ！', 'いいぞ！はやいぞー！', 'おいぬけー！', 'アイテムをとった！これはきょうりょく！', 'さいきんのレースゲームは、りんじょうかんがすごい！', 'はやすぎてめがまわるー！',
-               'ライバルにおいぬかれた！まけるなー', 'ふくざつなコースだ！ぶつからずはしれるか！？', '〈たまご〉はレースゲームにだいこうふん！', '〈たまご〉はレースゲームがだいすき！おとなになったら、ほんとのクルマものりたいね！', 'いいスタートだ！はやいぞー！', 'レースゲームなのにコースにバナナのかわがおちている！あぶないなあ！』',
-               'いいドリフト！かっこいいー！', 'いいカソク！そのままおいぬけー！', 'げんざいトップだ！ライバルをきりはなせ！', 'あー！カートがカベにぶつかってる！！', 'はやいぞー！・・・って、ぎゃくそうしてない！？', 'レースゲームといったら、やっぱこのタマモンカートだよね！' ] },
+               'ライバルにおいぬかれた！まけるなー', 'ふくざつなコースだ！ぶつからずはしれるか！？', '〈たまご〉はレースゲームにだいこうふん！', '〈たまご〉はレースゲームがだいすき！おとなになったら、ほんとのクルマものりたいね！', 'いいスタートだ！はやいぞー！', 'レースゲームなのにコースにバナナのカワがおちている！あぶないなあ！',
+               'いいドリフト！かっこいいー！', 'いいカソク！そのままおいぬけー！', 'げんざいトップだ！ライバルをきりはなせ！', 'あー！カートがカベにぶつかってる！！', 'はやいぞー！・・・って、ぎゃくそうしてない！？', 'レースゲームといったら、やっぱタマモンカートだよね！' ] },
   { event_set_name: 'タマモンカート', derivation_number: 0,  label: 'ながめている',        priority: 2, position: 1, message: '〈たまご〉「ににー！」',                          character_image: 'temp-character/temp-game-ochikomu.png', background_image: 'temp-background/temp-background.png',
    messages: [ 'あちゃー！おいぬかれたー！', 'あー！ビリじゃんー！', 'ライバルにこうげきされた！あちゃー！', 'なかなかいいアイテムがでないようだ！', 'カートがスピンしちゃった！あれれー！' ] }
 ]
