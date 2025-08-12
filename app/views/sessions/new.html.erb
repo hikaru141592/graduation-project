@@ -47,7 +47,7 @@
       <div class="text-center">
         <%= link_to '新規登録はこちら',
             signup_path,
-            data: { turbo_method: :delete, turbo_confirm: "LINEログインを利用しない場合、LINEメッセージを利用した機能がご利用できません。\nよろしいでしょうか。" },
+            onclick: "return confirm('LINEログインを利用しない場合、LINEメッセージを利用した機能がご利用できません。\\nよろしいでしょうか。')",
             class: 'btn btn-link'%>
       </div>
       <div class="text-center mb-2">
