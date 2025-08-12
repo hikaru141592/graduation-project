@@ -16,8 +16,8 @@ module StatusHelper
   end
 
   def vitality_point(temp, max)
-    temp_point = (temp / 30).to_i
-    max_point = (max / 30).to_i
+    temp_point = (temp / VITALITY_UNIT).to_i
+    max_point = (max / VITALITY_UNIT).to_i
     "#{temp_point} / #{max_point}"
   end
 end

@@ -1535,9 +1535,9 @@ action_results = [
     derivation_number:     0,
     label:                 'はなしをきいてあげる',
     priority:              1,
-    trigger_conditions:    { "operator": "or", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": "<", "value": 5 },
-                                                               { "type": "status", "attribute": "arithmetic", "operator": "<", "value": 5 },
-                                                               { "type": "status", "attribute": "temp_vitality", "operator": "<", "value": 30 },
+    trigger_conditions:    { "operator": "or", "conditions": [ { "type": "status", "attribute": "sports_value", "operator": "<", "value": 2 },
+                                                               { "type": "status", "attribute": "arithmetic", "operator": "<", "value": 2 },
+                                                               { "type": "status", "attribute": "temp_vitality", "operator": "<", "value": VITALITY_UNIT },
                                                                { "type": "probability", "percent": 80 } ] },
     effects:               { "status": [ { "attribute": "mood_value", "delta": 5 } ] },
     next_derivation_number: nil,
@@ -1638,7 +1638,7 @@ action_results = [
     derivation_number:     0,
     label:                 'ボールあそびをする',
     priority:              1,
-    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "temp_vitality", "operator": ">=", "value": 30 } ] },
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "temp_vitality", "operator": ">=", "value": VITALITY_UNIT } ] },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  'ボール遊び',
@@ -1660,7 +1660,7 @@ action_results = [
     derivation_number:     0,
     label:                 'べんきょうする',
     priority:              1,
-    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "temp_vitality", "operator": ">=", "value": 30 } ] },
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "temp_vitality", "operator": ">=", "value": VITALITY_UNIT } ] },
     effects:               {},
     next_derivation_number: 1,
     calls_event_set_name:  nil,
@@ -1765,7 +1765,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "japanese", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "japanese", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1784,7 +1784,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "japanese", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "japanese", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1795,7 +1795,7 @@ action_results = [
     label:                 'こくご',
     priority:              3,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "japanese_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "japanese_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1814,7 +1814,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "science", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "science", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1833,7 +1833,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "science", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "science", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1844,7 +1844,7 @@ action_results = [
     label:                 'りか',
     priority:              3,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "science_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "science_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1863,7 +1863,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "social_studies", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "social_studies", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1882,7 +1882,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "social_studies", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "social_studies", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1893,7 +1893,7 @@ action_results = [
     label:                 'しゃかい',
     priority:              3,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "social_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects:               { "status": [ { "attribute": "social_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2990,97 +2990,97 @@ action_results = [
   {
     event_set_name: '算数', derivation_number: 1, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 1, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 1, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 1, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 2, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 3, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈A〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈B〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈C〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '算数', derivation_number: 4, label: '〈D〉', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -3110,79 +3110,79 @@ action_results = [
   {
     event_set_name: 'ボール遊び', derivation_number: 2, label: 'ひだりだ！', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 1,
     trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 50 } ] },
-    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 2,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 2, label: 'みぎだ！', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 1,
     trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 30 } ] },
-    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 2,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 3, label: 'そこだ！', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 1,
     trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 30 } ] },
-    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 2,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 4, label: 'ひだりだ！', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 1,
     trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 50 } ] },
-    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 2,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'ボール遊び', derivation_number: 4, label: 'みぎだ！', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -30 } ] },
+    effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {

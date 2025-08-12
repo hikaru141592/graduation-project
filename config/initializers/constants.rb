@@ -1,0 +1,1 @@
+VITALITY_UNIT = 15
