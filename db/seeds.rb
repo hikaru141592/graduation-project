@@ -132,19 +132,19 @@ event_set_conditions = [
   },
   {
     name: 'ボーっとしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 10 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 5 } ] }
   },
   {
     name: 'ニコニコしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 22 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 6 } ] }
   },
   {
     name: 'ゴロゴロしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 28 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 10 } ] }
   },
   {
     name: '何かしたそう',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 40 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 50 } ] }
   },
   {
     name: '何か言っている',
@@ -357,6 +357,12 @@ event_set_conditions = [
         {
           "type": "weekday",
           "value": [ 1 ]
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -377,6 +383,12 @@ event_set_conditions = [
         {
           "type": "weekday",
           "value": [ 5 ]
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
@@ -397,6 +409,12 @@ event_set_conditions = [
         {
           "type": "weekday",
           "value": [ 3 ]
+        },
+        {
+          "type":      "status",
+          "attribute": "sports_value",
+          "operator":  ">=",
+          "value":     2
         }
       ]
     }
