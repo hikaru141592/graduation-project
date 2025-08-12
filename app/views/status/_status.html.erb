@@ -1,38 +1,69 @@
 <div class="card">
   <div class="card-body">
     <ul class="list-unstyled mb-0 status-list">
-      <li>
-        <span class="status-label">なまえ</span>
-        <span class="status-value"><%= user.egg_name %></span>
-      </li>
-      <li class="mb-4">
-        <span class="status-label">たいりょく</span>
-        <span class="status-value"><%= vitality_point(user_status.temp_vitality, user_status.vitality) %></span>
-      </li>
-      <li>
-        <span class="status-label">さんすう</span>
-        <span class="status-value"><%= study_evaluate(user_status.arithmetic, user_status.arithmetic_effort) %></span>
-      </li>
-      <li>
-        <span class="status-label">こくご</span>
-        <span class="status-value"><%= study_evaluate(user_status.japanese, user_status.japanese_effort) %></span>
-      </li>
-      <li>
-        <span class="status-label">りか</span>
-        <span class="status-value"><%= study_evaluate(user_status.science, user_status.science_effort) %></span>
-      </li>
-      <li>
-        <span class="status-label">しゃかい</span>
-        <span class="status-value"><%= study_evaluate(user_status.social_studies, user_status.social_effort) %></span>
-      </li>
-      <li>
-        <span class="status-label">うんどう</span>
-        <span class="status-value"><%= study_evaluate(user_status.sports_value, user_status.social_effort) %></span>
-      </li>
-      <li>
-        <span class="status-label">げいじゅつ</span>
-        <span class="status-value"><%= study_evaluate(user_status.art_value) %></span>
-      </li>
+      <div class="mb-3">―きほんステータス―</div>
+      <div class="mb-4">
+        <li>
+          <span class="status-label">なまえ</span>
+          <span class="status-value"><%= user.egg_name %></span>
+        </li>
+        <li class="mb-4">
+          <span class="status-label">たいりょく</span>
+          <span class="status-value"><%= vitality_point(user_status.temp_vitality, user_status.vitality) %></span>
+        </li>
+        <li>
+          <span class="status-label">さんすう</span>
+          <span class="status-value"><%= study_evaluate(user_status.arithmetic, user_status.arithmetic_effort) %></span>
+        </li>
+        <li>
+          <span class="status-label">こくご</span>
+          <span class="status-value"><%= study_evaluate(user_status.japanese, user_status.japanese_effort) %></span>
+        </li>
+        <li>
+          <span class="status-label">りか</span>
+          <span class="status-value"><%= study_evaluate(user_status.science, user_status.science_effort) %></span>
+        </li>
+        <li>
+          <span class="status-label">しゃかい</span>
+          <span class="status-value"><%= study_evaluate(user_status.social_studies, user_status.social_effort) %></span>
+        </li>
+        <li>
+          <span class="status-label">うんどう</span>
+          <span class="status-value"><%= study_evaluate(user_status.sports_value, user_status.social_effort) %></span>
+        </li>
+        <li>
+          <span class="status-label">げいじゅつ</span>
+          <span class="status-value"><%= study_evaluate(user_status.art_value) %></span>
+        </li>
+      </div>
+      <% if user_status.arithmetic_training_max_count.present? %>
+        <div class="mb-4">
+          <div class="mb-3">―さんすうとっくん ベストきろく―</div>
+          <li>
+            <span class="status-label">かいすう</span>
+            <span class="status-value"><%= user_status.arithmetic_training_max_count %> かい</span>
+          </li>
+          <% if user_status.arithmetic_training_fastest_time.present? %>
+            <li>
+              <span class="status-label">タイム</span>
+              <% total_seconds = [user_status.arithmetic_training_fastest_time, 5999].min %>
+              <% min = total_seconds / 60 %>
+              <% sec = total_seconds % 60 %>
+              <span class="status-value"><%= "#{min}ふん#{sec}びょう" %></span>
+            </li>
+          <% end %>
+        </div>
+      <% end %>
+      <% if user_status.ball_training_max_count.present? %>
+        <div class="mb-4">
+          <div class="mb-3">―ボールあそびとっくん ベストきろく―</div>
+          <li>
+            <span class="status-label">かいすう</span>
+            <span class="status-value"><%= user_status.ball_training_max_count %> かい</span>
+          </li>
+        </div>
+      <% end %>
     </ul>
+
   </div>
 </div>
