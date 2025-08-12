@@ -4,7 +4,7 @@ module ApplicationHelper
       site: "ニワトリとタマゴのワクワク生活",
       reverse: false,
       charset: "utf-8",
-      description: "タマゴの面倒を見てあげよう！",
+      description: "タマゴといっしょにワクワクな毎日を送ろう！",
       keywords: "たまご,タマゴ,卵,egg,Egg,鶏,ニワトリ,にわとり,雛,ヒヨコ,ひよこ,ワクワク,育成,ゲーム,Rails,Webアプリ,Webゲーム,Ruby,かわいい,キャラクター",
       canonical: request.original_url,
       separator: "|",
