@@ -132,19 +132,19 @@ event_set_conditions = [
   },
   {
     name: 'ボーっとしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 30 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 10 } ] }
   },
   {
     name: 'ニコニコしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 42 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 22 } ] }
   },
   {
     name: 'ゴロゴロしている',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 37 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 28 } ] }
   },
   {
     name: '何かしたそう',
-    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 50 } ] }
+    trigger_conditions: { "operator":   "and", "conditions": [ { "type":    "probability", "percent": 40 } ] }
   },
   {
     name: '何か言っている',
