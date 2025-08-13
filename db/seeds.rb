@@ -1579,7 +1579,7 @@ action_results = [
                                   "type": "status",
                                   "attribute": "hunger_value",
                                   "operator": "<=",
-                                  "value": 90
+                                  "value": 95
                                 }
                               ]
                             },
@@ -1612,7 +1612,7 @@ action_results = [
                                   "type": "status",
                                   "attribute": "hunger_value",
                                   "operator": "<=",
-                                  "value": 70
+                                  "value": 85
                                 }
                               ]
                             },
@@ -1976,7 +1976,7 @@ action_results = [
                                   "type": "status",
                                   "attribute": "hunger_value",
                                   "operator": "<=",
-                                  "value": 90
+                                  "value": 95
                                 }
                               ]
                             },
@@ -2009,7 +2009,7 @@ action_results = [
                                   "type": "status",
                                   "attribute": "hunger_value",
                                   "operator": "<=",
-                                  "value": 70
+                                  "value": 85
                                 }
                               ]
                             },
@@ -2759,7 +2759,7 @@ action_results = [
   },
   {
     event_set_name: '扇風機', derivation_number: 0, label: 'スイカをあげる', priority: 1,
-    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 90 } ] },
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 95 } ] },
     effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 3 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
@@ -2789,7 +2789,7 @@ action_results = [
   },
   {
     event_set_name: 'こたつ', derivation_number: 0, label: 'ミカンをあげる', priority: 1,
-    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 90 } ] },
+    trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 95 } ] },
     effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
