@@ -10,10 +10,10 @@
   <ul>
     <li>
       <% if current_user && current_user.authentications.exists?(provider: "line") %>
-        <%= link_to "LINE通知", settings_line_notification_path, class: "text-decoration-underline" %>
+        <%= link_to "LINEメッセージ機能", settings_line_notification_path, class: "text-decoration-underline" %>
       <% else %>
         <span class="text-muted">
-          LINE通知（LINEログインユーザーのみ利用可能）
+          LINEメッセージ機能（LINEログインユーザーのみ利用可能）
         </span>
       <% end %>
     </li>
