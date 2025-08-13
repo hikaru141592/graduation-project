@@ -1,10 +1,5 @@
 class OauthsController < ApplicationController
   skip_before_action :require_login, raise: false
-  # sends the user on a trip to the provider,
-  # and after authorizing there back to the callback url.
-  # def oauth
-  #   login_at(auth_params[:provider])
-  # end
 
   def line_login
     session[:remember] = params[:remember]
@@ -16,9 +11,8 @@ class OauthsController < ApplicationController
     Rails.logger.debug "=== AUTH HASH ===\n#{auth_hash.to_h.inspect}\n================="
     access_token = auth_hash.dig("credentials", "token")
     Rails.logger.debug "LINE access_token present? #{access_token.present?}"
-    
-    # 後程リファクタリング：raw_name = (auth_hash.dig("info", "name").presence || auth_hash.dig("info", "displayName").presence)
-    raw_name = auth_hash.info.name.to_s.presence || auth_hash.info["displayName"].to_s
+
+    raw_name = (auth_hash.dig("info", "name").presence || auth_hash.dig("info", "displayName").presence)
     truncated_name = raw_name.each_char.take(6).join
     authentication = Authentication.find_by(
       provider: auth_hash.provider,
@@ -47,17 +41,10 @@ class OauthsController < ApplicationController
     end
 
     update_line_friend_status(@user, access_token)
-    
+
     remember_flag = session.delete(:remember)
     reset_session
     session[:user_id] = @user.id
-    # session[:pending_oauth]はおそらく不要
-    session[:pending_oauth] = {
-      provider: auth_hash.provider,
-      uid:      auth_hash.uid,
-      name:     truncated_name,
-      email:    auth_hash.info["email"]
-    }
 
     if @user.profile_completed?
       auto_login(@user)
