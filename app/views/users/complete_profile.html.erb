@@ -9,7 +9,7 @@
       <%= image_tag( "main/complete_profile.png", alt: "パスワードリセット", class: "img-fluid mb-4" ) %>
     </div>
     <div class="col-12 col-md-3">
-      <h1 class="mb-4">ユーザー情報登録</h1>
+      <h1 class="mb-4">プロフィール登録</h1>
 
       <%= render 'shared/error_messages', object: @user %>
 
@@ -20,8 +20,8 @@
         </div>
 
         <div class="mb-3">
-          <%= f.label :egg_name, 'たまごちゃん名（6文字以内）', class: 'form-label' %>
-          <%= f.text_field :egg_name, class: 'form-control', maxlength: 6, required: true %>
+          <%= f.label :egg_name, 'たまごの名前（6文字以内）', class: 'form-label' %>
+          <%= f.text_field :egg_name, value: '', class: 'form-control', maxlength: 6, required: true %>
         </div>
 
         <div class="row mb-3">
