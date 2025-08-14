@@ -1907,7 +1907,7 @@ action_results = [
   },
   {
     event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 1,
-    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "=", "value": 0 } ] },
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "==", "value": 0 } ] },
     effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
