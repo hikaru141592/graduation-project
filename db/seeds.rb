@@ -1224,7 +1224,7 @@ choices = [
   {
     event_set_name:    'ボーっとしている',
     derivation_number: 0,
-    labels:            [ 'ながめている' ]
+    labels:            [ 'ながめている',   'こえをかける' ]
   },
   {
     event_set_name:    'ニコニコしている',
@@ -1901,15 +1901,54 @@ action_results = [
     resolves_loop:         false
   },
   {
-    event_set_name:        'ボーっとしている',
-    derivation_number:     0,
-    label:                 'ながめている',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'ながめている', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "=", "value": 0 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 2,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 10 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 3,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 30 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 4,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 80 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 5,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 150 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 6,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 400 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 7,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 1000 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 8,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 2500 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 9,
+    trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name:        'ニコニコしている',
@@ -3494,6 +3533,25 @@ cuts = [
   { event_set_name: 'ゴロゴロしている', derivation_number: 0, label: 'ながめている',  priority: 1, position: 1, message: 'ゴロゴロ！', character_image: 'temp-character/temp-gorogoro.png', background_image: 'temp-background/temp-background.png',
    messages: [ 'ゴロゴロ！', 'きもちよさそうだなあ。', 'ゴロゴロばっかしてるとふとっちゃうよ！', 'じぶんもゴロゴロしようかなあ。', 'ゆか、かたくないのかな？',
                'ゴロゴロきもちいいねえ！', '〈たまご〉「に～！」', '〈たまご〉「に！んにに～！」' ] },
+
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 1, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 1, position: 2, message: '・・・。けいかいされている。いちどじぶんのムネにてをあてて、げんいんをかんがえてみるんだ。', character_image: 'temp-character/temp-kanasii.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 2, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 2, position: 2, message: 'あー！ぜんぜんなついていないようだ。',                                                  character_image: 'temp-character/temp-mewosorasu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 3, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 3, position: 2, message: 'うーん、もっとこころをひらいてほしいなあ。',                                             character_image: 'temp-character/temp-tewoageru.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 4, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 4, position: 2, message: 'お！すこしこころをひらいてくれているようだ！',                                           character_image: 'temp-character/temp-nikoniko3.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 5, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 5, position: 2, message: '〈たまご〉はこころをひらいてくれているようだ！',                                         character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 6, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 6, position: 2, message: '〈たまご〉にすごくすかれているようだ！',                                                character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 7, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 7, position: 2, message: '〈たまご〉にすっごくすかれているようだ！！',                                             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 8, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 8, position: 2, message: '〈たまご〉にすーっごくかなりすかれているようだ！！！',                                    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 9, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 9, position: 2, message: '〈たまご〉にすーーっごくかなりすかれているようだ！！！！',                                character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
