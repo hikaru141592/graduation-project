@@ -1539,7 +1539,7 @@ action_results = [
                                                                { "type": "status", "attribute": "arithmetic", "operator": "<", "value": 2 },
                                                                { "type": "status", "attribute": "temp_vitality", "operator": "<", "value": VITALITY_UNIT },
                                                                { "type": "probability", "percent": 80 } ] },
-    effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 } , { "attribute": "mood_value", "delta": 5 } ] },
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 }, { "attribute": "mood_value", "delta": 5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
