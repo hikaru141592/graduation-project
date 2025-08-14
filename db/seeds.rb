@@ -1224,7 +1224,7 @@ choices = [
   {
     event_set_name:    'ボーっとしている',
     derivation_number: 0,
-    labels:            [ 'ながめている' ]
+    labels:            [ 'ながめている',   'こえをかける' ]
   },
   {
     event_set_name:    'ニコニコしている',
@@ -1539,7 +1539,7 @@ action_results = [
                                                                { "type": "status", "attribute": "arithmetic", "operator": "<", "value": 2 },
                                                                { "type": "status", "attribute": "temp_vitality", "operator": "<", "value": VITALITY_UNIT },
                                                                { "type": "probability", "percent": 80 } ] },
-    effects:               { "status": [ { "attribute": "mood_value", "delta": 5 } ] },
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 }, { "attribute": "mood_value", "delta": 5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -1562,6 +1562,7 @@ action_results = [
     priority:              1,
     trigger_conditions:    { always: true },
     effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
+                                         { "attribute": "happiness_value", "delta": 1 },
                                          { "attribute": "mood_value", "delta": 5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -1584,6 +1585,7 @@ action_results = [
                               ]
                             },
     effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
+                                         { "attribute": "happiness_value", "delta": 1 },
                                          { "attribute": "mood_value", "delta": 15 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -1724,7 +1726,7 @@ action_results = [
     label:                 'ゲームさせてあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  'タマモンカート',
     resolves_loop:         false
@@ -1899,15 +1901,54 @@ action_results = [
     resolves_loop:         false
   },
   {
-    event_set_name:        'ボーっとしている',
-    derivation_number:     0,
-    label:                 'ながめている',
-    priority:              1,
-    trigger_conditions:    { always: true },
-    effects:               {},
-    next_derivation_number: nil,
-    calls_event_set_name:  nil,
-    resolves_loop:         false
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'ながめている', priority: 1,
+    trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 1,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "==", "value": 0 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 2,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 10 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 3,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 30 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 4,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 80 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 5,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 150 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 6,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 400 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 7,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 1000 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 8,
+    trigger_conditions: { "operator": "and", "conditions": [ { "type": "status", "attribute": "happiness_value", "operator": "<=", "value": 2500 } ] },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+  },
+  {
+    event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 9,
+    trigger_conditions: { always: true },
+    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name:        'ニコニコしている',
@@ -1941,11 +1982,12 @@ action_results = [
                               "conditions": [
                                 {
                                   "type": "probability",
-                                  "percent": 6
+                                  "percent": 20
                                 }
                               ]
                             },
     effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
+                                         { "attribute": "happiness_value", "delta": 10 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -1981,6 +2023,7 @@ action_results = [
                               ]
                             },
     effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
+                                         { "attribute": "happiness_value", "delta": 3 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -2015,6 +2058,7 @@ action_results = [
                             },
     effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 },
                                          { "attribute": "vitality", "delta": 1 },
+                                         { "attribute": "happiness_value", "delta": 1 },
                                          { "attribute": "mood_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -2181,7 +2225,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 40 } ] },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 40 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2192,7 +2236,7 @@ action_results = [
     label:                 'たたきおこす',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": -5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2214,7 +2258,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 10 } ] },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2233,7 +2277,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": -1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '怒っている',
     resolves_loop:         true
@@ -2263,7 +2307,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "happiness_value", "delta": -2 } ] },
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": -100 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '怒っている',
     resolves_loop:         true
@@ -2296,7 +2340,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "love_value", "delta": 10 } ] },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2337,7 +2381,7 @@ action_results = [
     label:                 'マンガをとりあげる',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "happiness_value", "delta": -2 } ] },
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": -50 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '怒っている',
     resolves_loop:         true
@@ -2356,7 +2400,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '寝かせた',
     resolves_loop:         true
@@ -2386,7 +2430,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '寝かせた',
     resolves_loop:         true
@@ -2396,7 +2440,7 @@ action_results = [
     derivation_number:     0,
     label:                 'よしよしする',
     priority:              2,
-    trigger_conditions:    { always: true },
+    trigger_conditions:    { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     effects:               {},
     next_derivation_number: nil,
     calls_event_set_name:  nil,
@@ -2416,7 +2460,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": 3 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '寝かせた',
     resolves_loop:         true
@@ -2498,7 +2542,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 10 } ] },
     next_derivation_number: 1,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2509,7 +2553,7 @@ action_results = [
     label:                 'たたきおこす',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": -5 } ] },
     next_derivation_number: 1,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2542,7 +2586,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2553,7 +2597,7 @@ action_results = [
     label:                 'たたきおこす',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": -5 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2575,7 +2619,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              1,
     trigger_conditions: { "operator": "and", "conditions": [ { "type": "probability", "percent": 20 } ] },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         true
@@ -2586,7 +2630,7 @@ action_results = [
     label:                 'よしよしする',
     priority:              2,
     trigger_conditions:    { always: true },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -2663,7 +2707,7 @@ action_results = [
     label:                 'はい',
     priority:              1,
     trigger_conditions:    { always: true },
-    effects:               { "status": [ { "attribute": "happiness_value", "delta": -2 } ] },
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": -30 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  '怒っている',
     resolves_loop:         true
@@ -2700,7 +2744,7 @@ action_results = [
   {
     event_set_name: 'タマモン', derivation_number: 0, label: 'みていいよ', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
     next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2718,7 +2762,7 @@ action_results = [
   {
     event_set_name: 'タマえもん', derivation_number: 0, label: 'みていいよ', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
     next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2736,7 +2780,7 @@ action_results = [
   {
     event_set_name: 'ニワトリビアの湖', derivation_number: 0, label: 'みていいよ', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 3 } ] },
     next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2754,13 +2798,13 @@ action_results = [
   {
     event_set_name: '扇風機', derivation_number: 0, label: 'よしよしする', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "love_value", "delta": 10 } ] },
+    effects: { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 2 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '扇風機', derivation_number: 0, label: 'スイカをあげる', priority: 1,
     trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 95 } ] },
-    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 3 } ] },
+    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 3 }, { "attribute": "happiness_value", "delta": 2 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2772,7 +2816,7 @@ action_results = [
   {
     event_set_name: '扇風機', derivation_number: 0, label: 'せんぷうきをとめる', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "happiness_value", "delta": -1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
   },
   {
@@ -2784,13 +2828,13 @@ action_results = [
   {
     event_set_name: 'こたつ', derivation_number: 0, label: 'よしよしする', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "love_value", "delta": 10 } ] },
+    effects: { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 2 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'こたつ', derivation_number: 0, label: 'ミカンをあげる', priority: 1,
     trigger_conditions:    { "operator": "and", "conditions": [ { "type": "status", "attribute": "hunger_value", "operator": "<=", "value": 95 } ] },
-    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 1 } ] },
+    effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 3 }, { "attribute": "happiness_value", "delta": 2 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2802,7 +2846,7 @@ action_results = [
   {
     event_set_name: 'こたつ', derivation_number: 0, label: 'こたつをとめる', priority: 1,
     trigger_conditions: { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "happiness_value", "delta": -1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
   },
   {
@@ -2814,7 +2858,7 @@ action_results = [
   {
     event_set_name: '花見', derivation_number: 0, label: 'つれていく', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2826,7 +2870,7 @@ action_results = [
   {
     event_set_name: '紅葉', derivation_number: 0, label: 'つれていく', priority: 1,
     trigger_conditions: { always: true },
-    effects: { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -2947,7 +2991,7 @@ action_results = [
                                 }
                               ]
                             },
-    effects:               {},
+    effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         true
@@ -3356,7 +3400,7 @@ action_results = [
   {
     event_set_name: 'イントロ', derivation_number: 7, label: 'よしよし', priority: 1,
     trigger_conditions:    { always: true },
-    effects: {},
+    effects: { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
@@ -3365,19 +3409,23 @@ action_results = [
   },
   {
     event_set_name: '誕生日', derivation_number: 1, label: 'たのしくすごす！', priority: 1, trigger_conditions: { always: true },
-    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '誕生日', derivation_number: 1, label: 'えがおですごす！', priority: 1, trigger_conditions: { always: true },
-    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '誕生日', derivation_number: 1, label: 'せいちょうする！', priority: 1, trigger_conditions: { always: true },
-    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: '誕生日', derivation_number: 1, label: 'ひとをだいじにする！', priority: 1, trigger_conditions: { always: true },
-    effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+    effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+    next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
   },
   {
     event_set_name: 'タマモンカート', derivation_number: 0, label: 'ながめている', priority: 1,
@@ -3485,6 +3533,25 @@ cuts = [
   { event_set_name: 'ゴロゴロしている', derivation_number: 0, label: 'ながめている',  priority: 1, position: 1, message: 'ゴロゴロ！', character_image: 'temp-character/temp-gorogoro.png', background_image: 'temp-background/temp-background.png',
    messages: [ 'ゴロゴロ！', 'きもちよさそうだなあ。', 'ゴロゴロばっかしてるとふとっちゃうよ！', 'じぶんもゴロゴロしようかなあ。', 'ゆか、かたくないのかな？',
                'ゴロゴロきもちいいねえ！', '〈たまご〉「に～！」', '〈たまご〉「に！んにに～！」' ] },
+
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 1, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 1, position: 2, message: '・・・。けいかいされている。いちどじぶんのムネにてをあてて、げんいんをかんがえてみるんだ。', character_image: 'temp-character/temp-kanasii.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 2, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 2, position: 2, message: 'あー！ぜんぜんなついていないようだ。',                                                  character_image: 'temp-character/temp-mewosorasu.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 3, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 3, position: 2, message: 'うーん、もっとこころをひらいてほしいなあ。',                                             character_image: 'temp-character/temp-tewoageru.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 4, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 4, position: 2, message: 'お！すこしこころをひらいてくれているようだ！',                                           character_image: 'temp-character/temp-nikoniko3.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 5, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 5, position: 2, message: '〈たまご〉はこころをひらいてくれているようだ！',                                         character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 6, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 6, position: 2, message: '〈たまご〉にすごくすかれているようだ！',                                                character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 7, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 7, position: 2, message: '〈たまご〉にすっごくすかれているようだ！！',                                             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 8, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 8, position: 2, message: '〈たまご〉にすーっごくかなりすかれているようだ！！！',                                    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 9, position: 1, message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+  { event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける',  priority: 9, position: 2, message: '〈たまご〉にすーーっごくかなりすかれているようだ！！！！',                                character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
 
   { event_set_name: '踊っている',     derivation_number: 0, label: 'よしよしする',       priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '踊っている',     derivation_number: 0, label: 'おやつをあげる',     priority: 1, position: 1, message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },

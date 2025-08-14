@@ -82,7 +82,8 @@ class ProcessLineWebhookJob < ApplicationJob
   def handle_pet(user)
     user.play_state.line_apply_automatic_update!
     status = user.user_status.reload
-    status.update!(love_value: [ status.love_value + 10, 100 ].min)
+    status.update!(love_value:      [ status.love_value + 10, 100 ].min)
+    status.update!(happiness_value: [ status.happiness_value + 1, 99_999_999 ].min)
     "にー！\nにににーにー！\n----（訳）----\nわーい！\nうれしいなあ！"
   end
 
