@@ -60,9 +60,9 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
                      expected_priority_for: ->(_label) { 1 }
   end
 
-  context '空腹値が 80 のとき' do
+  context '空腹値が 90 のとき' do
     before do
-      setup_game(hunger: 80)
+      setup_game(hunger: 90)
       visit current_path
     end
 
