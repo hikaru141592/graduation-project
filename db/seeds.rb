@@ -595,8 +595,8 @@ event_set_conditions = [
       "conditions": [
         {
           "type": "date_range",
-          "from": { "month": 7, "day": 15 },
-          "to":   { "month": 7, "day": 15 }
+          "from": { "month": 1, "day": 1 },
+          "to":   { "month": 1, "day": 1 }
         }
       ]
     }
@@ -2440,8 +2440,8 @@ action_results = [
     derivation_number:     0,
     label:                 'よしよしする',
     priority:              2,
-    trigger_conditions:    { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
-    effects:               {},
+    trigger_conditions:    { always: true },
+    effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
     next_derivation_number: nil,
     calls_event_set_name:  nil,
     resolves_loop:         false
@@ -3701,7 +3701,7 @@ cuts = [
   { event_set_name: '寝かせた', derivation_number: 0, label: 'よしよしする',          priority: 1, position: 1, message: 'よしよし、りっぱにそだちますように。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '寝かせた', derivation_number: 0, label: 'たたきおこす',          priority: 1, position: 1, message: 'できるわけないだろ！！',              character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
   { event_set_name: '寝かせた', derivation_number: 0, label: 'ゴミばこのなかをのぞく', priority: 1, position: 1, message: 'はなをかんだティッシュがいっぱい！',   character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png',
-   messages: [ 'はなをかんだティッシュがいっぱい！', 'だが、からっぽだ！', 'しっかりブンベツされている！', 'テレビばんぐみひょうだ。うらないばんぐみは、まいあさやっているようだ。」', 'テレビばんぐみひょうだ。『タマモン』は、げつようびのよる7じからやっているようだ。', 'テレビばんぐみひょうだ。『ニワトリビアのいずみ』は、すいようびのよる8じからやっているようだ。', 'テレビばんぐみひょうだ。『タマえもん』は、きんようびのよる7じからやっているようだ。',
+   messages: [ 'はなをかんだティッシュがいっぱい！', 'だが、からっぽだ！', 'しっかりブンベツされている！', 'テレビばんぐみひょうだ。うらないばんぐみは、まいあさやっているようだ。」', 'テレビばんぐみひょうだ。『タマモン』は、げつようびのよる7じからやっているようだ。', 'テレビばんぐみひょうだ。『ニワトリビアのみずうみ』は、すいようびのよる8じからやっているようだ。', 'テレビばんぐみひょうだ。『タマえもん』は、きんようびのよる7じからやっているようだ。',
                'メモがきだ。「とっくんをしたくなると、はなしかけようとしてくる」だって。', 'メモがきだ。「れんぞくでべんきょうや、ボールあそびするとつかれちゃう」だって。', 'メモがきだ。「つかれても、じかんがたてばもとどおり」だって。', 'メモがきだ。「ごはんをあげると、ちょっとずつたいりょくがつく」だって。', 'メモがきだ。「おやつではたいりょくはつかない」だって。', 'メモがきだ。「げいじゅつせいはバクハツからやってくる」だって。', 'メモがきだ。「ダジャレがウケなくても、あきらめるな」だって。',
                'メモがきだ。「このあたりは、はるになるとサクラがきれい」だって。', 'メモがきだ。「このあたりは、あきになるとコウヨウがきれい」だって。', 'メモがきだ。「せんぷうき、あります」だって。', 'メモがきだ。「コタツ、あります」だって。', 'メモがきだ。「しっぱいしたって、せいちょうしないわけじゃない」だって。', 'メモがきだ。「L-I-N-E/35894421」だって。', 'メモがきだ。「メモがきをゴミばこにすてておこう」だって。', 'メモがきだ。「メモがきのなかにはゴクヒのものもある」だって。' ] },
   { event_set_name: '寝かせた', derivation_number: 1, label: 'そっとする',            priority: 1, position: 1, message: 'きもちよさそうにねているなあ。',      character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
