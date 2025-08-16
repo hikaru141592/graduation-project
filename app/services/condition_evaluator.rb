@@ -53,7 +53,11 @@ class ConditionEvaluator
   def date_range_judge?(c)
     from  = Date.new(@date.year, c["from"]["month"], c["from"]["day"])
     to    = Date.new(@date.year, c["to"]["month"],   c["to"]["day"])
-    to    = to.next_year if from > to
-    (from..to).cover?(@date)
+
+    if from <= to
+      (from..to).cover?(@date)
+    else
+      (@date >= from) || (@date <= to)
+    end
   end
 end
