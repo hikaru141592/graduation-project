@@ -15,9 +15,10 @@ module Seeds
     h["offsets_by_day"] = offsets if offsets.present?
     h
   end
-  def weekday(array) = { "type" => "weekday", "value" => array }.freeze
-  def date_range(fm, fd, tm, td) = { "type" => "date_range", "from" => { "month" => fm, "day" => fd }, "to" => { "month" => tm, "day" => td } }
-  def and_(*conditions) = { "operator" => "and", "conditions" => conditions }
+  def weekday(array)              = { "type" => "weekday", "value" => array }.freeze
+  def date_range(fm, fd, tm, td)  = { "type" => "date_range", "from" => { "month" => fm, "day" => fd }, "to" => { "month" => tm, "day" => td } }
+  def and_(*conditions)           = { "operator" => "and", "conditions" => conditions }
+  def effects_status(*pairs)      = { "status" => pairs.map { |attr, delta| { "attribute" => attr.to_s, "delta" => delta } } }
 
   def run!
     categories = [
@@ -1089,7 +1090,7 @@ module Seeds
                                                                   status("arithmetic", "<", 2),
                                                                   status("temp_vitality", "<", VITALITY_UNIT),
                                                                   prob(80) ] },
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 }, { "attribute": "mood_value", "delta": 5 } ] },
+        effects:               effects_status(["happiness_value", 1], ["mood_value", 5]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1111,9 +1112,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
-                                            { "attribute": "happiness_value", "delta": 1 },
-                                            { "attribute": "mood_value", "delta": 5 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", 5]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1129,9 +1128,7 @@ module Seeds
                                     status("hunger_value", "<=", 95)
                                   ]
                                 },
-        effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
-                                            { "attribute": "happiness_value", "delta": 1 },
-                                            { "attribute": "mood_value", "delta": 15 } ] },
+        effects:               effects_status(["hunger_value", 30], ["happiness_value", 1], ["mood_value", 15]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1156,8 +1153,7 @@ module Seeds
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 85) ]
                                 },
-        effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 },
-                                            { "attribute": "vitality", "delta": 1 } ] },
+        effects:               effects_status(["hunger_value", 40], ["vitality", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1264,7 +1260,7 @@ module Seeds
         label:                 'ゲームさせてあげる',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
+        effects:               effects_status(["happiness_value", 5]),
         next_derivation_number: nil,
         calls_event_set_name:  'タマモンカート',
         resolves_loop:         false
@@ -1297,7 +1293,7 @@ module Seeds
         label:                 'こくご',
         priority:              1,
         trigger_conditions:    prob_only(5),
-        effects:               { "status": [ { "attribute": "japanese", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1308,7 +1304,7 @@ module Seeds
         label:                 'こくご',
         priority:              2,
         trigger_conditions:    prob_only(20),
-        effects:               { "status": [ { "attribute": "japanese", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1319,7 +1315,7 @@ module Seeds
         label:                 'こくご',
         priority:              3,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "japanese_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["japanese_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1330,7 +1326,7 @@ module Seeds
         label:                 'りか',
         priority:              1,
         trigger_conditions:    prob_only(5),
-        effects:               { "status": [ { "attribute": "science", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1341,7 +1337,7 @@ module Seeds
         label:                 'りか',
         priority:              2,
         trigger_conditions:    prob_only(20),
-        effects:               { "status": [ { "attribute": "science", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1352,7 +1348,7 @@ module Seeds
         label:                 'りか',
         priority:              3,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "science_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["science_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1363,7 +1359,7 @@ module Seeds
         label:                 'しゃかい',
         priority:              1,
         trigger_conditions:    prob_only(5),
-        effects:               { "status": [ { "attribute": "social_studies", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1374,7 +1370,7 @@ module Seeds
         label:                 'しゃかい',
         priority:              2,
         trigger_conditions:    prob_only(20),
-        effects:               { "status": [ { "attribute": "social_studies", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1385,7 +1381,7 @@ module Seeds
         label:                 'しゃかい',
         priority:              3,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "social_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects:               effects_status(["social_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1468,9 +1464,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    prob_only(20),
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
-                                            { "attribute": "happiness_value", "delta": 10 },
-                                            { "attribute": "mood_value", "delta": -100 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 10], ["mood_value", -100]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1481,9 +1475,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              2,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 },
-                                            { "attribute": "happiness_value", "delta": 1 },
-                                            { "attribute": "mood_value", "delta": -100 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", -100]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1497,9 +1489,7 @@ module Seeds
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 95) ]
                                 },
-        effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 },
-                                            { "attribute": "happiness_value", "delta": 3 },
-                                            { "attribute": "mood_value", "delta": -100 } ] },
+        effects:               effects_status(["hunger_value", 30], ["happiness_value", 3], ["mood_value", -100]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1524,10 +1514,7 @@ module Seeds
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 85) ]
                                 },
-        effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 },
-                                            { "attribute": "vitality", "delta": 1 },
-                                            { "attribute": "happiness_value", "delta": 1 },
-                                            { "attribute": "mood_value", "delta": -100 } ] },
+        effects:               effects_status(["hunger_value", 40], ["vitality", 1], ["happiness_value", 1], ["mood_value", -100]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1549,7 +1536,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 5 } ] },
+        effects:               effects_status(["love_value", 5]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1560,7 +1547,7 @@ module Seeds
         label:                 'おやつをあげる',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "hunger_value", "delta": 40 } ] },
+        effects:               effects_status(["hunger_value", 40]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1571,8 +1558,7 @@ module Seeds
         label:                 'ごはんをあげる',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "hunger_value", "delta": 50 },
-                                            { "attribute": "vitality", "delta": 1 } ] },
+        effects:               effects_status(["hunger_value", 50], ["vitality", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1594,7 +1580,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 40 } ] },
+        effects:               effects_status(["love_value", 40]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1671,7 +1657,7 @@ module Seeds
         label:                 'あそんであげる',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 30 } ] },
+        effects:               effects_status(["love_value", 30]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -1693,7 +1679,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 40 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 40], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1704,7 +1690,7 @@ module Seeds
         label:                 'たたきおこす',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": -5 } ] },
+        effects:               effects_status(["happiness_value", -5]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1726,7 +1712,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1737,7 +1723,7 @@ module Seeds
         label:                 'ちょっかいをだす',
         priority:              1,
         trigger_conditions:    prob_only(20),
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": -1 } ] },
+        effects:               effects_status(["happiness_value", -1]),
         next_derivation_number: nil,
         calls_event_set_name:  '怒っている',
         resolves_loop:         true
@@ -1759,7 +1745,7 @@ module Seeds
         label:                 'ブロックをくずす',
         priority:              1,
         trigger_conditions:    prob_only(6),
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": -100 } ] },
+        effects:               effects_status(["happiness_value", -100]),
         next_derivation_number: nil,
         calls_event_set_name:  '怒っている',
         resolves_loop:         true
@@ -1792,7 +1778,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1825,7 +1811,7 @@ module Seeds
         label:                 'マンガをとりあげる',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": -50 } ] },
+        effects:               effects_status(["happiness_value", -50]),
         next_derivation_number: nil,
         calls_event_set_name:  '怒っている',
         resolves_loop:         true
@@ -1836,7 +1822,7 @@ module Seeds
         label:                 'ねかせる',
         priority:              1,
         trigger_conditions:    prob_only(30),
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
+        effects:               effects_status(["happiness_value", 5]),
         next_derivation_number: nil,
         calls_event_set_name:  '寝かせた',
         resolves_loop:         true
@@ -1858,7 +1844,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    prob_only(20),
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  '寝かせた',
         resolves_loop:         true
@@ -1869,7 +1855,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              2,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1880,7 +1866,7 @@ module Seeds
         label:                 'はみがきをさせる',
         priority:              1,
         trigger_conditions:    prob_only(33),
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": 3 } ] },
+        effects:               effects_status(["happiness_value", 3]),
         next_derivation_number: nil,
         calls_event_set_name:  '寝かせた',
         resolves_loop:         true
@@ -1902,7 +1888,7 @@ module Seeds
         label:                 'ダジャレをいう',
         priority:              1,
         trigger_conditions:    prob_only(5),
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1946,7 +1932,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 10 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 10]),
         next_derivation_number: 1,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1957,7 +1943,7 @@ module Seeds
         label:                 'たたきおこす',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": -5 } ] },
+        effects:               effects_status(["happiness_value", -5]),
         next_derivation_number: 1,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -1990,7 +1976,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -2001,7 +1987,7 @@ module Seeds
         label:                 'たたきおこす',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": -5 } ] },
+        effects:               effects_status(["happiness_value", -5]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -2023,7 +2009,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    prob_only(20),
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -2034,7 +2020,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              2,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -2111,7 +2097,7 @@ module Seeds
         label:                 'はい',
         priority:              1,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": -30 } ] },
+        effects:               effects_status(["happiness_value", -30]),
         next_derivation_number: nil,
         calls_event_set_name:  '怒っている',
         resolves_loop:         true
@@ -2148,7 +2134,7 @@ module Seeds
       {
         event_set_name: 'タマモン', derivation_number: 0, label: 'みていいよ', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
+        effects: effects_status(["happiness_value", 5]),
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2166,7 +2152,7 @@ module Seeds
       {
         event_set_name: 'タマえもん', derivation_number: 0, label: 'みていいよ', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 5 } ] },
+        effects: effects_status(["happiness_value", 5]),
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2184,7 +2170,7 @@ module Seeds
       {
         event_set_name: 'ニワトリビアの湖', derivation_number: 0, label: 'みていいよ', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 3 } ] },
+        effects: effects_status(["happiness_value", 3]),
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2202,13 +2188,13 @@ module Seeds
       {
         event_set_name: '扇風機', derivation_number: 0, label: 'よしよしする', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 2 } ] },
+        effects: effects_status(["love_value", 10], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '扇風機', derivation_number: 0, label: 'スイカをあげる', priority: 1,
         trigger_conditions:    { "operator": "and", "conditions": [ status("hunger_value", "<=", 95) ] },
-        effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 3 }, { "attribute": "happiness_value", "delta": 2 } ] },
+        effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2220,7 +2206,7 @@ module Seeds
       {
         event_set_name: '扇風機', derivation_number: 0, label: 'せんぷうきをとめる', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": -1 } ] },
+        effects: effects_status(["happiness_value", -1]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
       },
       {
@@ -2232,13 +2218,13 @@ module Seeds
       {
         event_set_name: 'こたつ', derivation_number: 0, label: 'よしよしする', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 2 } ] },
+        effects: effects_status(["love_value", 10], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'こたつ', derivation_number: 0, label: 'ミカンをあげる', priority: 1,
         trigger_conditions:    { "operator": "and", "conditions": [ status("hunger_value", "<=", 95) ] },
-        effects: { "status": [ { "attribute": "hunger_value", "delta": 30 }, { "attribute": "vitality", "delta": 3 }, { "attribute": "happiness_value", "delta": 2 } ] },
+        effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2250,7 +2236,7 @@ module Seeds
       {
         event_set_name: 'こたつ', derivation_number: 0, label: 'こたつをとめる', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": -1 } ] },
+        effects: effects_status(["happiness_value", -1]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
       },
       {
@@ -2262,7 +2248,7 @@ module Seeds
       {
         event_set_name: '花見', derivation_number: 0, label: 'つれていく', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+        effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2274,7 +2260,7 @@ module Seeds
       {
         event_set_name: '紅葉', derivation_number: 0, label: 'つれていく', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+        effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2295,7 +2281,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              1,
         trigger_conditions:    prob_only(25),
-        effects:               { "status": [ { "attribute": "love_value", "delta": 10 } ] },
+        effects:               effects_status(["love_value", 10]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -2306,7 +2292,7 @@ module Seeds
         label:                 'よしよしする',
         priority:              2,
         trigger_conditions:    always,
-        effects:               { "status": [ { "attribute": "love_value", "delta": 3 } ] },
+        effects:               effects_status(["love_value", 3]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         false
@@ -2320,7 +2306,7 @@ module Seeds
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 50) ]
                                 },
-        effects:               { "status": [ { "attribute": "hunger_value", "delta": 30 } ] },
+        effects:               effects_status(["hunger_value", 30]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -2342,7 +2328,7 @@ module Seeds
         label:                 'へんがおをする',
         priority:              1,
         trigger_conditions:    prob_only(10),
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -2364,7 +2350,7 @@ module Seeds
         label:                 'あやまる',
         priority:              1,
         trigger_conditions:    prob_only(33),
-        effects:               { "status": [ { "attribute": "happiness_value", "delta": 1 } ] },
+        effects:               effects_status(["happiness_value", 1]),
         next_derivation_number: nil,
         calls_event_set_name:  nil,
         resolves_loop:         true
@@ -2407,97 +2393,97 @@ module Seeds
       {
         event_set_name: '算数', derivation_number: 1, label: '〈A〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 1, label: '〈B〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 1, label: '〈C〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 1, label: '〈D〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 2, label: '〈A〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 2, label: '〈B〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 2, label: '〈C〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 2, label: '〈D〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 3, label: '〈A〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 3, label: '〈B〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 3, label: '〈C〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 3, label: '〈D〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 4, label: '〈A〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 4, label: '〈B〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 4, label: '〈C〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '算数', derivation_number: 4, label: '〈D〉', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "arithmetic_effort", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2527,79 +2513,79 @@ module Seeds
       {
         event_set_name: 'ボール遊び', derivation_number: 2, label: 'ひだりだ！', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 1,
         trigger_conditions: prob_only(50),
-        effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 2,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 2, label: 'みぎだ！', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 1,
         trigger_conditions: prob_only(30),
-        effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 2,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 3, label: 'そこだ！', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 1,
         trigger_conditions: prob_only(30),
-        effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 2,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 4, label: 'ひだりだ！', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 1,
         trigger_conditions: prob_only(50),
-        effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 2,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: 'ボール遊び', derivation_number: 4, label: 'みぎだ！', priority: 1,
         trigger_conditions: always,
-        effects: { "status": [ { "attribute": "sports_value", "delta": 1 }, { "attribute": "temp_vitality", "delta": -VITALITY_UNIT } ] },
+        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2773,7 +2759,7 @@ module Seeds
       {
         event_set_name: 'イントロ', derivation_number: 7, label: 'よしよし', priority: 1,
         trigger_conditions:    always,
-        effects: { "status": [ { "attribute": "love_value", "delta": 10 }, { "attribute": "happiness_value", "delta": 1 } ] },
+        effects: effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
@@ -2782,22 +2768,22 @@ module Seeds
       },
       {
         event_set_name: '誕生日', derivation_number: 1, label: 'たのしくすごす！', priority: 1, trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+        effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '誕生日', derivation_number: 1, label: 'えがおですごす！', priority: 1, trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+        effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '誕生日', derivation_number: 1, label: 'せいちょうする！', priority: 1, trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+        effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
         event_set_name: '誕生日', derivation_number: 1, label: 'ひとをだいじにする！', priority: 1, trigger_conditions: always,
-        effects: { "status": [ { "attribute": "happiness_value", "delta": 10 } ] },
+        effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
