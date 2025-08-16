@@ -20,6 +20,13 @@ module Seeds
   def and_(*conditions)           = { "operator" => "and", "conditions" => conditions }
   def effects_status(*pairs)      = { "status" => pairs.map { |attr, delta| { "attribute" => attr.to_s, "delta" => delta } } }
   def ar_key(set, deriv, label, prio = 1) = { event_set_name: set, derivation_number: deriv, label: label, priority: prio }
+  def next_ev(deriv: nil, call: nil, resolve: false)
+    {
+      next_derivation_number: deriv,
+      calls_event_set_name:   call,
+      resolves_loop:          resolve
+    }.freeze
+  end
 
   def run!
     categories = [
@@ -1089,25 +1096,19 @@ module Seeds
                                                                   status("temp_vitality", "<", VITALITY_UNIT),
                                                                   prob(80) ] },
         effects:               effects_status(["happiness_value", 1], ["mood_value", 5]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何か言っている', 0, 'はなしをきいてあげる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  '特訓',
-        resolves_loop:         false
+        **next_ev(call: '特訓')
       },
       {
         **ar_key('何か言っている', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", 5]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何か言っている', 0, 'おやつをあげる'),
@@ -1118,17 +1119,13 @@ module Seeds
                                   ]
                                 },
         effects:               effects_status(["hunger_value", 30], ["happiness_value", 1], ["mood_value", 15]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何か言っている', 0, 'おやつをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何か言っている', 0, 'ごはんをあげる'),
@@ -1137,265 +1134,219 @@ module Seeds
                                   "conditions": [ status("hunger_value", "<=", 85) ]
                                 },
         effects:               effects_status(["hunger_value", 40], ["vitality", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何か言っている', 0, 'ごはんをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'ボールあそびをする'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("temp_vitality", ">=", VITALITY_UNIT) ] },
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  'ボール遊び',
-        resolves_loop:         false
+        **next_ev(call: 'ボール遊び')
       },
       {
         **ar_key('何かしたそう', 0, 'ボールあそびをする', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'べんきょうする'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("temp_vitality", ">=", VITALITY_UNIT) ] },
         effects:               {},
-        next_derivation_number: 1,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('何かしたそう', 0, 'べんきょうする', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'おえかきする'),
         trigger_conditions:    prob_only(40),
         effects:               {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'おえかきする', 2),
         trigger_conditions:    prob_only(66),
         effects:               {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'おえかきする', 3),
         trigger_conditions:    prob_only(88),
         effects:               {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'おえかきする', 4),
         trigger_conditions:    prob_only(80),
         effects:               {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'おえかきする', 5),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'ゲームする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 2,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('何かしたそう', 2, 'ゲームさせてあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", 5]),
-        next_derivation_number: nil,
-        calls_event_set_name:  'タマモンカート',
-        resolves_loop:         false
+        **next_ev(call: 'タマモンカート')
       },
       {
         **ar_key('何かしたそう', 2, 'やっぱやめよう'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'さんすう'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  '算数',
-        resolves_loop:         false
+        **next_ev(call: '算数')
       },
       {
         **ar_key('何かしたそう', 1, 'こくご'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'こくご', 2),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'こくご', 3),
         trigger_conditions:    always,
         effects:               effects_status(["japanese_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか', 2),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか', 3),
         trigger_conditions:    always,
         effects:               effects_status(["science_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい', 2),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい', 3),
         trigger_conditions:    always,
         effects:               effects_status(["social_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'ながめている'),
         trigger_conditions: always,
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける'),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "==", 0) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 2),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 10) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 3),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 30) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 4),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 80) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 5),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 150) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 6),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 400) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 7),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 1000) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 8),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 2500) ] },
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ボーっとしている', 0, 'こえをかける', 9),
         trigger_conditions: always,
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('ニコニコしている', 0, 'ながめている'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('ゴロゴロしている', 0, 'ながめている'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('踊っている', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["love_value", 10], ["happiness_value", 10], ["mood_value", -100]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('踊っている', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", -100]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('踊っている', 0, 'おやつをあげる'),
@@ -1404,17 +1355,13 @@ module Seeds
                                   "conditions": [ status("hunger_value", "<=", 95) ]
                                 },
         effects:               effects_status(["hunger_value", 30], ["happiness_value", 3], ["mood_value", -100]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('踊っている', 0, 'おやつをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('踊っている', 0, 'ごはんをあげる'),
@@ -1423,619 +1370,505 @@ module Seeds
                                   "conditions": [ status("hunger_value", "<=", 85) ]
                                 },
         effects:               effects_status(["hunger_value", 40], ["vitality", 1], ["happiness_value", 1], ["mood_value", -100]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('踊っている', 0, 'ごはんをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(空腹)', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 5]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(空腹)', 0, 'おやつをあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["hunger_value", 40]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('泣いている(空腹)', 0, 'ごはんをあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["hunger_value", 50], ["vitality", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('泣いている(空腹)', 0, 'あそんであげる'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(よしよし不足)', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 40]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('泣いている(よしよし不足)', 0, 'おやつをあげる'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(よしよし不足)', 0, 'ごはんをあげる'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(よしよし不足)', 0, 'あそんであげる'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(ランダム)', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(ランダム)', 0, 'おやつをあげる'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(ランダム)', 0, 'ごはんをあげる'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('泣いている(ランダム)', 0, 'あそんであげる'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 30]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('寝ている', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝ている', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 40], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝ている', 0, 'たたきおこす'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -5]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["happiness_value", -1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  '怒っている',
-        resolves_loop:         true
+        **next_ev(call: '怒っている', resolve: true)
       },
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす'),
         trigger_conditions:    prob_only(6),
         effects:               effects_status(["happiness_value", -100]),
-        next_derivation_number: nil,
-        calls_event_set_name:  '怒っている',
-        resolves_loop:         true
+        **next_ev(call: '怒っている', resolve: true)
       },
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('マンガに夢中', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('マンガに夢中', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('マンガに夢中', 0, 'はなしかける'),
         trigger_conditions:    prob_only(30),
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('マンガに夢中', 0, 'はなしかける', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('マンガに夢中', 0, 'マンガをとりあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -50]),
-        next_derivation_number: nil,
-        calls_event_set_name:  '怒っている',
-        resolves_loop:         true
+        **next_ev(call: '怒っている', resolve: true)
       },
       {
         **ar_key('眠そう', 0, 'ねかせる'),
         trigger_conditions:    prob_only(30),
         effects:               effects_status(["happiness_value", 5]),
-        next_derivation_number: nil,
-        calls_event_set_name:  '寝かせた',
-        resolves_loop:         true
+        **next_ev(call: '寝かせた', resolve: true)
       },
       {
         **ar_key('眠そう', 0, 'ねかせる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('眠そう', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  '寝かせた',
-        resolves_loop:         true
+        **next_ev(call: '寝かせた', resolve: true)
       },
       {
         **ar_key('眠そう', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('眠そう', 0, 'はみがきをさせる'),
         trigger_conditions:    prob_only(33),
         effects:               effects_status(["happiness_value", 3]),
-        next_derivation_number: nil,
-        calls_event_set_name:  '寝かせた',
-        resolves_loop:         true
+        **next_ev(call: '寝かせた', resolve: true)
       },
       {
         **ar_key('眠そう', 0, 'はみがきをさせる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('眠そう', 0, 'ダジャレをいう'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('眠そう', 0, 'ダジャレをいう', 2),
         trigger_conditions:    prob_only(20),
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('眠そう', 0, 'ダジャレをいう', 3),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝かせた', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝かせた', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 10]),
-        next_derivation_number: 1,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('寝かせた', 0, 'たたきおこす'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -5]),
-        next_derivation_number: 1,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('寝かせた', 0, 'ゴミばこのなかをのぞく'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 1,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('寝かせた', 1, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
          **ar_key('寝かせた', 1, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝かせた', 1, 'たたきおこす'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -5]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝起き', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝起き', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('寝起き', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝起き', 0, 'きがえさせる'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('寝起き', 0, 'ばくおんをながす'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 1,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('寝起き', 1, 'かけちゃう'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 2,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('寝起き', 1, 'やめておく'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 0,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 0)
       },
       {
         **ar_key('寝起き', 2, 'はい'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 3,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 3)
       },
       {
         **ar_key('寝起き', 2, 'やっぱやめておく'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 0,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 0)
       },
       {
         **ar_key('寝起き', 3, 'はい'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -30]),
-        next_derivation_number: nil,
-        calls_event_set_name:  '怒っている',
-        resolves_loop:         true
+        **next_ev(call: '怒っている', resolve: true)
       },
       {
         **ar_key('寝起き', 3, 'いいえ'),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: 0,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev(deriv: 0)
       },
       {
         **ar_key('占い', 0, 'すすむ'),
         trigger_conditions: prob_only(10),
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('占い', 0, 'すすむ', 2),
         trigger_conditions: prob_only(33),
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('占い', 0, 'すすむ', 3),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('タマモン', 0, 'みていいよ'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 5]),
-        next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('タマモン', 0, 'みさせてあげない'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('タマモン', 1, 'いっしょにみる'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('タマえもん', 0, 'みていいよ'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 5]),
-        next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('タマえもん', 0, 'みさせてあげない'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('タマえもん', 1, 'いっしょにみる'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ニワトリビアの湖', 0, 'みていいよ'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 3]),
-        next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('ニワトリビアの湖', 0, 'みさせてあげない'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('ニワトリビアの湖', 1, 'いっしょにみる'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('扇風機', 0, 'よしよしする'),
         trigger_conditions: always,
         effects: effects_status(["love_value", 10], ["happiness_value", 2]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('扇風機', 0, 'スイカをあげる'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("hunger_value", "<=", 95) ] },
         effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('扇風機', 0, 'スイカをあげる', 2),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('扇風機', 0, 'せんぷうきをとめる'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", -1]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('扇風機', 0, 'そっとする'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('こたつ', 0, 'よしよしする'),
         trigger_conditions: always,
         effects: effects_status(["love_value", 10], ["happiness_value", 2]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('こたつ', 0, 'ミカンをあげる'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("hunger_value", "<=", 95) ] },
         effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('こたつ', 0, 'ミカンをあげる', 2),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('こたつ', 0, 'こたつをとめる'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", -1]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('こたつ', 0, 'そっとする'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('花見', 0, 'つれていく'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('花見', 0, 'いかない'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('紅葉', 0, 'つれていく'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('紅葉', 0, 'いかない'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('年始', 0, 'すすむ'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('怒っている', 0, 'よしよしする'),
         trigger_conditions:    prob_only(25),
         effects:               effects_status(["love_value", 10]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('怒っている', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 3]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('怒っている', 0, 'おやつをあげる'),
@@ -2044,477 +1877,465 @@ module Seeds
                                   "conditions": [ status("hunger_value", "<=", 50) ]
                                 },
         effects:               effects_status(["hunger_value", 30]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('怒っている', 0, 'おやつをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('怒っている', 0, 'へんがおをする'),
         trigger_conditions:    prob_only(10),
         effects:               effects_status(["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('怒っている', 0, 'へんがおをする', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('怒っている', 0, 'あやまる'),
         trigger_conditions:    prob_only(33),
         effects:               effects_status(["happiness_value", 1]),
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         true
+        **next_ev(resolve: true)
       },
       {
         **ar_key('怒っている', 0, 'あやまる', 2),
         trigger_conditions:    always,
         effects:               {},
-        next_derivation_number: nil,
-        calls_event_set_name:  nil,
-        resolves_loop:         false
+        **next_ev
       },
       {
         **ar_key('算数', 0, 'すすむ'),
         trigger_conditions: prob_only(25),
         effects: {},
-        next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('算数', 0, 'すすむ', 2),
         trigger_conditions: prob_only(33),
         effects: {},
-        next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('算数', 0, 'すすむ', 3),
         trigger_conditions: prob_only(50),
         effects: {},
-        next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 3)
       },
       {
         **ar_key('算数', 0, 'すすむ', 4),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 4)
       },
       {
         **ar_key('算数', 1, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 1, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 1, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 1, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 2, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 2, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 2, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 2, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 3, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 3, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 3, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 3, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 4, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 4, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 4, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('算数', 4, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 0, 'すすむ'),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('ボール遊び', 1, 'ぜんりょくとうきゅう'),
         trigger_conditions: prob_only(33),
         effects: {},
-        next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('ボール遊び', 1, 'ぜんりょくとうきゅう', 2),
         trigger_conditions: prob_only(50),
         effects: {},
-        next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 3)
       },
       {
         **ar_key('ボール遊び', 1, 'ぜんりょくとうきゅう', 3),
         trigger_conditions: always,
         effects: {},
-        next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 4)
       },
       {
         **ar_key('ボール遊び', 2, 'ひだりだ！'),
         trigger_conditions: always,
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 2, 'そこだ！'),
         trigger_conditions: prob_only(50),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 2, 'そこだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 2, 'みぎだ！'),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'ひだりだ！'),
         trigger_conditions: prob_only(30),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'ひだりだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'そこだ！'),
         trigger_conditions: always,
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'みぎだ！'),
         trigger_conditions: prob_only(30),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'みぎだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'ひだりだ！'),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'そこだ！'),
         trigger_conditions: prob_only(50),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'そこだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'みぎだ！'),
         trigger_conditions: always,
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 0, 'さんすう'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("arithmetic", ">=", 0) ] },
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: '算数', resolves_loop: false
+        **next_ev(call: '算数')
       },
       {
         **ar_key('特訓', 0, 'さんすう', 2),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 0, 'ボールあそび'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("sports_value", ">=", 0) ] },
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: 'ボール遊び', resolves_loop: false
+        **next_ev(call: 'ボール遊び')
       },
       {
         **ar_key('特訓', 0, 'ボールあそび', 2),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 0, 'やっぱやめておく'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 1, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 2, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 3, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 4, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 5, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('特訓', 6, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('イントロ', 0, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 1)
       },
       {
         **ar_key('イントロ', 1, 'えっ？'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('イントロ', 1, 'まさか！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('イントロ', 1, 'うーん'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('イントロ', 1, 'かっこいいです'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 2)
       },
       {
         **ar_key('イントロ', 2, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 3)
       },
       {
         **ar_key('イントロ', 3, 'いいなまえ！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 4)
       },
       {
         **ar_key('イントロ', 3, 'ちゃんをつけて！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 4)
       },
       {
         **ar_key('イントロ', 3, 'くんをつけて！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 4)
       },
       {
         **ar_key('イントロ', 3, 'さまをつけて！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 4)
       },
       {
         **ar_key('イントロ', 4, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 5, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 5)
       },
       {
         **ar_key('イントロ', 5, 'こんにちは！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 6, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 6)
       },
       {
         **ar_key('イントロ', 5, 'なかよくしてね！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 6, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 6)
       },
       {
         **ar_key('イントロ', 6, 'よっ！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 7)
       },
       {
         **ar_key('イントロ', 6, 'なかよくたのむぜ！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 7)
       },
       {
         **ar_key('イントロ', 7, 'こんにちは！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 7)
       },
       {
         **ar_key('イントロ', 7, 'なかよくしてね！'),
         trigger_conditions:    always,
         effects: {},
-        next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
+        **next_ev(deriv: 7)
       },
       {
         **ar_key('イントロ', 7, 'よしよし'),
         trigger_conditions:    always,
         effects: effects_status(["love_value", 10], ["happiness_value", 1]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('誕生日', 0, 'すすむ'), trigger_conditions: always,
-        effects: {}, next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev(deriv: 1)
       },
       {
         **ar_key('誕生日', 1, 'たのしくすごす！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('誕生日', 1, 'えがおですごす！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('誕生日', 1, 'せいちょうする！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('誕生日', 1, 'ひとをだいじにする！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
-        next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        **next_ev
       },
       {
         **ar_key('タマモンカート', 0, 'ながめている'), trigger_conditions: prob_only(85),
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       },
       {
         **ar_key('タマモンカート', 0, 'ながめている', 2), trigger_conditions: always,
-        effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
+        effects: {}, **next_ev
       }
     ]
 
