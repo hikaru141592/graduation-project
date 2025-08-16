@@ -19,6 +19,7 @@ module Seeds
   def date_range(fm, fd, tm, td)  = { "type" => "date_range", "from" => { "month" => fm, "day" => fd }, "to" => { "month" => tm, "day" => td } }
   def and_(*conditions)           = { "operator" => "and", "conditions" => conditions }
   def effects_status(*pairs)      = { "status" => pairs.map { |attr, delta| { "attribute" => attr.to_s, "delta" => delta } } }
+  def ar_key(set, deriv, label, prio = 1) = { event_set_name: set, derivation_number: deriv, label: label, priority: prio }
 
   def run!
     categories = [
@@ -1082,10 +1083,7 @@ module Seeds
 
     action_results = [
       {
-        event_set_name:        '何か言っている',
-        derivation_number:     0,
-        label:                 'はなしをきいてあげる',
-        priority:              1,
+        **ar_key('何か言っている', 0, 'はなしをきいてあげる'),
         trigger_conditions:    { "operator": "or", "conditions": [ status("sports_value", "<", 2),
                                                                   status("arithmetic", "<", 2),
                                                                   status("temp_vitality", "<", VITALITY_UNIT),
@@ -1096,10 +1094,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何か言っている',
-        derivation_number:     0,
-        label:                 'はなしをきいてあげる',
-        priority:              2,
+        **ar_key('何か言っている', 0, 'はなしをきいてあげる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1107,10 +1102,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何か言っている',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('何か言っている', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", 5]),
         next_derivation_number: nil,
@@ -1118,10 +1110,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何か言っている',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              1,
+        **ar_key('何か言っている', 0, 'おやつをあげる'),
         trigger_conditions:    {
                                   "operator": "and",
                                   "conditions": [
@@ -1134,10 +1123,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何か言っている',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              2,
+        **ar_key('何か言っている', 0, 'おやつをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1145,10 +1131,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何か言っている',
-        derivation_number:     0,
-        label:                 'ごはんをあげる',
-        priority:              1,
+        **ar_key('何か言っている', 0, 'ごはんをあげる'),
         trigger_conditions:    {
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 85) ]
@@ -1159,10 +1142,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何か言っている',
-        derivation_number:     0,
-        label:                 'ごはんをあげる',
-        priority:              2,
+        **ar_key('何か言っている', 0, 'ごはんをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1170,10 +1150,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     0,
-        label:                 'ボールあそびをする',
-        priority:              1,
+        **ar_key('何かしたそう', 0, 'ボールあそびをする'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("temp_vitality", ">=", VITALITY_UNIT) ] },
         effects:               {},
         next_derivation_number: nil,
@@ -1181,10 +1158,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     0,
-        label:                 'ボールあそびをする',
-        priority:              2,
+        **ar_key('何かしたそう', 0, 'ボールあそびをする', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1192,10 +1166,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     0,
-        label:                 'べんきょうする',
-        priority:              1,
+        **ar_key('何かしたそう', 0, 'べんきょうする'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("temp_vitality", ">=", VITALITY_UNIT) ] },
         effects:               {},
         next_derivation_number: 1,
@@ -1203,10 +1174,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     0,
-        label:                 'べんきょうする',
-        priority:              2,
+        **ar_key('何かしたそう', 0, 'べんきょうする', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1214,40 +1182,37 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name: '何かしたそう', derivation_number: 0, label: 'おえかきする', priority: 1,
+        **ar_key('何かしたそう', 0, 'おえかきする'),
         trigger_conditions:    prob_only(40),
         effects:               {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '何かしたそう', derivation_number: 0, label: 'おえかきする', priority: 2,
+        **ar_key('何かしたそう', 0, 'おえかきする', 2),
         trigger_conditions:    prob_only(66),
         effects:               {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '何かしたそう', derivation_number: 0, label: 'おえかきする', priority: 3,
+        **ar_key('何かしたそう', 0, 'おえかきする', 3),
         trigger_conditions:    prob_only(88),
         effects:               {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '何かしたそう', derivation_number: 0, label: 'おえかきする', priority: 4,
+        **ar_key('何かしたそう', 0, 'おえかきする', 4),
         trigger_conditions:    prob_only(80),
         effects:               {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '何かしたそう', derivation_number: 0, label: 'おえかきする', priority: 5,
+        **ar_key('何かしたそう', 0, 'おえかきする', 5),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     0,
-        label:                 'ゲームする',
-        priority:              1,
+        **ar_key('何かしたそう', 0, 'ゲームする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 2,
@@ -1255,10 +1220,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     2,
-        label:                 'ゲームさせてあげる',
-        priority:              1,
+        **ar_key('何かしたそう', 2, 'ゲームさせてあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", 5]),
         next_derivation_number: nil,
@@ -1266,10 +1228,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     2,
-        label:                 'やっぱやめよう',
-        priority:              1,
+        **ar_key('何かしたそう', 2, 'やっぱやめよう'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1277,10 +1236,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'さんすう',
-        priority:              1,
+        **ar_key('何かしたそう', 1, 'さんすう'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1288,10 +1244,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'こくご',
-        priority:              1,
+        **ar_key('何かしたそう', 1, 'こくご'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1299,10 +1252,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'こくご',
-        priority:              2,
+        **ar_key('何かしたそう', 1, 'こくご', 2),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1310,10 +1260,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'こくご',
-        priority:              3,
+        **ar_key('何かしたそう', 1, 'こくご', 3),
         trigger_conditions:    always,
         effects:               effects_status(["japanese_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1321,10 +1268,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'りか',
-        priority:              1,
+        **ar_key('何かしたそう', 1, 'りか'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1332,10 +1276,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'りか',
-        priority:              2,
+        **ar_key('何かしたそう', 1, 'りか', 2),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1343,10 +1284,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'りか',
-        priority:              3,
+        **ar_key('何かしたそう', 1, 'りか', 3),
         trigger_conditions:    always,
         effects:               effects_status(["science_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1354,10 +1292,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'しゃかい',
-        priority:              1,
+        **ar_key('何かしたそう', 1, 'しゃかい'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1365,10 +1300,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'しゃかい',
-        priority:              2,
+        **ar_key('何かしたそう', 1, 'しゃかい', 2),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1376,10 +1308,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '何かしたそう',
-        derivation_number:     1,
-        label:                 'しゃかい',
-        priority:              3,
+        **ar_key('何かしたそう', 1, 'しゃかい', 3),
         trigger_conditions:    always,
         effects:               effects_status(["social_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil,
@@ -1387,60 +1316,57 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'ながめている', priority: 1,
+        **ar_key('ボーっとしている', 0, 'ながめている'),
         trigger_conditions: always,
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 1,
+        **ar_key('ボーっとしている', 0, 'こえをかける'),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "==", 0) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 2,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 2),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 10) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 3,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 3),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 30) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 4,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 4),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 80) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 5,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 5),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 150) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 6,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 6),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 400) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 7,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 7),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 1000) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 8,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 8),
         trigger_conditions: { "operator": "and", "conditions": [ status("happiness_value", "<=", 2500) ] },
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボーっとしている', derivation_number: 0, label: 'こえをかける', priority: 9,
+        **ar_key('ボーっとしている', 0, 'こえをかける', 9),
         trigger_conditions: always,
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name:        'ニコニコしている',
-        derivation_number:     0,
-        label:                 'ながめている',
-        priority:              1,
+        **ar_key('ニコニコしている', 0, 'ながめている'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1448,10 +1374,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'ゴロゴロしている',
-        derivation_number:     0,
-        label:                 'ながめている',
-        priority:              1,
+        **ar_key('ゴロゴロしている', 0, 'ながめている'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1459,10 +1382,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '踊っている',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('踊っている', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["love_value", 10], ["happiness_value", 10], ["mood_value", -100]),
         next_derivation_number: nil,
@@ -1470,10 +1390,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '踊っている',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              2,
+        **ar_key('踊っている', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", -100]),
         next_derivation_number: nil,
@@ -1481,10 +1398,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '踊っている',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              1,
+        **ar_key('踊っている', 0, 'おやつをあげる'),
         trigger_conditions:    {
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 95) ]
@@ -1495,10 +1409,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '踊っている',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              2,
+        **ar_key('踊っている', 0, 'おやつをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1506,10 +1417,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '踊っている',
-        derivation_number:     0,
-        label:                 'ごはんをあげる',
-        priority:              1,
+        **ar_key('踊っている', 0, 'ごはんをあげる'),
         trigger_conditions:    {
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 85) ]
@@ -1520,10 +1428,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '踊っている',
-        derivation_number:     0,
-        label:                 'ごはんをあげる',
-        priority:              2,
+        **ar_key('踊っている', 0, 'ごはんをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1531,10 +1436,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(空腹)',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('泣いている(空腹)', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 5]),
         next_derivation_number: nil,
@@ -1542,10 +1444,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(空腹)',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              1,
+        **ar_key('泣いている(空腹)', 0, 'おやつをあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["hunger_value", 40]),
         next_derivation_number: nil,
@@ -1553,10 +1452,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '泣いている(空腹)',
-        derivation_number:     0,
-        label:                 'ごはんをあげる',
-        priority:              1,
+        **ar_key('泣いている(空腹)', 0, 'ごはんをあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["hunger_value", 50], ["vitality", 1]),
         next_derivation_number: nil,
@@ -1564,10 +1460,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '泣いている(空腹)',
-        derivation_number:     0,
-        label:                 'あそんであげる',
-        priority:              1,
+        **ar_key('泣いている(空腹)', 0, 'あそんであげる'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1575,10 +1468,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(よしよし不足)',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('泣いている(よしよし不足)', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 40]),
         next_derivation_number: nil,
@@ -1586,10 +1476,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '泣いている(よしよし不足)',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              1,
+        **ar_key('泣いている(よしよし不足)', 0, 'おやつをあげる'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1597,10 +1484,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(よしよし不足)',
-        derivation_number:     0,
-        label:                 'ごはんをあげる',
-        priority:              1,
+        **ar_key('泣いている(よしよし不足)', 0, 'ごはんをあげる'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1608,10 +1492,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(よしよし不足)',
-        derivation_number:     0,
-        label:                 'あそんであげる',
-        priority:              1,
+        **ar_key('泣いている(よしよし不足)', 0, 'あそんであげる'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1619,10 +1500,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(ランダム)',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('泣いている(ランダム)', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1630,10 +1508,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(ランダム)',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              1,
+        **ar_key('泣いている(ランダム)', 0, 'おやつをあげる'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1641,10 +1516,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(ランダム)',
-        derivation_number:     0,
-        label:                 'ごはんをあげる',
-        priority:              1,
+        **ar_key('泣いている(ランダム)', 0, 'ごはんをあげる'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1652,10 +1524,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '泣いている(ランダム)',
-        derivation_number:     0,
-        label:                 'あそんであげる',
-        priority:              1,
+        **ar_key('泣いている(ランダム)', 0, 'あそんであげる'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 30]),
         next_derivation_number: nil,
@@ -1663,10 +1532,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '寝ている',
-        derivation_number:     0,
-        label:                 'そっとする',
-        priority:              1,
+        **ar_key('寝ている', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1674,10 +1540,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝ている',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('寝ている', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 40], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -1685,10 +1548,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝ている',
-        derivation_number:     0,
-        label:                 'たたきおこす',
-        priority:              1,
+        **ar_key('寝ている', 0, 'たたきおこす'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -5]),
         next_derivation_number: nil,
@@ -1696,10 +1556,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'ブロックのおもちゃに夢中',
-        derivation_number:     0,
-        label:                 'そっとする',
-        priority:              1,
+        **ar_key('ブロックのおもちゃに夢中', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1707,10 +1564,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'ブロックのおもちゃに夢中',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('ブロックのおもちゃに夢中', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -1718,10 +1572,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'ブロックのおもちゃに夢中',
-        derivation_number:     0,
-        label:                 'ちょっかいをだす',
-        priority:              1,
+        **ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["happiness_value", -1]),
         next_derivation_number: nil,
@@ -1729,10 +1580,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        'ブロックのおもちゃに夢中',
-        derivation_number:     0,
-        label:                 'ちょっかいをだす',
-        priority:              2,
+        **ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1740,10 +1588,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'ブロックのおもちゃに夢中',
-        derivation_number:     0,
-        label:                 'ブロックをくずす',
-        priority:              1,
+        **ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす'),
         trigger_conditions:    prob_only(6),
         effects:               effects_status(["happiness_value", -100]),
         next_derivation_number: nil,
@@ -1751,10 +1596,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        'ブロックのおもちゃに夢中',
-        derivation_number:     0,
-        label:                 'ブロックをくずす',
-        priority:              2,
+        **ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1762,10 +1604,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'マンガに夢中',
-        derivation_number:     0,
-        label:                 'そっとする',
-        priority:              1,
+        **ar_key('マンガに夢中', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1773,10 +1612,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'マンガに夢中',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('マンガに夢中', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -1784,10 +1620,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'マンガに夢中',
-        derivation_number:     0,
-        label:                 'はなしかける',
-        priority:              1,
+        **ar_key('マンガに夢中', 0, 'はなしかける'),
         trigger_conditions:    prob_only(30),
         effects:               {},
         next_derivation_number: nil,
@@ -1795,10 +1628,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'マンガに夢中',
-        derivation_number:     0,
-        label:                 'はなしかける',
-        priority:              2,
+        **ar_key('マンガに夢中', 0, 'はなしかける', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1806,10 +1636,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        'マンガに夢中',
-        derivation_number:     0,
-        label:                 'マンガをとりあげる',
-        priority:              1,
+        **ar_key('マンガに夢中', 0, 'マンガをとりあげる'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -50]),
         next_derivation_number: nil,
@@ -1817,10 +1644,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'ねかせる',
-        priority:              1,
+        **ar_key('眠そう', 0, 'ねかせる'),
         trigger_conditions:    prob_only(30),
         effects:               effects_status(["happiness_value", 5]),
         next_derivation_number: nil,
@@ -1828,10 +1652,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'ねかせる',
-        priority:              2,
+        **ar_key('眠そう', 0, 'ねかせる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1839,10 +1660,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('眠そう', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -1850,10 +1668,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              2,
+        **ar_key('眠そう', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -1861,10 +1676,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'はみがきをさせる',
-        priority:              1,
+        **ar_key('眠そう', 0, 'はみがきをさせる'),
         trigger_conditions:    prob_only(33),
         effects:               effects_status(["happiness_value", 3]),
         next_derivation_number: nil,
@@ -1872,10 +1684,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'はみがきをさせる',
-        priority:              2,
+        **ar_key('眠そう', 0, 'はみがきをさせる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1883,10 +1692,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'ダジャレをいう',
-        priority:              1,
+        **ar_key('眠そう', 0, 'ダジャレをいう'),
         trigger_conditions:    prob_only(5),
         effects:               effects_status(["happiness_value", 1]),
         next_derivation_number: nil,
@@ -1894,10 +1700,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'ダジャレをいう',
-        priority:              2,
+        **ar_key('眠そう', 0, 'ダジャレをいう', 2),
         trigger_conditions:    prob_only(20),
         effects:               {},
         next_derivation_number: nil,
@@ -1905,10 +1708,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '眠そう',
-        derivation_number:     0,
-        label:                 'ダジャレをいう',
-        priority:              3,
+        **ar_key('眠そう', 0, 'ダジャレをいう', 3),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1916,10 +1716,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝かせた',
-        derivation_number:     0,
-        label:                 'そっとする',
-        priority:              1,
+        **ar_key('寝かせた', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1927,10 +1724,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝かせた',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('寝かせた', 0, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 10]),
         next_derivation_number: 1,
@@ -1938,10 +1732,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝かせた',
-        derivation_number:     0,
-        label:                 'たたきおこす',
-        priority:              1,
+        **ar_key('寝かせた', 0, 'たたきおこす'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -5]),
         next_derivation_number: 1,
@@ -1949,10 +1740,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝かせた',
-        derivation_number:     0,
-        label:                 'ゴミばこのなかをのぞく',
-        priority:              1,
+        **ar_key('寝かせた', 0, 'ゴミばこのなかをのぞく'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 1,
@@ -1960,10 +1748,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝かせた',
-        derivation_number:     1,
-        label:                 'そっとする',
-        priority:              1,
+        **ar_key('寝かせた', 1, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -1971,10 +1756,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝かせた',
-        derivation_number:     1,
-        label:                 'よしよしする',
-        priority:              1,
+         **ar_key('寝かせた', 1, 'よしよしする'),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -1982,10 +1764,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝かせた',
-        derivation_number:     1,
-        label:                 'たたきおこす',
-        priority:              1,
+        **ar_key('寝かせた', 1, 'たたきおこす'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -5]),
         next_derivation_number: nil,
@@ -1993,10 +1772,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     0,
-        label:                 'そっとする',
-        priority:              1,
+        **ar_key('寝起き', 0, 'そっとする'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -2004,10 +1780,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('寝起き', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -2015,10 +1788,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              2,
+        **ar_key('寝起き', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil,
@@ -2026,10 +1796,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     0,
-        label:                 'きがえさせる',
-        priority:              1,
+        **ar_key('寝起き', 0, 'きがえさせる'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -2037,10 +1804,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     0,
-        label:                 'ばくおんをながす',
-        priority:              1,
+        **ar_key('寝起き', 0, 'ばくおんをながす'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 1,
@@ -2048,10 +1812,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     1,
-        label:                 'かけちゃう',
-        priority:              1,
+        **ar_key('寝起き', 1, 'かけちゃう'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 2,
@@ -2059,10 +1820,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     1,
-        label:                 'やめておく',
-        priority:              1,
+        **ar_key('寝起き', 1, 'やめておく'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 0,
@@ -2070,10 +1828,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     2,
-        label:                 'はい',
-        priority:              1,
+        **ar_key('寝起き', 2, 'はい'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 3,
@@ -2081,10 +1836,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     2,
-        label:                 'やっぱやめておく',
-        priority:              1,
+        **ar_key('寝起き', 2, 'やっぱやめておく'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 0,
@@ -2092,10 +1844,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     3,
-        label:                 'はい',
-        priority:              1,
+        **ar_key('寝起き', 3, 'はい'),
         trigger_conditions:    always,
         effects:               effects_status(["happiness_value", -30]),
         next_derivation_number: nil,
@@ -2103,10 +1852,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '寝起き',
-        derivation_number:     3,
-        label:                 'いいえ',
-        priority:              1,
+        **ar_key('寝起き', 3, 'いいえ'),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: 0,
@@ -2114,172 +1860,169 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name: '占い', derivation_number: 0, label: 'すすむ', priority: 1,
+        **ar_key('占い', 0, 'すすむ'),
         trigger_conditions: prob_only(10),
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '占い', derivation_number: 0, label: 'すすむ', priority: 2,
+        **ar_key('占い', 0, 'すすむ', 2),
         trigger_conditions: prob_only(33),
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '占い', derivation_number: 0, label: 'すすむ', priority: 3,
+        **ar_key('占い', 0, 'すすむ', 3),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'タマモン', derivation_number: 0, label: 'みていいよ', priority: 1,
+        **ar_key('タマモン', 0, 'みていいよ'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 5]),
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'タマモン', derivation_number: 0, label: 'みさせてあげない', priority: 1,
+        **ar_key('タマモン', 0, 'みさせてあげない'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
       },
       {
-        event_set_name: 'タマモン', derivation_number: 1, label: 'いっしょにみる', priority: 1,
+        **ar_key('タマモン', 1, 'いっしょにみる'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'タマえもん', derivation_number: 0, label: 'みていいよ', priority: 1,
+        **ar_key('タマえもん', 0, 'みていいよ'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 5]),
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'タマえもん', derivation_number: 0, label: 'みさせてあげない', priority: 1,
+        **ar_key('タマえもん', 0, 'みさせてあげない'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
       },
       {
-        event_set_name: 'タマえもん', derivation_number: 1, label: 'いっしょにみる', priority: 1,
+        **ar_key('タマえもん', 1, 'いっしょにみる'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ニワトリビアの湖', derivation_number: 0, label: 'みていいよ', priority: 1,
+        **ar_key('ニワトリビアの湖', 0, 'みていいよ'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 3]),
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ニワトリビアの湖', derivation_number: 0, label: 'みさせてあげない', priority: 1,
+        **ar_key('ニワトリビアの湖', 0, 'みさせてあげない'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
       },
       {
-        event_set_name: 'ニワトリビアの湖', derivation_number: 1, label: 'いっしょにみる', priority: 1,
+        **ar_key('ニワトリビアの湖', 1, 'いっしょにみる'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '扇風機', derivation_number: 0, label: 'よしよしする', priority: 1,
+        **ar_key('扇風機', 0, 'よしよしする'),
         trigger_conditions: always,
         effects: effects_status(["love_value", 10], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '扇風機', derivation_number: 0, label: 'スイカをあげる', priority: 1,
+        **ar_key('扇風機', 0, 'スイカをあげる'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("hunger_value", "<=", 95) ] },
         effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '扇風機', derivation_number: 0, label: 'スイカをあげる', priority: 2,
+        **ar_key('扇風機', 0, 'スイカをあげる', 2),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '扇風機', derivation_number: 0, label: 'せんぷうきをとめる', priority: 1,
+        **ar_key('扇風機', 0, 'せんぷうきをとめる'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", -1]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
       },
       {
-        event_set_name: '扇風機', derivation_number: 0, label: 'そっとする', priority: 1,
+        **ar_key('扇風機', 0, 'そっとする'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'こたつ', derivation_number: 0, label: 'よしよしする', priority: 1,
+        **ar_key('こたつ', 0, 'よしよしする'),
         trigger_conditions: always,
         effects: effects_status(["love_value", 10], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'こたつ', derivation_number: 0, label: 'ミカンをあげる', priority: 1,
+        **ar_key('こたつ', 0, 'ミカンをあげる'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("hunger_value", "<=", 95) ] },
         effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'こたつ', derivation_number: 0, label: 'ミカンをあげる', priority: 2,
+        **ar_key('こたつ', 0, 'ミカンをあげる', 2),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'こたつ', derivation_number: 0, label: 'こたつをとめる', priority: 1,
+        **ar_key('こたつ', 0, 'こたつをとめる'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", -1]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: true
       },
       {
-        event_set_name: 'こたつ', derivation_number: 0, label: 'そっとする', priority: 1,
+        **ar_key('こたつ', 0, 'そっとする'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '花見', derivation_number: 0, label: 'つれていく', priority: 1,
+        **ar_key('花見', 0, 'つれていく'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '花見', derivation_number: 0, label: 'いかない', priority: 1,
+        **ar_key('花見', 0, 'いかない'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '紅葉', derivation_number: 0, label: 'つれていく', priority: 1,
+        **ar_key('紅葉', 0, 'つれていく'),
         trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '紅葉', derivation_number: 0, label: 'いかない', priority: 1,
+        **ar_key('紅葉', 0, 'いかない'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '年始', derivation_number: 0, label: 'すすむ', priority: 1,
+        **ar_key('年始', 0, 'すすむ'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              1,
+        **ar_key('怒っている', 0, 'よしよしする'),
         trigger_conditions:    prob_only(25),
         effects:               effects_status(["love_value", 10]),
         next_derivation_number: nil,
@@ -2287,10 +2030,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'よしよしする',
-        priority:              2,
+        **ar_key('怒っている', 0, 'よしよしする', 2),
         trigger_conditions:    always,
         effects:               effects_status(["love_value", 3]),
         next_derivation_number: nil,
@@ -2298,10 +2038,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              1,
+        **ar_key('怒っている', 0, 'おやつをあげる'),
         trigger_conditions:    {
                                   "operator": "and",
                                   "conditions": [ status("hunger_value", "<=", 50) ]
@@ -2312,10 +2049,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'おやつをあげる',
-        priority:              2,
+        **ar_key('怒っている', 0, 'おやつをあげる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -2323,10 +2057,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'へんがおをする',
-        priority:              1,
+        **ar_key('怒っている', 0, 'へんがおをする'),
         trigger_conditions:    prob_only(10),
         effects:               effects_status(["happiness_value", 1]),
         next_derivation_number: nil,
@@ -2334,10 +2065,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'へんがおをする',
-        priority:              2,
+        **ar_key('怒っている', 0, 'へんがおをする', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -2345,10 +2073,7 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'あやまる',
-        priority:              1,
+        **ar_key('怒っている', 0, 'あやまる'),
         trigger_conditions:    prob_only(33),
         effects:               effects_status(["happiness_value", 1]),
         next_derivation_number: nil,
@@ -2356,10 +2081,7 @@ module Seeds
         resolves_loop:         true
       },
       {
-        event_set_name:        '怒っている',
-        derivation_number:     0,
-        label:                 'あやまる',
-        priority:              2,
+        **ar_key('怒っている', 0, 'あやまる', 2),
         trigger_conditions:    always,
         effects:               {},
         next_derivation_number: nil,
@@ -2367,432 +2089,431 @@ module Seeds
         resolves_loop:         false
       },
       {
-        event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 1,
+        **ar_key('算数', 0, 'すすむ'),
         trigger_conditions: prob_only(25),
         effects: {},
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 2,
+        **ar_key('算数', 0, 'すすむ', 2),
         trigger_conditions: prob_only(33),
         effects: {},
         next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 3,
+        **ar_key('算数', 0, 'すすむ', 3),
         trigger_conditions: prob_only(50),
         effects: {},
         next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 0, label: 'すすむ', priority: 4,
+        **ar_key('算数', 0, 'すすむ', 4),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 1, label: '〈A〉', priority: 1,
+        **ar_key('算数', 1, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 1, label: '〈B〉', priority: 1,
+        **ar_key('算数', 1, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 1, label: '〈C〉', priority: 1,
+        **ar_key('算数', 1, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 1, label: '〈D〉', priority: 1,
+        **ar_key('算数', 1, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 2, label: '〈A〉', priority: 1,
+        **ar_key('算数', 2, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 2, label: '〈B〉', priority: 1,
+        **ar_key('算数', 2, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 2, label: '〈C〉', priority: 1,
+        **ar_key('算数', 2, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 2, label: '〈D〉', priority: 1,
+        **ar_key('算数', 2, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 3, label: '〈A〉', priority: 1,
+        **ar_key('算数', 3, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 3, label: '〈B〉', priority: 1,
+        **ar_key('算数', 3, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 3, label: '〈C〉', priority: 1,
+        **ar_key('算数', 3, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 3, label: '〈D〉', priority: 1,
+        **ar_key('算数', 3, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 4, label: '〈A〉', priority: 1,
+        **ar_key('算数', 4, '〈A〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 4, label: '〈B〉', priority: 1,
+        **ar_key('算数', 4, '〈B〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 4, label: '〈C〉', priority: 1,
+        **ar_key('算数', 4, '〈C〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '算数', derivation_number: 4, label: '〈D〉', priority: 1,
+        **ar_key('算数', 4, '〈D〉'),
         trigger_conditions: always,
         effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 0, label: 'すすむ', priority: 1,
+        **ar_key('ボール遊び', 0, 'すすむ'),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 1, label: 'ぜんりょくとうきゅう', priority: 1,
+        **ar_key('ボール遊び', 1, 'ぜんりょくとうきゅう'),
         trigger_conditions: prob_only(33),
         effects: {},
         next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 1, label: 'ぜんりょくとうきゅう', priority: 2,
+        **ar_key('ボール遊び', 1, 'ぜんりょくとうきゅう', 2),
         trigger_conditions: prob_only(50),
         effects: {},
         next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 1, label: 'ぜんりょくとうきゅう', priority: 3,
+        **ar_key('ボール遊び', 1, 'ぜんりょくとうきゅう', 3),
         trigger_conditions: always,
         effects: {},
         next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 2, label: 'ひだりだ！', priority: 1,
+        **ar_key('ボール遊び', 2, 'ひだりだ！'),
         trigger_conditions: always,
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 1,
+        **ar_key('ボール遊び', 2, 'そこだ！'),
         trigger_conditions: prob_only(50),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 2, label: 'そこだ！', priority: 2,
+        **ar_key('ボール遊び', 2, 'そこだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 2, label: 'みぎだ！', priority: 1,
+        **ar_key('ボール遊び', 2, 'みぎだ！'),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 1,
+        **ar_key('ボール遊び', 3, 'ひだりだ！'),
         trigger_conditions: prob_only(30),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 3, label: 'ひだりだ！', priority: 2,
+        **ar_key('ボール遊び', 3, 'ひだりだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 3, label: 'そこだ！', priority: 1,
+        **ar_key('ボール遊び', 3, 'そこだ！'),
         trigger_conditions: always,
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 1,
+        **ar_key('ボール遊び', 3, 'みぎだ！'),
         trigger_conditions: prob_only(30),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 3, label: 'みぎだ！', priority: 2,
+        **ar_key('ボール遊び', 3, 'みぎだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 4, label: 'ひだりだ！', priority: 1,
+        **ar_key('ボール遊び', 4, 'ひだりだ！'),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 1,
+        **ar_key('ボール遊び', 4, 'そこだ！'),
         trigger_conditions: prob_only(50),
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 4, label: 'そこだ！', priority: 2,
+        **ar_key('ボール遊び', 4, 'そこだ！', 2),
         trigger_conditions: always,
         effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'ボール遊び', derivation_number: 4, label: 'みぎだ！', priority: 1,
+        **ar_key('ボール遊び', 4, 'みぎだ！'),
         trigger_conditions: always,
         effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 0, label: 'さんすう', priority: 1,
+        **ar_key('特訓', 0, 'さんすう'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("arithmetic", ">=", 0) ] },
         effects: {},
         next_derivation_number: nil, calls_event_set_name: '算数', resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 0, label: 'さんすう', priority: 2,
+        **ar_key('特訓', 0, 'さんすう', 2),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 1,
+        **ar_key('特訓', 0, 'ボールあそび'),
         trigger_conditions:    { "operator": "and", "conditions": [ status("sports_value", ">=", 0) ] },
         effects: {},
         next_derivation_number: nil, calls_event_set_name: 'ボール遊び', resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 0, label: 'ボールあそび', priority: 2,
+        **ar_key('特訓', 0, 'ボールあそび', 2),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 0, label: 'やっぱやめておく', priority: 1,
+        **ar_key('特訓', 0, 'やっぱやめておく'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 1, label: 'すすむ', priority: 1,
+        **ar_key('特訓', 1, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 2, label: 'すすむ', priority: 1,
+        **ar_key('特訓', 2, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 3, label: 'すすむ', priority: 1,
+        **ar_key('特訓', 3, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 4, label: 'すすむ', priority: 1,
+        **ar_key('特訓', 4, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 5, label: 'すすむ', priority: 1,
+        **ar_key('特訓', 5, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '特訓', derivation_number: 6, label: 'すすむ', priority: 1,
+        **ar_key('特訓', 6, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 0, label: 'すすむ', priority: 1,
+        **ar_key('イントロ', 0, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 1, label: 'えっ？', priority: 1,
+        **ar_key('イントロ', 1, 'えっ？'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 1, label: 'まさか！', priority: 1,
+        **ar_key('イントロ', 1, 'まさか！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 1, label: 'うーん', priority: 1,
+        **ar_key('イントロ', 1, 'うーん'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 1, label: 'かっこいいです', priority: 1,
+        **ar_key('イントロ', 1, 'かっこいいです'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 2, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 2, label: 'すすむ', priority: 1,
+        **ar_key('イントロ', 2, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 3, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 3, label: 'いいなまえ！', priority: 1,
+        **ar_key('イントロ', 3, 'いいなまえ！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 3, label: 'ちゃんをつけて！', priority: 1,
+        **ar_key('イントロ', 3, 'ちゃんをつけて！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 3, label: 'くんをつけて！', priority: 1,
+        **ar_key('イントロ', 3, 'くんをつけて！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 3, label: 'さまをつけて！', priority: 1,
+        **ar_key('イントロ', 3, 'さまをつけて！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 4, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 4, label: 'すすむ', priority: 1,
+        **ar_key('イントロ', 4, 'すすむ'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 5, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 5, label: 'こんにちは！', priority: 1,
+        **ar_key('イントロ', 5, 'こんにちは！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 6, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 5, label: 'なかよくしてね！', priority: 1,
+        **ar_key('イントロ', 5, 'なかよくしてね！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 6, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 6, label: 'よっ！', priority: 1,
+        **ar_key('イントロ', 6, 'よっ！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 6, label: 'なかよくたのむぜ！', priority: 1,
+        **ar_key('イントロ', 6, 'なかよくたのむぜ！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 7, label: 'こんにちは！', priority: 1,
+        **ar_key('イントロ', 7, 'こんにちは！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 7, label: 'なかよくしてね！', priority: 1,
+        **ar_key('イントロ', 7, 'なかよくしてね！'),
         trigger_conditions:    always,
         effects: {},
         next_derivation_number: 7, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'イントロ', derivation_number: 7, label: 'よしよし', priority: 1,
+        **ar_key('イントロ', 7, 'よしよし'),
         trigger_conditions:    always,
         effects: effects_status(["love_value", 10], ["happiness_value", 1]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '誕生日', derivation_number: 0, label: 'すすむ', priority: 1, trigger_conditions: always,
+        **ar_key('誕生日', 0, 'すすむ'), trigger_conditions: always,
         effects: {}, next_derivation_number: 1, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '誕生日', derivation_number: 1, label: 'たのしくすごす！', priority: 1, trigger_conditions: always,
+        **ar_key('誕生日', 1, 'たのしくすごす！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '誕生日', derivation_number: 1, label: 'えがおですごす！', priority: 1, trigger_conditions: always,
+        **ar_key('誕生日', 1, 'えがおですごす！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '誕生日', derivation_number: 1, label: 'せいちょうする！', priority: 1, trigger_conditions: always,
+        **ar_key('誕生日', 1, 'せいちょうする！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: '誕生日', derivation_number: 1, label: 'ひとをだいじにする！', priority: 1, trigger_conditions: always,
+        **ar_key('誕生日', 1, 'ひとをだいじにする！'), trigger_conditions: always,
         effects: effects_status(["happiness_value", 10]),
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'タマモンカート', derivation_number: 0, label: 'ながめている', priority: 1,
-        trigger_conditions: prob_only(85),
+        **ar_key('タマモンカート', 0, 'ながめている'), trigger_conditions: prob_only(85),
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
-        event_set_name: 'タマモンカート', derivation_number: 0, label: 'ながめている', priority: 2, trigger_conditions: always,
+        **ar_key('タマモンカート', 0, 'ながめている', 2), trigger_conditions: always,
         effects: {}, next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       }
     ]
