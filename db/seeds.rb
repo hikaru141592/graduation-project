@@ -15,6 +15,8 @@ module Seeds
     h["offsets_by_day"] = offsets if offsets.present?
     h
   end
+  def weekday(array) = { "type" => "weekday", "value" => array }.freeze
+  def date_range(fm, fd, tm, td) = { "type" => "date_range", "from" => { "month" => fm, "day" => fd }, "to" => { "month" => tm, "day" => td } }
 
   def run!
     categories = [
@@ -204,10 +206,7 @@ module Seeds
           "operator": "and",
           "conditions": [
             time_range(19, 0, 20, 0),
-            {
-              "type": "weekday",
-              "value": [ 1 ]
-            },
+            weekday([ 1 ]),
             status("sports_value", ">=", 2)
           ]
         }
@@ -219,10 +218,7 @@ module Seeds
           "operator": "and",
           "conditions": [
             time_range(19, 0, 20, 0),
-            {
-              "type": "weekday",
-              "value": [ 5 ]
-            },
+            weekday([ 5 ]),
             status("sports_value", ">=", 2)
           ]
         }
@@ -234,10 +230,7 @@ module Seeds
           "operator": "and",
           "conditions": [
             time_range(20, 0, 21, 0),
-            {
-              "type": "weekday",
-              "value": [ 3 ]
-            },
+            weekday([ 3 ]),
             status("sports_value", ">=", 2)
           ]
         }
@@ -249,11 +242,7 @@ module Seeds
           "operator": "and",
           "conditions": [
             time_range(11, 0, 17, 0, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-            {
-              "type": "date_range",
-              "from": { "month": 7, "day": 1 },
-              "to":   { "month": 9, "day": 15 }
-            },
+            date_range(7, 1, 9, 15),
             prob(25),
             status("sports_value", ">=", 2)
           ]
@@ -266,11 +255,7 @@ module Seeds
           "operator": "and",
           "conditions": [
             time_range(11, 0, 21, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-            {
-              "type": "date_range",
-              "from": { "month": 12, "day": 16 },
-              "to":   { "month": 3, "day": 15 }
-            },
+            date_range(12, 16, 3, 15),
             prob(25),
             status("sports_value", ">=", 2)
           ]
@@ -283,11 +268,7 @@ module Seeds
           "operator": "and",
           "conditions": [
             time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]),
-            {
-              "type": "date_range",
-              "from": { "month": 3, "day": 16 },
-              "to":   { "month": 4, "day": 15 }
-            },
+            date_range(3, 16, 4, 15),
             prob(30)
           ]
         }
@@ -299,11 +280,7 @@ module Seeds
           "operator": "and",
           "conditions": [
             time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]),
-            {
-              "type": "date_range",
-              "from": { "month": 11, "day": 1 },
-              "to":   { "month": 12, "day": 15 }
-            },
+            date_range(11, 1, 12, 15),
             prob(25)
           ]
         }
@@ -314,11 +291,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type": "date_range",
-              "from": { "month": 1, "day": 1 },
-              "to":   { "month": 1, "day": 1 }
-            }
+            date_range(1, 1, 1, 1)
           ]
         }
       },
