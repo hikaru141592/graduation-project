@@ -1,9 +1,20 @@
 module Seeds
   module_function
   def always          = { "always" => true }.freeze
-  def prob(p)         = { "type" => "probability", "percent" => p }    
-  def prob_only(p)    = { "operator" => "and", "conditions" => [prob(p)] }
-  def status(a, o, v) = { "type" => "status", "attribute" => a, "operator" => o, "value" => v }
+  def prob(p)         = { "type" => "probability", "percent" => p }.freeze    
+  def prob_only(p)    = { "operator" => "and", "conditions" => [prob(p)] }.freeze
+  def status(a, o, v) = { "type" => "status", "attribute" => a, "operator" => o, "value" => v }.freeze
+  def off_fm(add, mult, mod) = { "add" => add, "mult" => mult, "mod" => mod, "target" => "from_min" }.freeze
+  def off_tm(add, mult, mod) = { "add" => add, "mult" => mult, "mod" => mod, "target" => "to_min"   }.freeze
+  def time_range(fh, fm, th, tm, offsets = nil)
+    h = {
+      "type"      => "time_range",
+      "from_hour" => fh, "from_min" => fm,
+      "to_hour"   => th, "to_min"   => tm
+    }
+    h["offsets_by_day"] = offsets if offsets.present?
+    h
+  end
 
   def run!
     categories = [
@@ -133,29 +144,7 @@ module Seeds
         name: '寝ている',
         trigger_conditions: {
           "operator": "and",
-          "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 0,
-              "from_min":  46,
-              "to_hour":   6,
-              "to_min":    38,
-              "offsets_by_day": [
-                {
-                  "add":        43,
-                  "mult":       17,
-                  "mod":        60,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        27,
-                  "mult":       19,
-                  "mod":        60,
-                  "target":     "to_min"
-                }
-              ]
-            }
-          ]
+          "conditions": [ time_range(0, 46, 6, 38, [ off_fm(43, 17, 60), off_tm(27, 19, 60) ]) ]
         }
       },
       {
@@ -165,27 +154,7 @@ module Seeds
           "operator":   "and",
           "conditions": [
             prob(100),
-            {
-              "type":      "time_range",
-              "from_hour": 11,
-              "from_min":  0,
-              "to_hour":   14,
-              "to_min":    0,
-              "offsets_by_day": [
-                {
-                  "add":        11,
-                  "mult":       77,
-                  "mod":        300,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        11,
-                  "mult":       77,
-                  "mod":        300,
-                  "target":     "to_min"
-                }
-              ]
-            },
+            time_range(11, 0, 14, 0, [ off_fm(11, 77, 300), off_tm(11, 77, 300) ]),
             status("sports_value", ">=", 2)
           ]
         }
@@ -196,21 +165,7 @@ module Seeds
           "operator":   "and",
           "conditions": [
             prob(5),
-            {
-              "type":      "time_range",
-              "from_hour": 10,
-              "from_min":  0,
-              "to_hour":   23,
-              "to_min":    30,
-              "offsets_by_day": [
-                {
-                  "add":        4,
-                  "mult":       7,
-                  "mod":        30,
-                  "target":     "from_min"
-                }
-              ]
-            },
+            time_range(10, 0, 23, 30, [ off_fm(4, 7, 30) ]),
             status("sports_value", ">=", 2)
           ]
         }
@@ -219,29 +174,7 @@ module Seeds
         name: '眠そう',
         trigger_conditions: {
           "operator": "and",
-          "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 22,
-              "from_min":  14,
-              "to_hour":   2,
-              "to_min":    0,
-              "offsets_by_day": [
-                {
-                  "add":        14,
-                  "mult":       43,
-                  "mod":        60,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        5,
-                  "mult":       17,
-                  "mod":        60,
-                  "target":     "to_min"
-                }
-              ]
-            }
-          ]
+          "conditions": [ time_range(22, 14, 2, 0, [ off_fm(14, 43, 60), off_fm(5, 17, 60) ]) ]
         }
       },
       {
@@ -253,29 +186,7 @@ module Seeds
         daily_limit: 1,
         trigger_conditions: {
           "operator": "and",
-          "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 6,
-              "from_min":  38,
-              "to_hour":   7,
-              "to_min":    38,
-              "offsets_by_day": [
-                {
-                  "add":        27,
-                  "mult":       19,
-                  "mod":        60,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        27,
-                  "mult":       19,
-                  "mod":        60,
-                  "target":     "to_min"
-                }
-              ]
-            }
-          ]
+          "conditions": [ time_range(6, 38, 7, 38, [ off_fm(27, 19, 60), off_tm(27, 19, 60) ]) ]
         }
       },
       {
@@ -283,16 +194,7 @@ module Seeds
         daily_limit: 1,
         trigger_conditions: {
           "operator": "and",
-          "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 6,
-              "from_min":  0,
-              "to_hour":   11,
-              "to_min":    0
-            },
-            prob(33)
-          ]
+          "conditions": [ time_range(6, 0, 11, 0), prob(33) ]
         }
       },
       {
@@ -301,13 +203,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 19,
-              "from_min":  0,
-              "to_hour":   20,
-              "to_min":    0
-            },
+            time_range(19, 0, 20, 0),
             {
               "type": "weekday",
               "value": [ 1 ]
@@ -322,13 +218,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 19,
-              "from_min":  0,
-              "to_hour":   20,
-              "to_min":    0
-            },
+            time_range(19, 0, 20, 0),
             {
               "type": "weekday",
               "value": [ 5 ]
@@ -343,13 +233,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 20,
-              "from_min":  0,
-              "to_hour":   21,
-              "to_min":    0
-            },
+            time_range(20, 0, 21, 0),
             {
               "type": "weekday",
               "value": [ 3 ]
@@ -364,27 +248,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 11,
-              "from_min":  0,
-              "to_hour":   17,
-              "to_min":    0,
-              "offsets_by_day": [
-                {
-                  "add":        27,
-                  "mult":       4,
-                  "mod":        15,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        27,
-                  "mult":       4,
-                  "mod":        15,
-                  "target":     "to_min"
-                }
-              ]
-            },
+            time_range(11, 0, 17, 0, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
             {
               "type": "date_range",
               "from": { "month": 7, "day": 1 },
@@ -401,27 +265,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 11,
-              "from_min":  0,
-              "to_hour":   21,
-              "to_min":    30,
-              "offsets_by_day": [
-                {
-                  "add":        27,
-                  "mult":       4,
-                  "mod":        15,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        27,
-                  "mult":       4,
-                  "mod":        15,
-                  "target":     "to_min"
-                }
-              ]
-            },
+            time_range(11, 0, 21, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
             {
               "type": "date_range",
               "from": { "month": 12, "day": 16 },
@@ -438,27 +282,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 10,
-              "from_min":  30,
-              "to_hour":   16,
-              "to_min":    30,
-              "offsets_by_day": [
-                {
-                  "add":        27,
-                  "mult":       6,
-                  "mod":        15,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        27,
-                  "mult":       51,
-                  "mod":        120,
-                  "target":     "to_min"
-                }
-              ]
-            },
+            time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]),
             {
               "type": "date_range",
               "from": { "month": 3, "day": 16 },
@@ -474,27 +298,7 @@ module Seeds
         trigger_conditions: {
           "operator": "and",
           "conditions": [
-            {
-              "type":      "time_range",
-              "from_hour": 10,
-              "from_min":  30,
-              "to_hour":   16,
-              "to_min":    30,
-              "offsets_by_day": [
-                {
-                  "add":        27,
-                  "mult":       6,
-                  "mod":        15,
-                  "target":     "from_min"
-                },
-                {
-                  "add":        27,
-                  "mult":       51,
-                  "mod":        120,
-                  "target":     "to_min"
-                }
-              ]
-            },
+            time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]),
             {
               "type": "date_range",
               "from": { "month": 11, "day": 1 },
@@ -1555,7 +1359,7 @@ module Seeds
       {
         event_set_name: '何かしたそう', derivation_number: 0, label: 'おえかきする', priority: 5,
         trigger_conditions:    always,
-        effects:               always,
+        effects:               {},
         next_derivation_number: nil, calls_event_set_name: nil, resolves_loop: false
       },
       {
