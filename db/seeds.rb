@@ -17,6 +17,7 @@ module Seeds
   end
   def weekday(array) = { "type" => "weekday", "value" => array }.freeze
   def date_range(fm, fd, tm, td) = { "type" => "date_range", "from" => { "month" => fm, "day" => fd }, "to" => { "month" => tm, "day" => td } }
+  def and_(*conditions) = { "operator" => "and", "conditions" => conditions }
 
   def run!
     categories = [
@@ -99,17 +100,11 @@ module Seeds
     event_set_conditions = [
       {
         name: '泣いている(空腹)',
-        trigger_conditions: {
-          "operator":   "and",
-          "conditions": [ status("hunger_value", "<=", 5) ]
-        }
+        trigger_conditions: and_(status("hunger_value", "<=", 5))
       },
       {
         name: '泣いている(よしよし不足)',
-        trigger_conditions: {
-          "operator":   "and",
-          "conditions": [ status("love_value", "<=", 40) ]
-        }
+        trigger_conditions: and_(status("love_value", "<=", 40))
       },
       {
         name: '泣いている(ランダム)',
@@ -117,10 +112,7 @@ module Seeds
       },
       {
         name: '踊っている',
-        trigger_conditions: {
-          "operator":   "and",
-          "conditions": [ status("mood_value", ">=", 80) ]
-        }
+        trigger_conditions: and_(status("mood_value", ">=", 80))
       },
       {
         name: 'ボーっとしている',
@@ -144,40 +136,20 @@ module Seeds
       },
       {
         name: '寝ている',
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [ time_range(0, 46, 6, 38, [ off_fm(43, 17, 60), off_tm(27, 19, 60) ]) ]
-        }
+        trigger_conditions: and_(time_range(0, 46, 6, 38, [ off_fm(43, 17, 60), off_tm(27, 19, 60) ]))
       },
       {
         name: 'ブロックのおもちゃに夢中',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator":   "and",
-          "conditions": [
-            prob(100),
-            time_range(11, 0, 14, 0, [ off_fm(11, 77, 300), off_tm(11, 77, 300) ]),
-            status("sports_value", ">=", 2)
-          ]
-        }
+        trigger_conditions: and_(prob(100), time_range(11, 0, 14, 0, [ off_fm(11, 77, 300), off_tm(11, 77, 300) ]), status("sports_value", ">=", 2))
       },
       {
         name: 'マンガに夢中',
-        trigger_conditions: {
-          "operator":   "and",
-          "conditions": [
-            prob(5),
-            time_range(10, 0, 23, 30, [ off_fm(4, 7, 30) ]),
-            status("sports_value", ">=", 2)
-          ]
-        }
+        trigger_conditions: and_(prob(5), time_range(10, 0, 23, 30, [ off_fm(4, 7, 30) ]), status("sports_value", ">=", 2))
       },
       {
         name: '眠そう',
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [ time_range(22, 14, 2, 0, [ off_fm(14, 43, 60), off_fm(5, 17, 60) ]) ]
-        }
+        trigger_conditions: and_(time_range(22, 14, 2, 0, [ off_fm(14, 43, 60), off_fm(5, 17, 60) ]))
       },
       {
         name: '寝かせた',
@@ -186,114 +158,54 @@ module Seeds
       {
         name: '寝起き',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [ time_range(6, 38, 7, 38, [ off_fm(27, 19, 60), off_tm(27, 19, 60) ]) ]
-        }
+        trigger_conditions: and_(time_range(6, 38, 7, 38, [ off_fm(27, 19, 60), off_tm(27, 19, 60) ]))
       },
       {
         name: '占い',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [ time_range(6, 0, 11, 0), prob(33) ]
-        }
+        trigger_conditions: and_(time_range(6, 0, 11, 0), prob(33))
       },
       {
         name: 'タマモン',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            time_range(19, 0, 20, 0),
-            weekday([ 1 ]),
-            status("sports_value", ">=", 2)
-          ]
-        }
+        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 1 ]), status("sports_value", ">=", 2))
       },
       {
         name: 'タマえもん',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            time_range(19, 0, 20, 0),
-            weekday([ 5 ]),
-            status("sports_value", ">=", 2)
-          ]
-        }
+        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 5 ]), status("sports_value", ">=", 2))
       },
       {
         name: 'ニワトリビアの湖',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            time_range(20, 0, 21, 0),
-            weekday([ 3 ]),
-            status("sports_value", ">=", 2)
-          ]
-        }
+        trigger_conditions: and_(time_range(20, 0, 21, 0), weekday([ 3 ]), status("sports_value", ">=", 2))
       },
       {
         name: '扇風機',
         daily_limit: 2,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            time_range(11, 0, 17, 0, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-            date_range(7, 1, 9, 15),
-            prob(25),
-            status("sports_value", ">=", 2)
-          ]
-        }
+        trigger_conditions: and_(time_range(11, 0, 17, 0, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
+                            date_range(7, 1, 9, 15), prob(25), status("sports_value", ">=", 2))
       },
       {
         name: 'こたつ',
         daily_limit: 2,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            time_range(11, 0, 21, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-            date_range(12, 16, 3, 15),
-            prob(25),
-            status("sports_value", ">=", 2)
-          ]
-        }
+        trigger_conditions: and_(time_range(11, 0, 21, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
+                            date_range(12, 16, 3, 15), prob(25), status("sports_value", ">=", 2))
       },
       {
         name: '花見',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]),
-            date_range(3, 16, 4, 15),
-            prob(30)
-          ]
-        }
+        trigger_conditions: and_(time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]), date_range(3, 16, 4, 15), prob(30))
       },
       {
         name: '紅葉',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]),
-            date_range(11, 1, 12, 15),
-            prob(25)
-          ]
-        }
+        trigger_conditions: and_(time_range(10, 30, 16, 30, [ off_fm(27, 6, 15), off_tm(27, 51, 120) ]), date_range(11, 1, 12, 15), prob(25))
       },
       {
         name: '年始',
         daily_limit: 1,
-        trigger_conditions: {
-          "operator": "and",
-          "conditions": [
-            date_range(1, 1, 1, 1)
-          ]
-        }
+        trigger_conditions: and_(date_range(1, 1, 1, 1))
       },
       {
         name: '怒っている',
