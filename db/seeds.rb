@@ -164,7 +164,7 @@ module Seeds
       },
       {
         name: '眠そう',
-        trigger_conditions: and_(time_range(22, 14, 2, 0, [ off_fm(14, 43, 60), off_fm(5, 17, 60) ]))
+        trigger_conditions: and_(time_range(22, 14, 2, 0, [ off_fm(14, 43, 60), off_tm(5, 17, 60) ]))
       },
       {
         name: '寝かせた',
