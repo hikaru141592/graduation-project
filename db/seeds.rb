@@ -1,7 +1,7 @@
 module Seeds
   module_function
   def always          = { "always" => true }.freeze
-  def prob(p)         = { "type" => "probability", "percent" => p }.freeze    
+  def prob(p)         = { "type" => "probability", "percent" => p }.freeze
   def prob_only(p)    = { "operator" => "and", "conditions" => [prob(p)] }.freeze
   def status(a, o, v) = { "type" => "status", "attribute" => a, "operator" => o, "value" => v }.freeze
   def off_fm(add, mult, mod) = { "add" => add, "mult" => mult, "mod" => mod, "target" => "from_min" }.freeze
