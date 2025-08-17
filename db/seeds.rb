@@ -32,6 +32,7 @@ module Seeds
       resolves_loop:          resolve
     }.freeze
   end
+  def image_set(char, bg = "temp-background.png") = { character_image: "temp-character/#{char}", background_image:  "temp-background/#{bg}" }
 
   def run!
     categories = [
@@ -263,496 +264,434 @@ module Seeds
         name:              '何か言っている',
         derivation_number: 0,
         message:           '〈たまご〉がなにかいっているよ。',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-normal.png")
       },
       {
         event_set_name:    '何かしたそう',
         name:              'べんきょうする',
         derivation_number: 1,
         message:           'よし！なんのべんきょうをしよう？',
-        character_image:   'temp-character/temp-nikoniko2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '何かしたそう',
         name:              '何かしたそう',
         derivation_number: 0,
         message:           '〈たまご〉はなにかしたそうだ。',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-normal.png")
       },
       {
         event_set_name:    '何かしたそう',
         name:              'ゲームさせてあげる？',
         derivation_number: 2,
         message:           '（30ぷんかん、かまってもらえなくなるけどいい？）',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-normal.png")
       },
       {
         event_set_name:    'ボーっとしている',
         name:              'ボーっとしている',
         derivation_number: 0,
         message:           '〈たまご〉はボーっとしている。',
-        character_image:   'temp-character/temp-hidariwomiru.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-hidariwomiru.png")
       },
       {
         event_set_name:    'ニコニコしている',
         name:              'ニコニコしている',
         derivation_number: 0,
         message:           '〈たまご〉はニコニコしている。',
-        character_image:   'temp-character/temp-suwatte-nikoniko.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-suwatte-nikoniko.png")
       },
       {
         event_set_name:    'ゴロゴロしている',
         name:              'ゴロゴロしている',
         derivation_number: 0,
         message:           '〈たまご〉はゴロゴロしている。',
-        character_image:   'temp-character/temp-gorogoro.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-gorogoro.png")
       },
       {
         event_set_name:    '踊っている',
         name:              '踊っている',
         derivation_number: 0,
         message:           '〈たまご〉はおどっている！',
-        character_image:   'temp-character/temp-dance.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-dance.png")
       },
       {
         event_set_name:    '泣いている(空腹)',
         name:              '泣いている(空腹)',
         derivation_number: 0,
         message:           '〈たまご〉がないている！',
-        character_image:   'temp-character/temp-naku.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-naku.png")
       },
       {
         event_set_name:    '泣いている(よしよし不足)',
         name:              '泣いている(よしよし不足)',
         derivation_number: 0,
         message:           '〈たまご〉がないている！',
-        character_image:   'temp-character/temp-naku.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-naku.png")
       },
       {
         event_set_name:    '泣いている(ランダム)',
         name:              '泣いている(ランダム)',
         derivation_number: 0,
         message:           '〈たまご〉がないている！',
-        character_image:   'temp-character/temp-naku.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-naku.png")
       },
       {
         event_set_name:    '怒っている',
         name:              '怒っている',
         derivation_number: 0,
         message:           '〈たまご〉はおこっている！',
-        character_image:   'temp-character/temp-okoru.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-okoru.png")
       },
       {
         event_set_name:    '寝ている',
         name:              '寝ている',
         derivation_number: 0,
         message:           '〈たまご〉はねている。',
-        character_image:   'temp-character/temp-sleep.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-sleep.png")
       },
       {
         event_set_name:    'ブロックのおもちゃに夢中',
         name:              'ブロックのおもちゃに夢中',
         derivation_number: 0,
         message:           '〈たまご〉はブロックのおもちゃにむちゅうだ。',
-        character_image:   'temp-character/temp-building_blocks.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-building_blocks.png")
       },
       {
         event_set_name:    'マンガに夢中',
         name:              'マンガに夢中',
         derivation_number: 0,
         message:           '〈たまご〉はマンガをよんでいる。',
-        character_image:   'temp-character/temp-comics.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-comics.png")
       },
       {
         event_set_name:    '眠そう',
         name:              '眠そう',
         derivation_number: 0,
         message:           '〈たまご〉はねむそうにしている。',
-        character_image:   'temp-character/temp-sleepy.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-sleepy.png")
       },
       {
         event_set_name:    '寝かせた',
         name:              '寝かせた',
         derivation_number: 0,
         message:           '〈たまご〉はねている。',
-        character_image:   'temp-character/temp-sleep.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-sleep.png")
       },
       {
         event_set_name:    '寝かせた',
         name:              '寝かせた（ゴミ箱なし）',
         derivation_number: 1,
         message:           '〈たまご〉はねている。',
-        character_image:   'temp-character/temp-sleep.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-sleep.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '寝起き',
         derivation_number: 0,
         message:           '〈たまご〉がおきたようだ！',
-        character_image:   'temp-character/temp-wakeup.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '起こす、1回目の警告',
         derivation_number: 1,
         message:           'おきにいりのハードロックミュージックでもかけっちゃおっかなー？',
-        character_image:   'temp-character/temp-wakeup.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '起こす、2回目の警告',
         derivation_number: 2,
         message:           'ほんとにかけるの？',
-        character_image:   'temp-character/temp-wakeup.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '起こす、3回目の警告',
         derivation_number: 3,
         message:           'ほんとにいいんですね？',
-        character_image:   'temp-character/temp-wakeup.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '占い',
         name:              '占い',
         derivation_number: 0,
         message:           'テレビでうらないをやってる！',
-        character_image:   'temp-character/temp-TV1.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-TV1.png")
       },
       {
         event_set_name:    'タマモン',
         name:              'タマモンがやっている',
         derivation_number: 0,
         message:           '〈たまご〉はタマモンがみたいらしい。どうする？',
-        character_image:   'temp-character/temp-TV3.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-TV3.png")
       },
       {
         event_set_name:    'タマモン',
         name:              'タマモンを見ている',
         derivation_number: 1,
         message:           '〈たまご〉はタマモンをみている！',
-        character_image:   'temp-character/temp-TV6.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-TV6.png")
       },
       {
         event_set_name:    'タマえもん',
         name:              'タマえもんがやっている',
         derivation_number: 0,
         message:           '〈たまご〉はタマえもんがみたいらしい。どうする？',
-        character_image:   'temp-character/temp-TV3.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-TV3.png")
       },
       {
         event_set_name:    'タマえもん',
         name:              'タマえもんを見ている',
         derivation_number: 1,
         message:           '〈たまご〉はタマえもんをみている！',
-        character_image:   'temp-character/temp-TV6.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-TV6.png")
       },
       {
         event_set_name:    'ニワトリビアの湖',
         name:              'ニワトリビアの湖がやっている',
         derivation_number: 0,
         message:           '〈たまご〉はニワトリビアのみずうみがみたいらしい。どうする？',
-        character_image:   'temp-character/temp-TV3.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-TV3.png")
       },
       {
         event_set_name:    'ニワトリビアの湖',
         name:              'ニワトリビアの湖を見ている',
         derivation_number: 1,
         message:           '〈たまご〉はニワトリビアのみずうみをみている！',
-        character_image:   'temp-character/temp-TV6.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-TV6.png")
       },
       {
         event_set_name:    '扇風機',
         name:              '扇風機',
         derivation_number: 0,
         message:           '〈たまご〉はすずんでいる！',
-        character_image:   'temp-character/temp-senpuuki1.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-senpuuki1.png")
       },
       {
         event_set_name:    'こたつ',
         name:              'こたつ',
         derivation_number: 0,
         message:           '〈たまご〉はこたつでヌクヌクしている！',
-        character_image:   'temp-character/temp-kotatu1.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-kotatu1.png")
       },
       {
         event_set_name:    '花見',
         name:              '花見',
         derivation_number: 0,
         message:           '〈たまご〉はおはなみにいきたいみたい。',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-normal.png")
       },
       {
         event_set_name:    '紅葉',
         name:              '紅葉',
         derivation_number: 0,
         message:           '〈たまご〉はコウヨウをみにいきたいみたい。',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-normal.png")
       },
       {
         event_set_name:    '年始',
         name:              '年始',
         derivation_number: 0,
         message:           '〈たまご〉「にー！！」',
-        character_image:   'temp-character/temp-nikoniko2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '算数',
         name:              '出題前',
         derivation_number: 0,
         message:           'よし、さんすうのもんだいにちょうせんだ！',
-        character_image:   'temp-character/temp-nikoniko2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '算数',
         name:              '1つ目が正解',
         derivation_number: 1,
         message:           '「X 演算子 Y」のこたえは？',
-        character_image:   'temp-character/temp-kangaeru.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    '算数',
         name:              '2つ目が正解',
         derivation_number: 2,
         message:           '「X 演算子 Y」のこたえは？',
-        character_image:   'temp-character/temp-kangaeru.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    '算数',
         name:              '3つ目が正解',
         derivation_number: 3,
         message:           '「X 演算子 Y」のこたえは？',
-        character_image:   'temp-character/temp-kangaeru.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    '算数',
         name:              '4つ目が正解',
         derivation_number: 4,
         message:           '「X 演算子 Y」のこたえは？',
-        character_image:   'temp-character/temp-kangaeru.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '投球前',
         derivation_number: 0,
         message:           'ボールなげるよー！',
-        character_image:   'temp-character/temp-ball1.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-ball1.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '投球',
         derivation_number: 1,
         message:           'ブンッ！',
-        character_image:   'temp-character/temp-ball2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-ball2.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '左が成功',
         derivation_number: 2,
         message:           'ボールをなげた！〈たまご〉、そっちだ！',
-        character_image:   'temp-character/temp-ball3.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-ball3.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '真ん中が成功',
         derivation_number: 3,
         message:           '〈たまご〉、そっちだ！',
-        character_image:   'temp-character/temp-ball3.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-ball3.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '右が成功',
         derivation_number: 4,
         message:           '〈たまご〉、そっちだ！',
-        character_image:   'temp-character/temp-ball3.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-ball3.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓',
         derivation_number: 0,
         message:           'なんのとっくんをしよう？',
-        character_image:   'temp-character/temp-kangaeru.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓終了',
         derivation_number: 1,
         message:           'ここまで！',
-        character_image:   'temp-character/temp-tukareta.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-tukareta.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓結果優秀',
         derivation_number: 2,
         message:           '20もんちゅう〈X〉もんせいかい！〈Y〉分〈Z〉秒クリア！すごいね！',
-        character_image:   'temp-character/temp-nikoniko.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓結果良し',
         derivation_number: 3,
         message:           '20もんちゅう〈X〉もんせいかい！よくがんばったね！',
-        character_image:   'temp-character/temp-nikoniko2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓結果微妙',
         derivation_number: 4,
         message:           '20もんちゅう〈X〉もんせいかい！またちょうせんしよう！',
-        character_image:   'temp-character/temp-bimuyou.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-bimuyou.png")
       },
       {
         event_set_name:    '特訓',
         name:              'ボール遊び特訓結果良し',
         derivation_number: 5,
         message:           '〈X〉かいせいこう！よくがんばったね！',
-        character_image:   'temp-character/temp-nikoniko2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '特訓',
         name:              'ボール遊び特訓結果微妙',
         derivation_number: 6,
         message:           '〈X〉かいせいこう！またちょうせんしよう！',
-        character_image:   'temp-character/temp-bimuyou.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-bimuyou.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'イントロ開始',
         derivation_number: 0,
         message:           'よくきた！まちくたびれたぞ！',
-        character_image:   'temp-character/temp-hiyoko-magao.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-hiyoko-magao.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'かっこいい？',
         derivation_number: 1,
         message:           'かっこいいだろ！',
-        character_image:   'temp-character/temp-hiyoko-nikoniko.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'そんなことはさておき',
         derivation_number: 2,
         message:           'まあ、そんなことはさておきだな。',
-        character_image:   'temp-character/temp-hiyoko-nikoniko.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'たまごのなまえ',
         derivation_number: 3,
         message:           '〈たまご〉、だったな！',
-        character_image:   'temp-character/temp-hiyoko-tamago-shokai.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'たまごのかいせつ',
         derivation_number: 4,
         message:           '〈たまご〉はとってもなきむしだ。',
-        character_image:   'temp-character/temp-hiyoko-magao.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-hiyoko-magao.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              '声かけ1回目',
         derivation_number: 5,
         message:           '〈たまご〉！',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-normal.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              '声かけ2回目',
         derivation_number: 6,
         message:           'もういちどこえをかけてみよう！',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-normal.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              '声かけ3回目',
         derivation_number: 7,
         message:           'ぜんぜんしゃべってくれない！',
-        character_image:   'temp-character/temp-normal.png',
-        background_image:  'temp-background/temp-in-house.png'
+        **image_set("temp-normal.png", "temp-in-house.png")
       },
       {
         event_set_name:    '誕生日',
         name:              '誕生日',
         derivation_number: 0,
         message:           '〈たまご〉「にー！」',
-        character_image:   'temp-character/temp-nikoniko2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '誕生日',
         name:              'どういう一年にする？',
         derivation_number: 1,
         message:           '「これからのいちねん、どうすごしたい？」ってきいてるよ。',
-        character_image:   'temp-character/temp-nikoniko2.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    'タマモンカート',
         name:              'タマモンカート',
         derivation_number: 0,
         message:           '〈たまご〉はゲーム『タマモンカート』であそんでいる！',
-        character_image:   'temp-character/temp-game-nikoniko.png',
-        background_image:  'temp-background/temp-background.png'
+        **image_set("temp-game-nikoniko.png")
       }
     ]
 
@@ -2103,396 +2042,396 @@ module Seeds
     end
 
     cuts = [
-      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 1), 1), message: '〈たまご〉「ににに！にににー！」', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 1), 2), message: 'さいきん、ボールあそびがたのしいようだ！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 1), 1), message: '〈たまご〉「ににに！にににー！」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 1), 2), message: 'さいきん、ボールあそびがたのしいようだ！', **image_set("temp-nikoniko2.png"),
       messages: [ 'さいきん、ボールあそびがたのしいようだ！', 'ちきゅうはまるいんだよ、といっている。まさか～！', 'しょうらいはパイロットになりたいらしい！', '〈たまご〉はまいにちがたのしいらしい！', '〈ユーザー〉はおなかがまんまるだね、といっている。うるさい！',
                   'このまえ、おとしよりのニモツをもってあげたんだって！えらい！', 'みそラーメンよりとんこつラーメン、といっている。むずかしいぎろんだ！', 'おとなになったらバイクにのってみたいらしい。あんぜんうんてんするんだよ！', '〈たまご〉はきんようびのよるにやっているテレビばんぐみ、タマえもんがすきらしい！', 'さいきん、はしるのがはやくなったらしい！いつもチョロチョロはしりまわってるもんね！', 'ともだちとのあいだでタマモンのゲームがはやっているらしい！', 'カレーライスはあまくちがすきらしい！わかる！',
                   'ラッコさんってかわいいよね、っていってる。すいぞくかんにいるかなー？', 'タコにはしんぞうが3つあるらしい。うそー！？', 'バナナはベリーのなかまらしい！ふーん！', 'カンガルーはうしろにすすめないらしい。ふしぎー！', 'カタツムリのしょっかくは4ほんあるらしい。こんどよくみてみよう！', 'このまえ、がいこくじんのひとにみちあんないしてあげたらしい！ことばわかった？', 'チーズバーガーはケチャップおおめがすきらしい！わかってるじゃん！', 'このまえ、れいぞうこのケチャップこっそりなめたらしい！あー！！',
                   'オトは1オクターブあがると、しゅうはすうが2ばいになるらしい。へー！', 'タンスにかくしてあったポテチおいしかったといっている。え！とっておきのやつー！', 'ジュウドウってかっこいいよねっていっている。つよいセイシンリョクがひつようだぞ！', 'ダジャレのもちネタが10こあるらしい。まだまだだな！', 'こんどおんがくフェスにいきたいらしい！さんせんしちゃう！？', 'ハンバーグのおいしさをかたっている！', 'からあげのおいしいおべんとうやが、さいきんできたらしい！' ] },
-      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 2), 1), message: 'なになに？うんうん。', character_image: 'temp-character/temp-komattakao.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 2), 2), message: '〈たまご〉はとっくんがしたいといっている！', character_image: 'temp-character/temp-yaruki.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何か言っている', 0, 'よしよしする',        1), 1), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何か言っている', 0, 'おやつをあげる',      1), 1), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何か言っている', 0, 'ごはんをあげる',      1), 1), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何か言っている', 0, 'おやつをあげる',      2), 1), message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何か言っている', 0, 'ごはんをあげる',      2), 1), message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 2), 1), message: 'なになに？うんうん。', **image_set("temp-komattakao.png") },
+      { **cut_key(ar_key('何か言っている', 0, 'はなしをきいてあげる', 2), 2), message: '〈たまご〉はとっくんがしたいといっている！', **image_set("temp-yaruki.png") },
+      { **cut_key(ar_key('何か言っている', 0, 'よしよしする',        1), 1), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('何か言っている', 0, 'おやつをあげる',      1), 1), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('何か言っている', 0, 'ごはんをあげる',      1), 1), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('何か言っている', 0, 'おやつをあげる',      2), 1), message: '〈たまご〉はおなかいっぱいのようだ。', **image_set("temp-normal.png") },
+      { **cut_key(ar_key('何か言っている', 0, 'ごはんをあげる',      2), 1), message: '〈たまご〉はおなかいっぱいのようだ。', **image_set("temp-normal.png") },
 
-      { **cut_key(ar_key('何かしたそう', 0, 'ボールあそびをする', 1), 1), message: 'よし！ボールあそびをしよう！',                       character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'ボールあそびをする', 2), 1), message: '〈たまご〉はつかれている！やすませてあげよう！',       character_image: 'temp-character/temp-hukigen.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'べんきょうする',     2), 1), message: '〈たまご〉はつかれている！やすませてあげよう！',      character_image: 'temp-character/temp-hukigen.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       1), 1), message: 'おえかきをした！じょうずにかけたね！',               character_image: 'temp-character/temp-ewokaita1.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       2), 1), message: 'おえかきをした！〈たまご〉はおえかきがじょうずだね！', character_image: 'temp-character/temp-ewokaita2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       3), 1), message: 'おえかきをした！これはなんだろう？',                 character_image: 'temp-character/temp-ewokaita3.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       4), 1), message: 'おえかきをした！ん！？なにかいてんだー！',            character_image: 'temp-character/temp-ewokaita4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       5), 1), message: 'おえかきをした！ん！？てんさいてきだーーー！！！',     character_image: 'temp-character/temp-ewokaita5.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 0, 'ゲームする',         1), 1), message: 'テレビゲームであそばせてあげよっかな！',              character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 2, 'ゲームさせてあげる',  1), 1), message: 'テレビゲームであそんでいいよ！30ぷんかんね！',         character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 2, 'やっぱやめよう',     1), 1), message: 'やっぱゲームはまたこんどかな！',                      character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('何かしたそう', 0, 'ボールあそびをする', 1), 1), message: 'よし！ボールあそびをしよう！',                       **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'ボールあそびをする', 2), 1), message: '〈たまご〉はつかれている！やすませてあげよう！',       **image_set("temp-hukigen.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'べんきょうする',     2), 1), message: '〈たまご〉はつかれている！やすませてあげよう！',      **image_set("temp-hukigen.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       1), 1), message: 'おえかきをした！じょうずにかけたね！',               **image_set("temp-ewokaita1.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       2), 1), message: 'おえかきをした！〈たまご〉はおえかきがじょうずだね！', **image_set("temp-ewokaita2.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       3), 1), message: 'おえかきをした！これはなんだろう？',                 **image_set("temp-ewokaita3.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       4), 1), message: 'おえかきをした！ん！？なにかいてんだー！',            **image_set("temp-ewokaita4.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       5), 1), message: 'おえかきをした！ん！？てんさいてきだーーー！！！',     **image_set("temp-ewokaita5.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'ゲームする',         1), 1), message: 'テレビゲームであそばせてあげよっかな！',              **image_set("temp-normal.png") },
+      { **cut_key(ar_key('何かしたそう', 2, 'ゲームさせてあげる',  1), 1), message: 'テレビゲームであそんでいいよ！30ぷんかんね！',         **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 2, 'やっぱやめよう',     1), 1), message: 'やっぱゲームはまたこんどかな！',                      **image_set("temp-okoru.png") },
 
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご')), message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 2), message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 3), message: '〈たまご〉はシェイクスピアのさくひんをよんだ！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2)), message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 2), message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 3), message: '〈たまご〉は「はしれメロス」をよんだ！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3)), message: 'こくごのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3), 2), message: '・・・。',                   character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3), 3), message: '『どんぶらこー、どんぶらこー』', character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3), 4), message: '〈たまご〉はももたろうをよんだ！', character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご')), message: 'こくごのべんきょうをしよう！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 2), message: '・・・。',                   **image_set("temp-study.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 3), message: '〈たまご〉はシェイクスピアのさくひんをよんだ！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2)), message: 'こくごのべんきょうをしよう！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 2), message: '・・・。',                   **image_set("temp-study.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 3), message: '〈たまご〉は「はしれメロス」をよんだ！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3)), message: 'こくごのべんきょうをしよう！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3), 2), message: '・・・。',                   **image_set("temp-study.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3), 3), message: '『どんぶらこー、どんぶらこー』', **image_set("temp-study.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご', 3), 4), message: '〈たまご〉はももたろうをよんだ！', **image_set("temp-study.png") },
 
-      { **cut_key(ar_key('何かしたそう', 1, 'りか')), message: 'りかのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 2), message: '・・・。',                   character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 3), message: '〈たまご〉はふろうふしになれるクスリをつくった！', character_image: 'temp-character/temp-rika2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2)), message: 'りかのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 2), message: '・・・。',                   character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 3), message: '！！！',                     character_image: 'temp-character/temp-rika3.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 4), message: '・・・。',                   character_image: 'temp-character/temp-rika4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか', 3)), message: 'りかのべんきょうをしよう！', character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか', 3), 2), message: '・・・。',                   character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか', 3), 3), message: 'じっけんはしっぱいした！', character_image: 'temp-character/temp-rika.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか')), message: 'りかのべんきょうをしよう！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 2), message: '・・・。',                   **image_set("temp-rika.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 3), message: '〈たまご〉はふろうふしになれるクスリをつくった！', **image_set("temp-rika2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2)), message: 'りかのべんきょうをしよう！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 2), message: '・・・。',                   **image_set("temp-rika.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 3), message: '！！！',                     **image_set("temp-rika3.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 4), message: '・・・。',                   **image_set("temp-rika4.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか', 3)), message: 'りかのべんきょうをしよう！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか', 3), 2), message: '・・・。',                   **image_set("temp-rika.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか', 3), 3), message: 'じっけんはしっぱいした！', **image_set("temp-rika.png") },
 
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい')), message: 'しゃかいのべんきょうをしよう！',                           character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 2), message: '・・・。',                                               character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 3), message: 'すっごいゆうめいなブショウがタイムスリップしてきた！すご！！', character_image: 'temp-character/temp-busyou3.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2)), message: 'しゃかいのべんきょうをしよう！',                           character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 2), message: '・・・。',                                               character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 3), message: 'なまえをきいたことあるようなないようなブショウがタイムスリップしてきた！', character_image: 'temp-character/temp-busyou2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 4), message: 'こんにちは！',                                           character_image: 'temp-character/temp-busyou2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3)), message: 'しゃかいのべんきょうをしよう！',                           character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3), 2), message: '・・・。',                                               character_image: 'temp-character/temp-study.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3), 3), message: 'むめいのブショウがタイムスリップしてきた！',                 character_image: 'temp-character/temp-busyou1.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3), 4), message: 'はやくかえって！',                                         character_image: 'temp-character/temp-busyou1.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい')), message: 'しゃかいのべんきょうをしよう！',                           **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 2), message: '・・・。',                                               **image_set("temp-study.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 3), message: 'すっごいゆうめいなブショウがタイムスリップしてきた！すご！！', **image_set("temp-busyou3.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2)), message: 'しゃかいのべんきょうをしよう！',                           **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 2), message: '・・・。',                                               **image_set("temp-study.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 3), message: 'なまえをきいたことあるようなないようなブショウがタイムスリップしてきた！', **image_set("temp-busyou2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 4), message: 'こんにちは！',                                           **image_set("temp-busyou2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3)), message: 'しゃかいのべんきょうをしよう！',                           **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3), 2), message: '・・・。',                                               **image_set("temp-study.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3), 3), message: 'むめいのブショウがタイムスリップしてきた！',                 **image_set("temp-busyou1.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 3), 4), message: 'はやくかえって！',                                         **image_set("temp-busyou1.png") },
 
-      { **cut_key(ar_key('ボーっとしている', 0, 'ながめている')), message: 'きょうものどかだねえ。', character_image: 'temp-character/temp-hidariwomiru-teage.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('ボーっとしている', 0, 'ながめている')), message: 'きょうものどかだねえ。', **image_set("temp-hidariwomiru-teage.png"),
       messages: [ 'きょうものどかだねえ。', '〈たまご〉「んに～」', '〈たまご〉「んにに～」', '〈たまご〉「にー、にに～」', '〈たまご〉「にににー、にに～」',
                   '〈たまご〉「にー、にに！」', '〈たまご〉「ににに？に～」', 'こうみえて、いろいろかんがえごとしてるのかも。', 'きょうもへいわだ。', 'のんびりすごすのがいちばんだよね～。', 'ボケっとしてると、あっというまにじかんがすぎるよ。' ] },
-      { **cut_key(ar_key('ニコニコしている', 0, 'ながめている')), message: 'どうしたのかな！', character_image: 'temp-character/temp-suwatte-nikoniko-teage.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('ニコニコしている', 0, 'ながめている')), message: 'どうしたのかな！', **image_set("temp-suwatte-nikoniko-teage.png"),
       messages: [ 'どうしたのかな！', '〈たまご〉「んに～！」', '〈たまご〉「んにに～！」', '〈たまご〉「にー！にに～！」', '〈たまご〉「にににー！にに～！」',
                   '〈たまご〉「にー！んにー！」', '〈たまご〉「んににー！」', 'ごきげんそう！' ] },
-      { **cut_key(ar_key('ゴロゴロしている', 0, 'ながめている')), message: 'ゴロゴロ！', character_image: 'temp-character/temp-gorogoro.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('ゴロゴロしている', 0, 'ながめている')), message: 'ゴロゴロ！', **image_set("temp-gorogoro.png"),
       messages: [ 'ゴロゴロ！', 'きもちよさそうだなあ。', 'ゴロゴロばっかしてるとふとっちゃうよ！', 'じぶんもゴロゴロしようかなあ。', 'ゆか、かたくないのかな？',
                   'ゴロゴロきもちいいねえ！', '〈たまご〉「に～！」', '〈たまご〉「に！んにに～！」' ] },
 
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける')), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける'), 2), message: '・・・。けいかいされている。いちどじぶんのムネにてをあてて、げんいんをかんがえてみるんだ。', character_image: 'temp-character/temp-kanasii.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 2)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 2), 2), message: 'あー！ぜんぜんなついていないようだ。',                                                  character_image: 'temp-character/temp-mewosorasu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 3)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 3), 2), message: 'うーん、もっとこころをひらいてほしいなあ。',                                             character_image: 'temp-character/temp-tewoageru.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 4)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 4), 2), message: 'お！すこしこころをひらいてくれているようだ！',                                           character_image: 'temp-character/temp-nikoniko3.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 5)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 5), 2), message: '〈たまご〉はこころをひらいてくれているようだ！',                                         character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 6)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 6), 2), message: '〈たまご〉にすごくすかれているようだ！',                                                character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 7)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 7), 2), message: '〈たまご〉にすっごくすかれているようだ！！',                                             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 8)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 8), 2), message: '〈たまご〉にすーっごくかなりすかれているようだ！！！',                                    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 9)), message: '〈たまご〉ー！',                                                                      character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 9), 2), message: '〈たまご〉にすーーっごくかなりすかれているようだ！！！！',                                character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける')), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける'), 2), message: '・・・。けいかいされている。いちどじぶんのムネにてをあてて、げんいんをかんがえてみるんだ。', **image_set("temp-kanasii.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 2)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 2), 2), message: 'あー！ぜんぜんなついていないようだ。',                                                  **image_set("temp-mewosorasu.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 3)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 3), 2), message: 'うーん、もっとこころをひらいてほしいなあ。',                                             **image_set("temp-tewoageru.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 4)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 4), 2), message: 'お！すこしこころをひらいてくれているようだ！',                                           **image_set("temp-nikoniko3.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 5)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 5), 2), message: '〈たまご〉はこころをひらいてくれているようだ！',                                         **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 6)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 6), 2), message: '〈たまご〉にすごくすかれているようだ！',                                                **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 7)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 7), 2), message: '〈たまご〉にすっごくすかれているようだ！！',                                             **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 8)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 8), 2), message: '〈たまご〉にすーっごくかなりすかれているようだ！！！',                                    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 9)), message: '〈たまご〉ー！',                                                                      **image_set("temp-normal.png") },
+      { **cut_key(ar_key('ボーっとしている', 0, 'こえをかける', 9), 2), message: '〈たまご〉にすーーっごくかなりすかれているようだ！！！！',                                **image_set("temp-nikoniko.png") },
 
-      { **cut_key(ar_key('踊っている',     0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('踊っている',     0, 'おやつをあげる')), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('踊っている',     0, 'ごはんをあげる')), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('踊っている',     0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('踊っている',     0, 'おやつをあげる')), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('踊っている',     0, 'ごはんをあげる')), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
 
-      { **cut_key(ar_key('踊っている',     0, 'よしよしする', 2)), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('踊っている',     0, 'おやつをあげる', 2)), message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('踊っている',     0, 'ごはんをあげる', 2)), message: '〈たまご〉はおなかいっぱいのようだ。', character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('踊っている',     0, 'よしよしする', 2)), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('踊っている',     0, 'おやつをあげる', 2)), message: '〈たまご〉はおなかいっぱいのようだ。', **image_set("temp-normal.png") },
+      { **cut_key(ar_key('踊っている',     0, 'ごはんをあげる', 2)), message: '〈たまご〉はおなかいっぱいのようだ。', **image_set("temp-normal.png") },
 
-      { **cut_key(ar_key('泣いている(空腹)', 0, 'よしよしする')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(空腹)', 0, 'おやつをあげる')), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(空腹)', 0, 'ごはんをあげる')), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(空腹)', 0, 'あそんであげる')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('泣いている(空腹)', 0, 'よしよしする')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
+      { **cut_key(ar_key('泣いている(空腹)', 0, 'おやつをあげる')), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('泣いている(空腹)', 0, 'ごはんをあげる')), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('泣いている(空腹)', 0, 'あそんであげる')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
 
-      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'おやつをあげる')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'ごはんをあげる')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'あそんであげる')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'おやつをあげる')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
+      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'ごはんをあげる')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
+      { **cut_key(ar_key('泣いている(よしよし不足)', 0, 'あそんであげる')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
 
-      { **cut_key(ar_key('泣いている(ランダム)', 0, 'よしよしする')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(ランダム)', 0, 'おやつをあげる')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(ランダム)', 0, 'ごはんをあげる')), message: 'そうじゃないらしい！', character_image: 'temp-character/temp-naku.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('泣いている(ランダム)', 0, 'あそんであげる')), message: '〈たまご〉はよろこんでいる！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('泣いている(ランダム)', 0, 'よしよしする')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
+      { **cut_key(ar_key('泣いている(ランダム)', 0, 'おやつをあげる')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
+      { **cut_key(ar_key('泣いている(ランダム)', 0, 'ごはんをあげる')), message: 'そうじゃないらしい！', **image_set("temp-naku.png") },
+      { **cut_key(ar_key('泣いている(ランダム)', 0, 'あそんであげる')), message: '〈たまご〉はよろこんでいる！', **image_set("temp-nikoniko.png") },
 
-      { **cut_key(ar_key('寝ている',           0, 'そっとする')), message: 'きもちよさそうにねている。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝ている',           0, 'よしよしする')), message: 'おこさないように、やさしくなでた。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝ている',           0, 'たたきおこす')), message: 'ひとでなし！！', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('寝ている',           0, 'そっとする')), message: 'きもちよさそうにねている。', **image_set("temp-sleep.png") },
+      { **cut_key(ar_key('寝ている',           0, 'よしよしする')), message: 'おこさないように、やさしくなでた。', **image_set("temp-sleep.png") },
+      { **cut_key(ar_key('寝ている',           0, 'たたきおこす')), message: 'ひとでなし！！', **image_set("temp-sleep.png") },
 
-      { **cut_key(ar_key('寝起き',             0, 'そっとする')), message: 'まだねむいみたいだからそっとしておこう！', character_image: 'temp-character/temp-wakeup.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝起き',             0, 'よしよしする')), message: '〈たまご〉がよろこんでいる！おはよう！',   character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝起き',             0, 'よしよしする', 2)), message: 'よしよし！',                            character_image: 'temp-character/temp-wakeup.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝起き',             0, 'きがえさせる')), message: '〈たまご〉はふくなんかきていない！',      character_image: 'temp-character/temp-wakeup.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝起き',             3, 'はい')), message: '〈たまご〉はおこってしまった！',           character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('寝起き',             0, 'そっとする')), message: 'まだねむいみたいだからそっとしておこう！', **image_set("temp-wakeup.png") },
+      { **cut_key(ar_key('寝起き',             0, 'よしよしする')), message: '〈たまご〉がよろこんでいる！おはよう！',   **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('寝起き',             0, 'よしよしする', 2)), message: 'よしよし！',                            **image_set("temp-wakeup.png") },
+      { **cut_key(ar_key('寝起き',             0, 'きがえさせる')), message: '〈たまご〉はふくなんかきていない！',      **image_set("temp-wakeup.png") },
+      { **cut_key(ar_key('寝起き',             3, 'はい')), message: '〈たまご〉はおこってしまった！',           **image_set("temp-okoru.png") },
 
-      { **cut_key(ar_key('占い',               0, 'すすむ')), message: '『ほんじつのあなたはすっごくラッキー！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('占い',               0, 'すすむ'), 2), message: '『ちょっかんにしたがうと、おもわぬいいことが！』', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('占い',               0, 'すすむ')), message: '『ほんじつのあなたはすっごくラッキー！』', **image_set("temp-TV1.png") },
+      { **cut_key(ar_key('占い',               0, 'すすむ'), 2), message: '『ちょっかんにしたがうと、おもわぬいいことが！』', **image_set("temp-TV2.png"),
       messages: [ '『ちょっかんにしたがうと、おもわぬいいことがありそう！』', '『せっきょくてきにうごくと、とってもいいことがおこりそう！』', '『おいしいものをたべると、きんうんアップ！』', '『ふだんとへんかのあるこうどうをいしきしよう！』', '『まわりのひとからかんしゃされそうなよかん！』',
                   '『なにをやってもうまくいきそう！』', '『いつもはしっぱいすることも、きょうならうまくいきそう！』', '『じぶんのとくいなことにうちこんでみよう！』', '『ひとのえがおにふれると、うんきがアップ！』', '『まわりへのおもいやりを、いつもいじょうにだいじにしよう！』' ] },
-      { **cut_key(ar_key('占い',               0, 'すすむ'), 3), message: 'だそうだ！', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('占い',               0, 'すすむ'), 3), message: 'だそうだ！', **image_set("temp-TV2.png") },
 
-      { **cut_key(ar_key('占い',               0, 'すすむ',    2)), message: '『ほんじつのあなたはそこそこラッキー！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    2), 2), message: '『あんまりふかくかんがえすぎず、こうどうしよう！』', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('占い',               0, 'すすむ',    2)), message: '『ほんじつのあなたはそこそこラッキー！』', **image_set("temp-TV1.png") },
+      { **cut_key(ar_key('占い',               0, 'すすむ',    2), 2), message: '『あんまりふかくかんがえすぎず、こうどうしよう！』', **image_set("temp-TV2.png"),
       messages: [ '『あんまりふかくかんがえすぎず、こうどうしよう！』', '『ごぜんちゅうから、かっぱつてきにこうどうしよう！』', '『あまいものをたべると、いいことがあるかも！』', '『じぶんをかざらず、すごしてみよう！』', '『コミュニケーションがじゅうようないちにちになりそう！』',
                   '『けんこうてきないちにちをすごすのがポイント！』', '『ちょうせんがうまくいきそうなよかん！』', '『じぶんのにがてなことにうちこんでみよう！』', '『たまにはのんびりすごすのもいいかも！』', '『にんげんかんけいがうまくいきそう！』' ] },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    2), 3), message: 'だそうだ！', character_image: 'temp-character/temp-TV2.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('占い',               0, 'すすむ',    2), 3), message: 'だそうだ！', **image_set("temp-TV2.png") },
 
-      { **cut_key(ar_key('占い',               0, 'すすむ',    3)), message: '『ほんじつのあなたはちょっぴりラッキー！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    3), 2), message: '『でもマンホールのうえにはきをつけよう！』', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('占い',               0, 'すすむ',    3)), message: '『ほんじつのあなたはちょっぴりラッキー！』', **image_set("temp-TV1.png") },
+      { **cut_key(ar_key('占い',               0, 'すすむ',    3), 2), message: '『でもマンホールのうえにはきをつけよう！』', **image_set("temp-TV1.png"),
       messages: [ '『でもマンホールのうえにはきをつけよう！』', '『みぎかひだりだったら、ひだりをえらぼう！』', '『みぎかひだりだったら、みぎをえらぼう！』', '『おとしよりにやさしくするのがポイント！』', '『にがてなたべものをがんばってたべてみよう！』',
                   '『うんどうをするといいことがあるかも？』', '『トイレはがまんしないほうがよさそう！』', '『せいじつなきもちをもっていれば、いいいちにちになりそう！』', '『きょうはいそがしいかもしればいけど、がんばってみよう！』', '『でもひとのわるぐちをいうと、うんきがガクッとさがるよ！』',
                   '『ラッキーカラーはきいろ！』', '『ラッキーカラーはあお！』', '『ラッキーカラーはあか！』', '『ラッキーカラーはみどり！』', '『ニコニコすることをこころがけよう！』' ] },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    3), 3), message: 'だそうだ！', character_image: 'temp-character/temp-TV1.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('占い',               0, 'すすむ',    3), 3), message: 'だそうだ！', **image_set("temp-TV1.png") },
 
-      { **cut_key(ar_key('タマモン',               0, 'みていいよ')), message: '〈たまご〉はよろこんでいる！',              character_image: 'temp-character/temp-TV4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('タマモン',               0, 'みさせてあげない')), message: 'しょぼん。',                              character_image: 'temp-character/temp-TV5.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('タマモン',               1, 'いっしょにみる')), message: '『でばんだ、タマチュウ！』', character_image: 'temp-character/temp-TV6.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('タマモン',               0, 'みていいよ')), message: '〈たまご〉はよろこんでいる！',              **image_set("temp-TV4.png") },
+      { **cut_key(ar_key('タマモン',               0, 'みさせてあげない')), message: 'しょぼん。',                              **image_set("temp-TV5.png") },
+      { **cut_key(ar_key('タマモン',               1, 'いっしょにみる')), message: '『でばんだ、タマチュウ！』', **image_set("temp-TV6.png"),
       messages: [ '『でばんだ、タマチュウ！』', '『これからたびにでるぞ！』', '『タマモンマスターへのみちはながい！』', '『タマチュウがつよくなってきた！』', '『バトルだタマチュウ！』',
                   '『タマチュウにげるぞ！』', '『タマチュウ！かえってこい！』', '『タマチュウきょうはちょうしわるいか？』', '『タマチュウ！たたかってくれ！』', '『これがタマチュウ？』',
                   '『タマチュウ、さいきんふとった？』', '『あのタマモンつかまえよう！』', '『あー、にげられた！』', '『あのやまをこえないと！』', '『タマチュウ、これからもよろしくな！』' ] },
 
-      { **cut_key(ar_key('タマえもん',               0, 'みていいよ')), message: '〈たまご〉はよろこんでいる！',           character_image: 'temp-character/temp-TV4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('タマえもん',               0, 'みさせてあげない')), message: 'しょぼん。',                           character_image: 'temp-character/temp-TV5.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('タマえもん',               1, 'いっしょにみる')), message: '『たすけてタマえもん！』', character_image: 'temp-character/temp-TV6.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('タマえもん',               0, 'みていいよ')), message: '〈たまご〉はよろこんでいる！',           **image_set("temp-TV4.png") },
+      { **cut_key(ar_key('タマえもん',               0, 'みさせてあげない')), message: 'しょぼん。',                           **image_set("temp-TV5.png") },
+      { **cut_key(ar_key('タマえもん',               1, 'いっしょにみる')), message: '『たすけてタマえもん！』', **image_set("temp-TV6.png"),
       messages: [ '『たすけてタマえもん！』', '『タマえもーん！』', '『タマえもんにどうにかしてもらおう！』', '『タマえもんとケンカしてしまった・・・。』', '『タマえもんにもできないことがあるんだね』',
                   '『しっかりしてよタマえもん！』', '『いそいでかえらないと！』', '『タマえもん、これどうやってつかえばいいの？』', '『いつもありがとうね、タマえもん！』', '『きょうはがっこうにいきたくないなあ』',
                   '『こうえんにあそびにいこう！』', '『タマえもん、またあしたね！』', '『いそいでタマえもんのところにいかないと！』', '『タマえもん、さっきはごめんね！』', '『タマえもん、これからもよろしくね！』' ] },
 
-      { **cut_key(ar_key('ニワトリビアの湖',           0, 'みていいよ')), message: '〈たまご〉はよろこんでいる！',           character_image: 'temp-character/temp-TV4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ニワトリビアの湖',           0, 'みさせてあげない')), message: 'しょぼん。',                           character_image: 'temp-character/temp-TV5.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ニワトリビアの湖',           1, 'いっしょにみる')), message: '『コケーコケーコケー、100コケー！』', character_image: 'temp-character/temp-TV6.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('ニワトリビアの湖',           0, 'みていいよ')), message: '〈たまご〉はよろこんでいる！',           **image_set("temp-TV4.png") },
+      { **cut_key(ar_key('ニワトリビアの湖',           0, 'みさせてあげない')), message: 'しょぼん。',                           **image_set("temp-TV5.png") },
+      { **cut_key(ar_key('ニワトリビアの湖',           1, 'いっしょにみる')), message: '『コケーコケーコケー、100コケー！』', **image_set("temp-TV6.png"),
       messages: [ '『コケーコケーコケー、97コケー！』', '『コケーコケーコケー、91コケー！』', '『コケーコケーコケー、88コケー！』', '『コケーコケーコケー、84コケー！』', '『コケーコケーコケー、75コケー！』',
                   '『コケーコケーコケー、69コケー！』', '『コケーコケーコケー、61コケー！』', '『コケーコケーコケー、54コケー！』', '『コケーコケーコケー、46コケー！』', '『コケーコケーコケー、43コケー！』', '『コケーコケーコケー、36コケー！』', '『コケーコケーコケー、35コケー！』',
                   '『コケーコケーコケー、27コケー！』', '『コケーコケーコケー、14コケー！』', '『コケーコケーコケー、7コケー！』', '『0コケー！』' ] },
 
-      { **cut_key(ar_key('扇風機',                 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！',                 character_image: 'temp-character/temp-senpuuki2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('扇風機',                 0, 'スイカをあげる')), message: '〈たまご〉はおいしそうにたべている！',          character_image: 'temp-character/temp-senpuuki3.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('扇風機',                 0, 'スイカをあげる', 2)), message: '〈たまご〉はおなかいっぱいみたい。',            character_image: 'temp-character/temp-senpuuki4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('扇風機',                 0, 'せんぷうきをとめる')), message: '〈たまご〉「・・・！」',                       character_image: 'temp-character/temp-bikkuri.png',   background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('扇風機',                 0, 'そっとする')), message: '〈たまご〉はきもちよさそう！',                 character_image: 'temp-character/temp-senpuuki1.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('扇風機',                 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！',                 **image_set("temp-senpuuki2.png") },
+      { **cut_key(ar_key('扇風機',                 0, 'スイカをあげる')), message: '〈たまご〉はおいしそうにたべている！',          **image_set("temp-senpuuki3.png") },
+      { **cut_key(ar_key('扇風機',                 0, 'スイカをあげる', 2)), message: '〈たまご〉はおなかいっぱいみたい。',            **image_set("temp-senpuuki4.png") },
+      { **cut_key(ar_key('扇風機',                 0, 'せんぷうきをとめる')), message: '〈たまご〉「・・・！」',                       **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('扇風機',                 0, 'そっとする')), message: '〈たまご〉はきもちよさそう！',                 **image_set("temp-senpuuki1.png") },
 
-      { **cut_key(ar_key('こたつ',                 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！',                 character_image: 'temp-character/temp-kotatu2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('こたつ',                 0, 'ミカンをあげる')), message: '〈たまご〉はおいしそうにたべている！',          character_image: 'temp-character/temp-kotatu3.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('こたつ',                 0, 'ミカンをあげる', 2)), message: '〈たまご〉はおなかいっぱいみたい。',            character_image: 'temp-character/temp-kotatu4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('こたつ',                 0, 'こたつをとめる')), message: '〈たまご〉「・・・！」',                       character_image: 'temp-character/temp-bikkuri.png',   background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('こたつ',                 0, 'そっとする')), message: '〈たまご〉はきもちよさそう！',                 character_image: 'temp-character/temp-kotatu1.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('こたつ',                 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！',                 **image_set("temp-kotatu2.png") },
+      { **cut_key(ar_key('こたつ',                 0, 'ミカンをあげる')), message: '〈たまご〉はおいしそうにたべている！',          **image_set("temp-kotatu3.png") },
+      { **cut_key(ar_key('こたつ',                 0, 'ミカンをあげる', 2)), message: '〈たまご〉はおなかいっぱいみたい。',            **image_set("temp-kotatu4.png") },
+      { **cut_key(ar_key('こたつ',                 0, 'こたつをとめる')), message: '〈たまご〉「・・・！」',                       **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('こたつ',                 0, 'そっとする')), message: '〈たまご〉はきもちよさそう！',                 **image_set("temp-kotatu1.png") },
 
-      { **cut_key(ar_key('花見',                   0, 'つれていく')), message: 'よし！おはなみにいこっか！',                    character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('花見',                   0, 'つれていく'), 2), message: 'おはなみにきた！',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
-      { **cut_key(ar_key('花見',                   0, 'つれていく'), 3), message: '〈たまご〉「にー！んににー！」',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
-      { **cut_key(ar_key('花見',                   0, 'つれていく'), 4), message: '〈たまご〉「にににーに、んにににに！」',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
-      { **cut_key(ar_key('花見',                   0, 'つれていく'), 5), message: '〈たまご〉「にー！んにー、んにに！」',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png' },
-      { **cut_key(ar_key('花見',                   0, 'つれていく'), 6), message: '〈たまご〉はたのしんでいるようだ！',                             character_image: 'temp-character/temp-hanami.png', background_image: 'temp-background/temp-hanami.png',
+      { **cut_key(ar_key('花見',                   0, 'つれていく')), message: 'よし！おはなみにいこっか！',                    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('花見',                   0, 'つれていく'), 2), message: 'おはなみにきた！',                             **image_set("temp-hanami.png", "temp-hanami.png") },
+      { **cut_key(ar_key('花見',                   0, 'つれていく'), 3), message: '〈たまご〉「にー！んににー！」',                             **image_set("temp-hanami.png", "temp-hanami.png") },
+      { **cut_key(ar_key('花見',                   0, 'つれていく'), 4), message: '〈たまご〉「にににーに、んにににに！」',                             **image_set("temp-hanami.png", "temp-hanami.png") },
+      { **cut_key(ar_key('花見',                   0, 'つれていく'), 5), message: '〈たまご〉「にー！んにー、んにに！」',                             **image_set("temp-hanami.png", "temp-hanami.png") },
+      { **cut_key(ar_key('花見',                   0, 'つれていく'), 6), message: '〈たまご〉はたのしんでいるようだ！',                             **image_set("temp-hanami.png", "temp-hanami.png"),
       messages: [ '〈たまご〉はたのしんでいるようだ！', '〈たまご〉はさくらがきょうみぶかいみたい！', '〈たまご〉はさくらがきれいだといっている！', '〈たまご〉はしあわせをかんじているようだ！', '〈たまご〉はしぜんをだいじにしていきたいといっている！',
                   '〈たまご〉はたこやきがたべたいようだ！', '〈たまご〉ははるがすきらしい！', '〈たまご〉はこれからもっといろんなものをみたいらしい！', '〈たまご〉はたわいもないことをたのしそうにはなしている！', '〈たまご〉はきいてほしいはなしがいっぱいあるようだ！', '〈たまご〉はおこのみやきがたべたいようだ！',
                   '〈たまご〉はふってくるさくらをがんばってつかもうとしている！', '〈たまご〉はずっとむこうまでみにいきたいらしい！！', '〈たまご〉はまたつれてきてねといっている！', '〈たまご〉はやさしいきもちでいっぱいなようだ！' ] },
-      { **cut_key(ar_key('花見',                   0, 'いかない')), message: 'しょぼん。',                    character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('花見',                   0, 'いかない')), message: 'しょぼん。',                    **image_set("temp-gakkari.png") },
 
-      { **cut_key(ar_key('紅葉',                   0, 'つれていく')), message: 'よし！コウヨウをみにいこっか！',                    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 2), message: 'コウヨウをみにきた！',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png' },
-      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 3), message: '〈たまご〉「んにー！」',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png' },
-      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 4), message: '〈たまご〉「んにに！にー！」',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png' },
-      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 5), message: '〈たまご〉はたのしんでいるようだ！',                             character_image: 'temp-character/temp-kouyou.png', background_image: 'temp-background/temp-kouyou.png',
+      { **cut_key(ar_key('紅葉',                   0, 'つれていく')), message: 'よし！コウヨウをみにいこっか！',                    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 2), message: 'コウヨウをみにきた！',                             **image_set("temp-kouyou.png", "temp-kouyou.png") },
+      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 3), message: '〈たまご〉「んにー！」',                             **image_set("temp-kouyou.png", "temp-kouyou.png") },
+      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 4), message: '〈たまご〉「んにに！にー！」',                             **image_set("temp-kouyou.png", "temp-kouyou.png") },
+      { **cut_key(ar_key('紅葉',                   0, 'つれていく'), 5), message: '〈たまご〉はたのしんでいるようだ！',                             **image_set("temp-kouyou.png", "temp-kouyou.png"),
       messages: [ '〈たまご〉はたのしんでいるようだ！', '〈たまご〉はおちばをあつめている！', '〈たまご〉はおおはしゃぎ！', '〈たまご〉はいまのコウヨウのいろみがすきなようだ！', '〈たまご〉はコウヨウのうつくしさにかんどうしている！',
                   '〈たまご〉はニコニコだ！', '〈たまご〉はあきがすきらしい！', '〈たまご〉はこれからもっといろんなものをみたいらしい！', '〈たまご〉はおちばをじまんしている！', '〈たまご〉はなぜはっぱのいろがうつりかわるのか、ふしぎなようだ！', 'またこんどもこようね！',
                   '〈たまご〉はふってくるおちばをつかまえるのがすきらしい！', '〈たまご〉はここにいるとココロがおちつくようだ！', '〈たまご〉はまたつれてきてねといっている！', '〈たまご〉はせいめいのとうとさをかんじているようだ！' ] },
-      { **cut_key(ar_key('紅葉',                   0, 'いかない')), message: 'しょぼん。',                    character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('紅葉',                   0, 'いかない')), message: 'しょぼん。',                    **image_set("temp-gakkari.png") },
 
-      { **cut_key(ar_key('年始',                   0, 'すすむ')), message: '〈たまご〉「ににににに、んにににー！」',                    character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('年始',                   0, 'すすむ'), 2), message: '〈たまご〉「にににに、ににににー！」',                     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('年始',                   0, 'すすむ'), 3), message: 'あけましておめでとう！',                                 character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('年始',                   0, 'すすむ'), 4), message: 'ことしもよろしくね、〈たまご〉！',                                   character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('年始',                   0, 'すすむ')), message: '〈たまご〉「ににににに、んにににー！」',                    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('年始',                   0, 'すすむ'), 2), message: '〈たまご〉「にににに、ににににー！」',                     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('年始',                   0, 'すすむ'), 3), message: 'あけましておめでとう！',                                 **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('年始',                   0, 'すすむ'), 4), message: 'ことしもよろしくね、〈たまご〉！',                                   **image_set("temp-nikoniko2.png") },
 
-      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'そっとする')), message: '〈たまご〉はたのしそうにあそんでいる！',                character_image: 'temp-character/temp-building_blocks.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'よしよしする')), message: '〈たまご〉はうれしそう！',                             character_image: 'temp-character/temp-building_blocks_nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす')), message: '〈たまご〉がおこってしまった！',                       character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす')), message: 'あー！ほんとにブロックをくずしちゃった！これはひどい！', character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'そっとする')), message: '〈たまご〉はたのしそうにあそんでいる！',                **image_set("temp-building_blocks.png") },
+      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'よしよしする')), message: '〈たまご〉はうれしそう！',                             **image_set("temp-building_blocks_nikoniko.png") },
+      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす')), message: '〈たまご〉がおこってしまった！',                       **image_set("temp-okoru.png") },
+      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす')), message: 'あー！ほんとにブロックをくずしちゃった！これはひどい！', **image_set("temp-okoru.png") },
 
-      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす', 2)), message: '〈たまご〉はちょっといやそう。', character_image: 'temp-character/temp-hukigen.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす', 2)), message: '〈たまご〉にそしされた。',       character_image: 'temp-character/temp-building_blocks.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす', 2)), message: '〈たまご〉はちょっといやそう。', **image_set("temp-hukigen.png") },
+      { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす', 2)), message: '〈たまご〉にそしされた。',       **image_set("temp-building_blocks.png") },
 
-      { **cut_key(ar_key('マンガに夢中', 0, 'そっとする')), message: '〈たまご〉はマンガがおもしろいようだ。',                     character_image: 'temp-character/temp-comics.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('マンガに夢中', 0, 'よしよしする')), message: '〈たまご〉はうれしそう！',                                  character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('マンガに夢中', 0, 'はなしかける')), message: '〈たまご〉はマンガにしゅうちゅうしたいみたい。ごめんごめん。', character_image: 'temp-character/temp-hukigen.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('マンガに夢中', 0, 'マンガをとりあげる')), message: '〈たまご〉がおこってしまった！',                            character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('マンガに夢中', 0, 'そっとする')), message: '〈たまご〉はマンガがおもしろいようだ。',                     **image_set("temp-comics.png") },
+      { **cut_key(ar_key('マンガに夢中', 0, 'よしよしする')), message: '〈たまご〉はうれしそう！',                                  **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('マンガに夢中', 0, 'はなしかける')), message: '〈たまご〉はマンガにしゅうちゅうしたいみたい。ごめんごめん。', **image_set("temp-hukigen.png") },
+      { **cut_key(ar_key('マンガに夢中', 0, 'マンガをとりあげる')), message: '〈たまご〉がおこってしまった！',                            **image_set("temp-okoru.png") },
 
-      { **cut_key(ar_key('マンガに夢中', 0, 'はなしかける',  2)), message: '〈たまご〉はニコニコしている。',                            character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('マンガに夢中', 0, 'はなしかける',  2)), message: '〈たまご〉はニコニコしている。',                            **image_set("temp-nikoniko2.png") },
 
-      { **cut_key(ar_key('眠そう', 0, 'ねかせる')), message: 'きょうはもうねようね！〈たまご〉おやすみ！', character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ねかせる',    2)), message: 'まだもうちょっとおきてたいみたい。',        character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'よしよしする')), message: '〈たまご〉はうれしそうだ！',               character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'よしよしする'), 2), message: '〈たまご〉はおふとんにはいってねた！',      character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'よしよしする', 2)), message: '〈たまご〉はよろこんでいる！',             character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'はみがきをさせる')), message: 'よし、よくみがこうね！',                   character_image: 'temp-character/temp-hamigaki.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'はみがきをさせる'), 2), message: '〈たまご〉はちゃんとはみがきしておやすみした！', character_image: 'temp-character/temp-hamigaki.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'はみがきをさせる',   2)), message: 'はみがきしたくないみたい。まったくー！',     character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう')), message: 'チーターががけから・・・',                 character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう'), 2), message: 'おっこちーたー！！',                       character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう'), 3), message: '〈たまご〉はおおわらいした！',             character_image: 'temp-character/temp-warau.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 2)), message: 'アルミかんのうえに・・・',                 character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 2), 2), message: 'あるミカン！！',                          character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 2), 3), message: '〈たまご〉がちょっとひいてる・・・。',      character_image: 'temp-character/temp-donbiki.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 3)), message: 'ふとんが・・・',                          character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 3), 2), message: 'ふっとんだ！！',                          character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 3), 3), message: 'わらわない・・・。',                       character_image: 'temp-character/temp-sleepy.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('眠そう', 0, 'ねかせる')), message: 'きょうはもうねようね！〈たまご〉おやすみ！', **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ねかせる',    2)), message: 'まだもうちょっとおきてたいみたい。',        **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'よしよしする')), message: '〈たまご〉はうれしそうだ！',               **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('眠そう', 0, 'よしよしする'), 2), message: '〈たまご〉はおふとんにはいってねた！',      **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('眠そう', 0, 'よしよしする', 2)), message: '〈たまご〉はよろこんでいる！',             **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('眠そう', 0, 'はみがきをさせる')), message: 'よし、よくみがこうね！',                   **image_set("temp-hamigaki.png") },
+      { **cut_key(ar_key('眠そう', 0, 'はみがきをさせる'), 2), message: '〈たまご〉はちゃんとはみがきしておやすみした！', **image_set("temp-hamigaki.png") },
+      { **cut_key(ar_key('眠そう', 0, 'はみがきをさせる',   2)), message: 'はみがきしたくないみたい。まったくー！',     **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう')), message: 'チーターががけから・・・',                 **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう'), 2), message: 'おっこちーたー！！',                       **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう'), 3), message: '〈たまご〉はおおわらいした！',             **image_set("temp-warau.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 2)), message: 'アルミかんのうえに・・・',                 **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 2), 2), message: 'あるミカン！！',                          **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 2), 3), message: '〈たまご〉がちょっとひいてる・・・。',      **image_set("temp-donbiki.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 3)), message: 'ふとんが・・・',                          **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 3), 2), message: 'ふっとんだ！！',                          **image_set("temp-sleepy.png") },
+      { **cut_key(ar_key('眠そう', 0, 'ダジャレをいう', 3), 3), message: 'わらわない・・・。',                       **image_set("temp-sleepy.png") },
 
-      { **cut_key(ar_key('寝かせた', 0, 'そっとする')), message: 'きもちよさそうにねているなあ。',      character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝かせた', 0, 'よしよしする')), message: 'よしよし、りっぱにそだちますように。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝かせた', 0, 'たたきおこす')), message: 'できるわけないだろ！！',              character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝かせた', 0, 'ゴミばこのなかをのぞく')), message: 'はなをかんだティッシュがいっぱい！',   character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('寝かせた', 0, 'そっとする')), message: 'きもちよさそうにねているなあ。',      **image_set("temp-sleep.png") },
+      { **cut_key(ar_key('寝かせた', 0, 'よしよしする')), message: 'よしよし、りっぱにそだちますように。', **image_set("temp-sleep.png") },
+      { **cut_key(ar_key('寝かせた', 0, 'たたきおこす')), message: 'できるわけないだろ！！',              **image_set("temp-sleep.png") },
+      { **cut_key(ar_key('寝かせた', 0, 'ゴミばこのなかをのぞく')), message: 'はなをかんだティッシュがいっぱい！',   **image_set("temp-sleep.png"),
       messages: [ 'はなをかんだティッシュがいっぱい！', 'だが、からっぽだ！', 'しっかりブンベツされている！', 'テレビばんぐみひょうだ。うらないばんぐみは、まいあさやっているようだ。', 'テレビばんぐみひょうだ。『タマモン』は、げつようびのよる7じからやっているようだ。', 'テレビばんぐみひょうだ。『ニワトリビアのみずうみ』は、すいようびのよる8じからやっているようだ。', 'テレビばんぐみひょうだ。『タマえもん』は、きんようびのよる7じからやっているようだ。',
                   'メモがきだ。「とっくんをしたくなると、はなしかけようとしてくる」だって。', 'メモがきだ。「れんぞくでべんきょうや、ボールあそびするとつかれちゃう」だって。', 'メモがきだ。「つかれても、じかんがたてばもとどおり」だって。', 'メモがきだ。「ごはんをあげると、ちょっとずつたいりょくがつく」だって。', 'メモがきだ。「おやつではたいりょくはつかない」だって。', 'メモがきだ。「げいじゅつせいはバクハツからやってくる」だって。', 'メモがきだ。「ダジャレがウケなくても、あきらめるな」だって。',
                   'メモがきだ。「このあたりは、はるになるとサクラがきれい」だって。', 'メモがきだ。「このあたりは、あきになるとコウヨウがきれい」だって。', 'メモがきだ。「せんぷうき、あります」だって。', 'メモがきだ。「コタツ、あります」だって。', 'メモがきだ。「しっぱいしたって、せいちょうしないわけじゃない」だって。', 'メモがきだ。「L-I-N-E/35894421」だって。', 'メモがきだ。「メモがきをゴミばこにすてておこう」だって。', 'メモがきだ。「メモがきのなかにはゴクヒのものもある」だって。' ] },
-      { **cut_key(ar_key('寝かせた', 1, 'そっとする')), message: 'きもちよさそうにねているなあ。',      character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝かせた', 1, 'よしよしする')), message: 'よしよし、りっぱにそだちますように。', character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('寝かせた', 1, 'たたきおこす')), message: 'できるわけないだろ！！',              character_image: 'temp-character/temp-sleep.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('寝かせた', 1, 'そっとする')), message: 'きもちよさそうにねているなあ。',      **image_set("temp-sleep.png") },
+      { **cut_key(ar_key('寝かせた', 1, 'よしよしする')), message: 'よしよし、りっぱにそだちますように。', **image_set("temp-sleep.png") },
+      { **cut_key(ar_key('寝かせた', 1, 'たたきおこす')), message: 'できるわけないだろ！！',              **image_set("temp-sleep.png") },
 
-      { **cut_key(ar_key('怒っている', 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！',     character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'よしよしする'), 2), message: '〈たまご〉はゆるしてくれた！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'よしよしする', 2)), message: '〈たまご〉はゆるしてくれない！！', character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'おやつをあげる')), message: '〈たまご〉はよろこんでいる！',     character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'おやつをあげる'), 2), message: '〈たまご〉はゆるしてくれた！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'おやつをあげる', 2)), message: 'おやつじゃゆるしてくれない！',     character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'へんがおをする')), message: 'こんしんのへんがお！',             character_image: 'temp-character/temp-hengao.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'へんがおをする'), 2), message: '〈たまご〉「キャッキャッ！」',      character_image: 'temp-character/temp-warau.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'へんがおをする'), 3), message: '大ウケした！',                    character_image: 'temp-character/temp-warau.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'へんがおをする', 2)), message: 'こんしんのへんがお！',             character_image: 'temp-character/temp-hengao.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'へんがおをする', 2), 2), message: '〈たまご〉「・・・。」',             character_image: 'temp-character/temp-donbiki.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'へんがおをする', 2), 3), message: 'すべった。',                      character_image: 'temp-character/temp-donbiki.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'あやまる')), message: 'ごめんよ・・・。',                character_image: 'temp-character/temp-gomen.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'あやまる'), 2), message: '〈たまご〉はゆるしてくれた！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'あやまる',     2)), message: 'ごめんよ・・・。',                character_image: 'temp-character/temp-gomen.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('怒っている', 0, 'あやまる',     2), 2), message: '〈たまご〉はまだおこっている！',    character_image: 'temp-character/temp-okoru.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('怒っている', 0, 'よしよしする')), message: '〈たまご〉はよろこんでいる！',     **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('怒っている', 0, 'よしよしする'), 2), message: '〈たまご〉はゆるしてくれた！',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('怒っている', 0, 'よしよしする', 2)), message: '〈たまご〉はゆるしてくれない！！', **image_set("temp-okoru.png") },
+      { **cut_key(ar_key('怒っている', 0, 'おやつをあげる')), message: '〈たまご〉はよろこんでいる！',     **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('怒っている', 0, 'おやつをあげる'), 2), message: '〈たまご〉はゆるしてくれた！',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('怒っている', 0, 'おやつをあげる', 2)), message: 'おやつじゃゆるしてくれない！',     **image_set("temp-okoru.png") },
+      { **cut_key(ar_key('怒っている', 0, 'へんがおをする')), message: 'こんしんのへんがお！',             **image_set("temp-hengao.png") },
+      { **cut_key(ar_key('怒っている', 0, 'へんがおをする'), 2), message: '〈たまご〉「キャッキャッ！」',      **image_set("temp-warau.png") },
+      { **cut_key(ar_key('怒っている', 0, 'へんがおをする'), 3), message: '大ウケした！',                    **image_set("temp-warau.png") },
+      { **cut_key(ar_key('怒っている', 0, 'へんがおをする', 2)), message: 'こんしんのへんがお！',             **image_set("temp-hengao.png") },
+      { **cut_key(ar_key('怒っている', 0, 'へんがおをする', 2), 2), message: '〈たまご〉「・・・。」',             **image_set("temp-donbiki.png") },
+      { **cut_key(ar_key('怒っている', 0, 'へんがおをする', 2), 3), message: 'すべった。',                      **image_set("temp-donbiki.png") },
+      { **cut_key(ar_key('怒っている', 0, 'あやまる')), message: 'ごめんよ・・・。',                **image_set("temp-gomen.png") },
+      { **cut_key(ar_key('怒っている', 0, 'あやまる'), 2), message: '〈たまご〉はゆるしてくれた！',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('怒っている', 0, 'あやまる',     2)), message: 'ごめんよ・・・。',                **image_set("temp-gomen.png") },
+      { **cut_key(ar_key('怒っている', 0, 'あやまる',     2), 2), message: '〈たまご〉はまだおこっている！',    **image_set("temp-okoru.png") },
 
-      { **cut_key(ar_key('算数',      1,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      1,  '〈B〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      1,  '〈C〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      1,  '〈D〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('算数',      1,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('算数',      1,  '〈B〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      1,  '〈C〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      1,  '〈D〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
 
-      { **cut_key(ar_key('算数',      2,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      2,  '〈B〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      2,  '〈C〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      2,  '〈D〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('算数',      2,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('算数',      2,  '〈B〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      2,  '〈C〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      2,  '〈D〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
 
-      { **cut_key(ar_key('算数',      3,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      3,  '〈B〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      3,  '〈C〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      3,  '〈D〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('算数',      3,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('算数',      3,  '〈B〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      3,  '〈C〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      3,  '〈D〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
 
-      { **cut_key(ar_key('算数',      4,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     character_image: 'temp-character/temp-nikoniko2.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      4,  '〈B〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      4,  '〈C〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('算数',      4,  '〈D〉')), message: 'ちがうよー！ざんねん！',     character_image: 'temp-character/temp-ochikomu.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('算数',      4,  '〈A〉')), message: 'おー！せいかい！いいちょうしだね！',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('算数',      4,  '〈B〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      4,  '〈C〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('算数',      4,  '〈D〉')), message: 'ちがうよー！ざんねん！',     **image_set("temp-ochikomu.png") },
 
-      { **cut_key(ar_key('ボール遊び',      2,  'ひだりだ！')), message: 'おー！きれいにキャッチ！',     character_image: 'temp-character/temp-ball4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！')), message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball4.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！', 2)), message: 'あちゃー！',                  character_image: 'temp-character/temp-ball7.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      2,  'みぎだ！')), message: 'あちゃー！',                  character_image: 'temp-character/temp-ball10.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ボール遊び',      2,  'ひだりだ！')), message: 'おー！きれいにキャッチ！',     **image_set("temp-ball4.png") },
+      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！')), message: 'なんとかキャッチ！',           **image_set("temp-ball4.png") },
+      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！', 2)), message: 'あちゃー！',                  **image_set("temp-ball7.png") },
+      { **cut_key(ar_key('ボール遊び',      2,  'みぎだ！')), message: 'あちゃー！',                  **image_set("temp-ball10.png") },
 
-      { **cut_key(ar_key('ボール遊び',      2,  'ひだりだ！'), 2), message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！'), 2), message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！', 2), 2), message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      2,  'みぎだ！'), 2), message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ボール遊び',      2,  'ひだりだ！'), 2), message: '〈たまご〉じょうずだねえ！',    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！'), 2), message: '〈たまご〉じょうずだねえ！',    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボール遊び',      2,  'そこだ！', 2), 2), message: 'しょぼん。',                  **image_set("temp-gakkari.png") },
+      { **cut_key(ar_key('ボール遊び',      2,  'みぎだ！'), 2), message: 'しょぼん。',                  **image_set("temp-gakkari.png") },
 
-      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！')), message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball8.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！',   2)), message: 'あちゃー！',                  character_image: 'temp-character/temp-ball5.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'そこだ！')), message: 'おー！きれいにキャッチ！',     character_image: 'temp-character/temp-ball8.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！')), message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball8.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！', 2)), message: 'あちゃー！',                  character_image: 'temp-character/temp-ball11.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！')), message: 'なんとかキャッチ！',           **image_set("temp-ball8.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！',   2)), message: 'あちゃー！',                  **image_set("temp-ball5.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'そこだ！')), message: 'おー！きれいにキャッチ！',     **image_set("temp-ball8.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！')), message: 'なんとかキャッチ！',           **image_set("temp-ball8.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！', 2)), message: 'あちゃー！',                  **image_set("temp-ball11.png") },
 
-      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！'), 2), message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！',   2), 2), message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'そこだ！'), 2), message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！'), 2), message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！', 2), 2), message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！'), 2), message: '〈たまご〉じょうずだねえ！',    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'ひだりだ！',   2), 2), message: 'しょぼん。',                  **image_set("temp-gakkari.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'そこだ！'), 2), message: '〈たまご〉じょうずだねえ！',    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！'), 2), message: '〈たまご〉じょうずだねえ！',    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボール遊び',      3,  'みぎだ！', 2), 2), message: 'しょぼん。',                  **image_set("temp-gakkari.png") },
 
-      { **cut_key(ar_key('ボール遊び',      4,  'ひだりだ！')), message: 'あちゃー！',                  character_image: 'temp-character/temp-ball6.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！')), message: 'なんとかキャッチ！',           character_image: 'temp-character/temp-ball12.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！', 2)), message: 'あちゃー！',                  character_image: 'temp-character/temp-ball9.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      4,  'みぎだ！')), message: 'おー！きれいにキャッチ！',     character_image: 'temp-character/temp-ball12.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ボール遊び',      4,  'ひだりだ！')), message: 'あちゃー！',                  **image_set("temp-ball6.png") },
+      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！')), message: 'なんとかキャッチ！',           **image_set("temp-ball12.png") },
+      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！', 2)), message: 'あちゃー！',                  **image_set("temp-ball9.png") },
+      { **cut_key(ar_key('ボール遊び',      4,  'みぎだ！')), message: 'おー！きれいにキャッチ！',     **image_set("temp-ball12.png") },
 
-      { **cut_key(ar_key('ボール遊び',      4,  'ひだりだ！'), 2), message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！'), 2), message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！', 2), 2), message: 'しょぼん。',                  character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('ボール遊び',      4,  'みぎだ！'), 2), message: '〈たまご〉じょうずだねえ！',    character_image: 'temp-character/temp-nikoniko.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('ボール遊び',      4,  'ひだりだ！'), 2), message: 'しょぼん。',                  **image_set("temp-gakkari.png") },
+      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！'), 2), message: '〈たまご〉じょうずだねえ！',    **image_set("temp-nikoniko.png") },
+      { **cut_key(ar_key('ボール遊び',      4,  'そこだ！', 2), 2), message: 'しょぼん。',                  **image_set("temp-gakkari.png") },
+      { **cut_key(ar_key('ボール遊び',      4,  'みぎだ！'), 2), message: '〈たまご〉じょうずだねえ！',    **image_set("temp-nikoniko.png") },
 
-      { **cut_key(ar_key('特訓',      0,  'さんすう')), message: 'とっくんはれんぞく20もんになるぞ！',      character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('特訓',      0,  'さんすう',        2)), message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('特訓',      0,  'ボールあそび')), message: 'とっくんは3かいしっぱいするまでつづくぞ！', character_image: 'temp-character/temp-bikkuri.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('特訓',      0,  'ボールあそび',    2)), message: 'このとっくんは〈たまご〉にはまだはやい！', character_image: 'temp-character/temp-gakkari.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('特訓',      0,  'やっぱやめておく')), message: 'いや、いまはやっぱやめておこう。',        character_image: 'temp-character/temp-normal.png', background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('特訓',      1,  'すすむ')), message: 'けっかは・・・。',                      character_image: 'temp-character/temp-tukareta.png', background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('特訓',      0,  'さんすう')), message: 'とっくんはれんぞく20もんになるぞ！',      **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('特訓',      0,  'さんすう',        2)), message: 'このとっくんは〈たまご〉にはまだはやい！', **image_set("temp-gakkari.png") },
+      { **cut_key(ar_key('特訓',      0,  'ボールあそび')), message: 'とっくんは3かいしっぱいするまでつづくぞ！', **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('特訓',      0,  'ボールあそび',    2)), message: 'このとっくんは〈たまご〉にはまだはやい！', **image_set("temp-gakkari.png") },
+      { **cut_key(ar_key('特訓',      0,  'やっぱやめておく')), message: 'いや、いまはやっぱやめておこう。',        **image_set("temp-normal.png") },
+      { **cut_key(ar_key('特訓',      1,  'すすむ')), message: 'けっかは・・・。',                      **image_set("temp-tukareta.png") },
 
-      { **cut_key(ar_key('イントロ',   0,  'すすむ')), message: 'あんたが・・・',                  character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 2), message: '〈ユーザー〉だな！',               character_image: 'temp-character/temp-niwatori.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 3), message: 'これからよろしくな！',             character_image: 'temp-character/temp-niwatori.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 4), message: 'おれはみてのとおり、ヒヨコだ！',    character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   0,  'すすむ')), message: 'あんたが・・・',                  **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 2), message: '〈ユーザー〉だな！',               **image_set("temp-niwatori.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 3), message: 'これからよろしくな！',             **image_set("temp-niwatori.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 4), message: 'おれはみてのとおり、ヒヨコだ！',    **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   1,  'えっ？')), message: 'えっ・・・。',                      character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   1,  'まさか！')), message: 'なに・・・！？',                    character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   1,  'うーん')), message: 'こら、うそでもかっこいいですといえ！', character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   1,  'かっこいいです')), message: 'そうだろ？うんうん！',               character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   1,  'えっ？')), message: 'えっ・・・。',                      **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   1,  'まさか！')), message: 'なに・・・！？',                    **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   1,  'うーん')), message: 'こら、うそでもかっこいいですといえ！', **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   1,  'かっこいいです')), message: 'そうだろ？うんうん！',               **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   2,  'すすむ')), message: 'きょうからあんたには、このたまごといっしょにくらしてもらうぞ！', character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   2,  'すすむ'), 2), message: 'なまえはたしか・・・。',                                     character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   2,  'すすむ')), message: 'きょうからあんたには、このたまごといっしょにくらしてもらうぞ！', **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   2,  'すすむ'), 2), message: 'なまえはたしか・・・。',                                     **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   3,  'ちゃんをつけて！')), message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   3,  'くんをつけて！')), message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   3,  'さまをつけて！')), message: 'わかったわかった！',              character_image: 'temp-character/temp-hiyoko-tamago-shokai.png',    background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   3,  'ちゃんをつけて！')), message: 'わかったわかった！',              **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   3,  'くんをつけて！')), message: 'わかったわかった！',              **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   3,  'さまをつけて！')), message: 'わかったわかった！',              **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   4,  'すすむ')), message: 'おなかがへってもなくし、さびしくなってもなく！',                              character_image: 'temp-character/temp-hiyoko-tuyoimagao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 2), message: 'またよるはとうぜんねむくなるし、じかんたいによってこうどうパターンがかわるぞ。', character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 3), message: '〈たまご〉はあそびだしたり、なにかにムチュウになると',                        character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 4), message: 'しばらくそれにしかキョウミがなくなるが',                                     character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 5), message: 'そういうときはしばらくそっとしてやってくれ。じかんをあけて、ようすをみてあげるんだ。', character_image: 'temp-character/temp-hiyoko-nikoniko.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 6), message: 'あとおなじことをしてあげても、はんのうがそのときそのときでかわったりするから',   character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 7), message: 'まあとにかくたくさんせっしてみてくれよな。',                                  character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 8), message: 'そうそう。',                                                               character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 9), message: 'これは『LINEログイン』をりようしているばあいのはなしなんだが、',                character_image: 'temp-character/temp-hiyoko-magao.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 10), message: 'じつは『LINE』をつうじて〈たまご〉とおはなしすることができるんだ！',            character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 11), message: '『せってい』がめんから『LINEともだちついか』ができるからカクニンしてみてくれよな。', character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 12), message: '『ごはんだよ！』とメッセージをおくるとごはんをあげられたり、なにかとべんりだぞ。', character_image: 'temp-character/temp-hiyoko-nikoniko.png', background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 13), message: 'おっと、いけねえ。',                                                        character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 14), message: 'このあとちょっとよていがあるから、オレはもういくな。',                         character_image: 'temp-character/temp-hiyoko-magao.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 15), message: '〈たまご〉のこと、だいじにしてくれよ！',                                      character_image: 'temp-character/temp-hiyoko-nikoniko.png',  background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 16), message: 'いってしまった。',                                                          character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 17), message: '〈たまご〉のめんどう、うまくみれるかな～。',                                   character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 18), message: '・・・。',                                                                 character_image: 'temp-character/temp-none.png',             background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 19), message: 'とりあえず、まずはこえをかけてみよう。',                                     character_image: 'temp-character/temp-normal.png',           background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ')), message: 'おなかがへってもなくし、さびしくなってもなく！',                              **image_set("temp-hiyoko-tuyoimagao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 2), message: 'またよるはとうぜんねむくなるし、じかんたいによってこうどうパターンがかわるぞ。', **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 3), message: '〈たまご〉はあそびだしたり、なにかにムチュウになると',                        **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 4), message: 'しばらくそれにしかキョウミがなくなるが',                                     **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 5), message: 'そういうときはしばらくそっとしてやってくれ。じかんをあけて、ようすをみてあげるんだ。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 6), message: 'あとおなじことをしてあげても、はんのうがそのときそのときでかわったりするから',   **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 7), message: 'まあとにかくたくさんせっしてみてくれよな。',                                  **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 8), message: 'そうそう。',                                                               **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 9), message: 'これは『LINEログイン』をりようしているばあいのはなしなんだが、',                **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 10), message: 'じつは『LINE』をつうじて〈たまご〉とおはなしすることができるんだ！',            **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 11), message: '『せってい』がめんから『LINEともだちついか』ができるからカクニンしてみてくれよな。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 12), message: '『ごはんだよ！』とメッセージをおくるとごはんをあげられたり、なにかとべんりだぞ。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 13), message: 'おっと、いけねえ。',                                                        **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 14), message: 'このあとちょっとよていがあるから、オレはもういくな。',                         **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 15), message: '〈たまご〉のこと、だいじにしてくれよ！',                                      **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 16), message: 'いってしまった。',                                                          **image_set("temp-none.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 17), message: '〈たまご〉のめんどう、うまくみれるかな～。',                                   **image_set("temp-none.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 18), message: '・・・。',                                                                 **image_set("temp-none.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 19), message: 'とりあえず、まずはこえをかけてみよう。',                                     **image_set("temp-normal.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   5,  'こんにちは！')), message: 'あ！へんじしてくれなかった！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   5,  'なかよくしてね！')), message: 'あ！へんじしてくれなかった！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   5,  'こんにちは！')), message: 'あ！へんじしてくれなかった！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   5,  'なかよくしてね！')), message: 'あ！へんじしてくれなかった！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   6,  'よっ！')), message: 'あ！まためをそらした！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   6,  'なかよくたのむぜ！')), message: 'あ！まためをそらした！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   6,  'よっ！')), message: 'あ！まためをそらした！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   6,  'なかよくたのむぜ！')), message: 'あ！まためをそらした！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   7,  'こんにちは！')), message: 'うぐぐ～！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   7,  'なかよくしてね！')), message: 'うぐぐ～！', character_image: 'temp-character/temp-mewosorasu.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし')), message: '〈たまご〉「んに～！」',         character_image: 'temp-character/temp-nikoniko.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 2), message: '・・・！',                     character_image: 'temp-character/temp-nikoniko.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 3), message: 'なんだ！けっこうすなおじゃん！',                    character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 4), message: 'とにかく、ちょっときょりがちじまったきがする！',      character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 5), message: 'これからよろしくね、〈たまご〉！',                    character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-in-house.png' },
+      { **cut_key(ar_key('イントロ',   7,  'こんにちは！')), message: 'うぐぐ～！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'なかよくしてね！')), message: 'うぐぐ～！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'よしよし')), message: '〈たまご〉「んに～！」',         **image_set("temp-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 2), message: '・・・！',                     **image_set("temp-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 3), message: 'なんだ！けっこうすなおじゃん！',                    **image_set("temp-nikoniko2.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 4), message: 'とにかく、ちょっときょりがちじまったきがする！',      **image_set("temp-nikoniko2.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 5), message: 'これからよろしくね、〈たまご〉！',                    **image_set("temp-nikoniko2.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('誕生日',     0,  'すすむ')), message: '〈たまご〉「にににーに・・・」', character_image: 'temp-character/temp-maekagami.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 2), message: '〈たまご〉「ににににー！！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 3), message: 'あ！〈たまご〉がたんじょうびをいわってくれた！', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 4), message: '〈たまご〉「ににににに、んににに、ににーに？」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('誕生日',     0,  'すすむ')), message: '〈たまご〉「にににーに・・・」', **image_set("temp-maekagami.png") },
+      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 2), message: '〈たまご〉「ににににー！！」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 3), message: 'あ！〈たまご〉がたんじょうびをいわってくれた！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 4), message: '〈たまご〉「ににににに、んににに、ににーに？」', **image_set("temp-nikoniko2.png") },
 
-      { **cut_key(ar_key('誕生日',     1,  'たのしくすごす！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     1,  'たのしくすごす！'), 2), message: 'ワクワクがいっぱいのいちねんになりますよう！',      character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     1,  'えがおですごす！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     1,  'えがおですごす！'), 2), message: 'ワクワクがいっぱいのいちねんになりますよう！',      character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     1,  'せいちょうする！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     1,  'せいちょうする！'), 2), message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     1,  'ひとをだいじにする！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
-      { **cut_key(ar_key('誕生日',     1,  'ひとをだいじにする！'), 2), message: 'すてきないちねんになりますよう！',                character_image: 'temp-character/temp-nikoniko2.png',    background_image: 'temp-background/temp-background.png' },
+      { **cut_key(ar_key('誕生日',     1,  'たのしくすごす！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     1,  'たのしくすごす！'), 2), message: 'ワクワクがいっぱいのいちねんになりますよう！',      **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     1,  'えがおですごす！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     1,  'えがおですごす！'), 2), message: 'ワクワクがいっぱいのいちねんになりますよう！',      **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     1,  'せいちょうする！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     1,  'せいちょうする！'), 2), message: 'すてきないちねんになりますよう！',                **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     1,  'ひとをだいじにする！')), message: '〈たまご〉「ににー！にー、にににーにんににーに！」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     1,  'ひとをだいじにする！'), 2), message: 'すてきないちねんになりますよう！',                **image_set("temp-nikoniko2.png") },
 
-      { **cut_key(ar_key('タマモンカート', 0,  'ながめている')), message: '〈たまご〉「ににー！」',                          character_image: 'temp-character/temp-game-nikoniko.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('タマモンカート', 0,  'ながめている')), message: '〈たまご〉「ににー！」',                          **image_set("temp-game-nikoniko.png"),
       messages: [ '〈たまご〉「ににー！」', '〈たまご〉「にっにに～！」', '〈たまご〉「んにー！ににー！」', 'いま、だいにんきのタマモンカートだ！', 'いいぞ！はやいぞー！', 'おいぬけー！', 'アイテムをとった！これはきょうりょく！', 'さいきんのレースゲームは、りんじょうかんがすごい！', 'はやすぎてめがまわるー！',
                   'ライバルにおいぬかれた！まけるなー', 'ふくざつなコースだ！ぶつからずはしれるか！？', '〈たまご〉はレースゲームにだいこうふん！', '〈たまご〉はレースゲームがだいすき！おとなになったら、ほんとのクルマものりたいね！', 'いいスタートだ！はやいぞー！', 'レースゲームなのにコースにバナナのカワがおちている！あぶないなあ！',
                   'いいドリフト！かっこいいー！', 'いいカソク！そのままおいぬけー！', 'げんざいトップだ！ライバルをきりはなせ！', 'あー！カートがカベにぶつかってる！！', 'はやいぞー！・・・って、ぎゃくそうしてない！？', 'レースゲームといったら、やっぱタマモンカートだよね！' ] },
-      { **cut_key(ar_key('タマモンカート', 0,  'ながめている',  2)), message: '〈たまご〉「ににー！」',                          character_image: 'temp-character/temp-game-ochikomu.png', background_image: 'temp-background/temp-background.png',
+      { **cut_key(ar_key('タマモンカート', 0,  'ながめている',  2)), message: '〈たまご〉「ににー！」',                          **image_set("temp-game-ochikomu.png"),
       messages: [ 'あちゃー！おいぬかれたー！', 'あー！ビリじゃんー！', 'ライバルにこうげきされた！あちゃー！', 'なかなかいいアイテムがでないようだ！', 'カートがスピンしちゃった！あれれー！' ] }
     ]
 
