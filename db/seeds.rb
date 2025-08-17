@@ -2,7 +2,7 @@ module Seeds
   module_function
   def always          = { "always" => true }.freeze
   def prob(p)         = { "type" => "probability", "percent" => p }.freeze
-  def prob_only(p)    = { "operator" => "and", "conditions" => [prob(p)] }.freeze
+  def prob_only(p)    = { "operator" => "and", "conditions" => [ prob(p) ] }.freeze
   def status(a, o, v) = { "type" => "status", "attribute" => a, "operator" => o, "value" => v }.freeze
   def off_fm(add, mult, mod) = { "add" => add, "mult" => mult, "mod" => mod, "target" => "from_min" }.freeze
   def off_tm(add, mult, mod) = { "add" => add, "mult" => mult, "mod" => mod, "target" => "to_min"   }.freeze
@@ -20,7 +20,7 @@ module Seeds
   def and_(*conditions)           = { "operator" => "and", "conditions" => conditions }
   def or_(*conditions)            = { "operator" => "or", "conditions" => conditions }
   def effects_status(*pairs)      = { "status" => pairs.map { |attr, delta| { "attribute" => attr.to_s, "delta" => delta } } }
-  def set_deriv(set, deriv = 0)                 = { event_set_name: set, derivation_number: deriv}
+  def set_deriv(set, deriv = 0)                 = { event_set_name: set, derivation_number: deriv }
   def ar_key(set, deriv, label, prio = 1)       = { event_set_name: set, derivation_number: deriv, label: label, priority: prio }
   def cut_key(ar_key, pos = 1)                  = { **ar_key, position: pos }
 
@@ -732,7 +732,7 @@ module Seeds
       { **set_deriv('寝起き', 3),               labels: [ 'はい',              'いいえ' ] },
       s_l(set_deriv('占い')),
       { **set_deriv('タマモン'),                labels: [ 'みていいよ',         'みさせてあげない' ] },
-      s_l(set_deriv('タマモン', 1), 'いっしょにみる' ),
+      s_l(set_deriv('タマモン', 1), 'いっしょにみる'),
       { **set_deriv('タマえもん'),              labels: [ 'みていいよ',         'みさせてあげない' ] },
       s_l(set_deriv('タマえもん', 1), 'いっしょにみる'),
       { **set_deriv('ニワトリビアの湖'),         labels: [ 'みていいよ',         'みさせてあげない' ] },
@@ -790,7 +790,7 @@ module Seeds
       {
         **ar_key('何か言っている', 0, 'はなしをきいてあげる'),
         trigger_conditions:    or_(status("sports_value", "<", 2), status("arithmetic", "<", 2), status("temp_vitality", "<", VITALITY_UNIT), prob(80)),
-        effects:               effects_status(["happiness_value", 1], ["mood_value", 5]),
+        effects:               effects_status([ "happiness_value", 1 ], [ "mood_value", 5 ]),
         **next_ev
       },
       {
@@ -802,13 +802,13 @@ module Seeds
       {
         **ar_key('何か言っている', 0, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", 5]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ], [ "mood_value", 5 ]),
         **next_ev
       },
       {
         **ar_key('何か言っている', 0, 'おやつをあげる'),
         trigger_conditions:    and_(status("hunger_value", "<=", 95)),
-        effects:               effects_status(["hunger_value", 30], ["happiness_value", 1], ["mood_value", 15]),
+        effects:               effects_status([ "hunger_value", 30 ], [ "happiness_value", 1 ], [ "mood_value", 15 ]),
         **next_ev
       },
       {
@@ -820,7 +820,7 @@ module Seeds
       {
         **ar_key('何か言っている', 0, 'ごはんをあげる'),
         trigger_conditions:    and_(status("hunger_value", "<=", 85)),
-        effects:               effects_status(["hunger_value", 40], ["vitality", 1]),
+        effects:               effects_status([ "hunger_value", 40 ], [ "vitality", 1 ]),
         **next_ev
       },
       {
@@ -892,7 +892,7 @@ module Seeds
       {
         **ar_key('何かしたそう', 2, 'ゲームさせてあげる'),
         trigger_conditions:    always,
-        effects:               effects_status(["happiness_value", 5]),
+        effects:               effects_status([ "happiness_value", 5 ]),
         **next_ev(call: 'タマモンカート')
       },
       {
@@ -910,55 +910,55 @@ module Seeds
       {
         **ar_key('何かしたそう', 1, 'こくご'),
         trigger_conditions:    prob_only(5),
-        effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "japanese", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'こくご', 2),
         trigger_conditions:    prob_only(20),
-        effects:               effects_status(["japanese", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "japanese", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'こくご', 3),
         trigger_conditions:    always,
-        effects:               effects_status(["japanese_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "japanese_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか'),
         trigger_conditions:    prob_only(5),
-        effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "science", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか', 2),
         trigger_conditions:    prob_only(20),
-        effects:               effects_status(["science", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "science", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか', 3),
         trigger_conditions:    always,
-        effects:               effects_status(["science_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "science_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい'),
         trigger_conditions:    prob_only(5),
-        effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "social_studies", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい', 2),
         trigger_conditions:    prob_only(20),
-        effects:               effects_status(["social_studies", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "social_studies", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい', 3),
         trigger_conditions:    always,
-        effects:               effects_status(["social_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects:               effects_status([ "social_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
@@ -1026,19 +1026,19 @@ module Seeds
       {
         **ar_key('踊っている', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
-        effects:               effects_status(["love_value", 10], ["happiness_value", 10], ["mood_value", -100]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 10 ], [ "mood_value", -100 ]),
         **next_ev(resolve: true)
       },
       {
         **ar_key('踊っている', 0, 'よしよしする', 2),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1], ["mood_value", -100]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ], [ "mood_value", -100 ]),
         **next_ev(resolve: true)
       },
       {
         **ar_key('踊っている', 0, 'おやつをあげる'),
         trigger_conditions:    and_(status("hunger_value", "<=", 95)),
-        effects:               effects_status(["hunger_value", 30], ["happiness_value", 3], ["mood_value", -100]),
+        effects:               effects_status([ "hunger_value", 30 ], [ "happiness_value", 3 ], [ "mood_value", -100 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1050,7 +1050,7 @@ module Seeds
       {
         **ar_key('踊っている', 0, 'ごはんをあげる'),
         trigger_conditions:    and_(status("hunger_value", "<=", 85)),
-        effects:               effects_status(["hunger_value", 40], ["vitality", 1], ["happiness_value", 1], ["mood_value", -100]),
+        effects:               effects_status([ "hunger_value", 40 ], [ "vitality", 1 ], [ "happiness_value", 1 ], [ "mood_value", -100 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1062,19 +1062,19 @@ module Seeds
       {
         **ar_key('泣いている(空腹)', 0, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 5]),
+        effects:               effects_status([ "love_value", 5 ]),
         **next_ev
       },
       {
         **ar_key('泣いている(空腹)', 0, 'おやつをあげる'),
         trigger_conditions:    always,
-        effects:               effects_status(["hunger_value", 40]),
+        effects:               effects_status([ "hunger_value", 40 ]),
         **next_ev(resolve: true)
       },
       {
         **ar_key('泣いている(空腹)', 0, 'ごはんをあげる'),
         trigger_conditions:    always,
-        effects:               effects_status(["hunger_value", 50], ["vitality", 1]),
+        effects:               effects_status([ "hunger_value", 50 ], [ "vitality", 1 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1086,7 +1086,7 @@ module Seeds
       {
         **ar_key('泣いている(よしよし不足)', 0, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 40]),
+        effects:               effects_status([ "love_value", 40 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1128,7 +1128,7 @@ module Seeds
       {
         **ar_key('泣いている(ランダム)', 0, 'あそんであげる'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 30]),
+        effects:               effects_status([ "love_value", 30 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1140,13 +1140,13 @@ module Seeds
       {
         **ar_key('寝ている', 0, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 40], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 40 ], [ "happiness_value", 1 ]),
         **next_ev
       },
       {
         **ar_key('寝ている', 0, 'たたきおこす'),
         trigger_conditions:    always,
-        effects:               effects_status(["happiness_value", -5]),
+        effects:               effects_status([ "happiness_value", -5 ]),
         **next_ev
       },
       {
@@ -1158,13 +1158,13 @@ module Seeds
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev
       },
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'ちょっかいをだす'),
         trigger_conditions:    prob_only(20),
-        effects:               effects_status(["happiness_value", -1]),
+        effects:               effects_status([ "happiness_value", -1 ]),
         **next_ev(call: '怒っている', resolve: true)
       },
       {
@@ -1176,7 +1176,7 @@ module Seeds
       {
         **ar_key('ブロックのおもちゃに夢中', 0, 'ブロックをくずす'),
         trigger_conditions:    prob_only(6),
-        effects:               effects_status(["happiness_value", -100]),
+        effects:               effects_status([ "happiness_value", -100 ]),
         **next_ev(call: '怒っている', resolve: true)
       },
       {
@@ -1194,7 +1194,7 @@ module Seeds
       {
         **ar_key('マンガに夢中', 0, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev
       },
       {
@@ -1212,13 +1212,13 @@ module Seeds
       {
         **ar_key('マンガに夢中', 0, 'マンガをとりあげる'),
         trigger_conditions:    always,
-        effects:               effects_status(["happiness_value", -50]),
+        effects:               effects_status([ "happiness_value", -50 ]),
         **next_ev(call: '怒っている', resolve: true)
       },
       {
         **ar_key('眠そう', 0, 'ねかせる'),
         trigger_conditions:    prob_only(30),
-        effects:               effects_status(["happiness_value", 5]),
+        effects:               effects_status([ "happiness_value", 5 ]),
         **next_ev(call: '寝かせた', resolve: true)
       },
       {
@@ -1230,19 +1230,19 @@ module Seeds
       {
         **ar_key('眠そう', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev(call: '寝かせた', resolve: true)
       },
       {
         **ar_key('眠そう', 0, 'よしよしする', 2),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev
       },
       {
         **ar_key('眠そう', 0, 'はみがきをさせる'),
         trigger_conditions:    prob_only(33),
-        effects:               effects_status(["happiness_value", 3]),
+        effects:               effects_status([ "happiness_value", 3 ]),
         **next_ev(call: '寝かせた', resolve: true)
       },
       {
@@ -1254,7 +1254,7 @@ module Seeds
       {
         **ar_key('眠そう', 0, 'ダジャレをいう'),
         trigger_conditions:    prob_only(5),
-        effects:               effects_status(["happiness_value", 1]),
+        effects:               effects_status([ "happiness_value", 1 ]),
         **next_ev
       },
       {
@@ -1278,13 +1278,13 @@ module Seeds
       {
         **ar_key('寝かせた', 0, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 10]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 10 ]),
         **next_ev(deriv: 1)
       },
       {
         **ar_key('寝かせた', 0, 'たたきおこす'),
         trigger_conditions:    always,
-        effects:               effects_status(["happiness_value", -5]),
+        effects:               effects_status([ "happiness_value", -5 ]),
         **next_ev(deriv: 1)
       },
       {
@@ -1302,13 +1302,13 @@ module Seeds
       {
          **ar_key('寝かせた', 1, 'よしよしする'),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev
       },
       {
         **ar_key('寝かせた', 1, 'たたきおこす'),
         trigger_conditions:    always,
-        effects:               effects_status(["happiness_value", -5]),
+        effects:               effects_status([ "happiness_value", -5 ]),
         **next_ev
       },
       {
@@ -1320,13 +1320,13 @@ module Seeds
       {
         **ar_key('寝起き', 0, 'よしよしする'),
         trigger_conditions:    prob_only(20),
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev(resolve: true)
       },
       {
         **ar_key('寝起き', 0, 'よしよしする', 2),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects:               effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev
       },
       {
@@ -1368,7 +1368,7 @@ module Seeds
       {
         **ar_key('寝起き', 3, 'はい'),
         trigger_conditions:    always,
-        effects:               effects_status(["happiness_value", -30]),
+        effects:               effects_status([ "happiness_value", -30 ]),
         **next_ev(call: '怒っている', resolve: true)
       },
       {
@@ -1398,7 +1398,7 @@ module Seeds
       {
         **ar_key('タマモン', 0, 'みていいよ'),
         trigger_conditions: always,
-        effects: effects_status(["happiness_value", 5]),
+        effects: effects_status([ "happiness_value", 5 ]),
         **next_ev(deriv: 1)
       },
       {
@@ -1416,7 +1416,7 @@ module Seeds
       {
         **ar_key('タマえもん', 0, 'みていいよ'),
         trigger_conditions: always,
-        effects: effects_status(["happiness_value", 5]),
+        effects: effects_status([ "happiness_value", 5 ]),
         **next_ev(deriv: 1)
       },
       {
@@ -1434,7 +1434,7 @@ module Seeds
       {
         **ar_key('ニワトリビアの湖', 0, 'みていいよ'),
         trigger_conditions: always,
-        effects: effects_status(["happiness_value", 3]),
+        effects: effects_status([ "happiness_value", 3 ]),
         **next_ev(deriv: 1)
       },
       {
@@ -1452,13 +1452,13 @@ module Seeds
       {
         **ar_key('扇風機', 0, 'よしよしする'),
         trigger_conditions: always,
-        effects: effects_status(["love_value", 10], ["happiness_value", 2]),
+        effects: effects_status([ "love_value", 10 ], [ "happiness_value", 2 ]),
         **next_ev
       },
       {
         **ar_key('扇風機', 0, 'スイカをあげる'),
         trigger_conditions:    and_(status("hunger_value", "<=", 95)),
-        effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
+        effects: effects_status([ "hunger_value", 30 ], [ "vitality", 3 ], [ "happiness_value", 2 ]),
         **next_ev
       },
       {
@@ -1470,7 +1470,7 @@ module Seeds
       {
         **ar_key('扇風機', 0, 'せんぷうきをとめる'),
         trigger_conditions: always,
-        effects: effects_status(["happiness_value", -1]),
+        effects: effects_status([ "happiness_value", -1 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1482,13 +1482,13 @@ module Seeds
       {
         **ar_key('こたつ', 0, 'よしよしする'),
         trigger_conditions: always,
-        effects: effects_status(["love_value", 10], ["happiness_value", 2]),
+        effects: effects_status([ "love_value", 10 ], [ "happiness_value", 2 ]),
         **next_ev
       },
       {
         **ar_key('こたつ', 0, 'ミカンをあげる'),
         trigger_conditions:    and_(status("hunger_value", "<=", 95)),
-        effects: effects_status(["hunger_value", 30], ["vitality", 3], ["happiness_value", 2]),
+        effects: effects_status([ "hunger_value", 30 ], [ "vitality", 3 ], [ "happiness_value", 2 ]),
         **next_ev
       },
       {
@@ -1500,7 +1500,7 @@ module Seeds
       {
         **ar_key('こたつ', 0, 'こたつをとめる'),
         trigger_conditions: always,
-        effects: effects_status(["happiness_value", -1]),
+        effects: effects_status([ "happiness_value", -1 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1512,7 +1512,7 @@ module Seeds
       {
         **ar_key('花見', 0, 'つれていく'),
         trigger_conditions: always,
-        effects: effects_status(["happiness_value", 10]),
+        effects: effects_status([ "happiness_value", 10 ]),
         **next_ev
       },
       {
@@ -1524,7 +1524,7 @@ module Seeds
       {
         **ar_key('紅葉', 0, 'つれていく'),
         trigger_conditions: always,
-        effects: effects_status(["happiness_value", 10]),
+        effects: effects_status([ "happiness_value", 10 ]),
         **next_ev
       },
       {
@@ -1542,19 +1542,19 @@ module Seeds
       {
         **ar_key('怒っている', 0, 'よしよしする'),
         trigger_conditions:    prob_only(25),
-        effects:               effects_status(["love_value", 10]),
+        effects:               effects_status([ "love_value", 10 ]),
         **next_ev(resolve: true)
       },
       {
         **ar_key('怒っている', 0, 'よしよしする', 2),
         trigger_conditions:    always,
-        effects:               effects_status(["love_value", 3]),
+        effects:               effects_status([ "love_value", 3 ]),
         **next_ev
       },
       {
         **ar_key('怒っている', 0, 'おやつをあげる'),
         trigger_conditions:    and_(status("hunger_value", "<=", 50)),
-        effects:               effects_status(["hunger_value", 30]),
+        effects:               effects_status([ "hunger_value", 30 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1566,7 +1566,7 @@ module Seeds
       {
         **ar_key('怒っている', 0, 'へんがおをする'),
         trigger_conditions:    prob_only(10),
-        effects:               effects_status(["happiness_value", 1]),
+        effects:               effects_status([ "happiness_value", 1 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1578,7 +1578,7 @@ module Seeds
       {
         **ar_key('怒っている', 0, 'あやまる'),
         trigger_conditions:    prob_only(33),
-        effects:               effects_status(["happiness_value", 1]),
+        effects:               effects_status([ "happiness_value", 1 ]),
         **next_ev(resolve: true)
       },
       {
@@ -1614,97 +1614,97 @@ module Seeds
       {
         **ar_key('算数', 1, '〈A〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 1, '〈B〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 1, '〈C〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 1, '〈D〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 2, '〈A〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 2, '〈B〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 2, '〈C〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 2, '〈D〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 3, '〈A〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 3, '〈B〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 3, '〈C〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 3, '〈D〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 4, '〈A〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 4, '〈B〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 4, '〈C〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('算数', 4, '〈D〉'),
         trigger_conditions: always,
-        effects: effects_status(["arithmetic_effort", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "arithmetic_effort", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
@@ -1734,79 +1734,79 @@ module Seeds
       {
         **ar_key('ボール遊び', 2, 'ひだりだ！'),
         trigger_conditions: always,
-        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "sports_value", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 2, 'そこだ！'),
         trigger_conditions: prob_only(50),
-        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "sports_value", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 2, 'そこだ！', 2),
         trigger_conditions: always,
-        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 2, 'みぎだ！'),
         trigger_conditions: always,
-        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'ひだりだ！'),
         trigger_conditions: prob_only(30),
-        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "sports_value", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'ひだりだ！', 2),
         trigger_conditions: always,
-        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'そこだ！'),
         trigger_conditions: always,
-        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "sports_value", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'みぎだ！'),
         trigger_conditions: prob_only(30),
-        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "sports_value", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 3, 'みぎだ！', 2),
         trigger_conditions: always,
-        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'ひだりだ！'),
         trigger_conditions: always,
-        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'そこだ！'),
         trigger_conditions: prob_only(50),
-        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "sports_value", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'そこだ！', 2),
         trigger_conditions: always,
-        effects: effects_status(["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('ボール遊び', 4, 'みぎだ！'),
         trigger_conditions: always,
-        effects: effects_status(["sports_value", 1], ["temp_vitality", -VITALITY_UNIT]),
+        effects: effects_status([ "sports_value", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
@@ -1980,31 +1980,31 @@ module Seeds
       {
         **ar_key('イントロ', 7, 'よしよし'),
         trigger_conditions:    always,
-        effects: effects_status(["love_value", 10], ["happiness_value", 1]),
+        effects: effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
         **next_ev
       },
       {
         **ar_key('誕生日', 0, 'すすむ'), trigger_conditions: always,
-        effects: {},**next_ev(deriv: 1)
+        effects: {}, **next_ev(deriv: 1)
       },
       {
         **ar_key('誕生日', 1, 'たのしくすごす！'), trigger_conditions: always,
-        effects: effects_status(["happiness_value", 10]),
+        effects: effects_status([ "happiness_value", 10 ]),
         **next_ev
       },
       {
         **ar_key('誕生日', 1, 'えがおですごす！'), trigger_conditions: always,
-        effects: effects_status(["happiness_value", 10]),
+        effects: effects_status([ "happiness_value", 10 ]),
         **next_ev
       },
       {
         **ar_key('誕生日', 1, 'せいちょうする！'), trigger_conditions: always,
-        effects: effects_status(["happiness_value", 10]),
+        effects: effects_status([ "happiness_value", 10 ]),
         **next_ev
       },
       {
         **ar_key('誕生日', 1, 'ひとをだいじにする！'), trigger_conditions: always,
-        effects: effects_status(["happiness_value", 10]),
+        effects: effects_status([ "happiness_value", 10 ]),
         **next_ev
       },
       {
