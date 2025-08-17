@@ -18,9 +18,11 @@ module Seeds
   def weekday(array)              = { "type" => "weekday", "value" => array }.freeze
   def date_range(fm, fd, tm, td)  = { "type" => "date_range", "from" => { "month" => fm, "day" => fd }, "to" => { "month" => tm, "day" => td } }
   def and_(*conditions)           = { "operator" => "and", "conditions" => conditions }
-  def or_(*conditions)           = { "operator" => "or", "conditions" => conditions }
+  def or_(*conditions)            = { "operator" => "or", "conditions" => conditions }
   def effects_status(*pairs)      = { "status" => pairs.map { |attr, delta| { "attribute" => attr.to_s, "delta" => delta } } }
-  def ar_key(set, deriv, label, prio = 1) = { event_set_name: set, derivation_number: deriv, label: label, priority: prio }
+  def ar_key(set, deriv, label, prio = 1)       = { event_set_name: set, derivation_number: deriv, label: label, priority: prio }
+  def set_deriv(set, deriv = 0)                 = { event_set_name: set, derivation_number: deriv}
+  def single_label(set_deriv, label = 'すすむ')  = { **set_deriv, labels: [ label ] }
   def next_ev(deriv: nil, call: nil, resolve: false)
     {
       next_derivation_number: deriv,
@@ -767,315 +769,190 @@ module Seeds
 
     choices = [
       {
-        event_set_name:    '何か言っている',
-        derivation_number: 0,
+        **set_deriv('何か言っている'),
         labels:            [ 'はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる' ]
       },
       {
-        event_set_name:    '何かしたそう',
-        derivation_number: 0,
+        **set_deriv('何かしたそう'),
         labels:            [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ]
       },
       {
-        event_set_name:    '何かしたそう',
-        derivation_number: 2,
+        **set_deriv('何かしたそう', 2),
         labels:            [ 'ゲームさせてあげる',   'やっぱやめよう' ]
       },
       {
-        event_set_name:    'ボーっとしている',
-        derivation_number: 0,
+        **set_deriv('ボーっとしている'),
         labels:            [ 'ながめている',   'こえをかける' ]
       },
+      single_label(set_deriv('ニコニコしている'), 'ながめている'),
+      single_label(set_deriv('ゴロゴロしている'), 'ながめている'),
       {
-        event_set_name:    'ニコニコしている',
-        derivation_number: 0,
-        labels:            [ 'ながめている' ]
-      },
-      {
-        event_set_name:    'ゴロゴロしている',
-        derivation_number: 0,
-        labels:            [ 'ながめている' ]
-      },
-      {
-        event_set_name:    '何かしたそう',
-        derivation_number: 1,
+        **set_deriv('何かしたそう', 1),
         labels:            [ 'さんすう',   'こくご',   'りか',     'しゃかい' ]
       },
       {
-        event_set_name:    '踊っている',
-        derivation_number: 0,
+        **set_deriv('踊っている'),
         labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる' ]
       },
       {
-        event_set_name:    '泣いている(空腹)',
-        derivation_number: 0,
+        **set_deriv('泣いている(空腹)'),
         labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
       },
       {
-        event_set_name:    '泣いている(よしよし不足)',
-        derivation_number: 0,
+        **set_deriv('泣いている(よしよし不足)'),
         labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
       },
       {
-        event_set_name:    '泣いている(ランダム)',
-        derivation_number: 0,
+        **set_deriv('泣いている(ランダム)'),
         labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
       },
       {
-        event_set_name:    '寝ている',
-        derivation_number: 0,
+        **set_deriv('寝ている'),
         labels:            [ 'そっとする',        'よしよしする',     'たたきおこす' ]
       },
       {
-        event_set_name:    'ブロックのおもちゃに夢中',
-        derivation_number: 0,
+        **set_deriv('ブロックのおもちゃに夢中'),
         labels:            [ 'そっとする',       'よしよしする',   'ちょっかいをだす',   'ブロックをくずす' ]
       },
       {
-        event_set_name:    'マンガに夢中',
-        derivation_number: 0,
+        **set_deriv('マンガに夢中'),
         labels:            [ 'そっとする',       'よしよしする',   'はなしかける',   'マンガをとりあげる' ]
       },
       {
-        event_set_name:    '眠そう',
-        derivation_number: 0,
+        **set_deriv('眠そう'),
         labels:            [ 'ねかせる',         'よしよしする',   'はみがきをさせる', 'ダジャレをいう' ]
       },
       {
-        event_set_name:    '寝かせた',
-        derivation_number: 0,
+        **set_deriv('寝かせた'),
         labels:            [ 'そっとする',        'よしよしする',     'たたきおこす',     'ゴミばこのなかをのぞく' ]
       },
       {
-        event_set_name:    '寝かせた',
-        derivation_number: 1,
+        **set_deriv('寝かせた', 1),
         labels:            [ 'そっとする',        'よしよしする',     'たたきおこす' ]
       },
       {
-        event_set_name:    '寝起き',
-        derivation_number: 0,
+        **set_deriv('寝起き'),
         labels:            [ 'そっとする',        'よしよしする',     'きがえさせる',     'ばくおんをながす' ]
       },
       {
-        event_set_name:    '寝起き',
-        derivation_number: 1,
+        **set_deriv('寝起き', 1),
         labels:            [ 'かけちゃう',        'やめておく' ]
       },
       {
-        event_set_name:    '寝起き',
-        derivation_number: 2,
+        **set_deriv('寝起き', 2),
         labels:            [ 'はい',              'やっぱやめておく' ]
       },
       {
-        event_set_name:    '寝起き',
-        derivation_number: 3,
+        **set_deriv('寝起き', 3),
         labels:            [ 'はい',              'いいえ' ]
       },
+      single_label(set_deriv('占い')),
       {
-        event_set_name:    '占い',
-        derivation_number: 0,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    'タマモン',
-        derivation_number: 0,
+        **set_deriv('タマモン'),
         labels:            [ 'みていいよ',         'みさせてあげない' ]
       },
+      single_label(set_deriv('タマモン', 1), 'いっしょにみる' ),
       {
-        event_set_name:    'タマモン',
-        derivation_number: 1,
-        labels:            [ 'いっしょにみる' ]
-      },
-      {
-        event_set_name:    'タマえもん',
-        derivation_number: 0,
+        **set_deriv('タマえもん'),
         labels:            [ 'みていいよ',         'みさせてあげない' ]
       },
+      single_label(set_deriv('タマえもん', 1), 'いっしょにみる'),
       {
-        event_set_name:    'タマえもん',
-        derivation_number: 1,
-        labels:            [ 'いっしょにみる' ]
-      },
-      {
-        event_set_name:    'ニワトリビアの湖',
-        derivation_number: 0,
+        **set_deriv('ニワトリビアの湖'),
         labels:            [ 'みていいよ',         'みさせてあげない' ]
       },
+      single_label(set_deriv('ニワトリビアの湖', 1), 'いっしょにみる'),
       {
-        event_set_name:    'ニワトリビアの湖',
-        derivation_number: 1,
-        labels:            [ 'いっしょにみる' ]
-      },
-      {
-        event_set_name:    '扇風機',
-        derivation_number: 0,
+        **set_deriv('扇風機'),
         labels:            [ 'よしよしする',       'スイカをあげる',   'せんぷうきをとめる',   'そっとする' ]
       },
       {
-        event_set_name:    'こたつ',
-        derivation_number: 0,
+        **set_deriv('こたつ'),
         labels:            [ 'よしよしする',       'ミカンをあげる',    'こたつをとめる',      'そっとする' ]
       },
       {
-        event_set_name:    '花見',
-        derivation_number: 0,
+        **set_deriv('花見'),
         labels:            [ 'つれていく',       'いかない' ]
       },
       {
-        event_set_name:    '紅葉',
-        derivation_number: 0,
+        **set_deriv('紅葉'),
         labels:            [ 'つれていく',       'いかない' ]
       },
+      single_label(set_deriv('年始')),
       {
-        event_set_name:    '年始',
-        derivation_number: 0,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '怒っている',
-        derivation_number: 0,
+        **set_deriv('怒っている'),
         labels:            [ 'よしよしする',       'おやつをあげる',   'へんがおをする',   'あやまる' ]
       },
+      single_label(set_deriv('算数')),
       {
-        event_set_name:    '算数',
-        derivation_number: 0,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '算数',
-        derivation_number: 1,
+        **set_deriv('算数', 1),
         labels:            [ '〈A〉', '〈B〉', '〈C〉', '〈D〉' ]
       },
       {
-        event_set_name:    '算数',
-        derivation_number: 2,
+        **set_deriv('算数', 2),
         labels:            [ '〈B〉', '〈A〉', '〈C〉', '〈D〉' ]
       },
       {
-        event_set_name:    '算数',
-        derivation_number: 3,
+        **set_deriv('算数', 3),
         labels:            [ '〈B〉', '〈C〉', '〈A〉', '〈D〉' ]
       },
       {
-        event_set_name:    '算数',
-        derivation_number: 4,
+        **set_deriv('算数', 4),
         labels:            [ '〈B〉', '〈C〉', '〈D〉', '〈A〉' ]
       },
+      single_label(set_deriv('ボール遊び')),
+      single_label(set_deriv('ボール遊び', 1), 'ぜんりょくとうきゅう'),
       {
-        event_set_name:    'ボール遊び',
-        derivation_number: 0,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    'ボール遊び',
-        derivation_number: 1,
-        labels:            [ 'ぜんりょくとうきゅう' ]
-      },
-      {
-        event_set_name:    'ボール遊び',
-        derivation_number: 2,
+        **set_deriv('ボール遊び', 2),
         labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
       },
       {
-        event_set_name:    'ボール遊び',
-        derivation_number: 3,
+        **set_deriv('ボール遊び', 3),
         labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
       },
       {
-        event_set_name:    'ボール遊び',
-        derivation_number: 4,
+        **set_deriv('ボール遊び', 4),
         labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
       },
       {
-        event_set_name:    '特訓',
-        derivation_number: 0,
+        **set_deriv('特訓'),
         labels:            [ 'さんすう', 'ボールあそび', 'やっぱやめておく' ]
       },
+      single_label(set_deriv('特訓', 1)),
+      single_label(set_deriv('特訓', 2)),
+      single_label(set_deriv('特訓', 3)),
+      single_label(set_deriv('特訓', 4)),
+      single_label(set_deriv('特訓', 5)),
+      single_label(set_deriv('特訓', 6)),
+      single_label(set_deriv('イントロ')),
       {
-        event_set_name:    '特訓',
-        derivation_number: 1,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '特訓',
-        derivation_number: 2,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '特訓',
-        derivation_number: 3,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '特訓',
-        derivation_number: 4,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '特訓',
-        derivation_number: 5,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '特訓',
-        derivation_number: 6,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    'イントロ',
-        derivation_number: 0,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    'イントロ',
-        derivation_number: 1,
+        **set_deriv('イントロ', 1),
         labels:            [ 'えっ？', 'まさか！', 'うーん', 'かっこいいです' ]
       },
+      single_label(set_deriv('イントロ', 2)),
       {
-        event_set_name:    'イントロ',
-        derivation_number: 2,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    'イントロ',
-        derivation_number: 3,
+        **set_deriv('イントロ', 3),
         labels:            [ 'いいなまえ！', 'ちゃんをつけて！', 'くんをつけて！', 'さまをつけて！' ]
       },
+      single_label(set_deriv('イントロ', 4)),
       {
-        event_set_name:    'イントロ',
-        derivation_number: 4,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    'イントロ',
-        derivation_number: 5,
+        **set_deriv('イントロ', 5),
         labels:            [ 'こんにちは！', 'なかよくしてね！' ]
       },
       {
-        event_set_name:    'イントロ',
-        derivation_number: 6,
+        **set_deriv('イントロ', 6),
         labels:            [ 'よっ！',       'なかよくたのむぜ！' ]
       },
       {
-        event_set_name:    'イントロ',
-        derivation_number: 7,
+        **set_deriv('イントロ', 7),
         labels:            [ 'こんにちは！', 'なかよくしてね！', 'よしよし' ]
       },
+      single_label(set_deriv('誕生日')),
       {
-        event_set_name:    '誕生日',
-        derivation_number: 0,
-        labels:            [ 'すすむ' ]
-      },
-      {
-        event_set_name:    '誕生日',
-        derivation_number: 1,
+        **set_deriv('誕生日', 1),
         labels:            [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ]
       },
-      {
-        event_set_name:    'タマモンカート',
-        derivation_number: 0,
-        labels:            [ 'ながめている' ]
-      }
+      single_label(set_deriv('タマモンカート'), 'ながめている')
     ]
 
     choices.each do |attrs|
