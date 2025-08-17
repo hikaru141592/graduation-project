@@ -22,7 +22,7 @@ module Seeds
   def effects_status(*pairs)      = { "status" => pairs.map { |attr, delta| { "attribute" => attr.to_s, "delta" => delta } } }
   def ar_key(set, deriv, label, prio = 1)       = { event_set_name: set, derivation_number: deriv, label: label, priority: prio }
   def set_deriv(set, deriv = 0)                 = { event_set_name: set, derivation_number: deriv}
-  def single_label(set_deriv, label = 'すすむ')  = { **set_deriv, labels: [ label ] }
+  def s_l(set_deriv, label = 'すすむ')  = { **set_deriv, labels: [ label ] }
   def next_ev(deriv: nil, call: nil, resolve: false)
     {
       next_derivation_number: deriv,
@@ -768,191 +768,70 @@ module Seeds
     end
 
     choices = [
-      {
-        **set_deriv('何か言っている'),
-        labels:            [ 'はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる' ]
-      },
-      {
-        **set_deriv('何かしたそう'),
-        labels:            [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ]
-      },
-      {
-        **set_deriv('何かしたそう', 2),
-        labels:            [ 'ゲームさせてあげる',   'やっぱやめよう' ]
-      },
-      {
-        **set_deriv('ボーっとしている'),
-        labels:            [ 'ながめている',   'こえをかける' ]
-      },
-      single_label(set_deriv('ニコニコしている'), 'ながめている'),
-      single_label(set_deriv('ゴロゴロしている'), 'ながめている'),
-      {
-        **set_deriv('何かしたそう', 1),
-        labels:            [ 'さんすう',   'こくご',   'りか',     'しゃかい' ]
-      },
-      {
-        **set_deriv('踊っている'),
-        labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる' ]
-      },
-      {
-        **set_deriv('泣いている(空腹)'),
-        labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
-      },
-      {
-        **set_deriv('泣いている(よしよし不足)'),
-        labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
-      },
-      {
-        **set_deriv('泣いている(ランダム)'),
-        labels:            [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ]
-      },
-      {
-        **set_deriv('寝ている'),
-        labels:            [ 'そっとする',        'よしよしする',     'たたきおこす' ]
-      },
-      {
-        **set_deriv('ブロックのおもちゃに夢中'),
-        labels:            [ 'そっとする',       'よしよしする',   'ちょっかいをだす',   'ブロックをくずす' ]
-      },
-      {
-        **set_deriv('マンガに夢中'),
-        labels:            [ 'そっとする',       'よしよしする',   'はなしかける',   'マンガをとりあげる' ]
-      },
-      {
-        **set_deriv('眠そう'),
-        labels:            [ 'ねかせる',         'よしよしする',   'はみがきをさせる', 'ダジャレをいう' ]
-      },
-      {
-        **set_deriv('寝かせた'),
-        labels:            [ 'そっとする',        'よしよしする',     'たたきおこす',     'ゴミばこのなかをのぞく' ]
-      },
-      {
-        **set_deriv('寝かせた', 1),
-        labels:            [ 'そっとする',        'よしよしする',     'たたきおこす' ]
-      },
-      {
-        **set_deriv('寝起き'),
-        labels:            [ 'そっとする',        'よしよしする',     'きがえさせる',     'ばくおんをながす' ]
-      },
-      {
-        **set_deriv('寝起き', 1),
-        labels:            [ 'かけちゃう',        'やめておく' ]
-      },
-      {
-        **set_deriv('寝起き', 2),
-        labels:            [ 'はい',              'やっぱやめておく' ]
-      },
-      {
-        **set_deriv('寝起き', 3),
-        labels:            [ 'はい',              'いいえ' ]
-      },
-      single_label(set_deriv('占い')),
-      {
-        **set_deriv('タマモン'),
-        labels:            [ 'みていいよ',         'みさせてあげない' ]
-      },
-      single_label(set_deriv('タマモン', 1), 'いっしょにみる' ),
-      {
-        **set_deriv('タマえもん'),
-        labels:            [ 'みていいよ',         'みさせてあげない' ]
-      },
-      single_label(set_deriv('タマえもん', 1), 'いっしょにみる'),
-      {
-        **set_deriv('ニワトリビアの湖'),
-        labels:            [ 'みていいよ',         'みさせてあげない' ]
-      },
-      single_label(set_deriv('ニワトリビアの湖', 1), 'いっしょにみる'),
-      {
-        **set_deriv('扇風機'),
-        labels:            [ 'よしよしする',       'スイカをあげる',   'せんぷうきをとめる',   'そっとする' ]
-      },
-      {
-        **set_deriv('こたつ'),
-        labels:            [ 'よしよしする',       'ミカンをあげる',    'こたつをとめる',      'そっとする' ]
-      },
-      {
-        **set_deriv('花見'),
-        labels:            [ 'つれていく',       'いかない' ]
-      },
-      {
-        **set_deriv('紅葉'),
-        labels:            [ 'つれていく',       'いかない' ]
-      },
-      single_label(set_deriv('年始')),
-      {
-        **set_deriv('怒っている'),
-        labels:            [ 'よしよしする',       'おやつをあげる',   'へんがおをする',   'あやまる' ]
-      },
-      single_label(set_deriv('算数')),
-      {
-        **set_deriv('算数', 1),
-        labels:            [ '〈A〉', '〈B〉', '〈C〉', '〈D〉' ]
-      },
-      {
-        **set_deriv('算数', 2),
-        labels:            [ '〈B〉', '〈A〉', '〈C〉', '〈D〉' ]
-      },
-      {
-        **set_deriv('算数', 3),
-        labels:            [ '〈B〉', '〈C〉', '〈A〉', '〈D〉' ]
-      },
-      {
-        **set_deriv('算数', 4),
-        labels:            [ '〈B〉', '〈C〉', '〈D〉', '〈A〉' ]
-      },
-      single_label(set_deriv('ボール遊び')),
-      single_label(set_deriv('ボール遊び', 1), 'ぜんりょくとうきゅう'),
-      {
-        **set_deriv('ボール遊び', 2),
-        labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
-      },
-      {
-        **set_deriv('ボール遊び', 3),
-        labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
-      },
-      {
-        **set_deriv('ボール遊び', 4),
-        labels:            [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ]
-      },
-      {
-        **set_deriv('特訓'),
-        labels:            [ 'さんすう', 'ボールあそび', 'やっぱやめておく' ]
-      },
-      single_label(set_deriv('特訓', 1)),
-      single_label(set_deriv('特訓', 2)),
-      single_label(set_deriv('特訓', 3)),
-      single_label(set_deriv('特訓', 4)),
-      single_label(set_deriv('特訓', 5)),
-      single_label(set_deriv('特訓', 6)),
-      single_label(set_deriv('イントロ')),
-      {
-        **set_deriv('イントロ', 1),
-        labels:            [ 'えっ？', 'まさか！', 'うーん', 'かっこいいです' ]
-      },
-      single_label(set_deriv('イントロ', 2)),
-      {
-        **set_deriv('イントロ', 3),
-        labels:            [ 'いいなまえ！', 'ちゃんをつけて！', 'くんをつけて！', 'さまをつけて！' ]
-      },
-      single_label(set_deriv('イントロ', 4)),
-      {
-        **set_deriv('イントロ', 5),
-        labels:            [ 'こんにちは！', 'なかよくしてね！' ]
-      },
-      {
-        **set_deriv('イントロ', 6),
-        labels:            [ 'よっ！',       'なかよくたのむぜ！' ]
-      },
-      {
-        **set_deriv('イントロ', 7),
-        labels:            [ 'こんにちは！', 'なかよくしてね！', 'よしよし' ]
-      },
-      single_label(set_deriv('誕生日')),
-      {
-        **set_deriv('誕生日', 1),
-        labels:            [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ]
-      },
-      single_label(set_deriv('タマモンカート'), 'ながめている')
+      { **set_deriv('何か言っている'),          labels: [ 'はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる' ] },
+      { **set_deriv('何かしたそう'),            labels: [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ] },
+      { **set_deriv('何かしたそう', 2),         labels: [ 'ゲームさせてあげる',   'やっぱやめよう' ] },
+      { **set_deriv('ボーっとしている'),        labels: [ 'ながめている',   'こえをかける' ] },
+      s_l(set_deriv('ニコニコしている'), 'ながめている'),
+      s_l(set_deriv('ゴロゴロしている'), 'ながめている'),
+      { **set_deriv('何かしたそう', 1),         labels: [ 'さんすう',   'こくご',   'りか',     'しゃかい' ] },
+      { **set_deriv('踊っている'),              labels: [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる' ] },
+      { **set_deriv('泣いている(空腹)'),        labels: [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ] },
+      { **set_deriv('泣いている(よしよし不足)'), labels: [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ] },
+      { **set_deriv('泣いている(ランダム)'),     labels: [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ] },
+      { **set_deriv('寝ている'),                labels: [ 'そっとする',        'よしよしする',     'たたきおこす' ] },
+      { **set_deriv('ブロックのおもちゃに夢中'), labels: [ 'そっとする',       'よしよしする',   'ちょっかいをだす',   'ブロックをくずす' ] },
+      { **set_deriv('マンガに夢中'),            labels: [ 'そっとする',       'よしよしする',   'はなしかける',   'マンガをとりあげる' ] },
+      { **set_deriv('眠そう'),                  labels: [ 'ねかせる',         'よしよしする',   'はみがきをさせる', 'ダジャレをいう' ] },
+      { **set_deriv('寝かせた'),                labels: [ 'そっとする',        'よしよしする',     'たたきおこす',     'ゴミばこのなかをのぞく' ] },
+      { **set_deriv('寝かせた', 1),             labels: [ 'そっとする',        'よしよしする',     'たたきおこす' ] },
+      { **set_deriv('寝起き'),                  labels: [ 'そっとする',        'よしよしする',     'きがえさせる',     'ばくおんをながす' ] },
+      { **set_deriv('寝起き', 1),               labels: [ 'かけちゃう',        'やめておく' ] },
+      { **set_deriv('寝起き', 2),               labels: [ 'はい',              'やっぱやめておく' ] },
+      { **set_deriv('寝起き', 3),               labels: [ 'はい',              'いいえ' ] },
+      s_l(set_deriv('占い')),
+      { **set_deriv('タマモン'),                labels: [ 'みていいよ',         'みさせてあげない' ] },
+      s_l(set_deriv('タマモン', 1), 'いっしょにみる' ),
+      { **set_deriv('タマえもん'),              labels: [ 'みていいよ',         'みさせてあげない' ] },
+      s_l(set_deriv('タマえもん', 1), 'いっしょにみる'),
+      { **set_deriv('ニワトリビアの湖'),         labels: [ 'みていいよ',         'みさせてあげない' ] },
+      s_l(set_deriv('ニワトリビアの湖', 1), 'いっしょにみる'),
+      { **set_deriv('扇風機'),                  labels: [ 'よしよしする',       'スイカをあげる',   'せんぷうきをとめる',   'そっとする' ] },
+      { **set_deriv('こたつ'),                  labels: [ 'よしよしする',       'ミカンをあげる',    'こたつをとめる',      'そっとする' ] },
+      { **set_deriv('花見'),                    labels: [ 'つれていく',       'いかない' ] },
+      { **set_deriv('紅葉'),                    labels: [ 'つれていく',       'いかない' ] },
+      s_l(set_deriv('年始')),
+      { **set_deriv('怒っている'),               labels: [ 'よしよしする',       'おやつをあげる',   'へんがおをする',   'あやまる' ] },
+      s_l(set_deriv('算数')),
+      { **set_deriv('算数', 1),                 labels: [ '〈A〉', '〈B〉', '〈C〉', '〈D〉' ] },
+      { **set_deriv('算数', 2),                 labels: [ '〈B〉', '〈A〉', '〈C〉', '〈D〉' ] },
+      { **set_deriv('算数', 3),                 labels: [ '〈B〉', '〈C〉', '〈A〉', '〈D〉' ] },
+      { **set_deriv('算数', 4),                 labels: [ '〈B〉', '〈C〉', '〈D〉', '〈A〉' ] },
+      s_l(set_deriv('ボール遊び')),
+      s_l(set_deriv('ボール遊び', 1), 'ぜんりょくとうきゅう'),
+      { **set_deriv('ボール遊び', 2),            labels: [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ] },
+      { **set_deriv('ボール遊び', 3),            labels: [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ] },
+      { **set_deriv('ボール遊び', 4),            labels: [ 'ひだりだ！', 'そこだ！', 'みぎだ！' ] },
+      { **set_deriv('特訓'),                     labels: [ 'さんすう', 'ボールあそび', 'やっぱやめておく' ] },
+      s_l(set_deriv('特訓', 1)),
+      s_l(set_deriv('特訓', 2)),
+      s_l(set_deriv('特訓', 3)),
+      s_l(set_deriv('特訓', 4)),
+      s_l(set_deriv('特訓', 5)),
+      s_l(set_deriv('特訓', 6)),
+
+      s_l(set_deriv('イントロ')),
+      { **set_deriv('イントロ', 1),             labels: [ 'えっ？', 'まさか！', 'うーん', 'かっこいいです' ] },
+      s_l(set_deriv('イントロ', 2)),
+      { **set_deriv('イントロ', 3),             labels: [ 'いいなまえ！', 'ちゃんをつけて！', 'くんをつけて！', 'さまをつけて！' ] },
+      s_l(set_deriv('イントロ', 4)),
+      { **set_deriv('イントロ', 5),             labels: [ 'こんにちは！', 'なかよくしてね！' ] },
+      { **set_deriv('イントロ', 6),             labels: [ 'よっ！',       'なかよくたのむぜ！' ] },
+      { **set_deriv('イントロ', 7),             labels: [ 'こんにちは！', 'なかよくしてね！', 'よしよし' ] },
+
+      s_l(set_deriv('誕生日')),
+      { **set_deriv('誕生日', 1),               labels: [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ] },
+      s_l(set_deriv('タマモンカート'), 'ながめている')
     ]
 
     choices.each do |attrs|
