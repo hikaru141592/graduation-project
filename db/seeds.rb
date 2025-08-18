@@ -24,7 +24,7 @@ module Seeds
   def ar_key(set, deriv, label, prio = 1)       = { event_set_name: set, derivation_number: deriv, label: label, priority: prio }
   def cut_key(ar_key, pos = 1)                  = { **ar_key, position: pos }
 
-  def s_l(set_deriv, label = 'すすむ')  = { **set_deriv, labels: [ label ] }
+  def s_l(set_deriv, label = 'つぎへ')  = { **set_deriv, labels: [ label ] }
   def next_ev(deriv: nil, call: nil, resolve: false)
     {
       next_derivation_number: deriv,
@@ -1378,19 +1378,19 @@ module Seeds
         **next_ev(deriv: 0)
       },
       {
-        **ar_key('占い', 0, 'すすむ'),
+        **ar_key('占い', 0, 'つぎへ'),
         trigger_conditions: prob_only(10),
         effects: {},
         **next_ev
       },
       {
-        **ar_key('占い', 0, 'すすむ', 2),
+        **ar_key('占い', 0, 'つぎへ', 2),
         trigger_conditions: prob_only(33),
         effects: {},
         **next_ev
       },
       {
-        **ar_key('占い', 0, 'すすむ', 3),
+        **ar_key('占い', 0, 'つぎへ', 3),
         trigger_conditions: always,
         effects: {},
         **next_ev
@@ -1534,7 +1534,7 @@ module Seeds
         **next_ev
       },
       {
-        **ar_key('年始', 0, 'すすむ'),
+        **ar_key('年始', 0, 'つぎへ'),
         trigger_conditions: always,
         effects: {},
         **next_ev
@@ -1588,25 +1588,25 @@ module Seeds
         **next_ev
       },
       {
-        **ar_key('算数', 0, 'すすむ'),
+        **ar_key('算数', 0, 'つぎへ'),
         trigger_conditions: prob_only(25),
         effects: {},
         **next_ev(deriv: 1)
       },
       {
-        **ar_key('算数', 0, 'すすむ', 2),
+        **ar_key('算数', 0, 'つぎへ', 2),
         trigger_conditions: prob_only(33),
         effects: {},
         **next_ev(deriv: 2)
       },
       {
-        **ar_key('算数', 0, 'すすむ', 3),
+        **ar_key('算数', 0, 'つぎへ', 3),
         trigger_conditions: prob_only(50),
         effects: {},
         **next_ev(deriv: 3)
       },
       {
-        **ar_key('算数', 0, 'すすむ', 4),
+        **ar_key('算数', 0, 'つぎへ', 4),
         trigger_conditions: always,
         effects: {},
         **next_ev(deriv: 4)
@@ -1708,7 +1708,7 @@ module Seeds
         **next_ev
       },
       {
-        **ar_key('ボール遊び', 0, 'すすむ'),
+        **ar_key('ボール遊び', 0, 'つぎへ'),
         trigger_conditions: always,
         effects: {},
         **next_ev(deriv: 1)
@@ -1840,43 +1840,43 @@ module Seeds
         **next_ev
       },
       {
-        **ar_key('特訓', 1, 'すすむ'),
+        **ar_key('特訓', 1, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev
       },
       {
-        **ar_key('特訓', 2, 'すすむ'),
+        **ar_key('特訓', 2, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev
       },
       {
-        **ar_key('特訓', 3, 'すすむ'),
+        **ar_key('特訓', 3, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev
       },
       {
-        **ar_key('特訓', 4, 'すすむ'),
+        **ar_key('特訓', 4, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev
       },
       {
-        **ar_key('特訓', 5, 'すすむ'),
+        **ar_key('特訓', 5, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev
       },
       {
-        **ar_key('特訓', 6, 'すすむ'),
+        **ar_key('特訓', 6, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev
       },
       {
-        **ar_key('イントロ', 0, 'すすむ'),
+        **ar_key('イントロ', 0, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev(deriv: 1)
@@ -1906,7 +1906,7 @@ module Seeds
         **next_ev(deriv: 2)
       },
       {
-        **ar_key('イントロ', 2, 'すすむ'),
+        **ar_key('イントロ', 2, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev(deriv: 3)
@@ -1936,7 +1936,7 @@ module Seeds
         **next_ev(deriv: 4)
       },
       {
-        **ar_key('イントロ', 4, 'すすむ'),
+        **ar_key('イントロ', 4, 'つぎへ'),
         trigger_conditions:    always,
         effects: {},
         **next_ev(deriv: 5)
@@ -1984,7 +1984,7 @@ module Seeds
         **next_ev
       },
       {
-        **ar_key('誕生日', 0, 'すすむ'), trigger_conditions: always,
+        **ar_key('誕生日', 0, 'つぎへ'), trigger_conditions: always,
         effects: {}, **next_ev(deriv: 1)
       },
       {
@@ -2164,24 +2164,24 @@ module Seeds
       { **cut_key(ar_key('寝起き',             0, 'きがえさせる')), message: '〈たまご〉は ふくなんか きていない！',      **image_set("temp-wakeup.png") },
       { **cut_key(ar_key('寝起き',             3, 'はい')), message: '〈たまご〉は おこってしまった！',           **image_set("temp-okoru.png") },
 
-      { **cut_key(ar_key('占い',               0, 'すすむ')), message: '『ほんじつの あなたは すっごくラッキー！』', **image_set("temp-TV1.png") },
-      { **cut_key(ar_key('占い',               0, 'すすむ'), 2), message: '『ちょっかんに したがうと、 おもわぬ いいことがありそう！』', **image_set("temp-TV2.png"),
+      { **cut_key(ar_key('占い',               0, 'つぎへ')), message: '『ほんじつの あなたは すっごくラッキー！』', **image_set("temp-TV1.png") },
+      { **cut_key(ar_key('占い',               0, 'つぎへ'), 2), message: '『ちょっかんに したがうと、 おもわぬ いいことがありそう！』', **image_set("temp-TV2.png"),
       messages: [ '『ちょっかんに したがうと、 おもわぬ いいことがありそう！』', '『せっきょくてきに うごくと、 とっても いいことが おこりそう！』', '『おいしいものを たべると、 きんうんアップ！』', '『ふだんと へんかのあるこうどうを いしきしよう！』', '『まわりのひとからかんしゃされそうなよかん！』',
                   '『なにを やっても うまくいきそう！』', '『いつもは しっぱいすることも、 きょうなら うまくいきそう！』', '『じぶんの とくいなことに うちこんでみよう！』', '『ひとのえがおに ふれると、 うんきがアップ！』', '『まわりへの おもいやりを、 いつもいじょうに だいじにしよう！』' ] },
-      { **cut_key(ar_key('占い',               0, 'すすむ'), 3), message: 'だそうだ！', **image_set("temp-TV2.png") },
+      { **cut_key(ar_key('占い',               0, 'つぎへ'), 3), message: 'だそうだ！', **image_set("temp-TV2.png") },
 
-      { **cut_key(ar_key('占い',               0, 'すすむ',    2)), message: '『ほんじつの あなたは そこそこラッキー！』', **image_set("temp-TV1.png") },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    2), 2), message: '『あんまり ふかく かんがえすぎず、 こうどうしよう！』', **image_set("temp-TV2.png"),
+      { **cut_key(ar_key('占い',               0, 'つぎへ',    2)), message: '『ほんじつの あなたは そこそこラッキー！』', **image_set("temp-TV1.png") },
+      { **cut_key(ar_key('占い',               0, 'つぎへ',    2), 2), message: '『あんまり ふかく かんがえすぎず、 こうどうしよう！』', **image_set("temp-TV2.png"),
       messages: [ '『あんまり ふかく かんがえすぎず、 こうどうしよう！』', '『ごぜんちゅうから、 かっぱつてきに こうどうしよう！』', '『あまいものを たべると、 いいことが あるかも！』', '『じぶんを かざらず、 すごしてみよう！』', '『コミュニケーションが じゅうような いちにちになりそう！』',
                   '『けんこうてきな いちにちを すごすのが ポイント！』', '『ちょうせんが うまくいきそうな よかん！』', '『じぶんの にがてなことに うちこんでみよう！』', '『たまには のんびりすごすのも いいかも！』', '『にんげんかんけいが うまくいきそう！』' ] },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    2), 3), message: 'だそうだ！', **image_set("temp-TV2.png") },
+      { **cut_key(ar_key('占い',               0, 'つぎへ',    2), 3), message: 'だそうだ！', **image_set("temp-TV2.png") },
 
-      { **cut_key(ar_key('占い',               0, 'すすむ',    3)), message: '『ほんじつの あなたは ちょっぴりラッキー！』', **image_set("temp-TV1.png") },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    3), 2), message: '『でも マンホールの うえには きをつけよう！』', **image_set("temp-TV1.png"),
+      { **cut_key(ar_key('占い',               0, 'つぎへ',    3)), message: '『ほんじつの あなたは ちょっぴりラッキー！』', **image_set("temp-TV1.png") },
+      { **cut_key(ar_key('占い',               0, 'つぎへ',    3), 2), message: '『でも マンホールの うえには きをつけよう！』', **image_set("temp-TV1.png"),
       messages: [ '『でも マンホールの うえには きをつけよう！』', '『みぎか ひだりだったら、 ひだりを えらぼう！』', '『みぎか ひだりだったら、 みぎを えらぼう！』', '『おとしよりに やさしくするのが ポイント！』', '『にがてなたべものを がんばってたべてみよう！』',
                   '『うんどうをすると いいことが あるかも？』', '『トイレは がまんしないほうが よさそう！』', '『せいじつなきもちを もっていれば、 いい いちにちになりそう！』', '『きょうは いそがしいかも しれないけど、 がんばってみよう！』', '『でも ひとのわるぐちを いうと、 うんきが ガクッとさがるよ！』',
                   '『ラッキーカラーは きいろ！』', '『ラッキーカラーは あお！』', '『ラッキーカラーは あか！』', '『ラッキーカラーは みどり！』', '『ニコニコすることを こころがけよう！』' ] },
-      { **cut_key(ar_key('占い',               0, 'すすむ',    3), 3), message: 'だそうだ！', **image_set("temp-TV1.png") },
+      { **cut_key(ar_key('占い',               0, 'つぎへ',    3), 3), message: 'だそうだ！', **image_set("temp-TV1.png") },
 
       { **cut_key(ar_key('タマモン',               0, 'みていいよ')), message: '〈たまご〉は よろこんでいる！',              **image_set("temp-TV4.png") },
       { **cut_key(ar_key('タマモン',               0, 'みさせてあげない')), message: 'しょぼん。',                              **image_set("temp-TV5.png") },
@@ -2237,10 +2237,10 @@ module Seeds
                   '〈たまご〉は ふってくるおちばを つかまえるのが すきらしい！', '〈たまご〉は ここにいると こころが おちつくようだ！', '〈たまご〉は またつれてきてねと いっている！', '〈たまご〉は せいめいの とうとさを かんじているようだ！' ] },
       { **cut_key(ar_key('紅葉',                   0, 'いかない')), message: 'しょぼん。',                    **image_set("temp-gakkari.png") },
 
-      { **cut_key(ar_key('年始',                   0, 'すすむ')), message: '〈たまご〉 「ににににに、 んにににー！」',                    **image_set("temp-nikoniko2.png") },
-      { **cut_key(ar_key('年始',                   0, 'すすむ'), 2), message: '〈たまご〉 「にににに、 ににににー！」',                     **image_set("temp-nikoniko2.png") },
-      { **cut_key(ar_key('年始',                   0, 'すすむ'), 3), message: 'あけましておめでとう！',                                 **image_set("temp-nikoniko2.png") },
-      { **cut_key(ar_key('年始',                   0, 'すすむ'), 4), message: 'ことしもよろしくね、 〈たまご〉！',                                   **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('年始',                   0, 'つぎへ')), message: '〈たまご〉 「ににににに、 んにににー！」',                    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('年始',                   0, 'つぎへ'), 2), message: '〈たまご〉 「にににに、 ににににー！」',                     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('年始',                   0, 'つぎへ'), 3), message: 'あけましておめでとう！',                                 **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('年始',                   0, 'つぎへ'), 4), message: 'ことしもよろしくね、 〈たまご〉！',                                   **image_set("temp-nikoniko2.png") },
 
       { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'そっとする')), message: '〈たまご〉は たのしそうに あそんでいる！',                **image_set("temp-building_blocks.png") },
       { **cut_key(ar_key('ブロックのおもちゃに夢中', 0, 'よしよしする')), message: '〈たまご〉は うれしそう！',                             **image_set("temp-building_blocks_nikoniko.png") },
@@ -2360,44 +2360,44 @@ module Seeds
       { **cut_key(ar_key('特訓',      0,  'ボールあそび')), message: 'とっくんは 3かい しっぱいするまで つづくぞ！', **image_set("temp-bikkuri.png") },
       { **cut_key(ar_key('特訓',      0,  'ボールあそび',    2)), message: 'この とっくんは 〈たまご〉には まだはやい！', **image_set("temp-gakkari.png") },
       { **cut_key(ar_key('特訓',      0,  'やっぱやめておく')), message: 'いや、 いまは やっぱやめておこう。',        **image_set("temp-normal.png") },
-      { **cut_key(ar_key('特訓',      1,  'すすむ')), message: 'けっかは・・・。',                      **image_set("temp-tukareta.png") },
+      { **cut_key(ar_key('特訓',      1,  'つぎへ')), message: 'けっかは・・・。',                      **image_set("temp-tukareta.png") },
 
-      { **cut_key(ar_key('イントロ',   0,  'すすむ')), message: 'あんたが・・・',                  **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 2), message: '〈ユーザー〉 だな！',               **image_set("temp-niwatori.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 3), message: 'これからよろしくな！',             **image_set("temp-niwatori.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   0,  'すすむ'), 4), message: 'おれは みてのとおり、 ヒヨコだ！',    **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   0,  'つぎへ')), message: 'あんたが・・・',                  **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   0,  'つぎへ'), 2), message: '〈ユーザー〉 だな！',               **image_set("temp-niwatori.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   0,  'つぎへ'), 3), message: 'これからよろしくな！',             **image_set("temp-niwatori.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   0,  'つぎへ'), 4), message: 'おれは みてのとおり、 ヒヨコだ！',    **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
 
       { **cut_key(ar_key('イントロ',   1,  'えっ？')), message: 'えっ・・・。',                      **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   1,  'まさか！')), message: 'なに・・・！？',                    **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   1,  'うーん')), message: 'こら、 うそでも かっこいいですと いえ！', **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   1,  'かっこいいです')), message: 'そうだろ？ うんうん！',               **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   2,  'すすむ')), message: 'きょうから あんたには、 この たまごと いっしょに くらしてもらうぞ！', **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   2,  'すすむ'), 2), message: 'なまえは たしか・・・。',                                     **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   2,  'つぎへ')), message: 'きょうから あんたには、 この たまごと いっしょに くらしてもらうぞ！', **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   2,  'つぎへ'), 2), message: 'なまえは たしか・・・。',                                     **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
 
       { **cut_key(ar_key('イントロ',   3,  'ちゃんをつけて！')), message: 'わかった わかった！',              **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   3,  'くんをつけて！')), message: 'わかった わかった！',              **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   3,  'さまをつけて！')), message: 'わかった わかった！',              **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   4,  'すすむ')), message: 'おなかが へっても なくし、 さびしくなっても なく！',                              **image_set("temp-hiyoko-tuyoimagao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 2), message: 'また よるは とうぜん ねむくなるし、 じかんたいによって こうどうパターンが かわるぞ。', **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 3), message: '〈たまご〉は あそびだしたり、 なにかに むちゅうに なると',                        **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 4), message: 'しばらく それにしか きょうみが なくなるが',                                     **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 5), message: 'そういうときは しばらく そっとしてやってくれ。じかんを あけて、 ようすを みてあげるんだ。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 6), message: 'あと おなじことを してあげても、 はんのうが そのときそのときで かわったりするから',   **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 7), message: 'まあ とにかくたくさん せっしてみてくれよな。',                                  **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 8), message: 'そうそう。',                                                               **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 9), message: 'これは 『LINEログイン』を りようしているばあいの はなしなんだが、 ',                **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 10), message: 'じつは 『LINE』をつうじて 〈たまご〉と おはなしすることが できるんだ！',            **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 11), message: '『せってい』がめんから 『LINEともだちついか』が できるから かくにん してみてくれよな。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 12), message: '『ごはんだよ！』と メッセージを おくると ごはんを あげられたり、 なにかと べんりだぞ。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 13), message: 'おっと、 いけねえ。',                                                        **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 14), message: 'このあと ちょっとよていが あるから、 オレは もういくな。',                         **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 15), message: '〈たまご〉 のこと、 だいじにしてくれよ！',                                      **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 16), message: 'いってしまった。',                                                          **image_set("temp-none.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 17), message: '〈たまご〉 の めんどう、 うまくみれるかな～。',                                   **image_set("temp-none.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 18), message: '・・・。',                                                                 **image_set("temp-none.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   4,  'すすむ'), 19), message: 'とりあえず、 まずは こえを かけてみよう。',                                     **image_set("temp-normal.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ')), message: 'おなかが へっても なくし、 さびしくなっても なく！',                              **image_set("temp-hiyoko-tuyoimagao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 2), message: 'また よるは とうぜん ねむくなるし、 じかんたいによって こうどうパターンが かわるぞ。', **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 3), message: '〈たまご〉は あそびだしたり、 なにかに むちゅうに なると',                        **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 4), message: 'しばらく それにしか きょうみが なくなるが',                                     **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 5), message: 'そういうときは しばらく そっとしてやってくれ。じかんを あけて、 ようすを みてあげるんだ。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 6), message: 'あと おなじことを してあげても、 はんのうが そのときそのときで かわったりするから',   **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 7), message: 'まあ とにかくたくさん せっしてみてくれよな。',                                  **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 8), message: 'そうそう。',                                                               **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 9), message: 'これは 『LINEログイン』を りようしているばあいの はなしなんだが、 ',                **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 10), message: 'じつは 『LINE』をつうじて 〈たまご〉と おはなしすることが できるんだ！',            **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 11), message: '『せってい』がめんから 『LINEともだちついか』が できるから かくにん してみてくれよな。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 12), message: '『ごはんだよ！』と メッセージを おくると ごはんを あげられたり、 なにかと べんりだぞ。', **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 13), message: 'おっと、 いけねえ。',                                                        **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 14), message: 'このあと ちょっとよていが あるから、 オレは もういくな。',                         **image_set("temp-hiyoko-magao.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 15), message: '〈たまご〉 のこと、 だいじにしてくれよ！',                                      **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 16), message: 'いってしまった。',                                                          **image_set("temp-none.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 17), message: '〈たまご〉 の めんどう、 うまくみれるかな～。',                                   **image_set("temp-none.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 18), message: '・・・。',                                                                 **image_set("temp-none.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 19), message: 'とりあえず、 まずは こえを かけてみよう。',                                     **image_set("temp-normal.png", "temp-in-house.png") },
 
       { **cut_key(ar_key('イントロ',   5,  'こんにちは！')), message: 'あ！ へんじ してくれなかった！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   5,  'なかよくしてね！')), message: 'あ！ へんじ してくれなかった！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
@@ -2413,10 +2413,10 @@ module Seeds
       { **cut_key(ar_key('イントロ',   7,  'よしよし'), 4), message: 'とにかく、 ちょっときょりが ちじまったきがする！',      **image_set("temp-nikoniko2.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   7,  'よしよし'), 5), message: 'これからよろしくね、 〈たまご〉！',                    **image_set("temp-nikoniko2.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('誕生日',     0,  'すすむ')), message: '〈たまご〉 「にににーに・・・」', **image_set("temp-maekagami.png") },
-      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 2), message: '〈たまご〉 「ににににー！！」', **image_set("temp-nikoniko2.png") },
-      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 3), message: 'あ！ 〈たまご〉が たんじょうびを いわってくれた！', **image_set("temp-nikoniko2.png") },
-      { **cut_key(ar_key('誕生日',     0,  'すすむ'), 4), message: '〈たまご〉 「ににににに、 んににに、 ににーに？」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     0,  'つぎへ')), message: '〈たまご〉 「にににーに・・・」', **image_set("temp-maekagami.png") },
+      { **cut_key(ar_key('誕生日',     0,  'つぎへ'), 2), message: '〈たまご〉 「ににににー！！」', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     0,  'つぎへ'), 3), message: 'あ！ 〈たまご〉が たんじょうびを いわってくれた！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('誕生日',     0,  'つぎへ'), 4), message: '〈たまご〉 「ににににに、 んににに、 ににーに？」', **image_set("temp-nikoniko2.png") },
 
       { **cut_key(ar_key('誕生日',     1,  'たのしくすごす！')), message: '〈たまご〉 「ににー！ にー、 にににーにんににーに！」', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('誕生日',     1,  'たのしくすごす！'), 2), message: 'ワクワクが いっぱいの いちねんになりますよう！',      **image_set("temp-nikoniko2.png") },

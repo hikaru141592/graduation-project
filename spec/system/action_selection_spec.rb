@@ -13,7 +13,7 @@ RSpec.describe 'ゲームプレイ画面 行動選択機能', type: :system, js:
         expect(page).to have_button(label, disabled: false)
 
         click_button label
-        expect(page).to have_selector('button', text: 'すすむ', count: 1)
+        expect(page).to have_selector('button', text: 'つぎへ', count: 1)
 
         ps = user.play_state.reload
         expect(ps.action_choices_position).to be_between(1, 4)
