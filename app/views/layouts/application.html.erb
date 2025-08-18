@@ -22,11 +22,24 @@
 
   </head>
 
-  <body>
+  <% login_page = (controller_name == 'sessions' && action_name == 'new') %>
+
+  <body class="<%= login_page ? 'fade-in' : '' %>">
     <% unless controller_name.in?(%w[games privacy_policies term settings line_notification_settings status delete_account]) %>
       <%= render 'shared/flash_message' %>
     <% end %>
     <%= yield %>
+
+    <script>
+      function fadeInIfNeeded() {
+        if (!document.body.classList.contains('fade-in')) return;
+        requestAnimationFrame(() => {
+          document.body.classList.add('show');
+        });
+      }
+      document.addEventListener('DOMContentLoaded', fadeInIfNeeded);
+      document.addEventListener('turbo:load',    fadeInIfNeeded);
+    </script>
   </body>
 
   <%= render 'shared/footer' %>
