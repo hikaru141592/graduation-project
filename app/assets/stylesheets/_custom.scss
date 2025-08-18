@@ -204,3 +204,18 @@ input.form-control[readonly] {
 .status-list .status-value {
   flex: 1;
 }
+
+body.fade-in::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #ffffff;
+  opacity: 1;
+  transition: opacity 1s ease-in;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+body.fade-in.show::before {
+  opacity: 0;
+}
