@@ -1,7 +1,7 @@
 <div class="container mt-3 text-center" data-controller="status">
   <div class="text-start mb-3">
-    <%= link_to "ログアウト", logout_path,
-        data: { turbo_method: :delete, turbo_confirm: "本当にログアウトしますか？" },
+    <%= link_to "またあとでね", logout_path,
+        data: { turbo_method: :delete, turbo_confirm: "いったんバイバイする？" },
         class: "btn btn-outline-secondary ms-md-5" %>
     <%= link_to "設定", settings_path,
         class: "btn btn-outline-secondary" %>
@@ -73,8 +73,8 @@
                     value: pos,
                     class: "btn btn-primary py-1 px-2" %>
               <% else %>
-                <button type="button" class="btn btn-primary py-1 px-2" disabled>
-                  <%= label.presence || "&nbsp;".html_safe %>
+                <button type="button" class="btn btn-primary py-1 px-2" disabled style="opacity: 0.5 !important;">
+                  <%= "&nbsp;".html_safe %>
                 </button>
               <% end %>
             <% end %>

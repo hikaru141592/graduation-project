@@ -13,7 +13,7 @@ RSpec.describe 'ログイン・ログアウト機能', type: :system do
     it '正しい認証情報でログインできる' do
       login(user)
       Capybara.assert_current_path root_path, ignore_query: true
-      expect(page).to have_link 'ログアウト'
+      expect(page).to have_link 'またあとでね'
     end
 
     it '誤った認証情報ではログインできずエラーメッセージが表示される' do
@@ -37,11 +37,11 @@ RSpec.describe 'ログイン・ログアウト機能', type: :system do
       expect(page).to have_current_path root_path, ignore_query: true
 
       # ② ログアウトリンクがあるか確認
-      expect(page).to have_link 'ログアウト'
+      expect(page).to have_link 'またあとでね'
 
       # ③ 確認ダイアログを承認しつつクリック
-      accept_confirm '本当にログアウトしますか？' do
-        click_link 'ログアウト'
+      accept_confirm 'いったんバイバイする？' do
+        click_link 'またあとでね'
       end
 
       # ④ ログアウト後の検証
