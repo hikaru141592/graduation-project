@@ -141,16 +141,6 @@ input.form-control[readonly] {
   }
 }
 
-@media (max-width: 767px) {
-  .login-banner {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw !important;
-    max-width: none !important;
-  }
-}
-
 .modal-content {
   background-color: $primary-btn-bg;
   color: #ffffff;
@@ -235,4 +225,19 @@ body.fade-in.show::before {
   opacity: 0;
   animation: slideDownFadeIn 1s ease-out forwards;
   animation-delay: 0.6s;
+}
+
+@media (max-width: 767px) {
+  @keyframes slideDownFadeInSp {
+    from { opacity: 0; transform: translate(-50%, -30px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+  }
+
+  .login-banner {
+    position: relative;
+    left: 50%;
+    width: 100vw !important;
+    max-width: none !important;
+    animation-name: slideDownFadeInSp;
+  }
 }
