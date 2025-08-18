@@ -263,280 +263,280 @@ module Seeds
         event_set_name:    '何か言っている',
         name:              '何か言っている',
         derivation_number: 0,
-        message:           '〈たまご〉がなにかいっているよ。',
+        message:           '〈たまご〉が なにか いっているよ。',
         **image_set("temp-normal.png")
       },
       {
         event_set_name:    '何かしたそう',
         name:              'べんきょうする',
         derivation_number: 1,
-        message:           'よし！なんのべんきょうをしよう？',
+        message:           'よし！ なんの べんきょうを しよう？',
         **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '何かしたそう',
         name:              '何かしたそう',
         derivation_number: 0,
-        message:           '〈たまご〉はなにかしたそうだ。',
+        message:           '〈たまご〉は なにか したそうだ。',
         **image_set("temp-normal.png")
       },
       {
         event_set_name:    '何かしたそう',
         name:              'ゲームさせてあげる？',
         derivation_number: 2,
-        message:           '（30ぷんかん、かまってもらえなくなるけどいい？）',
+        message:           '（30ぷんかん、 かまって もらえなくなるけど いい？）',
         **image_set("temp-normal.png")
       },
       {
         event_set_name:    'ボーっとしている',
         name:              'ボーっとしている',
         derivation_number: 0,
-        message:           '〈たまご〉はボーっとしている。',
+        message:           '〈たまご〉は ボーっと している。',
         **image_set("temp-hidariwomiru.png")
       },
       {
         event_set_name:    'ニコニコしている',
         name:              'ニコニコしている',
         derivation_number: 0,
-        message:           '〈たまご〉はニコニコしている。',
+        message:           '〈たまご〉は ニコニコしている。',
         **image_set("temp-suwatte-nikoniko.png")
       },
       {
         event_set_name:    'ゴロゴロしている',
         name:              'ゴロゴロしている',
         derivation_number: 0,
-        message:           '〈たまご〉はゴロゴロしている。',
+        message:           '〈たまご〉は ゴロゴロ している。',
         **image_set("temp-gorogoro.png")
       },
       {
         event_set_name:    '踊っている',
         name:              '踊っている',
         derivation_number: 0,
-        message:           '〈たまご〉はおどっている！',
+        message:           '〈たまご〉は おどっている！',
         **image_set("temp-dance.png")
       },
       {
         event_set_name:    '泣いている(空腹)',
         name:              '泣いている(空腹)',
         derivation_number: 0,
-        message:           '〈たまご〉がないている！',
+        message:           '〈たまご〉が ないている！',
         **image_set("temp-naku.png")
       },
       {
         event_set_name:    '泣いている(よしよし不足)',
         name:              '泣いている(よしよし不足)',
         derivation_number: 0,
-        message:           '〈たまご〉がないている！',
+        message:           '〈たまご〉が ないている！',
         **image_set("temp-naku.png")
       },
       {
         event_set_name:    '泣いている(ランダム)',
         name:              '泣いている(ランダム)',
         derivation_number: 0,
-        message:           '〈たまご〉がないている！',
+        message:           '〈たまご〉が ないている！',
         **image_set("temp-naku.png")
       },
       {
         event_set_name:    '怒っている',
         name:              '怒っている',
         derivation_number: 0,
-        message:           '〈たまご〉はおこっている！',
+        message:           '〈たまご〉は おこっている！',
         **image_set("temp-okoru.png")
       },
       {
         event_set_name:    '寝ている',
         name:              '寝ている',
         derivation_number: 0,
-        message:           '〈たまご〉はねている。',
+        message:           '〈たまご〉は ねている。',
         **image_set("temp-sleep.png")
       },
       {
         event_set_name:    'ブロックのおもちゃに夢中',
         name:              'ブロックのおもちゃに夢中',
         derivation_number: 0,
-        message:           '〈たまご〉はブロックのおもちゃにむちゅうだ。',
+        message:           '〈たまご〉は ブロックの おもちゃに むちゅうだ。',
         **image_set("temp-building_blocks.png")
       },
       {
         event_set_name:    'マンガに夢中',
         name:              'マンガに夢中',
         derivation_number: 0,
-        message:           '〈たまご〉はマンガをよんでいる。',
+        message:           '〈たまご〉は マンガを よんでいる。',
         **image_set("temp-comics.png")
       },
       {
         event_set_name:    '眠そう',
         name:              '眠そう',
         derivation_number: 0,
-        message:           '〈たまご〉はねむそうにしている。',
+        message:           '〈たまご〉は ねむそうに している。',
         **image_set("temp-sleepy.png")
       },
       {
         event_set_name:    '寝かせた',
         name:              '寝かせた',
         derivation_number: 0,
-        message:           '〈たまご〉はねている。',
+        message:           '〈たまご〉は ねている。',
         **image_set("temp-sleep.png")
       },
       {
         event_set_name:    '寝かせた',
         name:              '寝かせた（ゴミ箱なし）',
         derivation_number: 1,
-        message:           '〈たまご〉はねている。',
+        message:           '〈たまご〉は ねている。',
         **image_set("temp-sleep.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '寝起き',
         derivation_number: 0,
-        message:           '〈たまご〉がおきたようだ！',
+        message:           '〈たまご〉が おきたようだ！',
         **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '起こす、1回目の警告',
         derivation_number: 1,
-        message:           'おきにいりのハードロックミュージックでもかけっちゃおっかなー？',
+        message:           'おきにいりの ハードロック ミュージックでも かけっちゃおっかなー？',
         **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '起こす、2回目の警告',
         derivation_number: 2,
-        message:           'ほんとにかけるの？',
+        message:           'ほんとに かけるの？',
         **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '寝起き',
         name:              '起こす、3回目の警告',
         derivation_number: 3,
-        message:           'ほんとにいいんですね？',
+        message:           'ほんとに いいんですね？',
         **image_set("temp-wakeup.png")
       },
       {
         event_set_name:    '占い',
         name:              '占い',
         derivation_number: 0,
-        message:           'テレビでうらないをやってる！',
+        message:           'テレビで うらないを やってる！',
         **image_set("temp-TV1.png")
       },
       {
         event_set_name:    'タマモン',
         name:              'タマモンがやっている',
         derivation_number: 0,
-        message:           '〈たまご〉はタマモンがみたいらしい。どうする？',
+        message:           '〈たまご〉は タマモンが みたいらしい。 どうする？',
         **image_set("temp-TV3.png")
       },
       {
         event_set_name:    'タマモン',
         name:              'タマモンを見ている',
         derivation_number: 1,
-        message:           '〈たまご〉はタマモンをみている！',
+        message:           '〈たまご〉は タマモンを みている！',
         **image_set("temp-TV6.png")
       },
       {
         event_set_name:    'タマえもん',
         name:              'タマえもんがやっている',
         derivation_number: 0,
-        message:           '〈たまご〉はタマえもんがみたいらしい。どうする？',
+        message:           '〈たまご〉は タマえもんが みたいらしい。 どうする？',
         **image_set("temp-TV3.png")
       },
       {
         event_set_name:    'タマえもん',
         name:              'タマえもんを見ている',
         derivation_number: 1,
-        message:           '〈たまご〉はタマえもんをみている！',
+        message:           '〈たまご〉は タマえもんを みている！',
         **image_set("temp-TV6.png")
       },
       {
         event_set_name:    'ニワトリビアの湖',
         name:              'ニワトリビアの湖がやっている',
         derivation_number: 0,
-        message:           '〈たまご〉はニワトリビアのみずうみがみたいらしい。どうする？',
+        message:           '〈たまご〉は ニワトリビアの みずうみが みたいらしい。 どうする？',
         **image_set("temp-TV3.png")
       },
       {
         event_set_name:    'ニワトリビアの湖',
         name:              'ニワトリビアの湖を見ている',
         derivation_number: 1,
-        message:           '〈たまご〉はニワトリビアのみずうみをみている！',
+        message:           '〈たまご〉は ニワトリビアの みずうみを みている！',
         **image_set("temp-TV6.png")
       },
       {
         event_set_name:    '扇風機',
         name:              '扇風機',
         derivation_number: 0,
-        message:           '〈たまご〉はすずんでいる！',
+        message:           '〈たまご〉は すずんでいる！',
         **image_set("temp-senpuuki1.png")
       },
       {
         event_set_name:    'こたつ',
         name:              'こたつ',
         derivation_number: 0,
-        message:           '〈たまご〉はこたつでヌクヌクしている！',
+        message:           '〈たまご〉は こたつで ヌクヌク している！',
         **image_set("temp-kotatu1.png")
       },
       {
         event_set_name:    '花見',
         name:              '花見',
         derivation_number: 0,
-        message:           '〈たまご〉はおはなみにいきたいみたい。',
+        message:           '〈たまご〉は おはなみに いきたい みたい。',
         **image_set("temp-normal.png")
       },
       {
         event_set_name:    '紅葉',
         name:              '紅葉',
         derivation_number: 0,
-        message:           '〈たまご〉はコウヨウをみにいきたいみたい。',
+        message:           '〈たまご〉は コウヨウを みにいきたい みたい。',
         **image_set("temp-normal.png")
       },
       {
         event_set_name:    '年始',
         name:              '年始',
         derivation_number: 0,
-        message:           '〈たまご〉「にー！！」',
+        message:           'たまご 「にー！！」',
         **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '算数',
         name:              '出題前',
         derivation_number: 0,
-        message:           'よし、さんすうのもんだいにちょうせんだ！',
+        message:           'よし、 さんすうの もんだいに ちょうせんだ！',
         **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '算数',
         name:              '1つ目が正解',
         derivation_number: 1,
-        message:           '「X 演算子 Y」のこたえは？',
+        message:           '「X 演算子 Y」の こたえは？',
         **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    '算数',
         name:              '2つ目が正解',
         derivation_number: 2,
-        message:           '「X 演算子 Y」のこたえは？',
+        message:           '「X 演算子 Y」の こたえは？',
         **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    '算数',
         name:              '3つ目が正解',
         derivation_number: 3,
-        message:           '「X 演算子 Y」のこたえは？',
+        message:           '「X 演算子 Y」の こたえは？',
         **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    '算数',
         name:              '4つ目が正解',
         derivation_number: 4,
-        message:           '「X 演算子 Y」のこたえは？',
+        message:           '「X 演算子 Y」の こたえは？',
         **image_set("temp-kangaeru.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '投球前',
         derivation_number: 0,
-        message:           'ボールなげるよー！',
+        message:           'ボール なげるよー！',
         **image_set("temp-ball1.png")
       },
       {
@@ -550,28 +550,28 @@ module Seeds
         event_set_name:    'ボール遊び',
         name:              '左が成功',
         derivation_number: 2,
-        message:           'ボールをなげた！〈たまご〉、そっちだ！',
+        message:           '〈たまご〉、 そっちだ！',
         **image_set("temp-ball3.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '真ん中が成功',
         derivation_number: 3,
-        message:           '〈たまご〉、そっちだ！',
+        message:           '〈たまご〉、 そっちだ！',
         **image_set("temp-ball3.png")
       },
       {
         event_set_name:    'ボール遊び',
         name:              '右が成功',
         derivation_number: 4,
-        message:           '〈たまご〉、そっちだ！',
+        message:           '〈たまご〉、 そっちだ！',
         **image_set("temp-ball3.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓',
         derivation_number: 0,
-        message:           'なんのとっくんをしよう？',
+        message:           'なんの とっくんを しよう？',
         **image_set("temp-kangaeru.png")
       },
       {
@@ -585,42 +585,42 @@ module Seeds
         event_set_name:    '特訓',
         name:              '特訓結果優秀',
         derivation_number: 2,
-        message:           '20もんちゅう〈X〉もんせいかい！〈Y〉分〈Z〉秒クリア！すごいね！',
+        message:           '20もんちゅう 〈X〉もん せいかい！ 〈Y〉ふん 〈Z〉びょう クリア！ すごいね！',
         **image_set("temp-nikoniko.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓結果良し',
         derivation_number: 3,
-        message:           '20もんちゅう〈X〉もんせいかい！よくがんばったね！',
+        message:           '20もんちゅう 〈X〉もん せいかい！ よくがんばったね！',
         **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '特訓',
         name:              '特訓結果微妙',
         derivation_number: 4,
-        message:           '20もんちゅう〈X〉もんせいかい！またちょうせんしよう！',
+        message:           '20もんちゅう 〈X〉もん せいかい！ また ちょうせんしよう！',
         **image_set("temp-bimuyou.png")
       },
       {
         event_set_name:    '特訓',
         name:              'ボール遊び特訓結果良し',
         derivation_number: 5,
-        message:           '〈X〉かいせいこう！よくがんばったね！',
+        message:           '〈X〉かい せいこう！ よくがんばったね！',
         **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '特訓',
         name:              'ボール遊び特訓結果微妙',
         derivation_number: 6,
-        message:           '〈X〉かいせいこう！またちょうせんしよう！',
+        message:           '〈X〉かい せいこう！ また ちょうせんしよう！',
         **image_set("temp-bimuyou.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'イントロ開始',
         derivation_number: 0,
-        message:           'よくきた！まちくたびれたぞ！',
+        message:           'よくきた！ まちくたびれたぞ！',
         **image_set("temp-hiyoko-magao.png", "temp-in-house.png")
       },
       {
@@ -634,21 +634,21 @@ module Seeds
         event_set_name:    'イントロ',
         name:              'そんなことはさておき',
         derivation_number: 2,
-        message:           'まあ、そんなことはさておきだな。',
+        message:           'まあ、 そんなことは さておきだな。',
         **image_set("temp-hiyoko-nikoniko.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'たまごのなまえ',
         derivation_number: 3,
-        message:           '〈たまご〉、だったな！',
+        message:           '〈たまご〉、 だったな！',
         **image_set("temp-hiyoko-tamago-shokai.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              'たまごのかいせつ',
         derivation_number: 4,
-        message:           '〈たまご〉はとってもなきむしだ。',
+        message:           '〈たまご〉は とっても なきむしだ。',
         **image_set("temp-hiyoko-magao.png", "temp-in-house.png")
       },
       {
@@ -662,35 +662,35 @@ module Seeds
         event_set_name:    'イントロ',
         name:              '声かけ2回目',
         derivation_number: 6,
-        message:           'もういちどこえをかけてみよう！',
+        message:           'もういちど こえを かけてみよう！',
         **image_set("temp-normal.png", "temp-in-house.png")
       },
       {
         event_set_name:    'イントロ',
         name:              '声かけ3回目',
         derivation_number: 7,
-        message:           'ぜんぜんしゃべってくれない！',
+        message:           'ぜんぜん しゃべって くれない！',
         **image_set("temp-normal.png", "temp-in-house.png")
       },
       {
         event_set_name:    '誕生日',
         name:              '誕生日',
         derivation_number: 0,
-        message:           '〈たまご〉「にー！」',
+        message:           '〈たまご〉 「にー！」',
         **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    '誕生日',
         name:              'どういう一年にする？',
         derivation_number: 1,
-        message:           '「これからのいちねん、どうすごしたい？」ってきいてるよ。',
+        message:           '「これからの いちねん、 どうすごしたい？」 って きいてるよ。',
         **image_set("temp-nikoniko2.png")
       },
       {
         event_set_name:    'タマモンカート',
         name:              'タマモンカート',
         derivation_number: 0,
-        message:           '〈たまご〉はゲーム『タマモンカート』であそんでいる！',
+        message:           '〈たまご〉は ゲーム 『タマモンカート』で あそんでいる！',
         **image_set("temp-game-nikoniko.png")
       }
     ]
