@@ -59,6 +59,7 @@ module Seeds
       { name: '特訓',     description: '特訓',                                               loop_minutes: nil   },
       { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   },
       { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   }
+      { name: '質問',     description: '質問',                                                loop_minutes: 30   }
     ]
 
     categories.each do |attrs|
@@ -100,6 +101,7 @@ module Seeds
       { category_name: '特訓',      name: '特訓' },
       { category_name: '誕生日',     name: '誕生日' },
       { category_name: 'ゲーム',     name: 'タマモンカート' }
+      { category_name: '質問',       name: '元気ない？' }
     ]
 
     event_sets.each do |attrs|
@@ -127,7 +129,7 @@ module Seeds
       },
       {
         name: '踊っている',
-        trigger_conditions: and_(status("mood_value", ">=", 80))
+        trigger_conditions: and_(status("mood_value", "==", 100))
       },
       {
         name: 'ボーっとしている',
@@ -250,6 +252,13 @@ module Seeds
       {
         name: 'タマモンカート',
         trigger_conditions: prob_only(0)
+      },
+      {
+        name: '元気ない？',
+        daily_limit: 1,
+        trigger_conditions: and_(time_range(10, 30, 13, 30, [ off_fm(5, 193, 540), off_tm(5, 193, 540) ]), weekday([ 2, 4, 6 ]),
+                                 status("hunger_value", ">", 70), status("love_value", "==", 100), status("happiness_value", ">", 30),
+                                 status("mood_value", "==", 100))
       }
     ]
 
@@ -692,6 +701,20 @@ module Seeds
         derivation_number: 0,
         message:           '〈たまご〉は ゲーム 『タマモンカート』で あそんでいる！',
         **image_set("temp-game-nikoniko.png")
+      },
+      {
+        event_set_name:    '元気ない？',
+        name:              '元気ないのと聞いてくる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに？ ににーにー、 んにに？」',
+        **image_set("temp-tewoageru.png")
+      },
+      {
+        event_set_name:    '元気ない？',
+        name:              '元気ない？に対する返事',
+        derivation_number: 1,
+        message:           '『なんか げんきない？』と きかれている。',
+        **image_set("temp-normal.png")
       }
     ]
 
@@ -773,6 +796,9 @@ module Seeds
       s_l(set_deriv('誕生日')),
       { **set_deriv('誕生日', 1),               labels: [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ] },
       s_l(set_deriv('タマモンカート'), 'ながめている')
+      s_l(set_deriv('元気ない？')),
+      { **set_deriv('元気ない？', 1),           labels: [ 'そんなことないよ！', 'さいきんつかれてて', 'つらいことがあって', 'かなしいことがあって' ] },
+
     ]
 
     choices.each do |attrs|
@@ -2014,6 +2040,26 @@ module Seeds
       {
         **ar_key('タマモンカート', 0, 'ながめている', 2), trigger_conditions: always,
         effects: {}, **next_ev
+      },
+      {
+        **ar_key('元気ない？', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('元気ない？', 1, 'そんなことないよ！'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('元気ない？', 1, 'さいきんつかれてて'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('元気ない？', 1, 'つらいことがあって'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('元気ない？', 1, 'かなしいことがあって'), trigger_conditions: always,
+        effects: {}, **next_ev
       }
     ]
 
@@ -2441,7 +2487,53 @@ module Seeds
                   'ライバルに おいぬかれた！まけるなー', 'ふくざつな コースだ！ぶつからず はしれるか！？', '〈たまご〉は レースゲームにだいこうふん！', '〈たまご〉は レースゲームが だいすき！ おとなになったら、 ほんとの クルマものりたいね！', 'いいスタートだ！ はやいぞー！', 'レースゲームなのに コースに バナナのカワが おちている！ あぶないなあ！',
                   'いいドリフト！ かっこいいー！', 'いいカソク！ そのままおいぬけー！', 'げんざいトップだ！ ライバルを きりはなせ！', 'あー！ カートが カベにぶつかってる！！', 'はやいぞー！・・・って、 ぎゃくそうしてない！？', 'レースゲームといったら、 やっぱ タマモンカートだよね！' ] },
       { **cut_key(ar_key('タマモンカート', 0,  'ながめている',  2)), message: '〈たまご〉 「ににー！」',                          **image_set("temp-game-ochikomu.png"),
-      messages: [ 'あちゃー！ おいぬかれたー！', 'あー！ ビリじゃんー！', 'ライバルに こうげきされた！ あちゃー！', 'なかなか いいアイテムが でないようだ！', 'カートが スピンしちゃった！ あれれー！' ] }
+      messages: [ 'あちゃー！ おいぬかれたー！', 'あー！ ビリじゃんー！', 'ライバルに こうげきされた！ あちゃー！', 'なかなか いいアイテムが でないようだ！', 'カートが スピンしちゃった！ あれれー！' ] },
+
+      { **cut_key(ar_key('元気ない？', 1, 'そんなことないよ！')), message: '〈たまご〉 「ににににー？」',                      **image_set("temp-sounanokanaa.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'そんなことないよ！'), 2), message: '〈たまご〉 「にに、 にーに！」',                 **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'そんなことないよ！'), 3), message: '〈たまご〉は あんしんしたようだ！',              **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'そんなことないよ！'), 4), message: 'しんぱい してくれて ありがとうね！',             **image_set("temp-nikoniko2.png") },
+
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて')),     message: '〈たまご〉 「ににに、 んにににー・・・。」',                **image_set("temp-kanasii.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 2),  message: '〈たまご〉 「にー・・・。」',                              **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 3),  message: '〈たまご〉 「にに！」',                                   **image_set("temp-yaruki.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 4),  message: '？？？',                                                **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 5),  message: 'バタバタ バタバタ',                                      **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 6),  message: '〈たまご〉 「にー！」',                                   **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 7),  message: 'あ！ おにぎり！ 〈たまご〉が つくったの！？',               **image_set("temp-onigiri.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 8),  message: 'これたべて げんきだして ってこと？',                        **image_set("temp-nikoniko3.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 9),  message: '〈たまご〉 「んにー！」',                                 **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 10), message: 'ありがとう！ 〈たまご〉の つくった おにぎりいただくね！',    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 11), message: 'たべてみると、 おにぎりは しおと さとうを まちがえたものだった。', **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 12), message: 'でも、 おいしかった。 ごちそうさま。',                      **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'さいきんつかれてて'), 13), message: 'げんきが わいてきた きがする！。',                          **image_set("temp-none.png") },
+
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって')),     message: '〈たまご〉 「ににに、 んにににー・・・。」',                **image_set("temp-kanasii.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 2),  message: '〈たまご〉 「・・・。」',                                 **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 3),  message: '〈たまご〉 「ににー！」',                                **image_set("temp-tewoageru.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 4),  message: '？？？',                                                **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 5),  message: '・・・。',                                              **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 6),  message: '〈たまご〉 「にー！」',                                   **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 7),  message: 'ん？ おはなだ！ これくれるの？',                          **image_set("temp-flower.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 8),  message: 'きれいで めずらしい おはな！ 〈たまご〉が みつけてきて くれたみたい！', **image_set("temp-flower.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 9),  message: '〈たまご〉 「にー！ ににー！」',                          **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 10), message: 'ありがとう！',                                          **image_set("temp-none.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'つらいことがあって'), 11), message: 'なんだか、 きもちが かるくなった きがする！。',            **image_set("temp-none.png") },
+
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって')),     message: '〈たまご〉 「ににに、 にーににー・・・。」',                **image_set("temp-kanasii.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 2),  message: '〈たまご〉 「んにに・・・。」',                            **image_set("temp-ochikomu.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 3),  message: '〈たまご〉 「・・・。」',                                 **image_set("temp-kanasii.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 4),  message: '〈たまご〉 「にーににー・・・、」',                        **image_set("temp-inai-inai.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 5),  message: '〈たまご〉 「にー！」',                                  **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 6),  message: '！！',                                                  **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 7),  message: '〈たまご〉 「にーににー・・・、」',                        **image_set("temp-inai-inai.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 8),  message: '〈たまご〉 「にー！」',                                  **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 9),  message: '〈たまご〉が なんとか げんきづけようと してくれてる。',      **image_set("temp-nikoniko3.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 10),  message: 'そうだ、いつまでも おちこんでちゃ だめだよね。',            **image_set("temp-komattakao.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 11),  message: 'だいじょうぶ、 ちょっとずつまえを むけそうな きがするよ！',  **image_set("temp-normal.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 12),  message: 'ありがとうね、 〈たまご〉！',                             **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 13),  message: '〈たまご〉 「にー！」',                                   **image_set("temp-nikoniko.png") }
+
     ]
 
     cuts.each do |attrs|
