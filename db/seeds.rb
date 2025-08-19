@@ -58,8 +58,9 @@ module Seeds
       { name: 'ボール遊び', description: 'ボール遊び',                                        loop_minutes: nil   },
       { name: '特訓',     description: '特訓',                                               loop_minutes: nil   },
       { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   },
-      { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   }
-      { name: '質問',     description: '質問',                                                loop_minutes: 30   }
+      { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   },
+      { name: '質問',     description: '質問',                                                loop_minutes: nil  },
+      { name: 'マニュアル', description: 'マニュアル',                                         loop_minutes: nil  }
     ]
 
     categories.each do |attrs|
@@ -100,8 +101,9 @@ module Seeds
       { category_name: 'ボール遊び', name: 'ボール遊び' },
       { category_name: '特訓',      name: '特訓' },
       { category_name: '誕生日',     name: '誕生日' },
-      { category_name: 'ゲーム',     name: 'タマモンカート' }
-      { category_name: '質問',       name: '元気ない？' }
+      { category_name: 'ゲーム',     name: 'タマモンカート' },
+      { category_name: '質問',       name: '元気ない？' },
+      { category_name: 'マニュアル',  name: 'マニュアル' }
     ]
 
     event_sets.each do |attrs|
@@ -259,6 +261,10 @@ module Seeds
         trigger_conditions: and_(time_range(10, 30, 13, 30, [ off_fm(5, 193, 540), off_tm(5, 193, 540) ]), weekday([ 2, 4, 6 ]),
                                  status("hunger_value", ">", 70), status("love_value", "==", 100), status("happiness_value", ">", 30),
                                  status("mood_value", "==", 100))
+      },
+      {
+        name: 'マニュアル',
+        trigger_conditions: prob_only(0)
       }
     ]
 
@@ -715,6 +721,48 @@ module Seeds
         derivation_number: 1,
         message:           '『なんか げんきない？』と きかれている。',
         **image_set("temp-normal.png")
+      },
+      {
+        event_set_name:    'マニュアル',
+        name:              'マニュアルを手に取る',
+        derivation_number: 0,
+        message:           'ノートだ。 〈たまご〉について いろいろ まとめられている みたい。',
+        **image_set("temp-manual.png")
+      },
+      {
+        event_set_name:    'マニュアル',
+        name:              'マニュアル1ページ目',
+        derivation_number: 1,
+        message:           'なにについて よむ？',
+        **image_set("temp-manual.png")
+      },
+      {
+        event_set_name:    'マニュアル',
+        name:              'マニュアル2ページ目',
+        derivation_number: 2,
+        message:           'なにについて よむ？',
+        **image_set("temp-manual.png")
+      },
+      {
+        event_set_name:    'マニュアル',
+        name:              'マニュアル3ページ目',
+        derivation_number: 3,
+        message:           'なにについて よむ？',
+        **image_set("temp-manual.png")
+      },
+      {
+        event_set_name:    'マニュアル',
+        name:              'マニュアル4ページ目',
+        derivation_number: 4,
+        message:           'なにについて よむ？',
+        **image_set("temp-manual.png")
+      },
+      {
+        event_set_name:    'マニュアル',
+        name:              'マニュアル5ページ目',
+        derivation_number: 5,
+        message:           'なにについて よむ？',
+        **image_set("temp-manual.png")
       }
     ]
 
@@ -735,9 +783,9 @@ module Seeds
       { **set_deriv('何か言っている'),          labels: [ 'はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる' ] },
       { **set_deriv('何かしたそう'),            labels: [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ] },
       { **set_deriv('何かしたそう', 2),         labels: [ 'ゲームさせてあげる',   'やっぱやめよう' ] },
-      { **set_deriv('ボーっとしている'),        labels: [ 'ながめている',   'こえをかける' ] },
-      s_l(set_deriv('ニコニコしている'), 'ながめている'),
-      s_l(set_deriv('ゴロゴロしている'), 'ながめている'),
+      { **set_deriv('ボーっとしている'),        labels: [ 'ながめている',   'こえをかける', 'タンスのうえのノートをみる' ] },
+      { **set_deriv('ニコニコしている'),        labels: [ 'ながめている', 'タンスのうえのノートをみる' ] },
+      { **set_deriv('ゴロゴロしている'),        labels: [ 'ながめている', 'タンスのうえのノートをみる' ] },
       { **set_deriv('何かしたそう', 1),         labels: [ 'さんすう',   'こくご',   'りか',     'しゃかい' ] },
       { **set_deriv('踊っている'),              labels: [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる' ] },
       { **set_deriv('泣いている(空腹)'),        labels: [ 'よしよしする',       'おやつをあげる',   'ごはんをあげる',   'あそんであげる' ] },
@@ -795,10 +843,16 @@ module Seeds
 
       s_l(set_deriv('誕生日')),
       { **set_deriv('誕生日', 1),               labels: [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ] },
-      s_l(set_deriv('タマモンカート'), 'ながめている')
+      s_l(set_deriv('タマモンカート'), 'ながめている'),
       s_l(set_deriv('元気ない？')),
       { **set_deriv('元気ない？', 1),           labels: [ 'そんなことないよ！', 'さいきんつかれてて', 'つらいことがあって', 'かなしいことがあって' ] },
 
+      s_l(set_deriv('マニュアル')),
+      { **set_deriv('マニュアル', 1),           labels: [ 'ごはん',             'よしよし',             'ほか',                  'よむのをやめる' ] },
+      { **set_deriv('マニュアル', 2),           labels: [ 'ボールあそび',       'べんきょう',            'おえかき',              'ほか' ] },
+      { **set_deriv('マニュアル', 3),           labels: [ 'ゲーム',             'なつきぐあい',          'なくことについて',       'ほか' ] },
+      { **set_deriv('マニュアル', 4),           labels: [ 'おこることについて',  'なにかにむちゅうなとき', 'すいみん',               'ほか' ] },
+      { **set_deriv('マニュアル', 5),           labels: [ 'すきなテレビ',       'きせつによって',         'はなしをきいてあげると',  'ほか'  ] }
     ]
 
     choices.each do |attrs|
@@ -1038,16 +1092,31 @@ module Seeds
         effects: {}, **next_ev
       },
       {
+        **ar_key('ボーっとしている', 0, 'タンスのうえのノートをみる'),
+        trigger_conditions: always,
+        effects: {}, **next_ev(call: 'マニュアル')
+      },
+      {
         **ar_key('ニコニコしている', 0, 'ながめている'),
         trigger_conditions:    always,
         effects:               {},
         **next_ev
       },
       {
+        **ar_key('ニコニコしている', 0, 'タンスのうえのノートをみる'),
+        trigger_conditions: always,
+        effects: {}, **next_ev(call: 'マニュアル')
+      },
+      {
         **ar_key('ゴロゴロしている', 0, 'ながめている'),
         trigger_conditions:    always,
         effects:               {},
         **next_ev
+      },
+      {
+        **ar_key('ゴロゴロしている', 0, 'タンスのうえのノートをみる'),
+        trigger_conditions: always,
+        effects: {}, **next_ev(call: 'マニュアル')
       },
       {
         **ar_key('踊っている', 0, 'よしよしする'),
@@ -2060,6 +2129,90 @@ module Seeds
       {
         **ar_key('元気ない？', 1, 'かなしいことがあって'), trigger_conditions: always,
         effects: {}, **next_ev
+      },
+      {
+        **ar_key('マニュアル', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 1, 'ごはん'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 1, 'よしよし'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 1, 'ほか'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 2)
+      },
+      {
+        **ar_key('マニュアル', 1, 'よむのをやめる'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('マニュアル', 2, 'ボールあそび'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 2, 'べんきょう'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 2, 'おえかき'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 2, 'ほか'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 3)
+      },
+      {
+        **ar_key('マニュアル', 3, 'ゲーム'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 3, 'なつきぐあい'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 3, 'なくことについて'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 3, 'ほか'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 4)
+      },
+      {
+        **ar_key('マニュアル', 4, 'おこることについて'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 4, 'なにかにむちゅうなとき'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 4, 'すいみん'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 4, 'ほか'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 5)
+      },
+      {
+        **ar_key('マニュアル', 5, 'すきなテレビ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 5, 'きせつによって'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 5, 'はなしをきいてあげると'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('マニュアル', 5, 'ほか'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
       }
     ]
 
@@ -2532,8 +2685,90 @@ module Seeds
       { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 10),  message: 'そうだ、いつまでも おちこんでちゃ だめだよね。',            **image_set("temp-komattakao.png") },
       { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 11),  message: 'だいじょうぶ、 ちょっとずつまえを むけそうな きがするよ！',  **image_set("temp-normal.png") },
       { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 12),  message: 'ありがとうね、 〈たまご〉！',                             **image_set("temp-nikoniko2.png") },
-      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 13),  message: '〈たまご〉 「にー！」',                                   **image_set("temp-nikoniko.png") }
+      { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 13),  message: '〈たまご〉 「にー！」',                                   **image_set("temp-nikoniko.png") },
 
+      { **cut_key(ar_key('マニュアル', 1, 'ごはん')),                  message: '〈たまご〉は じかんがたつと おなかがへるよ。',                 **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 2),               message: 'おなかがへると ないちゃうから、ていきてきに ごはんをあげよう。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 3),               message: 'また、 ごはんを いっぱいあげると たいりょくが つくよ。',        **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 4),               message: 'いっぽうで おやつは たいりょくが つかないが、',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 5),               message: 'おやつのほうが よろこぶので バランスがだいじ。',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 6),               message: 'ちなみに ごはんは LINEからも あげることが できるので、',        **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 7),               message: 'いそがしいときは LINEで あげてもいいね。 LINEれんけいは せっていがめん から。', **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 1, 'よしよし')),                message: '〈たまご〉は さびしくなると ないてしまうので、',                   **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'よしよし'), 2),             message: 'ていきてきに よしよし しよう。',                                  **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'よしよし'), 3),             message: 'ちなみに 〈たまご〉は いろんな たいけんを つうじて あなたになつくが、', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'よしよし'), 4),             message: 'きほんは よしよし してくれるひとを このむぞ。',                    **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'よしよし'), 5),             message: 'LINEからも よしよし することが できるので、',                      **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'よしよし'), 6),             message: 'いそがしいときは LINEで よしよしも あり。LINEれんけいは せっていがめんから。', **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 1, 'よむのをやめる')),           message: '〈ユーザー〉は ノートを とじた！',                               **image_set("temp-none.png") },
+
+      { **cut_key(ar_key('マニュアル', 2, 'ボールあそび')),             message: '〈たまご〉は ボールあそびが だいすき。',                          **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'ボールあそび'), 2),          message: 'うまく しじをだすと ボールを キャッチしてくれるよ。',              **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'ボールあそび'), 3),          message: 'しじが ちょっとずれても なんとか キャッチしてくれるかも。',         **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'ボールあそび'), 4),          message: 'うんどうしんけいが どれだけ よくなったかは ステータスがめんで かくにんできるよ。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'ボールあそび'), 5),          message: 'ちなみに れんぞくで あそびつづけると つかれちゃうよ。',             **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう')),              message: 'べんきょうは だいじ。',                                  **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 2),           message: 'さんすうは けいさんもんだいに ちょうせん できるよ。',       **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 3),           message: 'こくごは どくしょで べんきょう。',                         **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 4),           message: 'むずかしい ほんにも ちょうせん してもらおう。',             **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 5),           message: 'りかは じっけんを おこなうよ。',                           **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 6),           message: 'せいこう するために、しっぱいを くりかえそう。',            **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 7),           message: 'しゃかいは きょうかしょを よむけど、',                     **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 8),           message: 'なぜか いつも ふしぎなげんしょうが おきる。',               **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 9),           message: 'でもそれが がくしゅういよくの こうじょうに つながることも。',  **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 10),          message: 'べんきょうが どれだけ とくいなったかは ステータスがめんで かくにんできるよ。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 11),          message: 'ちなみに れんぞくで べんきょうしつづけると つかれちゃうよ。', **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 2, 'おえかき')),                message: '〈たまご〉は おえかきが だいすき。',                 **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'おえかき'), 2),             message: 'いろんな えを かかせてあげよう。',                   **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'おえかき'), 3),             message: 'もしかしたら かくれたさいのうが ばくはつするかも？',   **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 3, 'ゲーム')),                  message: 'ゲームは 30ぷんと じかんをきめて あそばせてあげよう。',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'ゲーム'), 2),               message: 'そのあいだ 〈たまご〉は むちゅうになるから、',                        **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'ゲーム'), 3),               message: 'じっさいに 30ぷんかん、 かまって もらえなくなるけど',                  **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'ゲーム'), 4),               message: 'ゲームをさせてあげると とてもよろこぶから、 ぜひ あそばせてあげよう。',  **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'ゲーム'), 5),               message: 'そばで みていてもいいし、 『またあとで』と してもよし。',               **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 3, 'なつきぐあい')),            message: '〈たまご〉は いろんなたいけんを つうじて あなたになつくが、',   **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'なつきぐあい'), 2),         message: 'きほんは よしよし してくれるひとを このむぞ。',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'なつきぐあい'), 3),         message: 'あとは おやつをあげたり、 ゲームで あそばせて あげるのもいい。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'なつきぐあい'), 4),         message: 'ちなみに いじわるをすると、 いっきに きょりが できてしまうぞ。', **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 3, 'なくことについて')),         message: 'おなかが へったり、 さびしく なったりすると ないてしまうよ。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'なくことについて'), 2),      message: 'ていきてきに ごはんを あげたり よしよし しよう。',            **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'なくことについて'), 3),      message: 'ほかのりゆうで なくことも あるけどね。',                     **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 4, 'おこることについて')),       message: '〈たまご〉に いじわるを すると おこってしまうよ。',                   **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'おこることについて'), 2),    message: 'あやまったり すれば ゆるしてくれるかも しれないけど、',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'おこることについて'), 3),    message: 'いじわるの ないように よっては、いっきに きょりを おかれてしまうので、', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'おこることについて'), 4),    message: 'ぜったいに いじわるはしないこと。',                                   **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 4, 'なにかにむちゅうなとき')),    message: '〈たまご〉は あそびだしたり マンガを よみだしたりすると、',     **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'なにかにむちゅうなとき'), 2), message: 'しばらく むちゅうになって、 かまって くれなくなるよ。',         **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'なにかにむちゅうなとき'), 3), message: 'でも そういうときは じゃまを しないであげようね。',            **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'なにかにむちゅうなとき'), 4), message: '『またあとで』で そばを はなれても オッケー。',                **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 4, 'すいみん')),                message: 'よるになると ねむくなるし、 おそくなると かってにねるよ。',         **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'すいみん'), 2),             message: 'でも あなたが ねかせてあげると とてもよろこぶよ。',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'すいみん'), 3),             message: 'まあ、 なかなか ねてくれなかったり するんだけどね。',              **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 5, 'すきなテレビ')),            message: '〈たまご〉は きまった ようびのよるに、 すきな テレビばんぐみが あるよ。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'すきなテレビ'), 2),         message: 'なんようび だったか わすれたけど、 せっきょくてきに みせてあげてね。',    **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'すきなテレビ'), 3),         message: 'そのあいだ 〈たまご〉は むちゅうに なるから、',                        **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'すきなテレビ'), 4),         message: '『またあとで』で そばをはなれても オッケー。',                         **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'すきなテレビ'), 5),         message: 'あと まいあさ テレビで うらないを みるのが すきらしいよ。',             **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: '〈たまご〉は きせつを かんじることが だいすき。',     **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: 'ふゆは こたつで ミカンを たべるのが すきみたい。',    **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: 'きせつを かんじると いつもいじょうに よろこぶので、',  **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: 'いろんな たいけんを させてあげよう。',                **image_set("temp-manual.png") },
+
+      { **cut_key(ar_key('マニュアル', 5, 'はなしをきいてあげると')),     message: '〈たまご〉は おはなしを きいてもらうのが だいすき。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'はなしをきいてあげると'), 1),  message: 'たわいもない はなしが たいていだけど、',             **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'はなしをきいてあげると'), 2),  message: 'まじめな そうだんを してくることも あるかも？',       **image_set("temp-manual.png") }
     ]
 
     cuts.each do |attrs|
