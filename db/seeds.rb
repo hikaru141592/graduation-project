@@ -960,14 +960,20 @@ module Seeds
       {
         **ar_key('何かしたそう', 0, 'おえかきする', 5),
         trigger_conditions:    always,
-        effects:               {},
+        effects:               effects_status([ "art_value", 100 ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 0, 'ゲームする'),
-        trigger_conditions:    always,
+        trigger_conditions:    and_(status("sports_value", ">=", 2), status("vitality", ">=", 153)),
         effects:               {},
         **next_ev(deriv: 2)
+      },
+      {
+        **ar_key('何かしたそう', 0, 'ゲームする', 2),
+        trigger_conditions:    always,
+        effects:               {},
+        **next_ev
       },
       {
         **ar_key('何かしたそう', 2, 'ゲームさせてあげる'),
@@ -2264,6 +2270,7 @@ module Seeds
       { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       4), 1), message: 'おえかきをした！ ん！？ なに かいてんだー！',            **image_set("temp-ewokaita4.png") },
       { **cut_key(ar_key('何かしたそう', 0, 'おえかきする',       5), 1), message: 'おえかきをした！ ん！？ てんさい てきだーーー！！！',     **image_set("temp-ewokaita5.png") },
       { **cut_key(ar_key('何かしたそう', 0, 'ゲームする',         1), 1), message: 'テレビゲームで あそばせて あげよっかな！',              **image_set("temp-normal.png") },
+      { **cut_key(ar_key('何かしたそう', 0, 'ゲームする',         2), 1), message: 'いや、 まずは ほかのことを やらせてあげよう！',          **image_set("temp-normal.png") },
       { **cut_key(ar_key('何かしたそう', 2, 'ゲームさせてあげる',  1), 1), message: 'テレビゲームで あそんでいいよ！ 30ぷんかんね！',         **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 2, 'やっぱやめよう',     1), 1), message: 'やっぱゲームは またこんどかな！',                      **image_set("temp-okoru.png") },
 
