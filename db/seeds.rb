@@ -995,13 +995,13 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 1, 'こくご'),
-        trigger_conditions:    prob_only(5),
+        trigger_conditions:    prob_only(10),
         effects:               effects_status([ "japanese", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'こくご', 2),
-        trigger_conditions:    prob_only(20),
+        trigger_conditions:    prob_only(30),
         effects:               effects_status([ "japanese", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
@@ -1013,13 +1013,13 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 1, 'りか'),
-        trigger_conditions:    prob_only(5),
+        trigger_conditions:    prob_only(10),
         effects:               effects_status([ "science", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか', 2),
-        trigger_conditions:    prob_only(20),
+        trigger_conditions:    prob_only(30),
         effects:               effects_status([ "science", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
@@ -1031,13 +1031,13 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい'),
-        trigger_conditions:    prob_only(5),
+        trigger_conditions:    prob_only(10),
         effects:               effects_status([ "social_studies", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい', 2),
-        trigger_conditions:    prob_only(20),
+        trigger_conditions:    prob_only(30),
         effects:               effects_status([ "social_studies", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
@@ -2276,7 +2276,9 @@ module Seeds
 
       { **cut_key(ar_key('何かしたそう', 1, 'こくご')), message: 'こくごの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 2), message: '・・・。',                   **image_set("temp-study.png") },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 3), message: '〈たまご〉は シェイクスピアの さくひんを よんだ！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 3), message: '〈たまご〉は シェイクスピアの さくひんを よんだ！', **image_set("temp-nikoniko2.png"),
+      messages: [ '〈たまご〉は シェイクスピアの さくひんを よんだ！', '〈たまご〉は こくごじてんを まるあんき した！', '〈たまご〉は ドストエフスキーの さくひんを よんだ！',
+                  '〈たまご〉は エドガー・アラン・ポーの さくひんを よんだ！', '〈たまご〉は なつめそうせきの 『こころ』を よんだ！' ] },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2)), message: 'こくごの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 2), message: '・・・。',                   **image_set("temp-study.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 3), message: '〈たまご〉は 「はしれメロス」を よんだ！', **image_set("temp-nikoniko2.png") },
@@ -2287,7 +2289,9 @@ module Seeds
 
       { **cut_key(ar_key('何かしたそう', 1, 'りか')), message: 'りかの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'りか'), 2), message: '・・・。',                   **image_set("temp-rika.png") },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 3), message: '〈たまご〉は ふろうふしに なれる クスリを つくった！', **image_set("temp-rika2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 3), message: '〈たまご〉は ふろうふしに なれる クスリを つくった！', **image_set("temp-rika2.png"),
+      messages: [ '〈たまご〉は ふろうふしに なれる クスリを つくった！', '〈たまご〉は じかんを さかのぼれる ジュースを つくった！', '〈たまご〉は なにを たべても チョコの あじになる クスリを つくった！',
+                  '〈たまご〉は ぜんしんが とうめいになる クスリを つくった！', '〈たまご〉は じぶんの みらいが みえる ジュースを つくった！', '〈たまご〉は ぜったい にげられない カレーの においの クスリを つくった！' ] },
       { **cut_key(ar_key('何かしたそう', 1, 'りか', 2)), message: 'りかの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 2), message: '・・・。',                   **image_set("temp-rika.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 3), message: '！！！',                     **image_set("temp-rika3.png") },
@@ -2298,7 +2302,9 @@ module Seeds
 
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい')), message: 'しゃかいの べんきょうを しよう！',                           **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 2), message: '・・・。',                                               **image_set("temp-study.png") },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 3), message: 'すっごい ゆうめいな ブショウが タイムスリップ してきた！ すご！！', **image_set("temp-busyou3.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 3), message: 'すっごい ゆうめいな ブショウが タイムスリップ してきた！ すご！！', **image_set("temp-busyou3.png"),
+      messages: [ 'すっごい ゆうめいな ブショウが タイムスリップ してきた！ すご！！', 'でんせつの ブショウが タイムスリップして 〈たまご〉に あいにきた！ なんで！？', '〈たまご〉の あこがれの ブショウが タイムスリップ してきた！ サイン！ サイン！',
+                  'すっごい つよい ブショウが タイムスリップして げんだいを しんりゃくしにきた！ どうしよう！', 'すっごい いだいな ブショウが タイムスリップ してきた！ しゃしん とっていい！？' ] },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2)), message: 'しゃかいの べんきょうを しよう！',                           **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 2), message: '・・・。',                                               **image_set("temp-study.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 3), message: 'なまえを きいたこと あるような ないような ブショウが タイムスリップ してきた！', **image_set("temp-busyou2.png") },
