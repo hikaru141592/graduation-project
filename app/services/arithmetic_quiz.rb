@@ -3,11 +3,11 @@ class ArithmeticQuiz
     rng = seed ? Random.new(seed.to_i) : Random.new
     operator = [ :+, :* ][rng.rand(0..1)]
     if operator == :+
-      x = rng.rand(101..999)
+      x = rng.rand(11..99)
       y = rng.rand(11..99)
     else
       x = rng.rand(11..99)
-      y = rng.rand(2..19)
+      y = rng.rand(2..9)
     end
     question_text = "#{x} #{operator_symbol(operator)} #{y}"
     result = x.public_send(operator, y)

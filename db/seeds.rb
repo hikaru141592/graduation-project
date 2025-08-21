@@ -848,11 +848,11 @@ module Seeds
       { **set_deriv('元気ない？', 1),           labels: [ 'そんなことないよ！', 'さいきんつかれてて', 'つらいことがあって', 'かなしいことがあって' ] },
 
       s_l(set_deriv('マニュアル')),
-      { **set_deriv('マニュアル', 1),           labels: [ 'ごはん',             'よしよし',             'ほか',                  'よむのをやめる' ] },
-      { **set_deriv('マニュアル', 2),           labels: [ 'ボールあそび',       'べんきょう',            'おえかき',              'ほか' ] },
-      { **set_deriv('マニュアル', 3),           labels: [ 'ゲーム',             'なつきぐあい',          'なくことについて',       'ほか' ] },
-      { **set_deriv('マニュアル', 4),           labels: [ 'おこることについて',  'なにかにむちゅうなとき', 'すいみん',               'ほか' ] },
-      { **set_deriv('マニュアル', 5),           labels: [ 'すきなテレビ',       'きせつによって',         'はなしをきいてあげると',  'ほか'  ] }
+      { **set_deriv('マニュアル', 1),           labels: [ 'よむのをやめる',       'ごはん',                'よしよし',                 'ほか' ] },
+      { **set_deriv('マニュアル', 2),           labels: [ 'ボールあそび',         'べんきょう',            'おえかき',                 'ほか' ] },
+      { **set_deriv('マニュアル', 3),           labels: [ 'ゲーム',               'なつきぐあい',          'どういうときなく？',        'ほか' ] },
+      { **set_deriv('マニュアル', 4),           labels: [ 'どういうときおこる？',  'なにかにむちゅうなとき', 'すいみん',                 'ほか' ] },
+      { **set_deriv('マニュアル', 5),           labels: [ 'すきなテレビ',         'きせつによって',         'はなしをきいてあげると',    'ほか'  ] }
     ]
 
     choices.each do |attrs|
@@ -965,7 +965,7 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 0, 'ゲームする'),
-        trigger_conditions:    and_(status("sports_value", ">=", 2), status("vitality", ">=", 153)),
+        trigger_conditions:    and_(status("sports_value", ">=", 1), status("vitality", ">=", 153)),
         effects:               {},
         **next_ev(deriv: 2)
       },
@@ -995,13 +995,13 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 1, 'こくご'),
-        trigger_conditions:    prob_only(5),
+        trigger_conditions:    prob_only(10),
         effects:               effects_status([ "japanese", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'こくご', 2),
-        trigger_conditions:    prob_only(20),
+        trigger_conditions:    prob_only(30),
         effects:               effects_status([ "japanese", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
@@ -1013,13 +1013,13 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 1, 'りか'),
-        trigger_conditions:    prob_only(5),
+        trigger_conditions:    prob_only(10),
         effects:               effects_status([ "science", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'りか', 2),
-        trigger_conditions:    prob_only(20),
+        trigger_conditions:    prob_only(30),
         effects:               effects_status([ "science", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
@@ -1031,13 +1031,13 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい'),
-        trigger_conditions:    prob_only(5),
+        trigger_conditions:    prob_only(10),
         effects:               effects_status([ "social_studies", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
       {
         **ar_key('何かしたそう', 1, 'しゃかい', 2),
-        trigger_conditions:    prob_only(20),
+        trigger_conditions:    prob_only(30),
         effects:               effects_status([ "social_studies", 1 ], [ "temp_vitality", -VITALITY_UNIT ]),
         **next_ev
       },
@@ -2181,7 +2181,7 @@ module Seeds
         effects: {}, **next_ev(deriv: 1)
       },
       {
-        **ar_key('マニュアル', 3, 'なくことについて'), trigger_conditions: always,
+        **ar_key('マニュアル', 3, 'どういうときなく？'), trigger_conditions: always,
         effects: {}, **next_ev(deriv: 1)
       },
       {
@@ -2189,7 +2189,7 @@ module Seeds
         effects: {}, **next_ev(deriv: 4)
       },
       {
-        **ar_key('マニュアル', 4, 'おこることについて'), trigger_conditions: always,
+        **ar_key('マニュアル', 4, 'どういうときおこる？'), trigger_conditions: always,
         effects: {}, **next_ev(deriv: 1)
       },
       {
@@ -2276,7 +2276,9 @@ module Seeds
 
       { **cut_key(ar_key('何かしたそう', 1, 'こくご')), message: 'こくごの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 2), message: '・・・。',                   **image_set("temp-study.png") },
-      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 3), message: '〈たまご〉は シェイクスピアの さくひんを よんだ！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'こくご'), 3), message: '〈たまご〉は シェイクスピアの さくひんを よんだ！', **image_set("temp-nikoniko2.png"),
+      messages: [ '〈たまご〉は シェイクスピアの さくひんを よんだ！', '〈たまご〉は こくごじてんを まるあんき した！', '〈たまご〉は ドストエフスキーの さくひんを よんだ！',
+                  '〈たまご〉は エドガー・アラン・ポーの さくひんを よんだ！', '〈たまご〉は なつめそうせきの 『こころ』を よんだ！' ] },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2)), message: 'こくごの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 2), message: '・・・。',                   **image_set("temp-study.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'こくご', 2), 3), message: '〈たまご〉は 「はしれメロス」を よんだ！', **image_set("temp-nikoniko2.png") },
@@ -2287,7 +2289,9 @@ module Seeds
 
       { **cut_key(ar_key('何かしたそう', 1, 'りか')), message: 'りかの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'りか'), 2), message: '・・・。',                   **image_set("temp-rika.png") },
-      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 3), message: '〈たまご〉は ふろうふしに なれる クスリを つくった！', **image_set("temp-rika2.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'りか'), 3), message: '〈たまご〉は ふろうふしに なれる クスリを つくった！', **image_set("temp-rika2.png"),
+      messages: [ '〈たまご〉は ふろうふしに なれる クスリを つくった！', '〈たまご〉は じかんを さかのぼれる ジュースを つくった！', '〈たまご〉は なにを たべても チョコの あじになる クスリを つくった！',
+                  '〈たまご〉は ぜんしんが とうめいになる クスリを つくった！', '〈たまご〉は じぶんの みらいが みえる ジュースを つくった！', '〈たまご〉は ぜったい にげられない カレーの においの クスリを つくった！' ] },
       { **cut_key(ar_key('何かしたそう', 1, 'りか', 2)), message: 'りかの べんきょうを しよう！', **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 2), message: '・・・。',                   **image_set("temp-rika.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'りか', 2), 3), message: '！！！',                     **image_set("temp-rika3.png") },
@@ -2298,7 +2302,9 @@ module Seeds
 
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい')), message: 'しゃかいの べんきょうを しよう！',                           **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 2), message: '・・・。',                                               **image_set("temp-study.png") },
-      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 3), message: 'すっごい ゆうめいな ブショウが タイムスリップ してきた！ すご！！', **image_set("temp-busyou3.png") },
+      { **cut_key(ar_key('何かしたそう', 1, 'しゃかい'), 3), message: 'すっごい ゆうめいな ブショウが タイムスリップ してきた！ すご！！', **image_set("temp-busyou3.png"),
+      messages: [ 'すっごい ゆうめいな ブショウが タイムスリップ してきた！ すご！！', 'でんせつの ブショウが タイムスリップして 〈たまご〉に あいにきた！ なんで！？', '〈たまご〉の あこがれの ブショウが タイムスリップ してきた！ サイン！ サイン！',
+                  'すっごい つよい ブショウが タイムスリップして げんだいを しんりゃくしにきた！ どうしよう！', 'すっごい いだいな ブショウが タイムスリップ してきた！ しゃしん とっていい！？' ] },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2)), message: 'しゃかいの べんきょうを しよう！',                           **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 2), message: '・・・。',                                               **image_set("temp-study.png") },
       { **cut_key(ar_key('何かしたそう', 1, 'しゃかい', 2), 3), message: 'なまえを きいたこと あるような ないような ブショウが タイムスリップ してきた！', **image_set("temp-busyou2.png") },
@@ -2709,7 +2715,7 @@ module Seeds
       { **cut_key(ar_key('マニュアル', 1, 'よしよし'), 5),             message: 'LINEからも よしよし することが できるので、',                      **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 1, 'よしよし'), 6),             message: 'いそがしいときは LINEで よしよしも あり。LINEれんけいは せっていがめんから。', **image_set("temp-manual.png") },
 
-      { **cut_key(ar_key('マニュアル', 1, 'よむのをやめる')),           message: '〈ユーザー〉は ノートを とじた！',                               **image_set("temp-none.png") },
+      { **cut_key(ar_key('マニュアル', 1, 'よむのをやめる')),           message: '〈ユーザー〉は ノートを とじた！',                               **image_set("temp-manual.png") },
 
       { **cut_key(ar_key('マニュアル', 2, 'ボールあそび')),             message: '〈たまご〉は ボールあそびが だいすき。',                          **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 2, 'ボールあそび'), 2),          message: 'うまく しじをだすと ボールを キャッチしてくれるよ。',              **image_set("temp-manual.png") },
@@ -2726,12 +2732,13 @@ module Seeds
       { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 7),           message: 'しゃかいは きょうかしょを よむけど、',                     **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 8),           message: 'なぜか いつも ふしぎなげんしょうが おきる。',               **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 9),           message: 'でもそれが がくしゅういよくの こうじょうに つながることも。',  **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 10),          message: 'べんきょうが どれだけ とくいなったかは ステータスがめんで かくにんできるよ。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 10),          message: 'べんきょうが どれだけ とくいになったかは ステータスがめんで かくにんできるよ。', **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 2, 'べんきょう'), 11),          message: 'ちなみに れんぞくで べんきょうしつづけると つかれちゃうよ。', **image_set("temp-manual.png") },
 
       { **cut_key(ar_key('マニュアル', 2, 'おえかき')),                message: '〈たまご〉は おえかきが だいすき。',                 **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 2, 'おえかき'), 2),             message: 'いろんな えを かかせてあげよう。',                   **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 2, 'おえかき'), 3),             message: 'もしかしたら かくれたさいのうが ばくはつするかも？',   **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 2, 'おえかき'), 4),             message: 'ちなみに おえかきは れんぞくでしても つかれないよ。',  **image_set("temp-manual.png") },
 
       { **cut_key(ar_key('マニュアル', 3, 'ゲーム')),                  message: 'ゲームは 30ぷんと じかんをきめて あそばせてあげよう。',                **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 3, 'ゲーム'), 2),               message: 'そのあいだ 〈たまご〉は むちゅうになるから、',                        **image_set("temp-manual.png") },
@@ -2744,14 +2751,14 @@ module Seeds
       { **cut_key(ar_key('マニュアル', 3, 'なつきぐあい'), 3),         message: 'あとは おやつをあげたり、 ゲームで あそばせて あげるのもいい。', **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 3, 'なつきぐあい'), 4),         message: 'ちなみに いじわるをすると、 いっきに きょりが できてしまうぞ。', **image_set("temp-manual.png") },
 
-      { **cut_key(ar_key('マニュアル', 3, 'なくことについて')),         message: 'おなかが へったり、 さびしく なったりすると ないてしまうよ。', **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 3, 'なくことについて'), 2),      message: 'ていきてきに ごはんを あげたり よしよし しよう。',            **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 3, 'なくことについて'), 3),      message: 'ほかのりゆうで なくことも あるけどね。',                     **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'どういうときなく？')),         message: 'おなかが へったり、 さびしく なったりすると ないてしまうよ。', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'どういうときなく？'), 2),      message: 'ていきてきに ごはんを あげたり よしよし しよう。',            **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 3, 'どういうときなく？'), 3),      message: 'ほかのりゆうで なくことも あるけどね。',                     **image_set("temp-manual.png") },
 
-      { **cut_key(ar_key('マニュアル', 4, 'おこることについて')),       message: '〈たまご〉に いじわるを すると おこってしまうよ。',                   **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 4, 'おこることについて'), 2),    message: 'あやまったり すれば ゆるしてくれるかも しれないけど、',                **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 4, 'おこることについて'), 3),    message: 'いじわるの ないように よっては、いっきに きょりを おかれてしまうので、', **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 4, 'おこることについて'), 4),    message: 'ぜったいに いじわるはしないこと。',                                   **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'どういうときおこる？')),       message: '〈たまご〉に いじわるを すると おこってしまうよ。',                   **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'どういうときおこる？'), 2),    message: 'あやまったり すれば ゆるしてくれるかも しれないけど、',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'どういうときおこる？'), 3),    message: 'いじわるの ないように よっては、いっきに きょりを おかれてしまうので、', **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 4, 'どういうときおこる？'), 4),    message: 'ぜったいに いじわるはしないこと。',                                   **image_set("temp-manual.png") },
 
       { **cut_key(ar_key('マニュアル', 4, 'なにかにむちゅうなとき')),    message: '〈たまご〉は あそびだしたり マンガを よみだしたりすると、',     **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 4, 'なにかにむちゅうなとき'), 2), message: 'しばらく むちゅうになって、 かまって くれなくなるよ。',         **image_set("temp-manual.png") },
@@ -2769,9 +2776,9 @@ module Seeds
       { **cut_key(ar_key('マニュアル', 5, 'すきなテレビ'), 5),         message: 'あと まいあさ テレビで うらないを みるのが すきらしいよ。',             **image_set("temp-manual.png") },
 
       { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: '〈たまご〉は きせつを かんじることが だいすき。',     **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: 'ふゆは こたつで ミカンを たべるのが すきみたい。',    **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: 'きせつを かんじると いつもいじょうに よろこぶので、',  **image_set("temp-manual.png") },
-      { **cut_key(ar_key('マニュアル', 5, 'きせつによって')),        message: 'いろんな たいけんを させてあげよう。',                **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'きせつによって'), 2),        message: 'ふゆは こたつで ミカンを たべるのが すきみたい。',    **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'きせつによって'), 3),        message: 'きせつを かんじると いつもいじょうに よろこぶので、',  **image_set("temp-manual.png") },
+      { **cut_key(ar_key('マニュアル', 5, 'きせつによって'), 4),        message: 'いろんな たいけんを させてあげよう。',                **image_set("temp-manual.png") },
 
       { **cut_key(ar_key('マニュアル', 5, 'はなしをきいてあげると')),     message: '〈たまご〉は おはなしを きいてもらうのが だいすき。', **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 5, 'はなしをきいてあげると'), 1),  message: 'たわいもない はなしが たいていだけど、',             **image_set("temp-manual.png") },
