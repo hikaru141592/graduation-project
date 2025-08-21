@@ -965,7 +965,7 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 0, 'ゲームする'),
-        trigger_conditions:    and_(status("sports_value", ">=", 2), status("vitality", ">=", 153)),
+        trigger_conditions:    and_(status("sports_value", ">=", 1), status("vitality", ">=", 153)),
         effects:               {},
         **next_ev(deriv: 2)
       },
