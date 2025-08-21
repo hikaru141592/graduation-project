@@ -242,3 +242,19 @@ body.fade-in.show::before {
     animation-name: slideDownFadeInSp;
   }
 }
+
+.logo-anim {
+  opacity: 0;
+  animation: slideDownFadeIn 2.0s ease-out forwards;
+  animation-delay: 1.6s;
+}
+
+@media (max-width: 767px) {
+  @keyframes slideDownFadeInOnlyY {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .logo-anim {
+    animation-name: slideDownFadeInOnlyY;
+  }
+}
