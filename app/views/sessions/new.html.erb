@@ -1,17 +1,25 @@
 <% content_for :head do %>
   <%= preload_link_tag asset_path("main/login.png"), as: "image", type: "image/png" %>
+  <%= preload_link_tag asset_path("main/login-logo.png"), as: "image", type: "image/png" %>
 <% end %>
 
 <% content_for :title, 'ログイン' %>
 
 <div class="container mt-0 mt-md-5">
   <div class="row gx-4 justify-content-center align-items-md-center">
-    <div class="col-12 mt-4 mt-md-0 col-md-6 mb-0 mb-md-3 me-md-5 mt-md-4">
+    <div class="col-12 mt-4 mt-md-0 col-md-6 mb-0 mb-md-3 me-md-5 mt-md-4" style="position: relative;">
       <%= image_tag "main/login.png",
         alt: "ログインバナー",
         class: "img-fluid mb-4 login-banner",
         width: 1114, height: 707,
-        loading: "eager", decoding: "async", fetchpriority: "high" %>
+        loading: "eager", decoding: "async", fetchpriority: "high",
+        style: "z-index: 0;" %>
+      <%= image_tag "main/login-logo.png",
+        alt: "ログインバナー",
+        class: "img-fluid mb-4 logo-anim",
+        width: 1114, height: 707,
+        loading: "eager", decoding: "async", fetchpriority: "high",
+        style: "z-index: 1; position: absolute; top: 0; left: 0;"%>
     </div>
 
     <div class="col-12 col-md-3 mt-md-3">
