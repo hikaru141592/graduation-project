@@ -20,6 +20,17 @@
     <%= stylesheet_link_tag 'application', 'data-turbo-track': 'reload' %>
     <%= javascript_importmap_tags %>
 
+    <%= csp_meta_tag %>
+      <style nonce="<%= content_security_policy_nonce %>">
+      @font-face {
+        font-family: "Yomogi";
+        src: url("<%= asset_path 'Yomogi-Regular.ttf' %>") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      </style>
+
   </head>
 
   <% login_page = (controller_name == 'sessions' && action_name == 'new') %>

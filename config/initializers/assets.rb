@@ -9,3 +9,5 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap
 Rails.application.config.assets.paths << Rails.root.join("node_modules/bootstrap/dist/js")
 Rails.application.config.assets.precompile << "bootstrap.bundle.min.js"
 Rails.application.config.assets.paths << Rails.root.join("app/assets/images")
+Rails.application.config.assets.paths << Rails.root.join("app/assets/fonts")
+Rails.application.config.assets.precompile += %w( .svg .eot .woff .ttf .woff2 )
