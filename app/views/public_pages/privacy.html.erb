@@ -2,7 +2,7 @@
 
 <section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 800px;">
   <div class="text-start mb-3">
-    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-outline-secondary mb-0' %>
+    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-outline-secondary mb-0', data: { turbo: false } %>
   </div>
 
   <h3 class="mb-4">プライバシーポリシー</h3>

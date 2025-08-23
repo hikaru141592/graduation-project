@@ -2,7 +2,7 @@
 
 <section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 800px;">
   <div class="text-start mb-3">
-    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-outline-secondary mb-0' %>
+    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-outline-secondary mb-0', data: { turbo: false } %>
   </div>
 
   <div class="container-fluid px-0">
@@ -54,6 +54,6 @@
   </ul>
 
   <div class="text-center">
-    <%= link_to "ゲームをはじめる", login_path, class: "btn btn-primary" %>
+    <%= link_to "ゲームをはじめる", login_path, class: "btn btn-primary", data: { turbo: false } %>
   </div>
 </section>
