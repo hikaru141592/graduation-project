@@ -2785,6 +2785,7 @@ module Seeds
       { **cut_key(ar_key('マニュアル', 5, 'はなしをきいてあげると'), 2),  message: 'まじめな そうだんを してくることも あるかも？',       **image_set("temp-manual.png") }
     ]
 
+    kept_cut_ids ||= []
     cuts.each do |attrs|
       set    = EventSet.find_by!(name: attrs[:event_set_name])
       event  = Event.find_by!(event_set: set, derivation_number: attrs[:derivation_number])
@@ -2793,13 +2794,15 @@ module Seeds
 
       cut = Cut.find_or_initialize_by(action_result: result, position: attrs[:position])
       cut.message          = attrs[:message]
-      if attrs[:messages].present?
-        cut.messages = attrs[:messages]
-      end
+      cut.messages         = Array(attrs[:messages] || [])
       cut.character_image  = attrs[:character_image]
       cut.background_image = attrs[:background_image]
       cut.save!
+
+      kept_cut_ids << cut.id
     end
+    raise "kept_cut_idsが空です。削除処理を中断します。" if kept_cut_ids.blank?
+    Cut.where.not(id: kept_cut_ids).delete_all
 
     User.find_each do |user|
       UserStatus.find_or_create_by!(user: user) do |status|
