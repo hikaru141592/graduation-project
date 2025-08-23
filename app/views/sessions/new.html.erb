@@ -47,7 +47,7 @@
         </div>
       <% end %>
 
-      <div class="d-grid mb-3">
+      <div class="d-grid mb-2">
         <button
           type="submit"
           form="login-form"
@@ -59,6 +59,9 @@
         >
           LINEでログイン
         </button>
+      </div>
+      <div class="text-center">
+        <%= link_to 'このゲームについて', about_path, class: 'btn btn-link' %>
       </div>
       <div class="text-center">
         <%= link_to '新規登録はこちら',

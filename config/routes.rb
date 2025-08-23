@@ -9,8 +9,9 @@ Rails.application.routes.draw do
   post "games/select_action", to: "games#select_action", as: "select_action"
   post "games/advance_cut",   to: "games#advance_cut",   as: "advance_cut"
 
-  get "/privacy_policy", to: "privacy_policies#show", as: :privacy_policy
-  get "/term", to: "term#show", as: :term
+  get "/privacy_policy", to: "public_pages#privacy", as: :privacy_policy
+  get "/term",           to: "public_pages#term",    as: :term
+  get "/about",          to: "public_pages#about",   as: :about
 
   get  "/password_resets/new",     to: "password_resets#new",    as: "new_password_reset"
   post "/password_resets",         to: "password_resets#create", as: "password_resets"

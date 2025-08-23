@@ -1,0 +1,59 @@
+<% content_for :title, 'このゲームについて' %>
+
+<section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 800px;">
+  <div class="text-start mb-3">
+    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-outline-secondary mb-0' %>
+  </div>
+
+  <div class="container-fluid px-0">
+    <div class="row g-0">
+      <div class="col-3">
+        <%= image_tag "character/mewosorasu.png", style: "width:120%; margin-left:-10%; height:auto;" %>
+      </div>
+      <div class="col-3">
+        <%= image_tag "character/onigiri.png", style: "width:120%; margin-left:-10%; height:auto;" %>
+      </div>
+      <div class="col-3">
+        <%= image_tag "character/okoru.png", style: "width:120%; margin-left:-10%; height:auto;" %>
+      </div>
+      <div class="col-3">
+        <%= image_tag "character/game-nikoniko.png", style: "width:120%; margin-left:-10%; height:auto;" %>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-bottom:0.4em;">このゲームについて</h3>
+  <p style="line-height:2.7; margin-bottom:1.6em;">
+    『ニワトリとタマゴのワクワク生活（ライフ）』はあなたの毎日の生活にちょっとした触れ合いを与えてくれるゲームです。</p>
+  <p style="line-height:2.7; margin-bottom:1.6em;">
+    たまごは実際の時間の中で暮らしています。夜は眠り、朝は目覚め、お腹もすきます。<br>
+    ふとしたときに気軽に会いに行けて、小さな幸せ、楽しみ、優しさ、笑いを共有します。
+  </p>
+  <p style="line-height:2.7; margin-bottom:1.6em;">
+    子どもから大人まで、誰もが安心して楽しめるよう設計しています。<br>
+  </p>
+
+  <h3 style="margin-bottom:0.4em;">ゲームの特徴</h3>
+  <ul style="line-height: 2.7;">
+    <li>
+      <strong>簡単なボタン操作</strong><br>
+      4つのボタンから行動を選ぶだけ。小さなお子さまやご年配の方でも安心です。
+    </li>
+    <li>
+      <strong>気軽にちょこっと遊べる</strong><br>
+      1〜3分の短い時間で楽しめます。思い立ったときにいつでも遊べます。
+    </li>
+    <li>
+      <strong>時間と季節による変化</strong><br>
+      時間や季節によってたまごの様子が変わります。
+    </li>
+    <li>
+      <strong>その他</strong><br>
+      広告や課金はありません。安心して遊べます。
+    </li>
+  </ul>
+
+  <div class="text-center">
+    <%= link_to "ゲームをはじめる", login_path, class: "btn btn-primary" %>
+  </div>
+</section>
