@@ -2,7 +2,7 @@
 
 <section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 1200px;>
   <div class="text-start mb-3">
-    <%= link_to 'もどる', (settings_path), class: 'btn btn-outline-secondary mb-3' %>
+    <%= link_to 'もどる', (settings_path), class: 'btn btn-2 mb-3' %>
   </div>
 
   <h3 class="mb-4">LINEメッセージ機能</h3>
@@ -27,7 +27,7 @@
     <%= button_to(current_user.line_notifications_enabled? ? '通知をOFFにする' : '通知をONにする',
                   settings_line_notification_path(user: { line_notifications_enabled: !current_user.line_notifications_enabled?}),
                   method: :patch,
-                  class: 'btn btn-primary',
+                  class: 'btn btn-1',
                   style: 'width: 180px;') %>
     <% if current_user.line_notifications_enabled? %>
       <span class="text-primary ms-1 fw-bold">（現在ON）</span>

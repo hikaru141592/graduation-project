@@ -2,11 +2,11 @@
   <div class="text-start mb-3">
     <%= link_to "またあとでね", logout_path,
         data: { turbo_method: :delete, turbo_confirm: "いったんバイバイする？" },
-        class: "btn btn-outline-secondary ms-md-5" %>
+        class: "btn btn-2 ms-md-5" %>
     <%= link_to "設定", settings_path,
-        class: "btn btn-outline-secondary" %>
+        class: "btn btn-2" %>
     <button type="button"
-            class="btn btn-outline-secondary"
+            class="btn btn-2"
             data-action="click->status#open"
             data-bs-toggle="modal"
             data-bs-target="#statusModal">
@@ -71,9 +71,9 @@
                     type:  "submit",
                     name:  "position",
                     value: pos,
-                    class: "btn btn-primary btn-large-text btn-lg py-1 px-2" %>
+                    class: "btn btn-1 btn-large-text btn-lg py-1 px-2" %>
               <% else %>
-                <button type="button" class="btn btn-primary btn-large-text btn-lg py-1 px-2" disabled style="opacity: 0.5 !important;">
+                <button type="button" class="btn btn-1 btn-large-text btn-lg py-1 px-2" disabled style="opacity: 0.5 !important;">
                   <%= "&nbsp;".html_safe %>
                 </button>
               <% end %>
