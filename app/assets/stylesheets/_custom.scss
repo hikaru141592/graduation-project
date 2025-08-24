@@ -10,13 +10,15 @@ body,
   color: #333 !important;
   padding: 1rem;
   border-radius: 0.5rem;
-  font-size: 1rem;
+  font-size: 1.125rem;
   border: none !important;
   box-shadow: 0 4px 1px rgba(0, 0, 0, 0.4);
 
   white-space: normal;
   word-break: keep-all;
   line-break: strict;
+
+  min-height: 80px;
 }
 @media (min-width: 768px) {
   .message-box {
@@ -31,6 +33,12 @@ body,
   padding: 0.375rem !important;
   border-radius: 0.5rem !important;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+}
+
+.btn-primary:hover {
+  background-color: lighten($primary-btn-color, 10%) !important;
+  color: #222222 !important;
+  border-color: lighten($alt-btn-bg, 10%) !important;
 }
 
 .container {
@@ -261,4 +269,27 @@ body.fade-in.show::before {
 
 body {
   font-family: "Yomogi", system-ui;
+}
+
+.alert {
+  padding: 0.25rem 1.5rem;
+  font-size: 0.85rem;
+  border-radius: 0px;
+  margin-bottom: 1rem;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.alert-danger {
+  background-color: rgb(255, 211, 211);
+  color: #774045;
+}
+
+.alert-success {
+  background-color: rgb(204, 234, 232);
+  color: #356158;
+}
+
+.btn-primary.btn-large-text {
+  font-size: 1.08rem;
 }

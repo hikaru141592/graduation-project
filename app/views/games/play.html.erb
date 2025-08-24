@@ -47,7 +47,7 @@
         </div>
         <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
           <%= hidden_field_tag :state_timestamp, @play_state.updated_at.iso8601 %>
-          <div class="d-grid gap-2 mx-auto mt-2 mt-md-4" style="width: 70%;">
+          <div class="d-grid gap-2 mx-auto mt-2 mt-md-4" style="width: 80%;">
             <% 4.times do |i| %>
               <% pos   = i + 1 %>
               <% label =
@@ -71,9 +71,9 @@
                     type:  "submit",
                     name:  "position",
                     value: pos,
-                    class: "btn btn-primary py-1 px-2" %>
+                    class: "btn btn-primary btn-large-text btn-lg py-1 px-2" %>
               <% else %>
-                <button type="button" class="btn btn-primary py-1 px-2" disabled style="opacity: 0.5 !important;">
+                <button type="button" class="btn btn-primary btn-large-text btn-lg py-1 px-2" disabled style="opacity: 0.5 !important;">
                   <%= "&nbsp;".html_safe %>
                 </button>
               <% end %>
