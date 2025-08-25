@@ -1,9 +1,9 @@
-body,
-.bg-light {
-  background-color: $body-bg-color !important;
-  color: $body-color !important;
-}
+$btn-2-bg: #FBE5D6 !default;
 
+body {
+  background-color: #FEF5E5 !important;
+  color: $body-color #000000;
+}
 
 .message-box {
   background-color: rgba(255, 255, 255, 0.75) !important;
@@ -29,15 +29,32 @@ body,
 .btn-1 {
   background-color: #333333 !important;
   color: #ffffff !important;
-  border: none !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
 }
 
 .btn-1:hover {
   background-color: lighten(#f2f2f2, 10%) !important;
   color: #222222 !important;
-  border-color: lighten($btn-2-bg, 10%) !important;
+}
+
+.btn-2 {
+  background-color: $btn-2-bg !important;
+  color: #222222 !important;
+}
+
+.btn-2:hover {
+  background-color: lighten($btn-2-bg, 10%) !important;
+}
+
+.btn {
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  border: none !important;
+}
+
+.btn-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: #363322 !important;
 }
 
 .container {
@@ -56,10 +73,6 @@ footer {
   color: lighten($body-color, 30%);
   margin-top: 2rem;
   padding-bottom: 1.5rem;
-}
-
-.btn-lg {
-  border-radius: 0.5rem;
 }
 
 input.form-control {
@@ -85,24 +98,6 @@ textarea.form-control:focus {
   background-color: #ffffff !important;
   border-color: #333333 !important;
   box-shadow: 0 0 0 0.15rem rgba(51, 51, 51, 0.25) !important;
-}
-
-.btn-2 {
-  background-color: $btn-2-bg !important;
-  color: #222222 !important;
-  border: none !important;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.btn-success,
-.btn-danger {
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.btn-2:hover {
-  background-color: lighten($btn-2-bg, 10%) !important;
-  color: #222222 !important;
-  border-color: lighten($btn-2-bg, 10%) !important;
 }
 
 input.form-control[disabled],
