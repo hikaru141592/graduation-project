@@ -1,15 +1,15 @@
 <% content_for :title, 'パスワード再発行' %>
 
 <div class="container mt-5" >
-  <div class="mb-3 ms-md-5">
-    <%= link_to 'もどる', login_path, class: 'btn btn-outline-secondary' %>
-  </div>
   <div class="row gx-4 justify-content-center align-items-md-center">
     <div class="col-12 col-md-6 mb-0 me-md-5">
+      <div class="mb-3">
+        <%= link_to 'もどる', login_path, class: 'btn btn-2', data: { turbo: false } %>
+      </div>
       <%= image_tag( "main/password_reset_new.png", alt: "パスワードリセット", class: "img-fluid mb-4" ) %>
     </div>
     <div class="col-12 col-md-3">
-      <h1 class="mb-4">パスワード再発行</h1>
+      <h2 class="mb-4">パスワード再発行</h2>
 
       <%= form_with url: password_resets_path, local: true, html: { class: 'needs-validation' } do |f| %>
         <div class="mb-3">
@@ -18,7 +18,7 @@
         </div>
 
         <div class="d-grid mb-3">
-          <%= f.submit '再発行の申請', class: 'btn btn-alt btn-lg' %>
+          <%= f.submit '再発行の申請', class: 'btn btn-2 btn-lg', data: { turbo: false } %>
         </div>
       <% end %>
     </div>

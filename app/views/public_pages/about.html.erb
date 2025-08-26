@@ -2,7 +2,7 @@
 
 <section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 800px;">
   <div class="text-start mb-3">
-    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-outline-secondary mb-0' %>
+    <%= link_to 'もどる', (request.referer || root_path), class: 'btn btn-2 mb-0', data: { turbo: false } %>
   </div>
 
   <div class="container-fluid px-0">
@@ -26,7 +26,7 @@
   <p style="line-height:2.7; margin-bottom:1.6em;">
     『ニワトリとタマゴのワクワク生活（ライフ）』はあなたの毎日の生活にちょっとした触れ合いを与えてくれるゲームです。</p>
   <p style="line-height:2.7; margin-bottom:1.6em;">
-    たまごは実際の時間の中で暮らしています。夜は眠り、朝は目覚め、お腹もすきます。<br>
+    タマゴは実際の時間の中で暮らしています。夜は眠り、朝は目覚め、お腹もすきます。<br>
     ふとしたときに気軽に会いに行けて、小さな幸せ、楽しみ、優しさ、笑いを共有します。
   </p>
   <p style="line-height:2.7; margin-bottom:1.6em;">
@@ -45,7 +45,7 @@
     </li>
     <li>
       <strong>時間と季節による変化</strong><br>
-      時間や季節によってたまごの様子が変わります。
+      時間や季節によってタマゴの様子が変わります。
     </li>
     <li>
       <strong>その他</strong><br>
@@ -54,6 +54,6 @@
   </ul>
 
   <div class="text-center">
-    <%= link_to "ゲームをはじめる", login_path, class: "btn btn-primary" %>
+    <%= link_to "ゲームをはじめる", login_path, class: "btn btn-1", data: { turbo: false } %>
   </div>
 </section>

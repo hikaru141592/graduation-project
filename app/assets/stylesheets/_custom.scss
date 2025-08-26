@@ -1,109 +1,25 @@
-body,
-.bg-light {
-  background-color: $body-bg-color !important;
-  color: $body-color !important;
+$btn-2-bg: #FBE5D6 !default;
+
+body {
+  background-color: #FEF5E5 !important;
+  color: #000000;
+  font-family: "Yomogi", system-ui;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-
-.message-box {
-  background-color: rgba(255, 255, 255, 0.75) !important;
-  color: #333 !important;
-  padding: 1rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  border: none !important;
-  box-shadow: 0 4px 1px rgba(0, 0, 0, 0.4);
-
-  white-space: normal;
-  word-break: keep-all;
-  line-break: strict;
-}
-@media (min-width: 768px) {
-  .message-box {
-    min-height: 200px;
-  }
+main {
+  flex: 1;
 }
 
-.btn-primary {
-  background-color: $primary-btn-bg !important;
-  color: $primary-btn-color !important;
-  border-color: $primary-btn-bg !important;
-  padding: 0.375rem !important;
-  border-radius: 0.5rem !important;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.container {
-  width: 100%;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  max-width: 100%;
-}
-
-header {
-  margin-bottom: 1rem;
-}
 footer {
   text-align: center;
   font-size: 0.875rem;
-  color: lighten($body-color, 30%);
+  color: lighten(#000000, 30%);
   margin-top: 2rem;
-  padding-bottom: 1.5rem;
-}
-
-.btn-lg {
-  border-radius: 0.5rem;
-}
-
-input.form-control {
-  border-radius: 0.375rem;
-}
-
-.alert {
-  margin-bottom: 1rem;
-  padding: 0.75rem 1rem;
-}
-
-input.form-control,
-select.form-control,
-textarea.form-control {
-  background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.2) !important;
-  color: $body-color !important;
-}
-
-input.form-control:focus,
-select.form-control:focus,
-textarea.form-control:focus {
-  background-color: #ffffff !important;
-  border-color: $primary-btn-bg !important;
-  box-shadow: 0 0 0 0.15rem rgba(51, 51, 51, 0.25) !important;
-}
-
-.btn-alt,
-.btn-outline-secondary {
-  background-color: $alt-btn-bg !important;
-  color: #222222 !important;
-  border: none !important;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.btn-success,
-.btn-danger {
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
-}
-
-.btn-alt:hover,
-.btn-outline-secondary:hover {
-  background-color: lighten($alt-btn-bg, 10%) !important;
-  color: #222222 !important;
-  border-color: lighten($alt-btn-bg, 10%) !important;
-}
-
-input.form-control[disabled],
-input.form-control[readonly] {
-  background-color: #ffffff !important;
-  opacity: 0.8;
+  padding-bottom: 0.5rem;
 }
 
 .footer-divider {
@@ -113,9 +29,97 @@ input.form-control[readonly] {
   border-top: 1px solid #222222 !important;
 }
 
-.btn-primary:disabled,
-.btn-primary.disabled {
+.container {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+// ゲームプレイ画面のメッセージ部分
+.message-box {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  color: #333 !important;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.125rem;
+  border: none !important;
+  box-shadow: 0 4px 1px rgba(0, 0, 0, 0.4);
+
+  white-space: normal;
+  word-break: keep-all;
+  line-break: strict;
+
+  min-height: 80px;
+}
+@media (min-width: 768px) {
+  .message-box {
+    min-height: 200px;
+  }
+}
+
+.alert {
+  padding: 0.25rem 1.5rem;
+  font-size: 0.85rem;
+  border-radius: 0px;
+  margin-bottom: 1rem;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.alert-danger {
+  background-color: rgb(255, 211, 211);
+  color: #774045;
+}
+
+.alert-success {
+  background-color: rgb(204, 234, 232);
+  color: #356158;
+}
+
+.btn {
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 0.5rem;
+  border: none !important;
+}
+
+.btn-1 {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+}
+
+// btn-1がグレーボタン、btn-2が薄オレンジ色ボタン
+.btn-1:hover {
+  background-color: lighten(#f2f2f2, 10%) !important;
+  color: #222222 !important;
+}
+
+.btn-1.btn-large-text {
+  font-size: 1.08rem;
+}
+
+.btn-1:disabled,
+.btn-1.disabled {
   opacity: 1 !important;
+}
+
+.btn-2 {
+  background-color: $btn-2-bg !important;
+  color: #222222 !important;
+}
+
+.btn-2:hover {
+  background-color: lighten($btn-2-bg, 10%) !important;
+}
+
+.btn-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: #363322 !important;
+}
+
+.form-control:focus {
+  background-color: #ffffff !important;
+  border-color: #333333 !important;
+  box-shadow: 0 0 0 0.4rem rgba(51, 51, 51, 0.25) !important;
 }
 
 .play-image-wrapper {
@@ -142,7 +146,7 @@ input.form-control[readonly] {
 }
 
 .modal-content {
-  background-color: $primary-btn-bg;
+  background-color: #333333;
   color: #ffffff;
   text-align: left;
   border-radius: 16px;
@@ -194,6 +198,8 @@ input.form-control[readonly] {
 .status-list .status-value {
   flex: 1;
 }
+
+// 以下、ログイン画面のフェードイン、バナーアニメーション処理
 
 body.fade-in::before {
   content: "";
@@ -257,8 +263,4 @@ body.fade-in.show::before {
   .logo-anim {
     animation-name: slideDownFadeInOnlyY;
   }
-}
-
-body {
-  font-family: "Yomogi", system-ui;
 }

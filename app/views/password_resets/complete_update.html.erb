@@ -1,13 +1,13 @@
 <% content_for :title, '新しいパスワードの登録' %>
 
 <div class="container vertical-spacing-lg mt-5 mx-0 mx-md-auto text-md-center" style="max-width: 600px;">
-  <h1 class="mb-4">新しいパスワードの登録</h1>
+  <h2 class="mb-4">新しいパスワードの登録</h2>
 
   <p class="mb-4">
     パスワードの再登録が完了しました。
   </p>
 
   <div class="d-grid mb-3">
-    <%= link_to 'ログイン画面へ', login_path, class: 'btn btn-alt btn-lg' %>
+    <%= link_to 'ログイン画面へ', login_path, class: 'btn btn-2 btn-lg', data: { turbo: false } %>
   </div>
 </div>

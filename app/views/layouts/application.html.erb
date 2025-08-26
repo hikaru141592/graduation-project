@@ -39,7 +39,13 @@
     <% unless controller_name.in?(%w[games public_pages settings line_notification_settings status delete_account]) %>
       <%= render 'shared/flash_message' %>
     <% end %>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer>
+      <%= render 'shared/footer' %>
+    </footer>
 
     <script>
       function fadeInIfNeeded() {
@@ -52,6 +58,4 @@
       document.addEventListener('turbo:load',    fadeInIfNeeded);
     </script>
   </body>
-
-  <%= render 'shared/footer' %>
 </html>
