@@ -2,28 +2,12 @@ class GamesController < ApplicationController
   require "time"
 
   def play
+    # apply_automatic_update!によるステータス更新が適切に行われなくなるため@play_state.touchはしない
+    # @play_state.apply_automatic_update!はしない
     @play_state = current_user.play_state
     @user_status = current_user.user_status
-    # ステータス減少が適切に行われなくなるため@play_state.touchはしない
-    # @play_state.apply_automatic_update!はしない
     EventTimeout.new(@play_state, @user_status, request.headers).handle_timeouts
-
-    @event = @play_state.current_event
-    if @play_state.current_cut_position.present?
-      choice = @event.action_choices.find_by!(position: @play_state.action_choices_position)
-      @action_result = choice.action_results.find_by!(priority: @play_state.action_results_priority)
-      @cut = @action_result.cuts.find_by!(position: @play_state.current_cut_position)
-      @phase = :cut
-    else
-      @choices = @event.action_choices.order(:position)
-      @phase = :select
-      if @event.event_set.name == "算数" && (1..4).include?(@event.derivation_number)
-        seed = @play_state.updated_at.to_i
-        @question_text, @options = ArithmeticQuiz.generate(seed: seed)
-      end
-    end
-
-    set_base_background_image
+    @presenter = GameViewPresenter.new(@play_state)
   end
 
   def select_action
@@ -195,18 +179,5 @@ class GamesController < ApplicationController
       derived_event = event_set.events.find_by!(derivation_number: 0)
     end
     [ event_set, derived_event ]
-  end
-
-  def set_base_background_image
-    current_hour = Time.zone.now.hour
-    @base_background_image =
-      case current_hour
-      when 6...17
-        "temp-base_background/temp-base_background1.png"
-      when 17...18
-        "temp-base_background/temp-base_background2.png"
-      else
-        "temp-base_background/temp-base_background3.png"
-      end
   end
 end

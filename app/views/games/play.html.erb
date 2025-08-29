@@ -20,19 +20,19 @@
       <div class="col-12 col-md-8">
         <div class="position-relative my-2 mx-auto play-image-wrapper">
           <%= image_tag(
-                effective_image_path(@base_background_image),
+                effective_image_path(@presenter.base_background_image),
                 alt: "ベース背景",
                 class: "position-absolute top-0 start-0 img-fluid w-100",
                 style: "z-index: -1;"
               ) %>
           <%= image_tag(
-                effective_image_path(@cut&.background_image || @event.background_image),
+                effective_image_path(@presenter.cut&.background_image || @presenter.event.background_image),
                 alt: "背景",
                 class: "img-fluid",
                 style: "z-index: 0;"
               ) %>
           <%= image_tag(
-                effective_image_path(@cut&.character_image || @event.character_image),
+                effective_image_path(@presenter.cut&.character_image || @presenter.event.character_image),
                 alt: "キャラクター",
                 class: "position-absolute top-50 start-50 translate-middle img-fluid",
                 style: "width: 80%; z-index: 1;"
@@ -42,19 +42,19 @@
 
       <div class="col-12 col-md-4 pe-md-6 d-grid gap-1 mt-2 mt-md-4">
         <div class="message-box mb-1 py-4 d-flex align-items-center justify-content-center">
-          <% message = MessageBuilder.new(@play_state, @question_text).call %>
+          <% message = MessageBuilder.new(@presenter.play_state, @presenter.arithmetic_question_text).call %>
           <%= message.html_safe %>
         </div>
-        <%= form_with url: (@phase == :select ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
-          <%= hidden_field_tag :state_timestamp, @play_state.updated_at.iso8601 %>
+        <%= form_with url: (@presenter.phase == :select_now ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
+          <%= hidden_field_tag :state_timestamp, @presenter.play_state.updated_at.iso8601 %>
           <div class="d-grid gap-2 mx-auto mt-2 mt-md-4" style="width: 80%;">
             <% 4.times do |i| %>
               <% pos   = i + 1 %>
               <% label =
-                if @phase == :select
-                  orig = (@choices.find { |c| c.position == pos }&.label || "").dup
-                  if @question_text.present?
-                    @options.each_with_index do |opt, idx|
+                if @presenter.phase == :select_now
+                  orig = (@presenter.choices.find { |c| c.position == pos }&.label || "").dup
+                  if @presenter.arithmetic_question_text.present?
+                    @presenter.arithmetic_options.each_with_index do |opt, idx|
                       placeholder = "〈#{('A'.ord + idx).chr}〉"
                       orig.gsub!(placeholder, opt.to_s)
                     end
@@ -65,8 +65,8 @@
                   pos == 1 ? "つぎへ" : ""
                 end %>
 
-              <% if (@phase == :select && label.present?) ||
-                  (@phase == :cut    && pos == 1) %>
+              <% if (@presenter.phase == :select_now && label.present?) ||
+                  (@presenter.phase == :after_select    && pos == 1) %>
                 <%= button_tag label,
                     type:  "submit",
                     name:  "position",
