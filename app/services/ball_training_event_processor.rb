@@ -1,12 +1,10 @@
 class BallTrainingEventProcessor
   MAX_ALLOWED_MISTAKES = 3
 
-  def initialize(user, result, next_set, next_event)
+  def initialize(user, result)
     @user       = user
     @status     = user.user_status
     @result     = result
-    @next_set   = next_set
-    @next_event = next_event
     @temp       = user.event_temporary_datum
   end
 
@@ -21,7 +19,8 @@ class BallTrainingEventProcessor
     end
     return evaluation if evaluation?
 
-    [ @next_set, @next_event ]
+    # event_setもeventも返さない
+    [ nil, nil ]
   end
 
   def record_evaluation

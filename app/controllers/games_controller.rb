@@ -66,7 +66,8 @@ class GamesController < ApplicationController
       end
     end
 
-    next_set, next_event = call_training_event_processor(result, next_set, next_event)
+    training_next_set, training_next_event = call_training_event_processor(result)
+    next_set, next_event = training_next_set, training_next_event if training_next_event.present?
 
     play_state.start_new_event!(next_event)
 
@@ -164,14 +165,17 @@ class GamesController < ApplicationController
     end
   end
 
-  def call_training_event_processor(result, next_set, next_event)
-    arithmetic_training_event_processor = ArithmeticTrainingEventProcessor.new(current_user, result, next_set, next_event)
-    next_set, next_event = arithmetic_training_event_processor.call
+  def call_training_event_processor(result)
+    arithmetic_training_event_processor = ArithmeticTrainingEventProcessor.new(current_user, result)
+    a_next_set, a_next_event = arithmetic_training_event_processor.call
     arithmetic_training_event_processor.record_evaluation
 
-    ball_training_event_processor = BallTrainingEventProcessor.new(current_user, result, next_set, next_event)
-    next_set, next_event = ball_training_event_processor.call
+    ball_training_event_processor = BallTrainingEventProcessor.new(current_user, result)
+    b_next_set, b_next_event = ball_training_event_processor.call
     ball_training_event_processor.record_evaluation
-    [ next_set, next_event ]
+
+    return [ a_next_set, a_next_event ] if a_next_event.present?
+    return [ b_next_set, b_next_event ] if b_next_event.present?
+    return [ nil, nil ]
   end
 end
