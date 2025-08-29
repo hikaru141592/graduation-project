@@ -29,59 +29,57 @@ class GamesController < ApplicationController
 
   def advance_cut(skip_check: false)
     play_state = current_user.play_state
-    # select_actionでカット数0で呼び出された場合はタイムスタンプチェックをスキップする。
+    # select_actionでカット数0で呼び出された場合はタイムスタンプチェックをスキップする
     return if redirect_if_old_timestamp!(play_state, skip_check)
 
-    current = play_state.current_cut_position.to_i
+    current  = play_state.current_cut_position.to_i
     next_cut = current + 1
-    event   = play_state.current_event
-    choice  = event.action_choices.find_by!(position: play_state.action_choices_position)
-    result  = choice.action_results.find_by!(priority: play_state.action_results_priority)
+    event    = play_state.current_event
+    choice   = play_state.current_choice
+    result   = play_state.current_action_result
 
-    if result.cuts.exists?(position: next_cut)
-      play_state.apply_automatic_update!
-      play_state.update!(current_cut_position: next_cut)
+    return handle_next_cut(play_state, next_cut) if result.cuts.exists?(position: next_cut)
+
+    # 以下は、次のcutがなく次のイベント選定を行い遷移する処理
+    apply_effects!(result.effects)
+    play_state.apply_automatic_update!
+
+    user_status = current_user.user_status
+    current_set = event.event_set
+    resolves    = result.resolves_loop?
+
+    current_user.clear_event_category_invalidations!
+
+    if result.next_derivation_number.present?
+      next_set, next_event = apply_derivation(result)
     else
-      apply_effects!(result.effects)
-      play_state.apply_automatic_update!
-
-      user_status = current_user.user_status
-      current_set = event.event_set
-      resolves = result.resolves_loop?
-
-      current_user.clear_event_category_invalidations!
-
-      if result.next_derivation_number.present?
-        next_set, next_event = apply_derivation(result)
-      else
-        if resolves
-          event_category_invalidation(current_user, current_set.event_category, 2.hours.from_now)
-        end
-        if continue_loop?(user_status, current_set, resolves)
-          next_set = current_set
-          next_event = event
-        else
-          user_status.clear_loop_status!
-          next_set, next_event = pick_event_with_set_call_or_default(result)
-          user_status.record_loop_start!(next_set)
-        end
+      if resolves
+        event_category_invalidation(current_user, current_set.event_category, 2.hours.from_now)
       end
-
-      arithmetic_training_event_processor = ArithmeticTrainingEventProcessor.new(current_user, result, next_set, next_event)
-      next_set, next_event = arithmetic_training_event_processor.call
-      arithmetic_training_event_processor.record_evaluation
-
-      ball_training_event_processor = BallTrainingEventProcessor.new(current_user, result, next_set, next_event)
-      next_set, next_event = ball_training_event_processor.call
-      ball_training_event_processor.record_evaluation
-
-      play_state.start_new_event!(next_event)
+      if continue_loop?(user_status, current_set, resolves)
+        next_set = current_set
+        next_event = event
+      else
+        user_status.clear_loop_status!
+        next_set, next_event = pick_event_with_set_call_or_default(result)
+        user_status.record_loop_start!(next_set)
+      end
     end
+
+    next_set, next_event = call_training_event_processor(result, next_set, next_event)
+
+    play_state.start_new_event!(next_event)
 
     redirect_to root_path
   end
 
   private
+  def handle_next_cut(play_state, next_cut)
+    play_state.apply_automatic_update!
+    play_state.update!(current_cut_position: next_cut)
+    redirect_to root_path
+  end
+
   def apply_effects!(effects)
     status = current_user.user_status
     (effects["status"] || []).each do |e|
@@ -164,5 +162,16 @@ class GamesController < ApplicationController
       play_state.update!(attrs.merge(current_cut_position: nil))
       advance_cut(skip_check: true)
     end
+  end
+
+  def call_training_event_processor(result, next_set, next_event)
+    arithmetic_training_event_processor = ArithmeticTrainingEventProcessor.new(current_user, result, next_set, next_event)
+    next_set, next_event = arithmetic_training_event_processor.call
+    arithmetic_training_event_processor.record_evaluation
+
+    ball_training_event_processor = BallTrainingEventProcessor.new(current_user, result, next_set, next_event)
+    next_set, next_event = ball_training_event_processor.call
+    ball_training_event_processor.record_evaluation
+    [ next_set, next_event ]
   end
 end
