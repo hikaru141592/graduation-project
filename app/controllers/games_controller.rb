@@ -16,21 +16,15 @@ class GamesController < ApplicationController
 
     play_state.apply_automatic_update!
 
-    event = play_state.current_event
+    event    = play_state.current_event
     position = params.require(:position).to_i
-    choice = event.action_choices.find_by!(position: position)
-    result = choice.action_results.order(:priority).detect { |ar| conditions_met?(ar.trigger_conditions, current_user) }
-    result ||= choice.action_results.order(priority: :desc).first
+    choice   = event.selected_choice(position)
+    result   = choice.selected_result(current_user)
 
+    # イントロダクションイベントでのみ適用
     current_user.name_suffix_change!(event, position)
 
-    if result.cuts.exists?
-      play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: 1)
-      redirect_to root_path and return
-    else
-      play_state.update!(action_choices_position: position, action_results_priority: result.priority, current_cut_position: nil)
-      advance_cut(skip_check: true)
-    end
+    first_cut_or_next_event!(play_state, position, result)
   end
 
   def advance_cut(skip_check: false)
@@ -88,29 +82,6 @@ class GamesController < ApplicationController
   end
 
   private
-
-  # モデル移動可
-  def conditions_met?(conds, user)
-    return true if conds["always"] == true
-    op   = conds["operator"] || "and"
-    list = conds["conditions"] || []
-    results = list.map do |c|
-      case c["type"]
-      when "status"
-        user.user_status.send(c["attribute"]).public_send(c["operator"], c["value"])
-      when "probability"
-        rand(100) < c["percent"]
-      when "item"
-        user.user_items.find_by(code: c["item_code"]).try(:count).to_i.public_send(c["operator"], c["value"])
-      when "event_temporary_data"
-        user.event_temporary_datum.send(c["attribute"]).public_send(c["operator"], c["value"])
-      else
-        false
-      end
-    end
-    op == "and" ? results.all? : results.any?
-  end
-
   def apply_effects!(effects)
     status = current_user.user_status
     (effects["status"] || []).each do |e|
@@ -181,6 +152,17 @@ class GamesController < ApplicationController
       redirect_to root_path and return true
     else
       false
+    end
+  end
+
+  def first_cut_or_next_event!(play_state, position, result)
+    attrs = { action_choices_position: position, action_results_priority: result.priority }
+    if result.cuts.exists?
+      play_state.update!(attrs.merge(current_cut_position: 1))
+      redirect_to root_path and return
+    else
+      play_state.update!(attrs.merge(current_cut_position: nil))
+      advance_cut(skip_check: true)
     end
   end
 end

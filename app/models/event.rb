@@ -13,4 +13,8 @@ class Event < ApplicationRecord
   def arithmetic_quiz_being_asked?
     event_set.name == "算数" && (1..4).include?(derivation_number)
   end
+
+  def selected_choice(position)
+    action_choices.find_by!(position: position)
+  end
 end
