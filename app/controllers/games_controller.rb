@@ -12,12 +12,8 @@ class GamesController < ApplicationController
 
   def select_action
     play_state = current_user.play_state
-    unless Rails.env.test?
-      client_ts = Time.iso8601(params.require(:state_timestamp))
-      if client_ts.to_i < play_state.updated_at.to_i
-        redirect_to root_path and return
-      end
-    end
+    return if redirect_if_old_timestamp!(play_state, false)
+
     play_state.apply_automatic_update!
 
     event = play_state.current_event
@@ -39,14 +35,8 @@ class GamesController < ApplicationController
 
   def advance_cut(skip_check: false)
     play_state = current_user.play_state
-
-    # select_actionでカット数0で呼び出された場合にタイムスタンプチェックをスキップする。
-    unless skip_check || Rails.env.test?
-      client_ts = Time.iso8601(params.require(:state_timestamp))
-      if client_ts.to_i < play_state.updated_at.to_i
-        redirect_to root_path and return
-      end
-    end
+    # select_actionでカット数0で呼び出された場合はタイムスタンプチェックをスキップする。
+    return if redirect_if_old_timestamp!(play_state, skip_check)
 
     current = play_state.current_cut_position.to_i
     next_cut = current + 1
@@ -179,5 +169,18 @@ class GamesController < ApplicationController
       derived_event = event_set.events.find_by!(derivation_number: 0)
     end
     [ event_set, derived_event ]
+  end
+
+  def redirect_if_old_timestamp!(play_state, skip_check = false)
+    return false if skip_check || Rails.env.test?
+
+    client_ts = Time.iso8601(params.require(:state_timestamp)).to_i
+    server_ts = play_state.updated_at.to_i
+
+    if client_ts < server_ts
+      redirect_to root_path and return true
+    else
+      false
+    end
   end
 end
