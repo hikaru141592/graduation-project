@@ -32,6 +32,7 @@ class DecideNextEvent
   end
 
   private
+
   def continue_loop?
     return false if @resolves
     @user_status.in_loop?

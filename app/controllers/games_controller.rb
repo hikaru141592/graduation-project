@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-  require "time"
 
   def play
     # apply_automatic_update!によるステータス更新が適切に行われなくなるため@play_state.touchはしない
@@ -36,51 +35,24 @@ class GamesController < ApplicationController
     result   = play_state.current_action_result
 
     return handle_next_cut(play_state, next_cut_position) if result.cuts.exists?(position: next_cut_position)
-
-    # 以下は、次のcutがなく次のイベント選定を行い遷移する処理
-    apply_effects!(result.effects)
-    play_state.apply_automatic_update!
-    current_user.clear_event_category_invalidations!
-
-    next_set, next_event = DecideNextEvent.new(current_user).call
-    play_state.start_new_event!(next_event)
-    redirect_to root_path
+    return handle_next_event(play_state, result)
   end
 
   private
-  def handle_next_cut(play_state, next_cut)
-    play_state.apply_automatic_update!
-    play_state.update!(current_cut_position: next_cut)
-    redirect_to root_path
-  end
 
-  def apply_effects!(effects)
-    status = current_user.user_status
-    (effects["status"] || []).each do |e|
-      attr  = e["attribute"]
-      delta = e["delta"].to_i
-      new_value = status[attr] + delta
-      new_value = [ new_value, 0 ].max
-      if [ "hunger_value", "love_value", "mood_value" ].include?(attr)
-        new_value = [ new_value, 100 ].min
-      end
-      new_value = [ new_value, 99_999_999 ].min
-      status[attr] = new_value
+  # ↓↓↓------used by #select_action------↓↓↓
+  def first_cut_or_next_event!(play_state, position, result)
+    attrs = { action_choices_position: position, action_results_priority: result.priority }
+    if result.cuts.exists?
+      play_state.update!(attrs.merge(current_cut_position: 1))
+      redirect_to root_path and return
+    else
+      play_state.update!(attrs.merge(current_cut_position: nil))
+      advance_cut(skip_check: true)
     end
-    status.save!
-
-    #    event_temporary_data = current_user.event_temporary_datum
-    #    (effects["event_temporary_data"] || []).each do |e|
-    #      attr  = e["attribute"]
-    #      delta = e["delta"].to_i
-    #      new_value = event_temporary_data[attr] + delta
-    #      new_value = [ new_value, 0 ].max
-    #      new_value = [ new_value, 20 ].min
-    #      event_temporary_data[attr] = new_value
-    #    end
-    #    event_temporary_data.save!
   end
 
+  # ↓↓↓------used by #select_action , #advance_cut ------↓↓↓
   def redirect_if_old_timestamp!(play_state, skip_check = false)
     return false if skip_check || Rails.env.test?
 
@@ -94,14 +66,21 @@ class GamesController < ApplicationController
     end
   end
 
-  def first_cut_or_next_event!(play_state, position, result)
-    attrs = { action_choices_position: position, action_results_priority: result.priority }
-    if result.cuts.exists?
-      play_state.update!(attrs.merge(current_cut_position: 1))
-      redirect_to root_path and return
-    else
-      play_state.update!(attrs.merge(current_cut_position: nil))
-      advance_cut(skip_check: true)
-    end
+  # ↓↓↓------used by #advance_cut------↓↓↓
+  def handle_next_cut(play_state, next_cut)
+    play_state.apply_automatic_update!
+    play_state.update!(current_cut_position: next_cut)
+    redirect_to root_path
+  end
+
+  def handle_next_event(play_state, result)
+    user_status = current_user.user_status
+    user_status.apply_effects!(result.effects)
+    play_state.apply_automatic_update!
+    current_user.clear_event_category_invalidations!
+
+    next_set, next_event = DecideNextEvent.new(current_user).call
+    play_state.start_new_event!(next_event)
+    redirect_to root_path
   end
 end
