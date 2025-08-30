@@ -57,16 +57,13 @@ class EventSetSelector
   end
 
   def filter_daily_limits!
+    counts_by_set = DailyLimitEventSetCount.where(user: @user, occurred_on: Date.current).pluck(:event_set_id, :count).to_h
+
     @event_sets.reject! do |set|
       limit = set.daily_limit
       next false if limit.nil?
-      today_count(set) >= limit
+      (counts_by_set[set.id] || 0) >= limit
     end
-  end
-
-  def today_count(set)
-    rec = DailyLimitEventSetCount.find_by(user: @user, event_set: set, occurred_on: Date.current)
-    rec&.count.to_i
   end
 
   def event_triggerable?(set)
@@ -75,9 +72,18 @@ class EventSetSelector
 
   def record_occurrence(set)
     return if set.daily_limit.nil?
+    return if record_occurrence_skip?
     rec = DailyLimitEventSetCount.find_or_initialize_by(user: @user, event_set: set, occurred_on: Date.current)
     rec.count += 1
     rec.save!
+  end
+
+  def record_occurrence_skip?
+    result = @user.play_state.current_action_result
+    return false if result.nil?
+    return false if result.action_choice.event.event_set.name == "特訓" && [ 2, 3, 4, 5, 6 ].include?(result.action_choice.event.derivation_number)
+
+    [ "算数特訓", "ボール遊び特訓" ].include?(@user.event_temporary_datum.special_condition)
   end
 
   def filter_invalid_categories!

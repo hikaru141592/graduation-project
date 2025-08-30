@@ -53,6 +53,21 @@ class UserStatus < ApplicationRecord
     save!
   end
 
+  def apply_effects!(effects)
+    (effects["status"] || []).each do |e|
+      attr  = e["attribute"]
+      delta = e["delta"].to_i
+      new_value = self[attr] + delta
+      new_value = [ new_value, 0 ].max
+      if [ "hunger_value", "love_value", "mood_value" ].include?(attr)
+        new_value = [ new_value, 100 ].min
+      end
+      new_value = [ new_value, 99_999_999 ].min
+      self[attr] = new_value
+    end
+    save!
+  end
+
   def record_loop_start!(next_set)
     return if next_set.event_category.loop_minutes.blank?
     update!(
