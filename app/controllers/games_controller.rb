@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-
   def play
     # apply_automatic_update!によるステータス更新が適切に行われなくなるため@play_state.touchはしない
     # @play_state.apply_automatic_update!はしない
@@ -35,7 +34,7 @@ class GamesController < ApplicationController
     result   = play_state.current_action_result
 
     return handle_next_cut(play_state, next_cut_position) if result.cuts.exists?(position: next_cut_position)
-    return handle_next_event(play_state, result)
+    handle_next_event(play_state, result)
   end
 
   private

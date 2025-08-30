@@ -59,6 +59,6 @@ class DecideNextEvent
 
     return [ a_next_set, a_next_event ] if a_next_event.present?
     return [ b_next_set, b_next_event ] if b_next_event.present?
-    return [ nil, nil ]
+    [ nil, nil ]
   end
 end

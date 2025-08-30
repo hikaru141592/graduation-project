@@ -83,7 +83,7 @@ class EventSetSelector
     return false if result.nil?
     return false if result.action_choice.event.event_set.name == "特訓" && [ 2, 3, 4, 5, 6 ].include?(result.action_choice.event.derivation_number)
 
-    ["算数特訓", "ボール遊び特訓"].include?(@user.event_temporary_datum.special_condition)
+    [ "算数特訓", "ボール遊び特訓" ].include?(@user.event_temporary_datum.special_condition)
   end
 
   def filter_invalid_categories!
