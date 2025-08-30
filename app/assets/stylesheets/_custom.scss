@@ -87,9 +87,11 @@ footer {
 }
 
 // btn-1がグレーボタン、btn-2が薄オレンジ色ボタン
-.btn-1:hover {
-  background-color: lighten(#f2f2f2, 10%) !important;
-  color: #222222 !important;
+@media (hover: hover) and (pointer: fine) {
+  .btn-1:hover {
+    background-color: lighten(#f2f2f2, 10%) !important;
+    color: #222222 !important;
+  }
 }
 
 .btn-1.btn-large-text {
@@ -106,8 +108,10 @@ footer {
   color: #222222 !important;
 }
 
-.btn-2:hover {
-  background-color: lighten($btn-2-bg, 10%) !important;
+@media (hover: hover) and (pointer: fine) {
+  .btn-2:hover {
+    background-color: lighten($btn-2-bg, 10%) !important;
+  }
 }
 
 .btn-link {
