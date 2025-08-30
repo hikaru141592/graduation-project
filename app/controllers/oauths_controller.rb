@@ -8,9 +8,7 @@ class OauthsController < ApplicationController
 
   def callback
     auth_hash = request.env["omniauth.auth"]
-    Rails.logger.debug "=== AUTH HASH ===\n#{auth_hash.to_h.inspect}\n================="
     access_token = auth_hash.dig("credentials", "token")
-    Rails.logger.debug "LINE access_token present? #{access_token.present?}"
 
     raw_name = (auth_hash.dig("info", "name").presence || auth_hash.dig("info", "displayName").presence)
     truncated_name = raw_name.each_char.take(6).join
