@@ -61,6 +61,8 @@ class ProcessLineWebhookJob < ApplicationJob
       handle_pet(user)
     when "35894421"
       handle_change_image(user)
+    when "44235819"
+      handle_show_status(user)
     else
       default_reply
     end
@@ -90,6 +92,12 @@ class ProcessLineWebhookJob < ApplicationJob
   def handle_change_image(user)
     user.update!(image_change: !user.image_change)
     "にに！にににーに！？\nにーににーに、んにーににににに！\nんににに、にににーに！\n----（訳）----\nあれ！どうしてそのコードを知ってるの！？\nゲーム中の画像データがさし変わるよ！\n戻したいときは同じコードを使ってね！"
+  end
+
+  def handle_show_status(user)
+    status_hash = user.user_status.attributes.except("id", "user_id", "created_at", "updated_at", "money")
+    status_list = status_hash.map { |key, value| "#{key}: #{value}" }.join("\n")
+    "にに！にににーに！？\nににーにに、ににー、んににに、にーににに！！\n----（訳）----\nあれ！どうしてそのコードを知ってるの！？\nステータスの詳細情報を伝えるよ！\n#{status_list}"
   end
 
   def default_reply

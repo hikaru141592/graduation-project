@@ -2,15 +2,15 @@ module StatusHelper
   def study_evaluate(value, effort_value = 0)
     evaluate_value = (value + effort_value * 0.3).to_i
     case evaluate_value
-    when 0..5     then "ふつう"
-    when 6..10    then "ちょっといいかんじかも"
-    when 11..20   then "ちょっといいかんじ"
-    when 20..35   then "そこそこできる"
-    when 35..50   then "すごくできる"
-    when 51..80   then "できすぎ！"
-    when 81..120   then "てんさい？"
-    when 121..250  then "てんさい！"
-    when 251..450 then "てんさいすぎ！"
+    when 0..2     then "ふつう"
+    when 3..6    then "ちょっといいかんじかも"
+    when 7..12   then "ちょっといいかんじ"
+    when 13..20   then "そこそこできる"
+    when 21..35   then "すごくできる"
+    when 36..60   then "できすぎ！"
+    when 61..100   then "てんさい？"
+    when 101..200  then "てんさい！"
+    when 201..400 then "てんさいすぎ！"
     else                "かみさま"
     end
   end
