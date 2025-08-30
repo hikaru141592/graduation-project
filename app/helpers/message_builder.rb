@@ -36,7 +36,7 @@ class MessageBuilder
     message = message.gsub("〈X〉", success_count.to_s)
     elapsed_sec = (temp.ended_at - temp.started_at).to_i
     minutes, seconds = elapsed_sec.divmod(60)
-    time_str    = "#{minutes}ふん#{seconds}びょう"
-    message     = message.gsub("〈Y〉分〈Z〉秒", time_str)
+    time_str    = "#{minutes}ふん #{seconds}びょう"
+    message     = message.gsub("〈Y〉ふん 〈Z〉びょう", time_str)
   end
 end
