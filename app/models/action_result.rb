@@ -8,6 +8,17 @@ class ActionResult < ApplicationRecord
   validates :trigger_conditions, presence: true
   validate  :exclusive_derivation_or_call
 
+  def apply_derivation
+    event_set = action_choice.event.event_set
+    begin
+      derived_event = event_set.events.find_by!(derivation_number: next_derivation_number)
+    rescue ActiveRecord::RecordNotFound
+      Rails.logger.warn "Derivation event not found: set=#{event_set.id}, num=#{next_derivation_number}"
+      derived_event = event_set.events.find_by!(derivation_number: 0)
+    end
+    [ event_set, derived_event ]
+  end
+
   private
 
   def exclusive_derivation_or_call

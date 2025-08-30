@@ -32,45 +32,18 @@ class GamesController < ApplicationController
     # select_actionでカット数0で呼び出された場合はタイムスタンプチェックをスキップする
     return if redirect_if_old_timestamp!(play_state, skip_check)
 
-    current  = play_state.current_cut_position.to_i
-    next_cut = current + 1
-    event    = play_state.current_event
-    choice   = play_state.current_choice
+    next_cut_position = play_state.current_cut_position.to_i + 1
     result   = play_state.current_action_result
 
-    return handle_next_cut(play_state, next_cut) if result.cuts.exists?(position: next_cut)
+    return handle_next_cut(play_state, next_cut_position) if result.cuts.exists?(position: next_cut_position)
 
     # 以下は、次のcutがなく次のイベント選定を行い遷移する処理
     apply_effects!(result.effects)
     play_state.apply_automatic_update!
-
-    user_status = current_user.user_status
-    current_set = event.event_set
-    resolves    = result.resolves_loop?
-
     current_user.clear_event_category_invalidations!
 
-    if result.next_derivation_number.present?
-      next_set, next_event = apply_derivation(result)
-    else
-      if resolves
-        event_category_invalidation(current_user, current_set.event_category, 2.hours.from_now)
-      end
-      if continue_loop?(user_status, current_set, resolves)
-        next_set = current_set
-        next_event = event
-      else
-        user_status.clear_loop_status!
-        next_set, next_event = pick_event_with_set_call_or_default(result)
-        user_status.record_loop_start!(next_set)
-      end
-    end
-
-    training_next_set, training_next_event = call_training_event_processor(result)
-    next_set, next_event = training_next_set, training_next_event if training_next_event.present?
-
+    next_set, next_event = DecideNextEvent.new(current_user).call
     play_state.start_new_event!(next_event)
-
     redirect_to root_path
   end
 
@@ -108,39 +81,6 @@ class GamesController < ApplicationController
     #    event_temporary_data.save!
   end
 
-  def continue_loop?(user_status, event_set, resolves_loop)
-    return false if resolves_loop
-    user_status.in_loop?
-  end
-
-  def event_category_invalidation(user, event_category, expires_at)
-    inv = user.user_event_category_invalidations.find_or_initialize_by(event_category: event_category)
-    inv.expires_at = expires_at
-    inv.save!
-  end
-
-  def pick_event_with_set_call_or_default(action_result)
-    if action_result.calls_event_set_id.present?
-      event_set = EventSet.find(action_result.calls_event_set_id)
-      event = event_set.events.find_by!(derivation_number: 0)
-    else
-      event_set, event = current_user.pick_next_event_set_and_event
-    end
-    [ event_set, event ]
-  end
-
-  def apply_derivation(result)
-    derivation_num = result.next_derivation_number
-    event_set = result.action_choice.event.event_set
-    begin
-      derived_event = event_set.events.find_by!(derivation_number: derivation_num)
-    rescue ActiveRecord::RecordNotFound
-      Rails.logger.warn "Derivation event not found: set=#{event_set.id}, num=#{derivation_num}"
-      derived_event = event_set.events.find_by!(derivation_number: 0)
-    end
-    [ event_set, derived_event ]
-  end
-
   def redirect_if_old_timestamp!(play_state, skip_check = false)
     return false if skip_check || Rails.env.test?
 
@@ -163,19 +103,5 @@ class GamesController < ApplicationController
       play_state.update!(attrs.merge(current_cut_position: nil))
       advance_cut(skip_check: true)
     end
-  end
-
-  def call_training_event_processor(result)
-    arithmetic_training_event_processor = ArithmeticTrainingEventProcessor.new(current_user, result)
-    a_next_set, a_next_event = arithmetic_training_event_processor.call
-    arithmetic_training_event_processor.record_evaluation
-
-    ball_training_event_processor = BallTrainingEventProcessor.new(current_user, result)
-    b_next_set, b_next_event = ball_training_event_processor.call
-    ball_training_event_processor.record_evaluation
-
-    return [ a_next_set, a_next_event ] if a_next_event.present?
-    return [ b_next_set, b_next_event ] if b_next_event.present?
-    return [ nil, nil ]
   end
 end
