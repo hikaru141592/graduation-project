@@ -2,7 +2,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :line,
     ENV["LINE_KEY"],
     ENV["LINE_SECRET"],
-    scope: "profile openid email",
+    scope: "profile openid",
     bot_prompt: "aggressive",
     callback_path: "/auth/line/callback"
 end
