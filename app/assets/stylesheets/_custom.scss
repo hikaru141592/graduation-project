@@ -143,6 +143,12 @@ footer {
 }
 
 @media (min-width: 768px) {
+  .mt-md-6 {
+    margin-top: 6rem !important;
+  }
+}
+
+@media (min-width: 768px) {
   .vertical-spacing-lg {
     margin-top: 13rem !important;
     margin-bottom: 13rem !important;
