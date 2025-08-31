@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  NAME_MAX_LENGTH = 6
+
   has_one :user_status, dependent: :destroy
   has_one :play_state, dependent: :destroy
   has_many :authentications, dependent: :destroy
@@ -13,7 +15,6 @@ class User < ApplicationRecord
   after_create :build_initial_game_states
 
   before_validation :assign_friend_code, if: -> { new_record? && friend_code.blank? }
-  # before_validation :truncate_name_to_6_chars, if: -> { name_changed? && name.present? }
 
   validates :email, presence: true, uniqueness: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP }
@@ -21,7 +22,7 @@ class User < ApplicationRecord
             if: -> { authentications.empty? && (new_record? || changes[:crypted_password]) }
   validates :password_confirmation, presence: true,
             if: -> { authentications.empty? && (new_record? || changes[:crypted_password]) }
-  validates :name,      presence: true, length: { maximum: 6 }
+  validates :name,      presence: true, length: { maximum: NAME_MAX_LENGTH }
   validates :egg_name,  presence: true, length: { maximum: 6 }, exclusion: { in: [ "未登録" ], message: "には「未登録」という文字列を使用できません" }
   validates :birth_month, presence: true, inclusion: { in: 1..12 }
   validates :birth_day,   presence: true, inclusion: { in: 1..31 }

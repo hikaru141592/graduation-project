@@ -7,13 +7,8 @@ class OauthsController < ApplicationController
   end
 
   def callback
-    auth_hash = request.env["omniauth.auth"]
-    Rails.logger.debug "=== AUTH HASH ===\n#{auth_hash.to_h.inspect}\n================="
-    access_token = auth_hash.dig("credentials", "token")
-    Rails.logger.debug "LINE access_token present? #{access_token.present?}"
-
-    raw_name = (auth_hash.dig("info", "name").presence || auth_hash.dig("info", "displayName").presence)
-    truncated_name = raw_name.each_char.take(6).join
+    auth_hash      = request.env["omniauth.auth"]
+    access_token   = auth_hash.dig("credentials", "token")
     authentication = Authentication.find_by(
       provider: auth_hash.provider,
       uid:      auth_hash.uid
@@ -21,22 +16,7 @@ class OauthsController < ApplicationController
     @user = if authentication
       authentication.user
     else
-
-      user = User.new(
-        email:       auth_hash.info["email"].presence || "temp-#{SecureRandom.uuid}@example.com",
-        name:        truncated_name,
-        egg_name:    "未登録",
-        birth_month: 1,
-        birth_day:   1
-      )
-      user.send(:assign_friend_code)
-      dummy_pw = SecureRandom.urlsafe_base64(12)
-      user.password              = dummy_pw
-      user.password_confirmation = dummy_pw
-      user.send(:encrypt_password)
-      # 未登録というegg_nameは本来バリデーションではじかれるがここでは無視する。
-      user.save!(validate: false)
-      Authentication.create!(user: user, provider: auth_hash.provider, uid: auth_hash.uid)
+      user = pro_user_registration(auth_hash)
       user
     end
 
@@ -44,18 +24,53 @@ class OauthsController < ApplicationController
 
     remember_flag = session.delete(:remember)
     reset_session
-    session[:user_id] = @user.id
 
     if @user.profile_completed?
       auto_login(@user)
       remember_me! if remember_flag == "1"
       redirect_to root_path, success: "ログインに成功しました。"
     else
+      # requireログインには引っかかるよう、auto_loginは使用しない
+      # remember_me!はプロフィール補完完了後に行う
+      session[:user_id] = @user.id
+      session[:remember_flag] = remember_flag
       redirect_to complete_profile_path
     end
   end
 
   private
+  def pro_user_registration(auth_hash)
+    # OmniAuthの標準キーnameとLINE仕様のキーdisplayNameいずれにも念のため対応
+    raw_name       = (auth_hash.dig("info", "name").presence || auth_hash.dig("info", "displayName").presence)
+    truncated_name = raw_name.each_char.take(User::NAME_MAX_LENGTH).join
+
+    # LINE認証ではパスワードリセットが不要なため、emailは取得せずダミー値を格納
+    # egg_name、birth_month、birth_dayは一時的にダミーとして「未登録」とし、このあとユーザーのフォーム入力で正式決定
+    user = User.new(
+      email:       "temp-#{SecureRandom.uuid}@example.com",
+      name:        truncated_name,
+      egg_name:    "未登録",
+      birth_month: 1,
+      birth_day:   1
+    )
+
+    # 現状フレンド機能は未実装だが、今後実装の可能性があるためフレンドコードを割り振る
+    user.send(:assign_friend_code)
+
+    dummy_pw = SecureRandom.urlsafe_base64(12)
+    user.password              = dummy_pw
+    user.password_confirmation = dummy_pw
+
+    # Sorceryがsave!時に自動で呼び出すため、明示呼び出しは削除
+    # user.send(:encrypt_password)
+
+    # 未登録というegg_nameは本来バリデーションではじかれるがここでは無視する。
+    user.save!(validate: false)
+    Authentication.create!(user: user, provider: auth_hash.provider, uid: auth_hash.uid)
+
+    user
+  end
+
   def auth_params
     params.permit(:provider)
   end

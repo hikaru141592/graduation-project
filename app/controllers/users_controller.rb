@@ -28,6 +28,7 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
     if @user.update(profile_params)
       auto_login(@user)
+      remember_me! if session.delete(:remember_flag) == "1"
       redirect_to root_path, success: "プロフィールを登録しました。"
     else
       flash.now[:danger] = "入力に誤りがあります。"
