@@ -61,9 +61,7 @@ class OauthsController < ApplicationController
     user.password              = dummy_pw
     user.password_confirmation = dummy_pw
 
-    # Sorceryがsave!時に自動で呼び出すため、明示呼び出しは削除
-    # user.send(:encrypt_password)
-
+    user.send(:encrypt_password)
     # 未登録というegg_nameは本来バリデーションではじかれるがここでは無視する。
     user.save!(validate: false)
     Authentication.create!(user: user, provider: auth_hash.provider, uid: auth_hash.uid)
