@@ -28,7 +28,7 @@ class OauthsController < ApplicationController
     if @user.profile_completed?
       auto_login(@user)
       remember_me! if remember_flag == "1"
-      redirect_to root_path, success: "ログインに成功しました。"
+      redirect_to root_path, success: t("flash.oauths.callback.success")
     else
       # requireログインには引っかかるよう、auto_loginは使用しない
       # remember_me!はプロフィール補完完了後に行う

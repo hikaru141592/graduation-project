@@ -1,5 +1,19 @@
 ja:
-  hello: "こんにちは世界"
+  flash:
+    oauths:
+      callback:
+        success: "ログインに成功しました。"
+    password_resets:
+      create:
+        success: "パスワードリセット手順を送信しました"
+      update:
+        success: "パスワードを変更しました。"
+    sessions:
+      create:
+        success: "ログインに成功しました。"
+    users:
+      create:
+        success: "登録が完了しました。ログインしてください。"
   date:
     formats:
       default: "%Y-%m-%d"

@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     Rails.logger.debug "🛠️  params[:remember]=#{params[:remember].inspect}"
     if login(params[:email], params[:password], params[:remember] == "1")
       @user = current_user
-      redirect_to root_path, success: "ログインに成功しました。"
+      redirect_to root_path, success: t("flash.sessions.create.success")
     else
       flash.now[:danger] = "メールアドレスかパスワードが違います。"
       render :new, status: :unprocessable_entity
