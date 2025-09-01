@@ -64,7 +64,7 @@ class GameViewPresenter
 
   def arithmetic_payload
     return unless select_now_phase? && event.arithmetic_quiz_being_asked?
-    @arithmetic_payload ||= ArithmeticQuiz.generate(seed: seed)
+    ArithmeticQuiz.generate(seed: seed)
   end
 
   def seed
