@@ -1,0 +1,28 @@
+<%= form_with url: (@presenter.phase == :select_now ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
+  <%= hidden_field_tag :state_timestamp, @presenter.play_state.updated_at.iso8601 %>
+  <div class="d-grid gap-2 mx-auto mt-2 mt-md-4" style="width: 80%;">
+    <% 4.times do |i| %>
+      <% pos   = i + 1 %>
+
+      <%# ----- 各ボタンのラベルを生成 ----- %>
+      <% label =
+        if @presenter.phase == :select_now
+          orig = (@presenter.choices.find { |c| c.position == pos }&.label || "").dup
+          orig = arithmetic_option_replace(orig, @presenter.arithmetic_question_text, @presenter.arithmetic_options)
+        else
+          pos == 1 ? "つぎへ" : ""
+        end %>
+
+      <%# ----- ラベルの有無によってフォーム有効化ボタン/無効化ボタンを生成 ----- %>
+      <% if label.present? %>
+        <%= button_tag label,
+            type: "submit", name: "position", value: pos,
+            class: "btn btn-1 btn-large-text btn-lg py-1 px-2" %>
+      <% else %>
+        <button type="button" class="btn btn-1 btn-large-text btn-lg py-1 px-2" disabled style="opacity: 0.5 !important;">
+          <%= "&nbsp;".html_safe %>
+        </button>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
