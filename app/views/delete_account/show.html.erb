@@ -1,17 +1,17 @@
-<% content_for :title, 'アカウント削除' %>
+<% content_for :title, t(".title") %>
 
 <section class="privacy-policy container my-5 mx-0 mx-md-auto" style="max-width: 1200px;">
   <div class="text-start mb-3">
-    <%= link_to 'もどる', (settings_path), class: 'btn btn-2 mb-3' %>
+    <%= link_to t("buttons.back"), (settings_path), class: 'btn btn-2 mb-3' %>
   </div>
 
   <div class="text-center">
-    <h3 class="mb-4">アカウント削除</h3>
+    <h3 class="mb-4"><%= t(".title") %></h3>
 
     <p>
       アカウント削除を行うページです。誤って削除すると戻すことはできませんので十分ご注意ください。
     </p>
-    <%= link_to "アカウントを削除する", delete_account_path,
-          data: { turbo_method: :delete, turbo_confirm: "アカウントの復旧はできません。本当に削除しますか？" },
+    <%= link_to t("buttons.user_destroy"), delete_account_path,
+          data: { turbo_method: :delete, turbo_confirm: t("confirmations.user_destroy") },
           class: "btn btn-danger" %>
   </div>

@@ -8,9 +8,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to login_path, success: "登録が完了しました。ログインしてください。"
+      redirect_to login_path, success: t("flash.users.create.success")
     else
-      flash.now[:danger] = "入力に誤りがあります。"
+      flash.now[:danger] = t("flash.users.create.danger")
       render :new, status: :unprocessable_entity
     end
   end
@@ -29,9 +29,9 @@ class UsersController < ApplicationController
     if @user.update(profile_params)
       auto_login(@user)
       remember_me! if session.delete(:remember_flag) == "1"
-      redirect_to root_path, success: "プロフィールを登録しました。"
+      redirect_to root_path
     else
-      flash.now[:danger] = "入力に誤りがあります。"
+      flash.now[:danger] = t("flash.users.update_profile.danger")
       render :complete_profile, status: :unprocessable_entity
     end
   end

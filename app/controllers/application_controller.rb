@@ -6,13 +6,13 @@ class ApplicationController < ActionController::Base
   private
 
   def not_authenticated
-    redirect_to login_path, danger: "ログインが必要です。"
+    redirect_to login_path, danger: t("flash.application.not_authenticated.danger")
   end
 
   def redirect_if_incomplete_profile
     if session[:user_id] && current_user.nil?
       reset_session
-      return redirect_to login_path, danger: "セッションが切れています。再度ログインしてください。"
+      return redirect_to login_path, danger: t("flash.application.redirect_if_incomplete_profile.danger")
     end
     return unless current_user
     return if request.path == login_path

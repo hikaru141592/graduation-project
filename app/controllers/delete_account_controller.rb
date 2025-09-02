@@ -7,6 +7,6 @@ class DeleteAccountController < ApplicationController
   def destroy
     current_user.destroy!
     reset_session
-    redirect_to login_path, danger: "アカウントを削除しました。", status: :see_other
+    redirect_to login_path, danger: t("flash.delete_account.destroy.danger"), status: :see_other
   end
 end

@@ -1,15 +1,15 @@
 <div class="text-start mb-3 ms-md-3 ms-lg-4 ms-xl-5">
-  <%= link_to "またあとでね", logout_path,
-      data: { turbo_method: :delete, turbo_confirm: "いったんバイバイする？" },
+  <%= link_to t("buttons.logout"), logout_path,
+      data: { turbo_method: :delete, turbo_confirm: t("confirmations.logout") },
       class: "btn btn-2 ms-md-5" %>
 
-  <%= link_to "設定", settings_path, class: "btn btn-2" %>
+  <%= link_to t("buttons.settings"), settings_path, class: "btn btn-2" %>
 
   <button type="button"
           class="btn btn-2"
           data-action="click->status#open"
           data-bs-toggle="modal"
           data-bs-target="#statusModal">
-    ステータス
+    <%= t("buttons.status") %>
   </button>
 </div>

@@ -9,7 +9,7 @@ RSpec.describe "サインアップ（クライアントバリデーション）"
   end
 
   it "必須フィールドに入力せずに送信すると送信が抑制される" do
-    click_button '登録する'
+    click_button '登録'
     expect(current_path).to eq(signup_path)
   end
 

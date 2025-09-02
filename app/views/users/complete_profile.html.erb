@@ -1,4 +1,4 @@
-<% content_for :title, 'ユーザー登録' %>
+<% content_for :title, t(".title") %>
 
 <div class="container mt-5 mt-md-6" >
   <div class="row gx-4 justify-content-center align-items-md-center">
@@ -6,34 +6,34 @@
       <%= image_tag( "main/complete_profile.png", alt: "パスワードリセット", class: "img-fluid mb-4" ) %>
     </div>
     <div class="col-12 col-md-3">
-      <h2 class="mb-4">プロフィール登録</h2>
+      <h2 class="mb-4"><%= t(".title") %></h2>
 
       <%= render 'shared/error_messages', object: @user %>
 
       <%= form_with model: @user, url: update_profile_path, local: true, html: { class: 'needs-validation' } do |f| %>
         <div class="mb-3">
-          <%= f.label :name, 'ユーザー名（6文字以内）', class: 'form-label' %>
+          <%= f.label :name, t("activerecord.attributes.user.name"), class: 'form-label' %>
           <%= f.text_field :name, value: @user.name, class: 'form-control', maxlength: 6, required: true %>
         </div>
 
         <div class="mb-3">
-          <%= f.label :egg_name, 'たまごの名前（6文字以内）', class: 'form-label' %>
-          <%= f.text_field :egg_name, value: '', class: 'form-control', maxlength: 6, required: true %>
+          <%= f.label :egg_name, t("activerecord.attributes.user.egg_name"), class: 'form-label' %>
+          <%= f.text_field :egg_name, value: '', class: 'form-control', maxlength: 6, required: true, placeholder: t("helpers.placeholders.user.egg_name") %>
         </div>
 
         <div class="row mb-3">
           <div class="col">
-            <%= f.label :birth_month, '誕生月', class: 'form-label' %>
+            <%= f.label :birth_month, t("activerecord.attributes.user.birth_month"), class: 'form-label' %>
             <%= f.number_field :birth_month, class: 'form-control', in: 1..12, required: true %>
           </div>
           <div class="col">
-            <%= f.label :birth_day, '誕生日（日）', class: 'form-label' %>
+            <%= f.label :birth_day, t("activerecord.attributes.user.birth_day"), class: 'form-label' %>
             <%= f.number_field :birth_day, class: 'form-control', in: 1..31, required: true %>
           </div>
         </div>
 
         <div class="d-grid">
-          <%= f.submit '登録を完了する', class: 'btn btn-2 btn-lg' %>
+          <%= f.submit t("buttons.register"), class: 'btn btn-2 btn-lg' %>
         </div>
       <% end %>
     </div>
