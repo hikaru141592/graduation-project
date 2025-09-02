@@ -11,7 +11,7 @@ ja:
       title:    "プロフィール登録"
   sessions:
     new:
-      title: "ログイン"
+      title:    "ログイン"
   settings:
     show:
       title:    "設定"
@@ -40,38 +40,38 @@ ja:
   flash:
     application:
       not_authenticated:
-        danger: "ログインが必要です。"
+        danger:   "ログインが必要です。"
       redirect_if_incomplete_profile:
-        danger: "セッションが切れています。再度ログインしてください。"
+        danger:   "セッションが切れています。再度ログインしてください。"
     delete_account:
       destroy:
-        danger: "アカウントを削除しました。"
+        danger:   "アカウントを削除しました。"
     oauths:
       callback:
-        success: "ログインに成功しました。"
+        success:  "ログインに成功しました。"
     password_resets:
       create:
-        success: "パスワードリセット手順を送信しました"
+        success:  "パスワードリセット手順を送信しました"
       edit:
-        danger: "リンクが無効か、有効期限が切れています。再度お試しください。"
+        danger:   "リンクが無効か、有効期限が切れています。再度お試しください。"
       update:
-        success: "パスワードを変更しました。"
+        success:  "パスワードを変更しました。"
         invalid_token:
           danger: "リンクが無効か、有効期限が切れています。再度お試しください。"
         password_mismatch:
           danger: "パスワードと確認用パスワードが一致しません。"
     sessions:
       create:
-        success: "ログインに成功しました。"
-        danger: "メールアドレスかパスワードが違います。"
+        success:  "ログインに成功しました。"
+        danger:   "メールアドレスかパスワードが違います。"
       destroy:
-        danger: "ログアウトしました。"
+        danger:   "ログアウトしました。"
     users:
       create:
-        success: "登録が完了しました。ログインしてください。"
-        danger: "入力に誤りがあります。"
+        success:  "登録が完了しました。ログインしてください。"
+        danger:   "入力に誤りがあります。"
       update_profile:
-        danger: "入力に誤りがあります。"
+        danger:   "入力に誤りがあります。"
   buttons:
     # 共通
     back:     "もどる"
@@ -113,9 +113,9 @@ ja:
     line_login_required:  "LINEログインを利用しない場合、LINEメッセージを利用した機能がご利用できません。\nよろしいでしょうか。"
   date:
     formats:
-      default: "%Y-%m-%d"
-      long: "%Y年%-m月%-d日"
-      short: "%-m/%-d"
+      default:  "%Y-%m-%d"
+      long:     "%Y年%-m月%-d日"
+      short:    "%-m/%-d"
   time:
     formats:
       default: "%Y-%m-%d %H:%M:%S"
@@ -125,29 +125,29 @@ ja:
     errors:
       messages:
         record_invalid: "バリデーションに失敗しました: %{errors}"
-        blank: "を入力してください。"
-        invalid: "は不正な値です。"
-        confirmation: "と一致しません。"
-        too_long: "は%{count}文字以内で入力してください。"
-        too_short: "は%{count}文字以上で入力してください。"
-        taken: "はすでに存在します。"
-        not_a_number: "は数値で入力してください。"
-        inclusion: "は一覧にありません。"
+        blank:          "を入力してください。"
+        invalid:        "は不正な値です。"
+        confirmation:   "と一致しません。"
+        too_long:       "は%{count}文字以内で入力してください。"
+        too_short:      "は%{count}文字以上で入力してください。"
+        taken:          "はすでに存在します。"
+        not_a_number:   "は数値で入力してください。"
+        inclusion:      "は一覧にありません。"
     attributes:
       user:
-        email: "メールアドレス"
-        password: "パスワード"
+        email:        "メールアドレス"
+        password:     "パスワード"
         password_confirmation: "確認用パスワード"
-        name: "ユーザー名"
-        egg_name: "タマゴの名前"
-        birth_month: "誕生月"
-        birth_day: "誕生日"
-        friend_code: "フレンドコード"
+        name:         "ユーザー名"
+        egg_name:     "タマゴの名前"
+        birth_month:  "誕生月"
+        birth_day:    "誕生日"
+        friend_code:  "フレンドコード"
   helpers:
     placeholders:
       user:
-        email: "example@example.com"
+        email:    "example@example.com"
         password: "6文字以上"
         password_confirmation: "もう一度入力"
-        name: "6文字以内"
+        name:     "6文字以内"
         egg_name: "6文字以内"
