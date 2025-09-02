@@ -5,12 +5,12 @@ RSpec.describe "サインアップ（クライアントバリデーション）"
 
   before do
     driven_by :headless_chrome
-    visit signup_path
+    visit new_user_path
   end
 
   it "必須フィールドに入力せずに送信すると送信が抑制される" do
     click_button '登録'
-    expect(current_path).to eq(signup_path)
+    expect(current_path).to eq(new_user_path)
   end
 
   it "すべての入力欄に required 属性が付いている" do

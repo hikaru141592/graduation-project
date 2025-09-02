@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  get  "signup", to: "users#new",    as: "signup"
-  post "signup", to: "users#create"
+  resources :users, only: [:new, :create]
+  # get  "/users/new", to: "users#new",    as: "new_user"
+  # post "/users", to: "users#create"       as: "users"
+  # get  "signup", to: "users#new",    as: "signup"   # 元のコード
+  # post "signup", to: "users#create"                 # 元のコード
 
   get    "login",  to: "sessions#new",     as: "login"
   post   "login",  to: "sessions#create"

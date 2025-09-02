@@ -7,7 +7,7 @@ module AuthenticationMacros
   end
 
   def sign_up_as(attrs)
-    visit signup_path
+    visit new_user_path
     fill_in 'メールアドレス',           with: attrs[:email]
     fill_in 'パスワード（6文字以上）',   with: attrs[:password]
     fill_in 'パスワード（確認用）',       with: attrs[:password_confirmation]
