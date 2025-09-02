@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       @user = current_user
       redirect_to root_path, success: t("flash.sessions.create.success")
     else
-      flash.now[:danger] = "メールアドレスかパスワードが違います。"
+      flash.now[:danger] = t("flash.sessions.create.danger")
       render :new, status: :unprocessable_entity
     end
   end
@@ -19,6 +19,6 @@ class SessionsController < ApplicationController
   def destroy
     forget_me!
     logout
-    redirect_to login_path, danger: "ログアウトしました。", status: :see_other
+    redirect_to login_path, danger: t("flash.sessions.destroy.danger"), status: :see_other
   end
 end

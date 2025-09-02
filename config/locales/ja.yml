@@ -1,19 +1,39 @@
 ja:
   flash:
+    application:
+      not_authenticated:
+        danger: "ログインが必要です。"
+      redirect_if_incomplete_profile:
+        danger: "セッションが切れています。再度ログインしてください。"
+    delete_account:
+      destroy:
+        danger: "アカウントを削除しました。"
     oauths:
       callback:
         success: "ログインに成功しました。"
     password_resets:
       create:
         success: "パスワードリセット手順を送信しました"
+      edit:
+        danger: "リンクが無効か、有効期限が切れています。再度お試しください。"
       update:
         success: "パスワードを変更しました。"
+        invalid_token:
+          danger: "リンクが無効か、有効期限が切れています。再度お試しください。"
+        password_mismatch:
+          danger: "パスワードと確認用パスワードが一致しません。"
     sessions:
       create:
         success: "ログインに成功しました。"
+        danger: "メールアドレスかパスワードが違います。"
+      destroy:
+        danger: "ログアウトしました。"
     users:
       create:
         success: "登録が完了しました。ログインしてください。"
+        danger: "入力に誤りがあります。"
+      update_profile:
+        danger: "入力に誤りがあります。"
   date:
     formats:
       default: "%Y-%m-%d"
