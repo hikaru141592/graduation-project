@@ -1,4 +1,4 @@
-<% content_for :title, '新しいパスワードの登録' %>
+<% content_for :title, t(".title") %>
 
 <div class="container mt-5" >
   <div class="row gx-4 justify-content-center align-items-md-center">
@@ -6,7 +6,7 @@
       <%= image_tag( "main/password_reset_edit.png", alt: "パスワードリセット", class: "img-fluid mb-4" ) %>
     </div>
     <div class="col-12 col-md-3">
-      <h2 class="mb-4">新パスワード登録</h2>
+      <h2 class="mb-4"><%= t(".title") %></h2>
 
       <%= form_with url: update_password_reset_path(@token), method: :patch, local: true, html: { class: 'needs-validation' } do |f| %>
         <%= hidden_field_tag :token, @token %>

@@ -1,4 +1,4 @@
-<% content_for :title, 'パスワード再発行' %>
+<% content_for :title, t(".title") %>
 
 <div class="container mt-5" >
   <div class="row gx-4 justify-content-center align-items-md-center">
@@ -9,7 +9,7 @@
       <%= image_tag( "main/password_reset_new.png", alt: "パスワードリセット", class: "img-fluid mb-4" ) %>
     </div>
     <div class="col-12 col-md-3">
-      <h2 class="mb-4">パスワード再発行</h2>
+      <h2 class="mb-4"><%= t(".title") %></h2>
 
       <%= form_with url: password_resets_path, local: true, html: { class: 'needs-validation' } do |f| %>
         <div class="mb-3">

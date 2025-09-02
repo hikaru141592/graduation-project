@@ -1,7 +1,7 @@
-<% content_for :title, 'パスワード再発行' %>
+<% content_for :title, t(".title") %>
 
 <div class="container vertical-spacing-lg mt-5 mx-0 mx-md-auto text-md-center" style="max-width: 600px;">
-  <h2 class="mb-4">パスワード再発行</h2>
+  <h2 class="mb-4"><%= t(".title") %></h2>
 
   <p class="mb-4">
     パスワード再発行の案内メールを送信しました。<br>
@@ -11,5 +11,4 @@
   <div class="d-grid mb-3">
     <%= link_to t("buttons.to_top"), login_path, class: 'btn btn-2 btn-lg' %>
   </div>
-
 </div>

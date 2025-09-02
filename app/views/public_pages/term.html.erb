@@ -1,11 +1,11 @@
-<% content_for :title, '利用規約' %>
+<% content_for :title, t(".title") %>
 
 <section class="terms-of-service container my-5 mx-0 mx-md-auto" style="max-width: 800px;">
   <div class="text-start mb-3">
     <%= link_to t("buttons.back"), (request.referer || root_path), class: 'btn btn-2 mb-0', data: { turbo: false } %>
   </div>
 
-  <h3 class="mb-4">利用規約</h3>
+  <h3 class="mb-4"><%= t(".title") %></h3>
 
   <h6>1. はじめに</h6>
   <p>「ニワトリとタマゴのワクワク生活」Webゲーム（以下「本サービス」）は非商用のゲームです。以下の規約にご同意のうえご利用ください。

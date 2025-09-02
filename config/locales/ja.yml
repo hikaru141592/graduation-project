@@ -1,4 +1,47 @@
 ja:
+  app:
+    title: "ニワトリとタマゴのワクワク生活"
+  users:
+    new:
+      title:    "ユーザー登録"
+    complete_profile:
+      title:    "プロフィール登録"
+  sessions:
+    new:
+      title: "ログイン"
+  settings:
+    show:
+      title:    "設定"
+  delete_account:
+    show:
+      title:    "アカウント削除"
+  line_notification_settings:
+    show:
+      title:    "LINEメッセージ機能"
+  password_resets:
+    new:
+      title:    "パスワード再発行"
+    create_page:
+      title:    "パスワード再発行"
+    edit:
+      title:    "新しいパスワードの登録"
+    complete_update:
+      title:    "新しいパスワードの登録"
+  public_pages:
+    about:
+      title:    "このゲームについて"
+    privacy:
+      title:    "プライバシーポリシー"
+    term:
+      title:    "利用規約"
+
+
+
+
+
+
+
+
   flash:
     application:
       not_authenticated:
