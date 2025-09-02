@@ -34,6 +34,45 @@ ja:
         danger: "入力に誤りがあります。"
       update_profile:
         danger: "入力に誤りがあります。"
+  buttons:
+    # 共通
+    back:     "もどる"
+    register: "登録"
+    # ゲームプレイ画面
+    logout:   "またあとでね"
+    settings: "設定"
+    status:   "ステータス"
+    # 設定
+    line_add_friend:        "LINEともだち追加"
+    line_notifications_on:  "通知をONにする"
+    line_notifications_off: "通知をOFFにする"
+    user_destroy:           "アカウントを削除する"
+    # ログイン画面
+    login:          "ログイン"
+    login_on_line:  "LINEでログイン"
+    # 他
+    to_login:       "ログイン画面へ"
+    to_top:         "トップページへ"
+    reset_request:  "再発行の申請"
+    start_game:     "ゲームをはじめる"
+  links:
+    # ログイン画面
+    about_game:           "このゲームについて"
+    user_new:             "新規登録はこちら"
+    forgot_password_link: "パスワードを忘れた方はこちら"
+    # 設定
+    user_destroy: "アカウント削除"
+    line_message: "LINEメッセージ機能"
+    # フッター
+    home:           "ホーム"
+    privacy_policy: "プライバシーポリシー"
+    term:           "利用規約"
+  form-check:
+    auto_login:     "次回から自動ログインする"
+  confirmations:
+    logout:               "いったんバイバイする？"
+    user_destroy:         "アカウントの復旧はできません。本当に削除しますか？"
+    line_login_required:  "LINEログインを利用しない場合、LINEメッセージを利用した機能がご利用できません。\nよろしいでしょうか。"
   date:
     formats:
       default: "%Y-%m-%d"

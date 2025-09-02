@@ -2,15 +2,15 @@
   <hr class="footer-divider mb-3">
   <div class=\"container\">
     <small>
-      <%= link_to 'ホーム', root_path, class: 'text-muted text-decoration-none', data: { turbo: false } %>
+      <%= link_to t("links.home"), root_path, class: 'text-muted text-decoration-none', data: { turbo: false } %>
     </small>
     |
     <small>
-      <%= link_to 'プライバシーポリシー', privacy_policy_path, class: 'text-muted text-decoration-none' %>
+      <%= link_to t("links.privacy_policy"), privacy_policy_path, class: 'text-muted text-decoration-none' %>
     </small>
     |
     <small>
-      <%= link_to '利用規約', term_path, class: 'text-muted text-decoration-none' %>
+      <%= link_to t("links.term"), term_path, class: 'text-muted text-decoration-none' %>
     </small>
     <br>
     <small class=\"text-muted\">©ニワトリとタマゴのワクワク生活</small>
