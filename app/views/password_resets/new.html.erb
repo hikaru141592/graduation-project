@@ -13,8 +13,8 @@
 
       <%= form_with url: password_resets_path, local: true, html: { class: 'needs-validation' } do |f| %>
         <div class="mb-3">
-          <%= f.label :email, 'メールアドレス', class: 'form-label' %>
-          <%= f.email_field :email, name: :email, class: 'form-control', required: true, placeholder: 'example@example.com' %>
+          <%= f.label :email, t("activerecord.attributes.user.email"), class: 'form-label' %>
+          <%= f.email_field :email, name: :email, class: 'form-control', required: true, placeholder: t("helpers.placeholders.user.email") %>
         </div>
 
         <div class="d-grid mb-3">

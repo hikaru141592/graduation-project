@@ -19,37 +19,37 @@
 
       <%= form_with model: @user, url: signup_path, local: true, html: { class: 'needs-validation' } do |f| %>
         <div class="mb-3">
-          <%= f.label :email, 'メールアドレス', class: 'form-label' %>
-          <%= f.email_field :email, class: 'form-control', required: true, placeholder: 'example@example.com' %>
+          <%= f.label :email, t("activerecord.attributes.user.email"), class: 'form-label' %>
+          <%= f.email_field :email, class: 'form-control', required: true, placeholder: t("helpers.placeholders.user.email") %>
         </div>
 
         <div class="mb-3">
-          <%= f.label :password, 'パスワード（6文字以上）', class: 'form-label' %>
-          <%= f.password_field :password, class: 'form-control', minlength: 6, required: true %>
+          <%= f.label :password, t("activerecord.attributes.user.password"), class: 'form-label' %>
+          <%= f.password_field :password, class: 'form-control', minlength: 6, required: true, placeholder: t("helpers.placeholders.user.password") %>
         </div>
 
         <div class="mb-3">
-          <%= f.label :password_confirmation, 'パスワード（確認用）', class: 'form-label' %>
-          <%= f.password_field :password_confirmation, class: 'form-control', required: true %>
+          <%= f.label :password_confirmation, t("activerecord.attributes.user.password_confirmation"), class: 'form-label' %>
+          <%= f.password_field :password_confirmation, class: 'form-control', required: true, placeholder: t("helpers.placeholders.user.password_confirmation") %>
         </div>
 
         <div class="mb-3">
-          <%= f.label :name, 'ユーザー名（6文字以内）', class: 'form-label' %>
-          <%= f.text_field :name, class: 'form-control', maxlength: 6, required: true %>
+          <%= f.label :name, t("activerecord.attributes.user.name"), class: 'form-label' %>
+          <%= f.text_field :name, class: 'form-control', maxlength: 6, required: true, placeholder: t("helpers.placeholders.user.name") %>
         </div>
 
         <div class="mb-3">
-          <%= f.label :egg_name, 'たまごの名前（6文字以内）', class: 'form-label' %>
-          <%= f.text_field :egg_name, class: 'form-control', maxlength: 6, required: true %>
+          <%= f.label :egg_name, t("activerecord.attributes.user.egg_name"), class: 'form-label' %>
+          <%= f.text_field :egg_name, class: 'form-control', maxlength: 6, required: true, placeholder: t("helpers.placeholders.user.egg_name") %>
         </div>
 
         <div class="row mb-3">
           <div class="col">
-            <%= f.label :birth_month, '誕生月', class: 'form-label' %>
+            <%= f.label :birth_month, t("activerecord.attributes.user.birth_month"), class: 'form-label' %>
             <%= f.number_field :birth_month, class: 'form-control', in: 1..12, required: true %>
           </div>
           <div class="col">
-            <%= f.label :birth_day, '誕生日（日）', class: 'form-label' %>
+            <%= f.label :birth_day, t("activerecord.attributes.user.birth_day"), class: 'form-label' %>
             <%= f.number_field :birth_day, class: 'form-control', in: 1..31, required: true %>
           </div>
         </div>

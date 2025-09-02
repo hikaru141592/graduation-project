@@ -101,7 +101,15 @@ ja:
         password: "パスワード"
         password_confirmation: "確認用パスワード"
         name: "ユーザー名"
-        egg_name: "たまごちゃんの名前"
+        egg_name: "タマゴの名前"
         birth_month: "誕生月"
         birth_day: "誕生日"
         friend_code: "フレンドコード"
+  helpers:
+    placeholders:
+      user:
+        email: "example@example.com"
+        password: "6文字以上"
+        password_confirmation: "もう一度入力"
+        name: "6文字以内"
+        egg_name: "6文字以内"
