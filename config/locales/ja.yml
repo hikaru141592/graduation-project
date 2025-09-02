@@ -1,6 +1,9 @@
 ja:
   app:
     title: "ニワトリとタマゴのワクワク生活"
+  meta:
+    description:  "タマゴといっしょにワクワクな毎日を送ろう！"
+    keywords:     "たまご,タマゴ,卵,egg,Egg,鶏,ニワトリ,にわとり,雛,ヒヨコ,ひよこ,ワクワク,育成,ゲーム,Rails,Webアプリ,Webゲーム,Ruby,かわいい,キャラクター"
   users:
     new:
       title:    "ユーザー登録"
@@ -34,14 +37,6 @@ ja:
       title:    "プライバシーポリシー"
     term:
       title:    "利用規約"
-
-
-
-
-
-
-
-
   flash:
     application:
       not_authenticated:

@@ -1,18 +1,18 @@
 module ApplicationHelper
   def default_meta_tags
     {
-      site: "ニワトリとタマゴのワクワク生活",
-      reverse: false,
-      charset: "utf-8",
-      description: "タマゴといっしょにワクワクな毎日を送ろう！",
-      keywords: "たまご,タマゴ,卵,egg,Egg,鶏,ニワトリ,にわとり,雛,ヒヨコ,ひよこ,ワクワク,育成,ゲーム,Rails,Webアプリ,Webゲーム,Ruby,かわいい,キャラクター",
-      canonical: request.original_url,
-      separator: "|",
+      site:         t("app.title"),
+      reverse:      false,
+      charset:      "utf-8",
+      description:  t("meta.description"),
+      keywords:     t("meta.keywords"),
+      canonical:    request.original_url,
+      separator:    "|",
       og: {
         site_name: :site,
-        type: "website",
-        url: request.original_url,
-        image: image_url("og/og_image.png"),
+        type:   "website",
+        url:    request.original_url,
+        image:  image_url("og/og_image.png"),
         description: :description,
         locale: "ja_JP"
       }
