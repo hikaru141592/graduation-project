@@ -5,9 +5,13 @@ Rails.application.routes.draw do
   # get  "signup", to: "users#new",    as: "signup"   # 元のコード
   # post "signup", to: "users#create"                 # 元のコード
 
-  get    "login",  to: "sessions#new",     as: "login"
-  post   "login",  to: "sessions#create"
-  delete "logout", to: "sessions#destroy", as: "logout"
+  resource :session, only: [:new, :create, :destroy]
+  # get    "/session/new", to: "sessions#new",     as: "new_session" # resourceが展開するルート
+  # post   "/session",     to: "sessions#create",  as: "session"     # resourceが展開するルート
+  # delete "/session",     to: "sessions#destroy", as: "session"     # resourceが展開するルート
+  # get    "login",        to: "sessions#new",     as: "login"       # 元のコード
+  # post   "login",        to: "sessions#create"                     # 元のコード
+  # delete "logout",       to: "sessions#destroy", as: "logout"      # 元のコード
 
   post "games/select_action", to: "games#select_action", as: "select_action"
   post "games/advance_cut",   to: "games#advance_cut",   as: "advance_cut"

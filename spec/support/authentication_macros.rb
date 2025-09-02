@@ -1,6 +1,6 @@
 module AuthenticationMacros
   def login(user, password = 'password')
-    visit login_path
+    visit new_session_path
     fill_in 'メールアドレス', with: user.email
     fill_in 'パスワード',     with: password
     click_button 'ログイン'

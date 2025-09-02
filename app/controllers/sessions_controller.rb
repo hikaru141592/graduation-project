@@ -19,6 +19,6 @@ class SessionsController < ApplicationController
   def destroy
     forget_me!
     logout
-    redirect_to login_path, danger: t("flash.sessions.destroy.danger"), status: :see_other
+    redirect_to new_session_path, danger: t("flash.sessions.destroy.danger"), status: :see_other
   end
 end

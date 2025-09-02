@@ -17,7 +17,7 @@ RSpec.describe "ユーザー登録", type: :request do
         expect {
           post users_path, params: { user: valid_attributes }
         }.to change(User, :count).by(1)
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_session_path)
         follow_redirect!
         expect(response.body).to include("登録が完了しました。ログインしてください。")
       end

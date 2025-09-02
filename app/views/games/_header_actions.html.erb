@@ -1,5 +1,5 @@
 <div class="text-start mb-3 ms-md-3 ms-lg-4 ms-xl-5">
-  <%= link_to t("buttons.logout"), logout_path,
+  <%= link_to t("buttons.logout"), session_path,
       data: { turbo_method: :delete, turbo_confirm: t("confirmations.logout") },
       class: "btn btn-2 ms-md-5" %>
 
