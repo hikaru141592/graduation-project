@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_action :require_login, only: %i[new create]
+  skip_before_action :require_login
 
   def new
     @user = User.new
@@ -15,27 +15,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def complete_profile
-    @user = User.find(session[:user_id])
-
-    if @user.profile_completed?
-      auto_login(@user)
-      redirect_to root_path
-    end
-  end
-
-  def update_profile
-    @user = User.find(session[:user_id])
-    if @user.update(profile_params)
-      auto_login(@user)
-      remember_me! if session.delete(:remember_flag) == "1"
-      redirect_to root_path
-    else
-      flash.now[:danger] = t("flash.users.update_profile.danger")
-      render :complete_profile, status: :unprocessable_entity
-    end
-  end
-
   private
 
   def user_params
@@ -43,15 +22,6 @@ class UsersController < ApplicationController
       :email,
       :password,
       :password_confirmation,
-      :name,
-      :egg_name,
-      :birth_month,
-      :birth_day,
-    )
-  end
-
-  def profile_params
-    params.require(:user).permit(
       :name,
       :egg_name,
       :birth_month,

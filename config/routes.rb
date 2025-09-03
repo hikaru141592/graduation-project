@@ -51,8 +51,12 @@ Rails.application.routes.draw do
   match "/auth/:provider/callback", to: "oauths#callback", via: %i[get post]
   get "/auth/failure",            to: redirect("/")
 
-  get   "/complete_profile", to: "users#complete_profile", as: :complete_profile
-  patch "/complete_profile", to: "users#update_profile",   as: :update_profile
+  resource :profile_completion, only: [:edit, :update]
+  # 【resourcesが展開する新ルーティング】
+  # GET   "/profile_completion/edit",  to: "profiles_completions#edit",     as: edit_profile_completion # resourceが展開
+  # PATCH "/profile_completion",       to: "profiles_completions#update",   as: profile_completion      # resourceが展開
+  # get   "/complete_profile", to: "users#complete_profile", as: :complete_profile  # 元のコード
+  # patch "/complete_profile", to: "users#update_profile",   as: :update_profile    # 元のコード
 
   get   "/settings", to: "settings#show", as: :settings
   get   "/settings/line_notification", to: "line_notification_settings#show", as: :settings_line_notification

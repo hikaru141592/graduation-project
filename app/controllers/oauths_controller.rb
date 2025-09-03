@@ -34,7 +34,7 @@ class OauthsController < ApplicationController
       # remember_me!はプロフィール補完完了後に行う
       session[:user_id] = @user.id
       session[:remember_flag] = remember_flag
-      redirect_to complete_profile_path
+      redirect_to edit_profile_completion_path
     end
   end
 

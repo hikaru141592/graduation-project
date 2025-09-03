@@ -17,7 +17,8 @@ class ApplicationController < ActionController::Base
     return unless current_user
     return if request.path == new_session_path
     return if current_user.profile_completed?
-    return if request.path == complete_profile_path
-    redirect_to complete_profile_path
+    return if request.path == edit_profile_completion_path ||
+                              (request.path == profile_completion_path && request.patch?)
+    redirect_to edit_profile_completion_path
   end
 end

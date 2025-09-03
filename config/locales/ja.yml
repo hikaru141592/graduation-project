@@ -7,6 +7,7 @@ ja:
   users:
     new:
       title:    "ユーザー登録"
+  profile_completions:
     complete_profile:
       title:    "プロフィール登録"
   sessions:
@@ -70,7 +71,8 @@ ja:
       create:
         success:  "登録が完了しました。ログインしてください。"
         danger:   "入力に誤りがあります。"
-      update_profile:
+    profile_completions:
+      update:
         danger:   "入力に誤りがあります。"
   buttons:
     # 共通
