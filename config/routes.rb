@@ -13,8 +13,15 @@ Rails.application.routes.draw do
   # post   "login",        to: "sessions#create"                     # 元のコード
   # delete "logout",       to: "sessions#destroy", as: "logout"      # 元のコード
 
-  post "games/select_action", to: "games#select_action", as: "select_action"
-  post "games/advance_cut",   to: "games#advance_cut",   as: "advance_cut"
+  resource :game, only: [], controller: "games" do
+    post :select_action
+    post :advance_cut
+  end
+  # post "/game/select_action",  to: "games#select_action", as: "select_action_game"   # resourceにぶら下げたカスタムPOST
+  # post "/game/advance_cut",    to: "games#advance_cut",   as: "advance_cut_game"     # resourceにぶら下げたカスタムPOST
+  # post "games/select_action",  to: "games#select_action", as: "select_action"        # 元のコード
+  # post "games/advance_cut",    to: "games#advance_cut",   as: "advance_cut"          # 元のコード
+  root to: "games#play"
 
   get "/privacy_policy", to: "public_pages#privacy", as: :privacy_policy
   get "/term",           to: "public_pages#term",    as: :term
@@ -43,8 +50,6 @@ Rails.application.routes.draw do
   post "/webhooks/line", to: "line_webhooks#callback"
 
   get "/status", to: "status#show", as: :status
-
-  root to: "games#play"
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
