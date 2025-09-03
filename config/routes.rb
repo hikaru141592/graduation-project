@@ -27,12 +27,25 @@ Rails.application.routes.draw do
   get "/term",           to: "public_pages#term",    as: :term
   get "/about",          to: "public_pages#about",   as: :about
 
-  get  "/password_resets/new",     to: "password_resets#new",    as: "new_password_reset"
-  post "/password_resets",         to: "password_resets#create", as: "password_resets"
-  get   "/password_resets/create",   to: "password_resets#create_page", as: "password_resets_create"
-  get   "/password_resets/edit",   to: "password_resets#edit",   as: "edit_password_reset"
-  patch "/password_resets/update", to: "password_resets#update", as: "update_password_reset"
-  get "/password_resets/complete_update", to: "password_resets#complete_update", as: "complete_update_password_reset"
+  resources :password_resets, param: :token, only: [:new, :create, :edit, :update] do
+    collection do
+      get :create_page
+      get :complete_update
+    end
+  end
+    # get   "/password_resets/new",           to: "password_resets#new",    as: "new_password_reset"          # ← resourcesが展開
+    # post  "/password_resets",               to: "password_resets#create", as: "password_resets"             # ← resourcesが展開
+    # get   "/password_resets/:token/edit",   to: "password_resets#edit",   as: "edit_password_reset"         # ← resourcesが展開（:tokenがURLに入る）
+    # patch "/password_resets/:token",        to: "password_resets#update", as: "password_reset"              # ← resourcesが展開
+    # get   "/password_resets/new",           to: "password_resets#new",    as: "new_password_reset"          # 元のコード
+    # post  "/password_resets",               to: "password_resets#create", as: "password_resets"             # 元のコード
+    # get   "/password_resets/edit",          to: "password_resets#edit",   as: "edit_password_reset"         # 元のコード
+    # patch "/password_resets/update",        to: "password_resets#update", as: "update_password_reset"       # 元のコード
+
+    # get   "/password_resets/create_page",     to: "password_resets#create_page",     as: "create_page_password_resets"      # collectionでぶら下げ
+    # get   "/password_resets/complete_update", to: "password_resets#complete_update", as: "complete_update_password_resets"  # collectionでぶら下げ
+    # get   "/password_resets/create",          to: "password_resets#create_page",     as: "password_resets_create"           # 元のコード
+    # get   "/password_resets/complete_update", to: "password_resets#complete_update", as: "complete_update_password_reset"   # 元のコード
 
   get "/line_login", to: "oauths#line_login", as: "line_login"
   match "/auth/:provider/callback", to: "oauths#callback", via: %i[get post]
