@@ -53,6 +53,7 @@ class OauthsController < ApplicationController
       birth_month: 1,
       birth_day:   1
     )
+    user.line_registration = true
 
     # 現状フレンド機能は未実装だが、今後実装の可能性があるためフレンドコードを割り振る
     user.send(:assign_friend_code)
@@ -62,22 +63,17 @@ class OauthsController < ApplicationController
     user.password_confirmation = dummy_pw
 
     user.send(:encrypt_password)
-    # 未登録というegg_nameは本来バリデーションではじかれるがここでは無視する。
-    user.save!(validate: false)
+    user.save!
     Authentication.create!(user: user, provider: auth_hash.provider, uid: auth_hash.uid)
 
     user
-  end
-
-  def auth_params
-    params.permit(:provider)
   end
 
   def update_line_friend_status(user, access_token)
     return if access_token.blank?
     begin
       friend_flag = fetch_line_friend_flag(access_token)
-      user.update_column(:line_friend_linked, friend_flag)
+      user.update(line_friend_linked: friend_flag)
     rescue => e
       Rails.logger.warn("[LINE Friendship] #{e.class}: #{e.message}")
     end

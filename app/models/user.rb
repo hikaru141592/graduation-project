@@ -23,7 +23,17 @@ class User < ApplicationRecord
   validates :password_confirmation, presence: true,
             if: -> { authentications.empty? && (new_record? || changes[:crypted_password]) }
   validates :name,      presence: true, length: { maximum: NAME_MAX_LENGTH }
-  validates :egg_name,  presence: true, length: { maximum: 6 }, exclusion: { in: [ "未登録" ], message: "には「未登録」という文字列を使用できません" }
+  validates :egg_name,
+    presence: true,
+    length: { maximum: 6 }
+
+  # LINE認証による仮登録時のみ未登録とし、仮登録ユーザーをrootに通したりしないようにするための判断基準とする。
+  validates :egg_name,
+    exclusion: {
+      in: [ "未登録" ],
+      message: "には「未登録」という文字列を使用できません"
+    },
+    unless: :line_registration?
   validates :birth_month, presence: true, inclusion: { in: 1..12 }
   validates :birth_day,   presence: true, inclusion: { in: 1..31 }
   validates :friend_code, presence: true, uniqueness: true, format: { with: /\A\d{8}\z/ }
@@ -31,6 +41,8 @@ class User < ApplicationRecord
 
   enum :role, { general: 0, admin: 1 }
   enum :name_suffix, { no_suffix: 0, chan: 1, kun: 2, sama: 3 }
+
+  attr_accessor :line_registration
 
   def profile_completed?
     egg_name != "未登録"
@@ -87,6 +99,10 @@ class User < ApplicationRecord
     inv = user_event_category_invalidations.find_or_initialize_by(event_category: event_category)
     inv.expires_at = expires_at
     inv.save!
+  end
+
+  def line_registration?
+    line_registration == true
   end
 
   private

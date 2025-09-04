@@ -1,0 +1,15 @@
+name: Setup bundle with Docker
+description: Checkout, cache vendor/bundle, and bundle install in Docker
+runs:
+  using: "composite"
+  steps:
+    - name: Cache vendor/bundle
+      uses: actions/cache@v4
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: ${{ runner.os }}-gems-
+
+    - name: Ensure bundle dir
+      shell: bash
+      run: mkdir -p vendor/bundle

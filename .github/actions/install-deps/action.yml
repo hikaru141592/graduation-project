@@ -1,0 +1,8 @@
+name: 'Install dependencies'
+description: 'Installs Ruby dependencies using Docker'
+runs:
+  using: 'composite'
+  steps:
+    - run: |
+        docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bundle install
+      shell: bash

@@ -13,69 +13,57 @@ jobs:
   scan_ruby:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      # 共通処理1
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
+      # 共通処理2
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
-
+      # 共通処理3
       - name: Install dependencies
-        run: |
-          docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bundle install
+        uses: ./.github/actions/install-deps
 
+      # 個別処理
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      # 共通処理1
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
+      # 共通処理2
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
-
+      # 共通処理3
       - name: Install dependencies
-        run: |
-          docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bundle install
+        uses: ./.github/actions/install-deps
 
+      # 個別処理
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      # 共通処理1
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
+      # 共通処理2
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
-
+      # 共通処理3
       - name: Install dependencies
-        run: |
-          docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bundle install
+        uses: ./.github/actions/install-deps
 
+      # 個別処理
       - name: Lint code for consistent style
         run: docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bin/rubocop -f github
 
@@ -87,18 +75,15 @@ jobs:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     steps:
-      - uses: actions/checkout@v4
+      # 共通処理1
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
+      # 共通処理2
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
-
+      # 個別処理
       - name: Start DB container
         run: |
           docker compose up -d db
