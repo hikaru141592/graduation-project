@@ -23,9 +23,11 @@ Rails.application.routes.draw do
   # post "games/advance_cut",    to: "games#advance_cut",   as: "advance_cut"          # 元のコード
   root to: "games#play"
 
-  get "/privacy_policy", to: "public_pages#privacy", as: :privacy_policy
-  get "/term",           to: "public_pages#term",    as: :term
-  get "/about",          to: "public_pages#about",   as: :about
+  controller :public_pages do
+    get :privacy_policy, action: :privacy
+    get :term
+    get :about
+  end
 
   resources :password_resets, param: :token, only: [:new, :create, :edit, :update] do
     collection do
@@ -77,7 +79,8 @@ Rails.application.routes.draw do
 
   post "/webhooks/line", to: "line_webhooks#callback"
 
-  get "/status", to: "status#show", as: :status
+  resource :status, only: [:show], controller: "status"
+  # get "/status", to: "status#show", as: :status  # resourceが展開、元のコードと同様
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
