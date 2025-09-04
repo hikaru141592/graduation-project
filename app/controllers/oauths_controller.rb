@@ -74,7 +74,7 @@ class OauthsController < ApplicationController
     return if access_token.blank?
     begin
       friend_flag = fetch_line_friend_flag(access_token)
-      user.update_column(:line_friend_linked, friend_flag)
+      user.update(line_friend_linked: friend_flag)
     rescue => e
       Rails.logger.warn("[LINE Friendship] #{e.class}: #{e.message}")
     end

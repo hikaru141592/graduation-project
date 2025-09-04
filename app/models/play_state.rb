@@ -47,6 +47,7 @@ class PlayState < ApplicationRecord
   end
 
   def record_last_line_update_at!
+    # update_atを変更せずにlast_line_update_atだけ更新する
     update_column(:last_line_update_at, Time.current)
   end
 
