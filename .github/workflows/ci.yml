@@ -13,18 +13,8 @@ jobs:
   scan_ruby:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
-
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
       - name: Install dependencies
         run: |
@@ -36,18 +26,8 @@ jobs:
   scan_js:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
-
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
       - name: Install dependencies
         run: |
@@ -59,18 +39,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
-
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
       - name: Install dependencies
         run: |
@@ -87,17 +57,8 @@ jobs:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Cache vendor/bundle
-        uses: actions/cache@v4
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: ${{ runner.os }}-gems-
-
-      - name: Ensure bundle dir
-        run: mkdir -p vendor/bundle
+      - name: Setup bundle
+        uses: ./.github/actions/setup-bundle
 
       - name: Start DB container
         run: |
