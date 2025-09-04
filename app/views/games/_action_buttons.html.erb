@@ -1,4 +1,4 @@
-<%= form_with url: (@presenter.phase == :select_now ? select_action_path : advance_cut_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
+<%= form_with url: (@presenter.phase == :select_now ? select_action_game_path : advance_cut_game_path), method: :post, data: { turbo_frame: "game_play" } do |f| %>
   <%= hidden_field_tag :state_timestamp, @presenter.play_state.updated_at.iso8601 %>
   <div class="d-grid gap-2 mx-auto mt-2 mt-md-4" style="width: 80%;">
     <% 4.times do |i| %>

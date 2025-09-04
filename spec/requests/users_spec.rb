@@ -6,7 +6,7 @@ RSpec.describe "ユーザー登録", type: :request do
 
   describe "GET /signup" do
     it "200 OK が返る" do
-      get signup_path
+      get new_user_path
       expect(response).to have_http_status(:ok)
     end
   end
@@ -15,9 +15,9 @@ RSpec.describe "ユーザー登録", type: :request do
     context "有効なパラメータの場合" do
       it "User が 1 件増え、ログイン画面にリダイレクトされる" do
         expect {
-          post signup_path, params: { user: valid_attributes }
+          post users_path, params: { user: valid_attributes }
         }.to change(User, :count).by(1)
-        expect(response).to redirect_to(login_path)
+        expect(response).to redirect_to(new_session_path)
         follow_redirect!
         expect(response.body).to include("登録が完了しました。ログインしてください。")
       end
@@ -25,7 +25,7 @@ RSpec.describe "ユーザー登録", type: :request do
 
     context "無効なパラメータの場合" do
       it "ステータス422で再描画され、インラインエラーが表示される" do
-        post signup_path, params: { user: invalid_attributes }
+        post users_path, params: { user: invalid_attributes }
         expect(response).to have_http_status(:unprocessable_entity)
         expect(response.body).to include("メールアドレスを入力してください")
         expect(response.body).to include("誕生月は一覧にありません")

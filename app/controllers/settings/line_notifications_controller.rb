@@ -1,4 +1,4 @@
-class LineNotificationSettingsController < ApplicationController
+class Settings::LineNotificationsController < ApplicationController
   before_action :ensure_line_login_authenticated, only: %i[show update]
 
   def show

@@ -36,7 +36,7 @@
   <% login_page = (controller_name == 'sessions' && action_name == 'new') %>
 
   <body class="<%= login_page ? 'fade-in' : '' %>">
-    <% unless controller_name.in?(%w[games public_pages settings line_notification_settings status delete_account]) %>
+    <% unless controller_name.in?(%w[games public_pages settings line_notifications accounts status]) %>
       <%= render 'shared/flash_message' %>
     <% end %>
     <main>

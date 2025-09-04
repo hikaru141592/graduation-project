@@ -17,11 +17,11 @@ RSpec.describe 'ログイン・ログアウト機能', type: :system do
     end
 
     it '誤った認証情報ではログインできずエラーメッセージが表示される' do
-      visit login_path
+      visit new_session_path
       fill_in 'メールアドレス', with: user.email
       fill_in 'パスワード', with: 'wrongpass'
       click_button 'ログイン'
-      Capybara.assert_current_path login_path, ignore_query: true
+      Capybara.assert_current_path new_session_path, ignore_query: true
       expect(page).to have_content 'メールアドレスかパスワードが違います。'
     end
   end
@@ -45,7 +45,7 @@ RSpec.describe 'ログイン・ログアウト機能', type: :system do
       end
 
       # ④ ログアウト後の検証
-      expect(page).to have_current_path login_path, ignore_query: true
+      expect(page).to have_current_path new_session_path, ignore_query: true
       expect(page).to have_content 'ログアウトしました。'
     end
   end

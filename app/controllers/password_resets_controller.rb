@@ -14,7 +14,7 @@ class PasswordResetsController < ApplicationController
       # user.save!
       # UserMailer.reset_password_email(user).deliver_now
     end
-    redirect_to password_resets_create_path, success: t("flash.password_resets.create.success")
+    redirect_to create_page_password_resets_path, success: t("flash.password_resets.create.success")
   end
 
   def create_page
@@ -46,7 +46,7 @@ class PasswordResetsController < ApplicationController
 
     @user.password_confirmation = password_confirmation
     if @user.change_password!(password)
-      redirect_to complete_update_password_reset_path, success: t("flash.password_resets.update.success")
+      redirect_to complete_update_password_resets_path, success: t("flash.password_resets.update.success")
     else
       flash.now[:danger] = @user.errors.full_messages.join(", ")
       render :edit, status: :unprocessable_entity
