@@ -15,7 +15,7 @@ jobs:
     steps:
       # 共通処理1
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # 共通処理2
       - name: Setup bundle
@@ -34,7 +34,7 @@ jobs:
     steps:
       # 共通処理1
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # 共通処理2
       - name: Setup bundle
@@ -53,7 +53,7 @@ jobs:
     steps:
       # 共通処理1
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # 共通処理2
       - name: Setup bundle
@@ -77,7 +77,7 @@ jobs:
     steps:
       # 共通処理1
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       # 共通処理2
       - name: Setup bundle
