@@ -13,39 +13,45 @@ jobs:
   scan_ruby:
     runs-on: ubuntu-latest
     steps:
+      # 共通処理1
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
+      # 共通処理2
       - name: Install dependencies
-        run: |
-          docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bundle install
+        uses: ./.github/actions/install-deps
 
+      # 個別処理
       - name: Scan for common Rails security vulnerabilities using static analysis
         run: docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bin/brakeman --no-pager
 
   scan_js:
     runs-on: ubuntu-latest
     steps:
+      # 共通処理1
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
+      # 共通処理2
       - name: Install dependencies
-        run: |
-          docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bundle install
+        uses: ./.github/actions/install-deps
 
+      # 個別処理
       - name: Scan for security vulnerabilities in JavaScript dependencies
         run: docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
     steps:
+      # 共通処理1
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
+      # 共通処理2
       - name: Install dependencies
-        run: |
-          docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bundle install
+        uses: ./.github/actions/install-deps
 
+      # 個別処理
       - name: Lint code for consistent style
         run: docker compose run --rm -v ${{ github.workspace }}/vendor/bundle:/usr/local/bundle web bin/rubocop -f github
 
@@ -57,9 +63,11 @@ jobs:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
     steps:
+      # 共通処理1
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
+      # 個別処理
       - name: Start DB container
         run: |
           docker compose up -d db
