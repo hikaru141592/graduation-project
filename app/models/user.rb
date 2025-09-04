@@ -25,7 +25,10 @@ class User < ApplicationRecord
   validates :name,      presence: true, length: { maximum: NAME_MAX_LENGTH }
   validates :egg_name,
     presence: true,
-    length: { maximum: 6 },
+    length: { maximum: 6 }
+
+  # LINE認証による仮登録時のみ未登録とし、仮登録ユーザーをrootに通したりしないようにするための判断基準とする。
+  validates :egg_name,
     exclusion: {
       in: [ "未登録" ],
       message: "には「未登録」という文字列を使用できません"
