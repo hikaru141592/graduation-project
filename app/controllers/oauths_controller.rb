@@ -63,7 +63,6 @@ class OauthsController < ApplicationController
     user.password_confirmation = dummy_pw
 
     user.send(:encrypt_password)
-    # 未登録というegg_nameは本来バリデーションではじかれるがここでは無視する。
     user.save!
     Authentication.create!(user: user, provider: auth_hash.provider, uid: auth_hash.uid)
 
