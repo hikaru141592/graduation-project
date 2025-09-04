@@ -69,10 +69,6 @@ class OauthsController < ApplicationController
     user
   end
 
-  def auth_params
-    params.permit(:provider)
-  end
-
   def update_line_friend_status(user, access_token)
     return if access_token.blank?
     begin
