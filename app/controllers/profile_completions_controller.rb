@@ -1,5 +1,4 @@
 class ProfileCompletionsController < ApplicationController
-
   def edit
     @user = User.find(session[:user_id])
 
