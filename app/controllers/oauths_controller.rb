@@ -53,6 +53,7 @@ class OauthsController < ApplicationController
       birth_month: 1,
       birth_day:   1
     )
+    user.line_registration = true
 
     # 現状フレンド機能は未実装だが、今後実装の可能性があるためフレンドコードを割り振る
     user.send(:assign_friend_code)
@@ -63,7 +64,7 @@ class OauthsController < ApplicationController
 
     user.send(:encrypt_password)
     # 未登録というegg_nameは本来バリデーションではじかれるがここでは無視する。
-    user.save!(validate: false)
+    user.save!
     Authentication.create!(user: user, provider: auth_hash.provider, uid: auth_hash.uid)
 
     user
