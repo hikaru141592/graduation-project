@@ -53,16 +53,27 @@ Rails.application.routes.draw do
 
   resource :profile_completion, only: [:edit, :update]
   # 【resourcesが展開する新ルーティング】
-  # GET   "/profile_completion/edit",  to: "profiles_completions#edit",     as: edit_profile_completion # resourceが展開
-  # PATCH "/profile_completion",       to: "profiles_completions#update",   as: profile_completion      # resourceが展開
+  # get   "/profile_completion/edit",  to: "profile_completions#edit",     as: edit_profile_completion # resourceが展開
+  # patch "/profile_completion",       to: "profile_completions#update",   as: profile_completion      # resourceが展開
   # get   "/complete_profile", to: "users#complete_profile", as: :complete_profile  # 元のコード
   # patch "/complete_profile", to: "users#update_profile",   as: :update_profile    # 元のコード
 
-  get   "/settings", to: "settings#show", as: :settings
-  get   "/settings/line_notification", to: "line_notification_settings#show", as: :settings_line_notification
-  patch "/settings/line_notification", to: "line_notification_settings#update"
-  get   "/settings/delete_account", to: "delete_account#show", as: :delete_account
-  delete "/settings/delete_account", to: "delete_account#destroy"
+  resource :settings, only: [:show]
+  # GET   "/settings", to: "settings#show", as: settings   # resourceが展開、元のコードと同様
+
+  namespace :settings do
+    resource :line_notification, only: [:show, :update]
+      # get   "/settings/line_notification", to: "settings/line_notifications#show",    as: settings_line_notification   # resourceが展開
+      # patch "/settings/line_notification", to: "settings/line_notifications#update",  as: settings_line_notification   # resourceが展開
+      # get   "/settings/line_notification", to: "line_notification_settings#show",     as: :settings_line_notification   # 元のコード
+      # patch "/settings/line_notification", to: "line_notification_settings#update"                                      # 元のコード
+
+    resource :account, only: [:show, :destroy], path: "delete_account", as: "delete_account"
+      # get    "/settings/delete_account", to: "settings/accounts#show",     as: settings_delete_account   # resourceが展開
+      # delete "/settings/delete_account", to: "settings/accounts#destroy",  as: settings_delete_account   # resourceが展開
+      # get    "/settings/delete_account", to: "delete_account#show", as: :delete_account    # 元のコード
+      # delete "/settings/delete_account", to: "delete_account#destroy"                      # 元のコード
+  end
 
   post "/webhooks/line", to: "line_webhooks#callback"
 

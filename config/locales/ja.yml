@@ -15,13 +15,13 @@ ja:
       title:    "ログイン"
   settings:
     show:
-      title:    "設定"
-  delete_account:
-    show:
-      title:    "アカウント削除"
-  line_notification_settings:
-    show:
-      title:    "LINEメッセージ機能"
+      title: "設定"
+    accounts:
+      show:
+        title: "アカウント削除"
+    line_notifications:
+      show:
+        title: "LINEメッセージ機能"
   password_resets:
     new:
       title:    "パスワード再発行"
@@ -44,9 +44,10 @@ ja:
         danger:   "ログインが必要です。"
       redirect_if_incomplete_profile:
         danger:   "セッションが切れています。再度ログインしてください。"
-    delete_account:
-      destroy:
-        danger:   "アカウントを削除しました。"
+    settings:
+      accounts:
+        destroy:
+          danger: "アカウントを削除しました。"
     oauths:
       callback:
         success:  "ログインに成功しました。"

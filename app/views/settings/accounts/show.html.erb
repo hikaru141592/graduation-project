@@ -11,7 +11,7 @@
     <p>
       アカウント削除を行うページです。誤って削除すると戻すことはできませんので十分ご注意ください。
     </p>
-    <%= link_to t("buttons.user_destroy"), delete_account_path,
+    <%= link_to t("buttons.user_destroy"), settings_delete_account_path,
           data: { turbo_method: :delete, turbo_confirm: t("confirmations.user_destroy") },
           class: "btn btn-danger" %>
   </div>
