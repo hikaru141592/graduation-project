@@ -14,10 +14,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 共通処理1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 共通処理2
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
-      # 共通処理2
+      # 共通処理3
       - name: Install dependencies
         uses: ./.github/actions/install-deps
 
@@ -29,10 +33,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 共通処理1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 共通処理2
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
-      # 共通処理2
+      # 共通処理3
       - name: Install dependencies
         uses: ./.github/actions/install-deps
 
@@ -44,10 +52,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 共通処理1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 共通処理2
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
-      # 共通処理2
+      # 共通処理3
       - name: Install dependencies
         uses: ./.github/actions/install-deps
 
@@ -64,6 +76,10 @@ jobs:
 
     steps:
       # 共通処理1
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 共通処理2
       - name: Setup bundle
         uses: ./.github/actions/setup-bundle
 
