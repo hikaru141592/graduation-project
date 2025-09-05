@@ -1,4 +1,10 @@
 <div class="friendship pe-1 pe-md-2 pe-lg-4" >
   <span class="label">friendship:</span>
-  <span class="value"><%= @user_status.happiness_value * 1000 %></span>
+  <span class="value">
+    <% if @play_state.current_event.event_set.name == "イントロ" && (0..4).include?(@play_state.current_event.derivation_number) %>
+    ―
+    <% else %>
+      <%= @user_status.happiness_value * 1000 %>
+    <% end %>
+  </span>
 </div>
