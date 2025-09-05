@@ -986,7 +986,7 @@ module Seeds
       {
         **ar_key('何かしたそう', 2, 'ゲームさせてあげる'),
         trigger_conditions:    always,
-        effects:               effects_status([ "happiness_value",  ]),
+        effects:               effects_status([ "happiness_value", 10 ]),
         **next_ev(call: 'タマモンカート')
       },
       {
