@@ -688,6 +688,13 @@ module Seeds
         **image_set("temp-normal.png", "temp-in-house.png")
       },
       {
+        event_set_name:    'イントロ',
+        name:              '仲良くなれそう',
+        derivation_number: 8,
+        message:           '・・・！',
+        **image_set("temp-nikoniko.png", "temp-in-house.png")
+      },
+      {
         event_set_name:    '誕生日',
         name:              '誕生日',
         derivation_number: 0,
@@ -840,6 +847,7 @@ module Seeds
       { **set_deriv('イントロ', 5),             labels: [ 'こんにちは！', 'なかよくしてね！' ] },
       { **set_deriv('イントロ', 6),             labels: [ 'よっ！',       'なかよくたのむぜ！' ] },
       { **set_deriv('イントロ', 7),             labels: [ 'こんにちは！', 'なかよくしてね！', 'よしよし' ] },
+      s_l(set_deriv('イントロ', 8)),
 
       s_l(set_deriv('誕生日')),
       { **set_deriv('誕生日', 1),               labels: [ 'たのしくすごす！', 'えがおですごす！', 'せいちょうする！', 'ひとをだいじにする！' ] },
@@ -2082,6 +2090,12 @@ module Seeds
         **ar_key('イントロ', 7, 'よしよし'),
         trigger_conditions:    always,
         effects: effects_status([ "love_value", 10 ], [ "happiness_value", 1 ]),
+        **next_ev(deriv: 8)
+      },
+      {
+        **ar_key('イントロ', 8, 'つぎへ'),
+        trigger_conditions:    always,
+        effects: {},
         **next_ev
       },
       {
@@ -2620,19 +2634,18 @@ module Seeds
       { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 27), message: 'いってしまった。 〈たまご〉の めんどう、 うまくみれるかな～。',                   **image_set("temp-none.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   4,  'つぎへ'), 28), message: 'まあ、 とりあえずまずは こえを かけてみよう。',                                  **image_set("temp-normal.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   5,  'こんにちは！')), message: 'あ！ へんじ してくれなかった！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   5,  'こんにちは！')),    message: 'あ！ へんじ してくれなかった！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
       { **cut_key(ar_key('イントロ',   5,  'なかよくしてね！')), message: 'あ！ へんじ してくれなかった！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   6,  'よっ！')), message: 'あ！ また めを そらした！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   6,  'なかよくたのむぜ！')), message: 'あ！ また めを そらした！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   6,  'よっ！')),            message: 'あ！ また めを そらした！',    **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   6,  'なかよくたのむぜ！')), message: 'あ！ また めを そらした！',    **image_set("temp-mewosorasu.png", "temp-in-house.png") },
 
-      { **cut_key(ar_key('イントロ',   7,  'こんにちは！')), message: 'うぐぐ～！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   7,  'なかよくしてね！')), message: 'うぐぐ～！', **image_set("temp-mewosorasu.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし')), message: '〈たまご〉 「んに～！」',         **image_set("temp-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 2), message: '・・・！',                     **image_set("temp-nikoniko.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 3), message: 'なんだ！ けっこう すなおじゃん！',                    **image_set("temp-nikoniko2.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 4), message: 'とにかく、 ちょっときょりが ちじまったきがする！',      **image_set("temp-nikoniko2.png", "temp-in-house.png") },
-      { **cut_key(ar_key('イントロ',   7,  'よしよし'), 5), message: 'これからよろしくね、 〈たまご〉！',                    **image_set("temp-nikoniko2.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'こんにちは！')),    message: 'うぐぐ～！',                                        **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'なかよくしてね！')), message: 'うぐぐ～！',                                        **image_set("temp-mewosorasu.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   7,  'よしよし')),        message: '〈たまご〉 「んに～！」',                            **image_set("temp-nikoniko.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   8,  'つぎへ')),          message: 'なんだ！ けっこう すなおじゃん！',                    **image_set("temp-nikoniko2.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   8,  'つぎへ'), 2),       message: 'とにかく、 ちょっときょりが ちじまったきがする！',      **image_set("temp-nikoniko2.png", "temp-in-house.png") },
+      { **cut_key(ar_key('イントロ',   8,  'つぎへ'), 3),       message: 'これからよろしくね、 〈たまご〉！',                    **image_set("temp-nikoniko2.png", "temp-in-house.png") },
 
       { **cut_key(ar_key('誕生日',     0,  'つぎへ')), message: '〈たまご〉 「にににーに・・・」', **image_set("temp-maekagami.png") },
       { **cut_key(ar_key('誕生日',     0,  'つぎへ'), 2), message: '〈たまご〉 「ににににー！！」', **image_set("temp-nikoniko2.png") },
