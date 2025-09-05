@@ -1,4 +1,8 @@
 class GamesController < ApplicationController
+  # ビューで使用
+  INTRO_START_DERIVATION = (0..4)
+  FRIENDSHIP_MULTIPLIER = 1000
+
   def play
     # apply_automatic_update!によるステータス更新が適切に行われなくなるため@play_state.touchはしない
     # @play_state.apply_automatic_update!はしない
