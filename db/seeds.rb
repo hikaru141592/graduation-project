@@ -42,15 +42,15 @@ module Seeds
       { name: 'ルンルン', description: '踊っている',                                           loop_minutes: 3   },
       { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 20 },
       { name: '怒っている', description: '怒っている',                                         loop_minutes: 20   },
-      { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: 10  },
+      { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: 5  },
       { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
       { name: '寝ている', description: '寝ている',                                             loop_minutes: 5   },
       { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
       { name: '寝起き',   description: '寝起き',                                             loop_minutes: 15   },
       { name: '占い',     description: '占い',                                               loop_minutes: nil   },
       { name: 'テレビ',   description: 'テレビ',                                             loop_minutes: 15   },
-      { name: '扇風機',   description: '扇風機',                                             loop_minutes: 10   },
-      { name: 'こたつ',   description: 'こたつ',                                             loop_minutes: 10   },
+      { name: '扇風機',   description: '扇風機',                                             loop_minutes: 5   },
+      { name: 'こたつ',   description: 'こたつ',                                             loop_minutes: 5   },
       { name: '花見',     description: '花見',                                               loop_minutes: nil   },
       { name: '紅葉',     description: '紅葉',                                               loop_minutes: nil   },
       { name: '年始',     description: '年始',                                               loop_minutes: nil   },
@@ -142,7 +142,7 @@ module Seeds
       },
       {
         name: '泣いている(ランダム)',
-        trigger_conditions: prob_only(3)
+        trigger_conditions: prob_only(2)
       },
       {
         name: '踊っている',
@@ -150,15 +150,15 @@ module Seeds
       },
       {
         name: 'ボーっとしている',
-        trigger_conditions: prob_only(12)
+        trigger_conditions: prob_only(4)
       },
       {
         name: 'ニコニコしている',
-        trigger_conditions: prob_only(9)
+        trigger_conditions: prob_only(12)
       },
       {
         name: 'ゴロゴロしている',
-        trigger_conditions: prob_only(6)
+        trigger_conditions: prob_only(12)
       },
       {
         name: '何かしたそう',
@@ -175,11 +175,13 @@ module Seeds
       {
         name: 'ブロックのおもちゃに夢中',
         daily_limit: 1,
-        trigger_conditions: and_(prob(100), time_range(11, 0, 14, 0, [ off_fm(11, 77, 300), off_tm(11, 77, 300) ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(prob(100), time_range(11, 0, 14, 0, [ off_fm(11, 77, 300), off_tm(11, 77, 300) ]),
+                                 status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'マンガに夢中',
-        trigger_conditions: and_(prob(5), time_range(10, 0, 23, 30, [ off_fm(4, 7, 30) ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(prob(5), time_range(10, 0, 23, 30, [ off_fm(4, 7, 30) ]),
+                                 status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: '眠そう',
@@ -197,34 +199,34 @@ module Seeds
       {
         name: '占い',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(6, 0, 11, 0), prob(33))
+        trigger_conditions: and_(time_range(6, 0, 11, 0), prob(40))
       },
       {
         name: 'タマモン',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 1 ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 1 ]), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'タマえもん',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 5 ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 5 ]), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'ニワトリビアの湖',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(20, 0, 21, 0), weekday([ 3 ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(time_range(20, 0, 21, 0), weekday([ 3 ]), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: '扇風機',
         daily_limit: 2,
         trigger_conditions: and_(time_range(11, 0, 17, 0, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                            date_range(7, 1, 9, 15), prob(25), status("sports_value", ">=", 2))
+                            date_range(7, 1, 9, 15), prob(25), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'こたつ',
         daily_limit: 2,
         trigger_conditions: and_(time_range(11, 0, 21, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                            date_range(12, 16, 3, 15), prob(25), status("sports_value", ">=", 2))
+                            date_range(12, 16, 3, 15), prob(25), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: '花見',
@@ -1052,7 +1054,7 @@ module Seeds
       { **set_deriv('何か言っている'),          labels: [ 'はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる' ] },
       { **set_deriv('何かしたそう'),            labels: [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ] },
       { **set_deriv('何かしたそう', 2),         labels: [ 'ゲームさせてあげる',   'やっぱやめよう' ] },
-      { **set_deriv('ボーっとしている'),        labels: [ 'ながめている',   'こえをかける', 'タンスのうえのノートをみる' ] },
+      { **set_deriv('ボーっとしている'),        labels: [ 'ながめている',   'こえをかける' ] },
       { **set_deriv('ニコニコしている'),        labels: [ 'ながめている', 'タンスのうえのノートをみる' ] },
       { **set_deriv('ゴロゴロしている'),        labels: [ 'ながめている', 'タンスのうえのノートをみる' ] },
       { **set_deriv('何かしたそう', 1),         labels: [ 'さんすう',   'こくご',   'りか',     'しゃかい' ] },
@@ -1264,7 +1266,7 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 0, 'ゲームする'),
-        trigger_conditions:    and_(status("sports_value", ">=", 1), status("vitality", ">=", 153)),
+        trigger_conditions:    and_(status("sports_value", ">=", 1), status("vitality", ">=", 151)),
         effects:               {},
         **next_ev(deriv: 2)
       },
@@ -1395,11 +1397,6 @@ module Seeds
         **ar_key('ボーっとしている', 0, 'こえをかける', 9),
         trigger_conditions: always,
         effects: {}, **next_ev
-      },
-      {
-        **ar_key('ボーっとしている', 0, 'タンスのうえのノートをみる'),
-        trigger_conditions: always,
-        effects: {}, **next_ev(call: 'マニュアル')
       },
       {
         **ar_key('ニコニコしている', 0, 'ながめている'),
@@ -2961,7 +2958,7 @@ module Seeds
       { **cut_key(ar_key('こたつ',                 0, 'こたつをとめる')), message: '〈たまご〉 「・・・！」',                       **image_set("temp-bikkuri.png") },
       { **cut_key(ar_key('こたつ',                 0, 'そっとする')), message: '〈たまご〉は きもちよさそう！',                 **image_set("temp-kotatu1.png") },
 
-      { **cut_key(ar_key('花見',                   0, 'つれていく')), message: 'よし！おはなみに いこっか！',                    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('花見',                   0, 'つれていく')), message: 'よし！ おはなみに いこっか！',                    **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('花見',                   0, 'つれていく'), 2), message: 'おはなみに きた！',                             **image_set("temp-hanami.png", "temp-hanami.png") },
       { **cut_key(ar_key('花見',                   0, 'つれていく'), 3), message: '〈たまご〉 「にー！ んににー！」',                             **image_set("temp-hanami.png", "temp-hanami.png") },
       { **cut_key(ar_key('花見',                   0, 'つれていく'), 4), message: '〈たまご〉 「にににーに、 んにににに！」',                             **image_set("temp-hanami.png", "temp-hanami.png") },
