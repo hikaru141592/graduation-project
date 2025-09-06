@@ -60,7 +60,7 @@ module Seeds
       { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   },
       { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   },
       { name: '質問',     description: '元気ない？、他多数',                                   loop_minutes: nil  },
-      { name: 'いたずら',     description: 'うしろ！、たすけてくれる',                                        loop_minutes: nil  },
+      { name: 'いたずら',     description: 'うしろ！、たすけてくれる',                          loop_minutes: nil  },
       { name: '話聞いて',     description: '自慢話',                                        loop_minutes: nil  },
       { name: 'マニュアル', description: 'マニュアル',                                         loop_minutes: nil  }
     ]
@@ -157,11 +157,11 @@ module Seeds
       },
       {
         name: 'ニコニコしている',
-        trigger_conditions: prob_only(12)
+        trigger_conditions: prob_only(10)
       },
       {
         name: 'ゴロゴロしている',
-        trigger_conditions: prob_only(12)
+        trigger_conditions: prob_only(10)
       },
       {
         name: '何かしたそう',
@@ -286,15 +286,15 @@ module Seeds
         name: '今日はどんな予定？',
         daily_limit: 1,
         trigger_conditions: and_(time_range(6, 0, 10, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                                 prob(30), status("happiness_value", ">=", 1))
+                                 prob(30), status("happiness_value", ">=", 15))
       },
       { name: '今日はどんな一日だった？',
         daily_limit: 1,
         trigger_conditions: and_(time_range(18, 0, 23, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                                 prob(35), status("happiness_value", ">=", 1))
+                                 prob(35), status("happiness_value", ">=", 15))
       },
       { name: 'ヒマなの？',
-        daily_limit: 5,
+        daily_limit: 7,
         trigger_conditions: prob_only(2)
       },
       { name: 'オムライス',
@@ -326,7 +326,7 @@ module Seeds
         trigger_conditions: prob_only(2)
       },
       { name: 'たすけてくれる',
-        daily_limit: 3,
+        daily_limit: 1,
         trigger_conditions: prob_only(1)
       },
       { name: '仲直り',
@@ -351,7 +351,7 @@ module Seeds
       },
       { name: '自慢話',
         daily_limit: 15,
-        trigger_conditions: prob_only(7)
+        trigger_conditions: prob_only(5)
       }
     ]
 
@@ -3451,7 +3451,7 @@ module Seeds
                   'サウナに 10ぷん はいれたらしい！ ゆでたまごに ならない？',                      'まちを あるいてたら モデルに スカウト されたらしい！ いっとうしん なのに？',
                   'パソコンで ブラインドタッチが できるように なったらしい！ ゆうのうだ・・・。',    'キノコの しゅるいを 100しゅるい おぼえたらしい！ キノコすきなの？',
                   'およいで たいへいようを おうだん したらしい！ どうやって かえってきた？',         'ぼき 46きゅうの しかくを もってるらしい！ どのくらいすごいの？',
-                  'どくじの ほうほうで マグロの ようしょくに せいこう したらしい！ かいせんどんたべたい！', 'けんこうしんだんで かんぞうが わかいですねって いわれたらしい！ そりゃそうだろ。',
+                  'どくじの ほうほうで マグロの ようしょくに せいこう したらしい！ かいせん どんたべたい！', 'けんこうしんだんで かんぞうが わかいですねって いわれたらしい！ そりゃそうだろ。',
                   'このまえ うちゅうじんに サインを もらったらしい！ いまどこにいる！？',           'サッカーの リフティング、 さいこう 7かい らしい！ ぼくより できる！' ] },
 
       { **cut_key(ar_key('マニュアル', 1, 'ごはん')),                  message: '〈たまご〉は じかんがたつと おなかがへるよ。',                 **image_set("temp-manual.png") },
