@@ -60,7 +60,7 @@ module Seeds
       { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   },
       { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   },
       { name: '質問',     description: '元気ない？、他多数',                                   loop_minutes: nil  },
-      { name: 'いたずら',     description: 'うしろ！',                                        loop_minutes: nil  },
+      { name: 'いたずら',     description: 'うしろ！、たすけてくれる',                          loop_minutes: nil  },
       { name: '話聞いて',     description: '自慢話',                                        loop_minutes: nil  },
       { name: 'マニュアル', description: 'マニュアル',                                         loop_minutes: nil  }
     ]
@@ -115,6 +115,7 @@ module Seeds
       { category_name: '質問',       name: 'なんかいいこと' },
       { category_name: '質問',       name: 'てんさい' },
       { category_name: 'いたずら',   name: 'うしろ！' },
+      { category_name: 'いたずら',   name: 'たすけてくれる' },
       { category_name: '質問',       name: '仲直り' },
       { category_name: '質問',       name: '最近どこか行った？' },
       { category_name: '質問',       name: '最近なにかがんばってる？' },
@@ -156,11 +157,11 @@ module Seeds
       },
       {
         name: 'ニコニコしている',
-        trigger_conditions: prob_only(12)
+        trigger_conditions: prob_only(10)
       },
       {
         name: 'ゴロゴロしている',
-        trigger_conditions: prob_only(12)
+        trigger_conditions: prob_only(10)
       },
       {
         name: '何かしたそう',
@@ -285,15 +286,15 @@ module Seeds
         name: '今日はどんな予定？',
         daily_limit: 1,
         trigger_conditions: and_(time_range(6, 0, 10, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                                 prob(30), status("happiness_value", ">=", 1))
+                                 prob(30), status("happiness_value", ">=", 15))
       },
       { name: '今日はどんな一日だった？',
         daily_limit: 1,
         trigger_conditions: and_(time_range(18, 0, 23, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                                 prob(35), status("happiness_value", ">=", 1))
+                                 prob(35), status("happiness_value", ">=", 15))
       },
       { name: 'ヒマなの？',
-        daily_limit: 5,
+        daily_limit: 7,
         trigger_conditions: prob_only(2)
       },
       { name: 'オムライス',
@@ -324,6 +325,10 @@ module Seeds
         daily_limit: 3,
         trigger_conditions: prob_only(2)
       },
+      { name: 'たすけてくれる',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
       { name: '仲直り',
         daily_limit: 1,
         trigger_conditions: and_(prob(1), weekday([ 1, 3, 5 ]))
@@ -346,7 +351,7 @@ module Seeds
       },
       { name: '自慢話',
         daily_limit: 15,
-        trigger_conditions: prob_only(7)
+        trigger_conditions: prob_only(5)
       }
     ]
 
@@ -951,6 +956,20 @@ module Seeds
         message:           '『うしろー！』と いっている！',
         **image_set("temp-bikkuri.png")
       },
+      {
+        event_set_name:    'たすけてくれる',
+        name:              'うしろ！と言ってる（たすけてくれる）',
+        derivation_number: 0,
+        message:           '〈たまご〉 「に！ にににー！」',
+        **image_set("temp-bikkuri.png")
+      },
+      {
+        event_set_name:    'たすけてくれる',
+        name:              'うしろ！に対する返事（たすけてくれる）',
+        derivation_number: 1,
+        message:           '『うしろー！』と いっている！',
+        **image_set("temp-bikkuri.png")
+      },
       { event_set_name:    '仲直り',
         name:              '仲直りの方法を聞いてる',
         derivation_number: 0,
@@ -1169,6 +1188,8 @@ module Seeds
       { **set_deriv('てんさい', 1),         labels: [ 'てんさい！', 'うぬぼれだよ' ] },
       s_l(set_deriv('うしろ！')),
       { **set_deriv('うしろ！', 1),         labels: [ 'うしろをふりむく', 'ふりむかない' ] },
+      s_l(set_deriv('たすけてくれる')),
+      { **set_deriv('たすけてくれる', 1),         labels: [ 'うしろをふりむく', 'ふりむかない' ] },
       s_l(set_deriv('仲直り')),
       { **set_deriv('仲直り', 1),           labels: [ 'あやまるんだよ', 'ときがかいけつするよ', 'おかしをあげるんだ', 'くっぷくさせよう' ] },
       s_l(set_deriv('最近どこか行った？')),
@@ -2614,11 +2635,23 @@ module Seeds
       },
       {
         **ar_key('うしろ！', 1, 'うしろをふりむく'), trigger_conditions: always,
-        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+        effects: effects_status([ "happiness_value", 2 ]), **next_ev
       },
       {
         **ar_key('うしろ！', 1, 'ふりむかない'), trigger_conditions: always,
         effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('たすけてくれる', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('たすけてくれる', 1, 'うしろをふりむく'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 2 ]), **next_ev
+      },
+      {
+        **ar_key('たすけてくれる', 1, 'ふりむかない'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", -1 ]), **next_ev
       },
       {
         **ar_key('仲直り', 0, 'つぎへ'), trigger_conditions: always,
@@ -3352,11 +3385,18 @@ module Seeds
       { **cut_key(ar_key('てんさい', 1, 'てんさい！'), 2),        message: '〈たまご〉は ごきげんだ！',         **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('てんさい', 1, 'うぬぼれだよ')),         message: '〈たまご〉 「にー！ んにににー！」', **image_set("temp-yaruki.png") },
 
-      { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく')),           message: 'なんだー！？',    **image_set("temp-bikkuri.png") },
-      { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく'), 2),        message: '・・・。',        **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく')),           message: 'なんだー！？',                                 **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく'), 2),        message: '・・・。',                                     **image_set("temp-bikkuri.png") },
       { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく'), 3),        message: '〈たまご〉が からかっただけだった！ おぼえてろ！', **image_set("temp-warau.png") },
-      { **cut_key(ar_key('うしろ！', 1, 'ふりむかない')),               message: 'まったく、 そういうてには かからないよ！',      **image_set("temp-bikkuri.png") },
-      { **cut_key(ar_key('うしろ！', 1, 'ふりむかない'), 2),            message: '〈たまご〉は めをそらした！',       **image_set("temp-hidariwomiru-teage.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'ふりむかない')),               message: 'まったく、 そういうてには かからないよ！',        **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'ふりむかない'), 2),            message: '〈たまご〉は めをそらした！',                    **image_set("temp-hidariwomiru-teage.png") },
+
+      { **cut_key(ar_key('たすけてくれる', 1, 'うしろをふりむく')),           message: 'ん！？ ハチだー！',                             **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('たすけてくれる', 1, 'うしろをふりむく'), 2),        message: 'このやろ！ このやろ！',                         **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('たすけてくれる', 1, 'うしろをふりむく'), 3),        message: 'ハチを おいはらった！ おしえてくれて ありがとう！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('たすけてくれる', 1, 'ふりむかない')),               message: 'まったく、 そういうてには かからないよ！',        **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('たすけてくれる', 1, 'ふりむかない'), 2),            message: 'あーーー！ いてっ！',                            **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('たすけてくれる', 1, 'ふりむかない'), 3),            message: 'ハチに さされてしまった、 とほほ・・・。',        **image_set("temp-kanasii.png") },
 
       { **cut_key(ar_key('仲直り', 1, 'あやまるんだよ')),           message: '〈たまご〉 「ににに・・・。」',                         **image_set("temp-normal.png") },
       { **cut_key(ar_key('仲直り', 1, 'あやまるんだよ'), 2),        message: '〈たまご〉は やっぱそうだよね、 といっている！',         **image_set("temp-nikoniko2.png") },
@@ -3411,7 +3451,7 @@ module Seeds
                   'サウナに 10ぷん はいれたらしい！ ゆでたまごに ならない？',                      'まちを あるいてたら モデルに スカウト されたらしい！ いっとうしん なのに？',
                   'パソコンで ブラインドタッチが できるように なったらしい！ ゆうのうだ・・・。',    'キノコの しゅるいを 100しゅるい おぼえたらしい！ キノコすきなの？',
                   'およいで たいへいようを おうだん したらしい！ どうやって かえってきた？',         'ぼき 46きゅうの しかくを もってるらしい！ どのくらいすごいの？',
-                  'どくじの ほうほうで マグロの ようしょくに せいこう したらしい！ かいせんどんたべたい！', 'けんこうしんだんで かんぞうが わかいですねって いわれたらしい！ そりゃそうだろ。',
+                  'どくじの ほうほうで マグロの ようしょくに せいこう したらしい！ かいせん どんたべたい！', 'けんこうしんだんで かんぞうが わかいですねって いわれたらしい！ そりゃそうだろ。',
                   'このまえ うちゅうじんに サインを もらったらしい！ いまどこにいる！？',           'サッカーの リフティング、 さいこう 7かい らしい！ ぼくより できる！' ] },
 
       { **cut_key(ar_key('マニュアル', 1, 'ごはん')),                  message: '〈たまご〉は じかんがたつと おなかがへるよ。',                 **image_set("temp-manual.png") },
