@@ -42,15 +42,15 @@ module Seeds
       { name: 'ルンルン', description: '踊っている',                                           loop_minutes: 3   },
       { name: '泣いている', description: '泣いている(空腹)、泣いている(よしよし不足)、泣いている(ランダム)', loop_minutes: 20 },
       { name: '怒っている', description: '怒っている',                                         loop_minutes: 20   },
-      { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: 10  },
+      { name: '夢中',     description: 'ブロックのおもちゃに夢中、マンガに夢中',               loop_minutes: 5  },
       { name: '眠そう',   description: '眠そう',                                               loop_minutes: 12   },
       { name: '寝ている', description: '寝ている',                                             loop_minutes: 5   },
       { name: '寝かせた', description: '寝かせた',                                             loop_minutes: 240   },
       { name: '寝起き',   description: '寝起き',                                             loop_minutes: 15   },
       { name: '占い',     description: '占い',                                               loop_minutes: nil   },
       { name: 'テレビ',   description: 'テレビ',                                             loop_minutes: 15   },
-      { name: '扇風機',   description: '扇風機',                                             loop_minutes: 10   },
-      { name: 'こたつ',   description: 'こたつ',                                             loop_minutes: 10   },
+      { name: '扇風機',   description: '扇風機',                                             loop_minutes: 5   },
+      { name: 'こたつ',   description: 'こたつ',                                             loop_minutes: 5   },
       { name: '花見',     description: '花見',                                               loop_minutes: nil   },
       { name: '紅葉',     description: '紅葉',                                               loop_minutes: nil   },
       { name: '年始',     description: '年始',                                               loop_minutes: nil   },
@@ -59,7 +59,8 @@ module Seeds
       { name: '特訓',     description: '特訓',                                               loop_minutes: nil   },
       { name: '誕生日',    description: '誕生日',                                             loop_minutes: nil   },
       { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   },
-      { name: '質問',     description: '質問',                                                loop_minutes: nil  },
+      { name: '質問',     description: '元気ない？、他多数',                                   loop_minutes: nil  },
+      { name: 'いたずら',     description: 'うしろ！',                                        loop_minutes: nil  },
       { name: 'マニュアル', description: 'マニュアル',                                         loop_minutes: nil  }
     ]
 
@@ -103,6 +104,20 @@ module Seeds
       { category_name: '誕生日',     name: '誕生日' },
       { category_name: 'ゲーム',     name: 'タマモンカート' },
       { category_name: '質問',       name: '元気ない？' },
+      { category_name: '質問',       name: '今日はどんな予定？' },
+      { category_name: '質問',       name: '今日はどんな一日だった？' },
+      { category_name: '質問',       name: 'ヒマなの？' },
+      { category_name: '質問',       name: 'オムライス' },
+      { category_name: '質問',       name: 'ラーメン' },
+      { category_name: '質問',       name: '野菜' },
+      { category_name: '質問',       name: 'ぼくかっこいい' },
+      { category_name: '質問',       name: 'なんかいいこと' },
+      { category_name: '質問',       name: 'てんさい' },
+      { category_name: 'いたずら',   name: 'うしろ！' },
+      { category_name: '質問',       name: '仲直り' },
+      { category_name: '質問',       name: '最近どこか行った？' },
+      { category_name: '質問',       name: '最近なにかがんばってる？' },
+      { category_name: '質問',       name: 'つらいことがあったとき' },
       { category_name: 'マニュアル',  name: 'マニュアル' }
     ]
 
@@ -127,7 +142,7 @@ module Seeds
       },
       {
         name: '泣いている(ランダム)',
-        trigger_conditions: prob_only(3)
+        trigger_conditions: prob_only(2)
       },
       {
         name: '踊っている',
@@ -135,15 +150,15 @@ module Seeds
       },
       {
         name: 'ボーっとしている',
-        trigger_conditions: prob_only(12)
+        trigger_conditions: prob_only(4)
       },
       {
         name: 'ニコニコしている',
-        trigger_conditions: prob_only(9)
+        trigger_conditions: prob_only(12)
       },
       {
         name: 'ゴロゴロしている',
-        trigger_conditions: prob_only(6)
+        trigger_conditions: prob_only(12)
       },
       {
         name: '何かしたそう',
@@ -160,11 +175,13 @@ module Seeds
       {
         name: 'ブロックのおもちゃに夢中',
         daily_limit: 1,
-        trigger_conditions: and_(prob(100), time_range(11, 0, 14, 0, [ off_fm(11, 77, 300), off_tm(11, 77, 300) ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(prob(100), time_range(11, 0, 14, 0, [ off_fm(11, 77, 300), off_tm(11, 77, 300) ]),
+                                 status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'マンガに夢中',
-        trigger_conditions: and_(prob(5), time_range(10, 0, 23, 30, [ off_fm(4, 7, 30) ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(prob(5), time_range(10, 0, 23, 30, [ off_fm(4, 7, 30) ]),
+                                 status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: '眠そう',
@@ -182,34 +199,34 @@ module Seeds
       {
         name: '占い',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(6, 0, 11, 0), prob(33))
+        trigger_conditions: and_(time_range(6, 0, 11, 0), prob(40))
       },
       {
         name: 'タマモン',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 1 ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 1 ]), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'タマえもん',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 5 ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(time_range(19, 0, 20, 0), weekday([ 5 ]), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'ニワトリビアの湖',
         daily_limit: 1,
-        trigger_conditions: and_(time_range(20, 0, 21, 0), weekday([ 3 ]), status("sports_value", ">=", 2))
+        trigger_conditions: and_(time_range(20, 0, 21, 0), weekday([ 3 ]), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: '扇風機',
         daily_limit: 2,
         trigger_conditions: and_(time_range(11, 0, 17, 0, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                            date_range(7, 1, 9, 15), prob(25), status("sports_value", ">=", 2))
+                            date_range(7, 1, 9, 15), prob(25), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: 'こたつ',
         daily_limit: 2,
         trigger_conditions: and_(time_range(11, 0, 21, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
-                            date_range(12, 16, 3, 15), prob(25), status("sports_value", ">=", 2))
+                            date_range(12, 16, 3, 15), prob(25), status("sports_value", ">=", 1), status("vitality", ">=", 151))
       },
       {
         name: '花見',
@@ -261,6 +278,65 @@ module Seeds
         trigger_conditions: and_(time_range(10, 30, 13, 30, [ off_fm(5, 193, 540), off_tm(5, 193, 540) ]), weekday([ 2, 4, 6 ]),
                                  status("hunger_value", ">", 70), status("love_value", "==", 100), status("happiness_value", ">", 60),
                                  status("mood_value", "==", 100))
+      },
+      {
+        name: '今日はどんな予定？',
+        daily_limit: 1,
+        trigger_conditions: and_(time_range(6, 0, 10, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
+                                 prob(30), status("happiness_value", ">=", 1))
+      },
+      { name: '今日はどんな一日だった？',
+        daily_limit: 1,
+        trigger_conditions: and_(time_range(18, 0, 23, 30, [ off_fm(27, 4, 15), off_tm(27, 4, 15) ]),
+                                 prob(35), status("happiness_value", ">=", 1))
+      },
+      { name: 'ヒマなの？',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: 'オムライス',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: 'ラーメン',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: '野菜',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: 'ぼくかっこいい',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: 'なんかいいこと',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: 'てんさい',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: 'うしろ！',
+        daily_limit: 1,
+        trigger_conditions: prob_only(1)
+      },
+      { name: '仲直り',
+        daily_limit: 1,
+        trigger_conditions: and_(prob(1), weekday([ 1, 3, 5 ]))
+      },
+      { name: '最近どこか行った？',
+        daily_limit: 1,
+        trigger_conditions: and_(prob(1), weekday([ 2, 4, 6 ]))
+      },
+      { name: '最近なにかがんばってる？',
+        daily_limit: 1,
+        trigger_conditions: and_(prob(1), weekday([ 0, 3, 5 ]))
+      },
+      { name: 'つらいことがあったとき',
+        daily_limit: 1,
+        trigger_conditions: and_(prob(1), weekday([ 1, 4, 6 ]))
       },
       {
         name: 'マニュアル',
@@ -730,6 +806,194 @@ module Seeds
         **image_set("temp-normal.png")
       },
       {
+        event_set_name:    '今日はどんな予定？',
+        name:              '今日はどんな予定？と聞いてくる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！にににー？」',
+        **image_set("temp-tewoageru.png")
+      },
+      {
+        event_set_name:    '今日はどんな予定？',
+        name:              '今日はどんな予定？に対する返事',
+        derivation_number: 1,
+        message:           '『きょうは どんな よていなのー？』と きかれている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    '今日はどんな一日だった？',
+        name:              '今日はどんな一日だった？と聞いてくる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！にににー？」',
+        **image_set("temp-nikoniko2.png")
+      },
+      {
+        event_set_name:    '今日はどんな一日だった？',
+        name:              '今日はどんな一日だった？に対する返事',
+        derivation_number: 1,
+        message:           '『きょうは いちにち どうだったー？』と きかれている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    'ヒマなの？',
+        name:              'ヒマなの？と聞いてくる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ にににー？」',
+        **image_set("temp-nikoniko2.png")
+      },
+      {
+        event_set_name:    'ヒマなの？',
+        name:              'ヒマなの？に対する返事',
+        derivation_number: 1,
+        message:           '『もしかして ヒマなのー？』と きかれている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    'オムライス',
+        name:              'オムライスについて聞いてくる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ にににーにに！」',
+        **image_set("temp-nikoniko2.png")
+      },
+      {
+        event_set_name:    'オムライス',
+        name:              'オムライスについての返事',
+        derivation_number: 1,
+        message:           '『オムライスは やっぱ デミグラスソース だよね！』と いっている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    'ラーメン',
+        name:              'ラーメンについて聞いてくる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ にににーにに！」',
+        **image_set("temp-nikoniko2.png")
+      },
+      {
+        event_set_name:    'ラーメン',
+        name:              'ラーメンについての返事',
+        derivation_number: 1,
+        message:           '『ラーメンは やっぱ とんこつ だよね！』と いっている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    '野菜',
+        name:              '野菜について聞いてくる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ にににーにに！」',
+        **image_set("temp-nikoniko2.png")
+      },
+      {
+        event_set_name:    '野菜',
+        name:              '野菜についての返事',
+        derivation_number: 1,
+        message:           '『ぼく やさいは にがてなんだよね！』と いっている。',
+        **image_set("temp-normal.png")
+      },
+      {
+        event_set_name:    'ぼくかっこいい',
+        name:              'ぼくかっこいいと言ってる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ ににににー！」',
+        **image_set("temp-nikoniko2.png")
+      },
+      {
+        event_set_name:    'ぼくかっこいい',
+        name:              'ぼくかっこいいに対する返事',
+        derivation_number: 1,
+        message:           '『ぼくって けっこう かっこいいと おもうんだよねー！』と いっている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    'なんかいいこと',
+        name:              'なんかいいことあったのと聞いてる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに？ んににに？」',
+        **image_set("temp-tewoageru.png")
+      },
+      {
+        event_set_name:    'なんかいいこと',
+        name:              'なんかいいことあったのに対する返事',
+        derivation_number: 1,
+        message:           '『なにか いいこと あったのー？』と きかれている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    'てんさい',
+        name:              'ぼくって天才と言ってる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ ににににー！」',
+        **image_set("temp-nikoniko2.png")
+      },
+      {
+        event_set_name:    'てんさい',
+        name:              'ぼくって天才に対する返事',
+        derivation_number: 1,
+        message:           '『ぼくって きっと てんさいだと おもうんだー！』と いっている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      {
+        event_set_name:    'うしろ！',
+        name:              'うしろ！と言ってる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「に！ にににー！」',
+        **image_set("temp-bikkuri.png")
+      },
+      {
+        event_set_name:    'うしろ！',
+        name:              'うしろ！に対する返事',
+        derivation_number: 1,
+        message:           '『うしろー！』と いっている！',
+        **image_set("temp-bikkuri.png")
+      },
+      { event_set_name:    '仲直り',
+        name:              '仲直りの方法を聞いてる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にー、 ににーににに？」',
+        **image_set("temp-hukigen.png")
+      },
+      { event_set_name:    '仲直り',
+        name:              '仲直りの方法に対する返事',
+        derivation_number: 1,
+        message:           '『どうやったら ともだちと なかなおり できるー？』と きかれている。 ケンカしたらしい。',
+        **image_set("temp-komattakao.png")
+      },
+      { event_set_name:    '最近どこか行った？',
+        name:              '最近どこか行った？と聞いてる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ ににににー？」',
+        **image_set("temp-nikoniko2.png")
+      },
+      { event_set_name:    '最近どこか行った？',
+        name:              '最近どこか行った？に対する返事',
+        derivation_number: 1,
+        message:           '『さいきんは どこか いったー？』と きかれている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      { event_set_name:    '最近なにかがんばってる？',
+        name:              '最近なにかがんばってる？と聞いてる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にに！ ににににー？」',
+        **image_set("temp-nikoniko2.png")
+      },
+      { event_set_name:    '最近なにかがんばってる？',
+        name:              '最近なにかがんばってる？に対する返事',
+        derivation_number: 1,
+        message:           '『さいきん なにか がんばってること あるー？』と きかれている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      { event_set_name:    'つらいことがあったとき',
+        name:              'つらいことがあったときについて聞いてる',
+        derivation_number: 0,
+        message:           '〈たまご〉 「にににー、 ににににー？」',
+        **image_set("temp-tewoageru.png")
+      },
+      { event_set_name:    'つらいことがあったとき',
+        name:              'つらいことがあったときについての返事',
+        derivation_number: 1,
+        message:           '『もしも つらいことが あったときって どうしたら いいのかなー？』と きかれている。',
+        **image_set("temp-sounanokanaa.png")
+      },
+      {
         event_set_name:    'マニュアル',
         name:              'マニュアルを手に取る',
         derivation_number: 0,
@@ -790,7 +1054,7 @@ module Seeds
       { **set_deriv('何か言っている'),          labels: [ 'はなしをきいてあげる', 'よしよしする', 'おやつをあげる', 'ごはんをあげる' ] },
       { **set_deriv('何かしたそう'),            labels: [ 'ボールあそびをする',   'べんきょうする',   'おえかきする',     'ゲームする' ] },
       { **set_deriv('何かしたそう', 2),         labels: [ 'ゲームさせてあげる',   'やっぱやめよう' ] },
-      { **set_deriv('ボーっとしている'),        labels: [ 'ながめている',   'こえをかける', 'タンスのうえのノートをみる' ] },
+      { **set_deriv('ボーっとしている'),        labels: [ 'ながめている',   'こえをかける' ] },
       { **set_deriv('ニコニコしている'),        labels: [ 'ながめている', 'タンスのうえのノートをみる' ] },
       { **set_deriv('ゴロゴロしている'),        labels: [ 'ながめている', 'タンスのうえのノートをみる' ] },
       { **set_deriv('何かしたそう', 1),         labels: [ 'さんすう',   'こくご',   'りか',     'しゃかい' ] },
@@ -854,6 +1118,35 @@ module Seeds
       s_l(set_deriv('タマモンカート'), 'ながめている'),
       s_l(set_deriv('元気ない？')),
       { **set_deriv('元気ない？', 1),           labels: [ 'そんなことないよ！', 'さいきんつかれてて', 'つらいことがあって', 'かなしいことがあって' ] },
+
+      s_l(set_deriv('今日はどんな予定？')),
+      { **set_deriv('今日はどんな予定？', 1),   labels: [ 'あそぶ！', 'たいへんないちにち！', 'へいぼんなひ', 'ひまだー' ] },
+      s_l(set_deriv('今日はどんな一日だった？')),
+      { **set_deriv('今日はどんな一日だった？', 1), labels: [ 'たのしかった！', 'たいへんだった', 'へいぼんなひだった', 'すごかった！' ] },
+      s_l(set_deriv('ヒマなの？')),
+      { **set_deriv('ヒマなの？', 1),           labels: [ 'ヒマじゃないよ！', 'ヒマだよ！' ] },
+      s_l(set_deriv('オムライス')),
+      { **set_deriv('オムライス', 1),       labels: [ 'デミグラスソース！', 'ケチャップ！'  ] },
+      s_l(set_deriv('ラーメン')),
+      { **set_deriv('ラーメン', 1),         labels: [ 'わかる！', 'しょうゆでしょ！', 'しおでしょ！', 'みそでしょ！' ] },
+      s_l(set_deriv('野菜')),
+      { **set_deriv('野菜', 1),             labels: [ 'ちゃんとたべなさい', 'わかる！' ] },
+      s_l(set_deriv('ぼくかっこいい')),
+      { **set_deriv('ぼくかっこいい', 1),   labels: [ 'かっこいい！', 'そうかなあ' ] },
+      s_l(set_deriv('なんかいいこと')),
+      { **set_deriv('なんかいいこと', 1), labels: [ 'あったよ！', 'ないよ！', 'おしえないよ' ] },
+      s_l(set_deriv('てんさい')),
+      { **set_deriv('てんさい', 1),         labels: [ 'てんさい！', 'うぬぼれだよ' ] },
+      s_l(set_deriv('うしろ！')),
+      { **set_deriv('うしろ！', 1),         labels: [ 'うしろをふりむく', 'ふりむかない' ] },
+      s_l(set_deriv('仲直り')),
+      { **set_deriv('仲直り', 1),           labels: [ 'あやまるんだよ', 'ときがかいけつするよ', 'おかしをあげるんだ', 'くっぷくさせよう' ] },
+      s_l(set_deriv('最近どこか行った？')),
+      { **set_deriv('最近どこか行った？', 1), labels: [ 'ショッピング！', 'しょくじ！', 'りょこう！', '・・・。' ] },
+      s_l(set_deriv('最近なにかがんばってる？')),
+      { **set_deriv('最近なにかがんばってる？', 1), labels: [ 'べんきょう！', 'しごと！', 'しゅみ！', 'いや、とくに！' ] },
+      s_l(set_deriv('つらいことがあったとき')),
+      { **set_deriv('つらいことがあったとき', 1), labels: [ 'おいしいものをたべる', 'ともだちとあそぶ', 'しゅみにぼっとう', 'あばれる' ] },
 
       s_l(set_deriv('マニュアル')),
       { **set_deriv('マニュアル', 1),           labels: [ 'よむのをやめる',       'ごはん',                'よしよし',                 'ほか' ] },
@@ -973,7 +1266,7 @@ module Seeds
       },
       {
         **ar_key('何かしたそう', 0, 'ゲームする'),
-        trigger_conditions:    and_(status("sports_value", ">=", 1), status("vitality", ">=", 153)),
+        trigger_conditions:    and_(status("sports_value", ">=", 1), status("vitality", ">=", 151)),
         effects:               {},
         **next_ev(deriv: 2)
       },
@@ -1104,11 +1397,6 @@ module Seeds
         **ar_key('ボーっとしている', 0, 'こえをかける', 9),
         trigger_conditions: always,
         effects: {}, **next_ev
-      },
-      {
-        **ar_key('ボーっとしている', 0, 'タンスのうえのノートをみる'),
-        trigger_conditions: always,
-        effects: {}, **next_ev(call: 'マニュアル')
       },
       {
         **ar_key('ニコニコしている', 0, 'ながめている'),
@@ -2151,6 +2439,234 @@ module Seeds
         effects: effects_status([ "happiness_value", 10 ]), **next_ev
       },
       {
+        **ar_key('今日はどんな予定？', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('今日はどんな予定？', 1, 'あそぶ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('今日はどんな予定？', 1, 'たいへんないちにち！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('今日はどんな予定？', 1, 'へいぼんなひ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('今日はどんな予定？', 1, 'ひまだー'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('今日はどんな一日だった？', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('今日はどんな一日だった？', 1, 'たのしかった！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('今日はどんな一日だった？', 1, 'たいへんだった'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('今日はどんな一日だった？', 1, 'へいぼんなひだった'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('今日はどんな一日だった？', 1, 'すごかった！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ヒマなの？', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('ヒマなの？', 1, 'ヒマじゃないよ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ヒマなの？', 1, 'ヒマだよ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('オムライス', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('オムライス', 1, 'ケチャップ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('オムライス', 1, 'デミグラスソース！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ラーメン', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('ラーメン', 1, 'わかる！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ラーメン', 1, 'しょうゆでしょ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ラーメン', 1, 'しおでしょ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ラーメン', 1, 'みそでしょ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('野菜', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('野菜', 1, 'ちゃんとたべなさい'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('野菜', 1, 'わかる！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ぼくかっこいい', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('ぼくかっこいい', 1, 'かっこいい！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('ぼくかっこいい', 1, 'そうかなあ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('なんかいいこと', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('なんかいいこと', 1, 'あったよ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('なんかいいこと', 1, 'ないよ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('なんかいいこと', 1, 'おしえないよ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('てんさい', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('てんさい', 1, 'てんさい！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('てんさい', 1, 'うぬぼれだよ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('うしろ！', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('うしろ！', 1, 'うしろをふりむく'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('うしろ！', 1, 'ふりむかない'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('仲直り', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('仲直り', 1, 'あやまるんだよ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('仲直り', 1, 'ときがかいけつするよ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('仲直り', 1, 'おかしをあげるんだ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('仲直り', 1, 'くっぷくさせよう'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", -1 ]), **next_ev
+      },
+      {
+        **ar_key('最近どこか行った？', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('最近どこか行った？', 1, 'ショッピング！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('最近どこか行った？', 1, 'しょくじ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('最近どこか行った？', 1, 'りょこう！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('最近どこか行った？', 1, '・・・。'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('最近なにかがんばってる？', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('最近なにかがんばってる？', 1, 'べんきょう！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('最近なにかがんばってる？', 1, 'しごと！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('最近なにかがんばってる？', 1, 'しゅみ！'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('最近なにかがんばってる？', 1, 'いや、とくに！'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('つらいことがあったとき', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('つらいことがあったとき', 1, 'おいしいものをたべる'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('つらいことがあったとき', 1, 'ともだちとあそぶ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('つらいことがあったとき', 1, 'しゅみにぼっとう'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
+        **ar_key('つらいことがあったとき', 1, 'あばれる'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
         **ar_key('マニュアル', 0, 'つぎへ'), trigger_conditions: always,
         effects: {}, **next_ev(deriv: 1)
       },
@@ -2442,7 +2958,7 @@ module Seeds
       { **cut_key(ar_key('こたつ',                 0, 'こたつをとめる')), message: '〈たまご〉 「・・・！」',                       **image_set("temp-bikkuri.png") },
       { **cut_key(ar_key('こたつ',                 0, 'そっとする')), message: '〈たまご〉は きもちよさそう！',                 **image_set("temp-kotatu1.png") },
 
-      { **cut_key(ar_key('花見',                   0, 'つれていく')), message: 'よし！おはなみに いこっか！',                    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('花見',                   0, 'つれていく')), message: 'よし！ おはなみに いこっか！',                    **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('花見',                   0, 'つれていく'), 2), message: 'おはなみに きた！',                             **image_set("temp-hanami.png", "temp-hanami.png") },
       { **cut_key(ar_key('花見',                   0, 'つれていく'), 3), message: '〈たまご〉 「にー！ んににー！」',                             **image_set("temp-hanami.png", "temp-hanami.png") },
       { **cut_key(ar_key('花見',                   0, 'つれていく'), 4), message: '〈たまご〉 「にににーに、 んにににに！」',                             **image_set("temp-hanami.png", "temp-hanami.png") },
@@ -2712,6 +3228,99 @@ module Seeds
       { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 11),  message: 'だいじょうぶ、 ちょっとずつまえを むけそうな きがするよ！',  **image_set("temp-normal.png") },
       { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 12),  message: 'ありがとうね、 〈たまご〉！',                             **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('元気ない？', 1, 'かなしいことがあって'), 13),  message: '〈たまご〉 「にー！」',                                   **image_set("temp-nikoniko.png") },
+
+      { **cut_key(ar_key('今日はどんな予定？', 1, 'あそぶ！')),                 message: '〈たまご〉 「ににににー！」',                 **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('今日はどんな予定？', 1, 'あそぶ！'), 2),              message: '〈たまご〉も たくさんあそぶ よていらしい！',   **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('今日はどんな予定？', 1, 'たいへんないちにち！')),      message: '〈たまご〉「ににににー！？」',                 **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('今日はどんな予定？', 1, 'たいへんないちにち！'), 2),   message: '〈たまご〉が がんばろうって いってくれてる！',  **image_set("temp-yaruki.png") },
+      { **cut_key(ar_key('今日はどんな予定？', 1, 'へいぼんなひ')),             message: '〈たまご〉 「にににに～！」',                 **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('今日はどんな予定？', 1, 'へいぼんなひ'), 2),          message: 'へいぼんが いちばんだよねと 〈たまご〉は いっている！」',  **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('今日はどんな予定？', 1, 'ひまだー')),                 message: '〈たまご〉は 「ににに～？」',                 **image_set("temp-bikkuri.png") },
+
+      { **cut_key(ar_key('今日はどんな一日だった？', 1, 'たのしかった！')),                 message: '〈たまご〉 「にににー！」',                **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('今日はどんな一日だった？', 1, 'たのしかった！'), 2),              message: '〈たまご〉は よろこんでる ようだ！',        **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('今日はどんな一日だった？', 1, 'たいへんだった')),                 message: '〈たまご〉 「にににー？」',                  **image_set("temp-komattakao.png") },
+      { **cut_key(ar_key('今日はどんな一日だった？', 1, 'たいへんだった'), 2),              message: '〈たまご〉が ゆっくり やすんでねーって、 いってくれてるよ。',  **image_set("temp-hukigen.png") },
+      { **cut_key(ar_key('今日はどんな一日だった？', 1, 'へいぼんなひだった')),             message: '〈たまご〉 「にににに～！」',               **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('今日はどんな一日だった？', 1, 'すごかった！')),                   message: '〈たまご〉「にに！？ んににに！？」',        **image_set("temp-bikkuri.png") },
+
+      { **cut_key(ar_key('ヒマなの？', 1, 'ヒマじゃないよ！')),        message: 'ヒマじゃないよ！',                 **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('ヒマなの？', 1, 'ヒマじゃないよ！'), 2),     message: '〈たまご〉 「ににに～。」',          **image_set("temp-bimuyou.png") },
+      { **cut_key(ar_key('ヒマなの？', 1, 'ヒマだよ！')),             message: '〈たまご〉 「んににににー！」',      **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('ヒマなの？', 1, 'ヒマだよ！'), 2),          message: 'ぼくは あそぶ よていが いっぱいで いそがしいよ、 といってる！',  **image_set("temp-nikoniko2.png") },
+
+      { **cut_key(ar_key('オムライス', 1, 'ケチャップ！')),         message: '〈たまご〉 「ににに～。」',      **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('オムライス', 1, 'ケチャップ！'), 2),      message: '〈たまご〉は なやみだした！',   **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('オムライス', 1, 'デミグラスソース！')),    message: '〈たまご〉 「ににににー！」',   **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('オムライス', 1, 'デミグラスソース！'), 2), message: 'きずなが ふかまった！',        **image_set("temp-nikoniko2.png") },
+
+      { **cut_key(ar_key('ラーメン', 1, 'わかる！')),           message: '〈たまご〉 「ににににー！」',    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('ラーメン', 1, 'わかる！'), 2),        message: 'きずなが ふかまった！',         **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('ラーメン', 1, 'しょうゆでしょ！')),    message: '〈たまご〉 「にににー！」',      **image_set("temp-yaruki.png") },
+      { **cut_key(ar_key('ラーメン', 1, 'しょうゆでしょ！'), 2), message: 'ゆずれない たたかいだと、 いっている！',       **image_set("temp-yaruki.png") },
+      { **cut_key(ar_key('ラーメン', 1, 'しおでしょ！')),        message: '〈たまご〉 「ににに～。」',      **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('ラーメン', 1, 'しおでしょ！'), 2),     message: '〈たまご〉は なやみだした！',   **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('ラーメン', 1, 'みそでしょ！')),        message: '〈たまご〉 「・・・。」',        **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('ラーメン', 1, 'みそでしょ！'), 2),     message: 'やっぱ そうかもと、 〈たまご〉は いっている！', **image_set("temp-nikoniko2.png") },
+
+      { **cut_key(ar_key('野菜', 1, 'ちゃんとたべなさい')),         message: '〈たまご〉 「にににに～。」',      **image_set("temp-tukareta.png") },
+      { **cut_key(ar_key('野菜', 1, 'ちゃんとたべなさい'), 2),      message: 'すききらいは ダメだよ！',         **image_set("temp-tukareta.png") },
+      { **cut_key(ar_key('野菜', 1, 'わかる！')),                  message: '〈たまご〉 「ににににー！」',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('野菜', 1, 'わかる！'), 2),               message: 'いきとうごうした！',             **image_set("temp-nikoniko2.png") },
+
+      { **cut_key(ar_key('ぼくかっこいい', 1, 'かっこいい！')),       message: '〈たまご〉 「にににに～！」',     **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('ぼくかっこいい', 1, 'かっこいい！'), 2),    message: '〈たまご〉は ごきげんだ！',       **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('ぼくかっこいい', 1, 'そうかなあ')),         message: '〈たまご〉 「・・・！？」',      **image_set("temp-bikkuri.png") },
+
+      { **cut_key(ar_key('なんかいいこと', 1, 'あったよ！')),           message: '〈たまご〉 「にに！ ににににー！」',                        **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('なんかいいこと', 1, 'あったよ！'), 2),        message: 'そんなきが したらしい！ 〈たまご〉は なんだか うれしそう！',  **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('なんかいいこと', 1, 'ないよ！')),             message: '〈たまご〉 「にににー？」',                                **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('なんかいいこと', 1, 'ないよ！'), 2),          message: 'かんちがいか～、と 〈たまご〉が いっている！',               **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('なんかいいこと', 1, 'おしえないよ')),         message: '〈たまご〉 「にー！ にににー！」',                          **image_set("temp-okoru.png") },
+
+      { **cut_key(ar_key('てんさい', 1, 'てんさい！')),           message: '〈たまご〉 「にににに～！」',       **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('てんさい', 1, 'てんさい！'), 2),        message: '〈たまご〉は ごきげんだ！',         **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('てんさい', 1, 'うぬぼれだよ')),         message: '〈たまご〉 「にー！ んにににー！」', **image_set("temp-yaruki.png") },
+
+      { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく')),           message: 'なんだー！？',    **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく'), 2),        message: '・・・。',        **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'うしろをふりむく'), 3),        message: '〈たまご〉が からかっただけだった！ おぼえてろ！', **image_set("temp-warau.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'ふりむかない')),               message: 'まったく、 そういうてには かからないよ！',      **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('うしろ！', 1, 'ふりむかない'), 2),            message: '〈たまご〉は めをそらした！',       **image_set("temp-hidariwomiru-teage.png") },
+
+      { **cut_key(ar_key('仲直り', 1, 'あやまるんだよ')),           message: '〈たまご〉 「ににに・・・。」',                         **image_set("temp-normal.png") },
+      { **cut_key(ar_key('仲直り', 1, 'あやまるんだよ'), 2),        message: '〈たまご〉は やっぱそうだよね、 といっている！',         **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('仲直り', 1, 'ときがかいけつするよ')),     message: '〈たまご〉 「ににに・・・。」',                          **image_set("temp-kangaeru.png") },
+      { **cut_key(ar_key('仲直り', 1, 'ときがかいけつするよ'), 2),  message: 'たしかに そうかもと、 〈たまご〉は いっている！',         **image_set("temp-nikoniko3.png") },
+      { **cut_key(ar_key('仲直り', 1, 'おかしをあげるんだ')),        message: '〈たまご〉 「ににに・・・！？」',                      **image_set("temp-bikkuri.png") },
+      { **cut_key(ar_key('仲直り', 1, 'おかしをあげるんだ'), 2),     message: 'たしかに それはいいかもと、 〈たまご〉は いっている！',  **image_set("temp-nikoniko3.png") },
+      { **cut_key(ar_key('仲直り', 1, 'くっぷくさせよう')),         message: '〈たまご〉 「・・・。」',                               **image_set("temp-donbiki.png") },
+      { **cut_key(ar_key('仲直り', 1, 'くっぷくさせよう'), 2),      message: '〈たまご〉は ちょっと ひいてる！',                      **image_set("temp-donbiki.png") },
+
+      { **cut_key(ar_key('最近どこか行った？', 1, 'ショッピング！')),    message: '〈たまご〉 「にに！ にににー！」',                               **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近どこか行った？', 1, 'ショッピング！'), 2), message: 'ぼくも おこづかいためて おかいもの いきたいと 〈たまご〉は いっている！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近どこか行った？', 1, 'しょくじ！')),       message: '〈たまご〉 「ににー！ んにににー！」',                            **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近どこか行った？', 1, 'しょくじ！'), 2),    message: 'おいしいものを たべるのは だいじだよねと 〈たまご〉は いっている！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近どこか行った？', 1, 'りょこう！')),        message: '〈たまご〉 「にー！ ににににー！」',                             **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近どこか行った？', 1, 'りょこう！'), 2),     message: 'ぼくも こんどいきたいと いっている！',                           **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近どこか行った？', 1, '・・・。')),         message: '〈たまご〉 「にに？ んににに？」',                               **image_set("temp-sounanokanaa.png") },
+
+      { **cut_key(ar_key('最近なにかがんばってる？', 1, 'べんきょう！')),    message: '〈たまご〉 「にー！ にににー！」',                               **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近なにかがんばってる？', 1, 'べんきょう！'), 2), message: 'ぼくも みならわなきゃと、 〈たまご〉は いっている！',              **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近なにかがんばってる？', 1, 'しごと！')),       message: '〈たまご〉 「にー！ にーににー！」',                              **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近なにかがんばってる？', 1, 'しごと！'), 2),    message: 'しごとを がんばってる ひとって かっこいいと、 〈たまご〉 はいっている！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近なにかがんばってる？', 1, 'しゅみ！')),        message: '〈たまご〉 「ににー！ んににーにー！」',                             **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近なにかがんばってる？', 1, 'しゅみ！'), 2),     message: 'しゅみに ぜんりょくな ひとって あこがれると、 〈たまご〉は いっている！', **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('最近なにかがんばってる？', 1, 'いや、とくに！')),   message: '〈たまご〉 「ににに～？」',                                     **image_set("temp-tewoageru.png") },
+
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'おいしいものをたべる')),    message: '〈たまご〉 「にー！ にににー！」',                                       **image_set("temp-tewoageru.png") },
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'おいしいものをたべる'), 2), message: 'おいしい たべものの ちからは すごいねと 〈たまご〉は いっている！',         **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'ともだちとあそぶ')),       message: '〈たまご〉 「にに！ んにーにー！」',                                      **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'ともだちとあそぶ'), 2),    message: 'やっぱ ともだちの そんざいは だいじだねと、 〈たまご〉は いっている！',      **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'しゅみにぼっとう')),        message: '〈たまご〉 「にー！ んににー！」',                                       **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'しゅみにぼっとう'), 2),     message: 'たしかに それがよさそうと、 〈たまご〉は いっている！',                    **image_set("temp-nikoniko2.png") },
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'あばれる')),               message: '〈たまご〉 「・・・。」',                                                **image_set("temp-normal.png") },
+      { **cut_key(ar_key('つらいことがあったとき', 1, 'あばれる'), 2),            message: '〈たまご〉「にに？」',                                                   **image_set("temp-sounanokanaa.png") },
 
       { **cut_key(ar_key('マニュアル', 1, 'ごはん')),                  message: '〈たまご〉は じかんがたつと おなかがへるよ。',                 **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 2),               message: 'おなかがへると ないちゃうから、ていきてきに ごはんをあげよう。', **image_set("temp-manual.png") },
