@@ -61,6 +61,7 @@ module Seeds
       { name: 'ゲーム',    description: 'ゲーム',                                             loop_minutes: 30   },
       { name: '質問',     description: '元気ない？、他多数',                                   loop_minutes: nil  },
       { name: 'いたずら',     description: 'うしろ！',                                        loop_minutes: nil  },
+      { name: '話聞いて',     description: '自慢話',                                        loop_minutes: nil  },
       { name: 'マニュアル', description: 'マニュアル',                                         loop_minutes: nil  }
     ]
 
@@ -118,6 +119,7 @@ module Seeds
       { category_name: '質問',       name: '最近どこか行った？' },
       { category_name: '質問',       name: '最近なにかがんばってる？' },
       { category_name: '質問',       name: 'つらいことがあったとき' },
+      { category_name: '話聞いて',    name: '自慢話' },
       { category_name: 'マニュアル',  name: 'マニュアル' }
     ]
 
@@ -292,7 +294,7 @@ module Seeds
       },
       { name: 'ヒマなの？',
         daily_limit: 1,
-        trigger_conditions: prob_only(1)
+        trigger_conditions: prob_only(2)
       },
       { name: 'オムライス',
         daily_limit: 1,
@@ -320,7 +322,7 @@ module Seeds
       },
       { name: 'うしろ！',
         daily_limit: 1,
-        trigger_conditions: prob_only(1)
+        trigger_conditions: prob_only(2)
       },
       { name: '仲直り',
         daily_limit: 1,
@@ -341,6 +343,10 @@ module Seeds
       {
         name: 'マニュアル',
         trigger_conditions: prob_only(0)
+      },
+      { name: '自慢話',
+        daily_limit: 3,
+        trigger_conditions: prob_only(5)
       }
     ]
 
@@ -993,6 +999,30 @@ module Seeds
         message:           '『もしも つらいことが あったときって どうしたら いいのかなー？』と きかれている。',
         **image_set("temp-sounanokanaa.png")
       },
+      { event_set_name:    '自慢話',
+        name:              '自慢話したいから声をかけてくる',
+        derivation_number: 0,
+        message:           'ん？ なになに？',
+        **image_set("temp-nikoniko2.png")
+      },
+      { event_set_name:    '自慢話',
+        name:              '自慢話したいから聞いてと言ってくる',
+        derivation_number: 1,
+        message:           '『ぼくの すごいはなしを きいてー！』と いっている。',
+        **image_set("temp-nikoniko3.png")
+      },
+      { event_set_name:    '自慢話',
+        name:              '自慢話したいともう一度言ってくる',
+        derivation_number: 2,
+        message:           '『えー、 きいてよー』と いっている。',
+        **image_set("temp-kanasii.png")
+      },
+      { event_set_name:    '自慢話',
+        name:              '自慢話している',
+        derivation_number: 3,
+        message:           '〈たまご〉 「にに！ んににー！ にーににーににー！」',
+        **image_set("temp-nikoniko2.png")
+      },
       {
         event_set_name:    'マニュアル',
         name:              'マニュアルを手に取る',
@@ -1147,6 +1177,10 @@ module Seeds
       { **set_deriv('最近なにかがんばってる？', 1), labels: [ 'べんきょう！', 'しごと！', 'しゅみ！', 'いや、とくに！' ] },
       s_l(set_deriv('つらいことがあったとき')),
       { **set_deriv('つらいことがあったとき', 1), labels: [ 'おいしいものをたべる', 'ともだちとあそぶ', 'しゅみにぼっとう', 'あばれる' ] },
+      s_l(set_deriv('自慢話')),
+      { **set_deriv('自慢話', 1), labels: [ 'きかせて！', 'えー', 'きかないよ' ] },
+      { **set_deriv('自慢話', 2), labels: [ 'きかせて！', 'えー', 'きかないよ' ] },
+      s_l(set_deriv('自慢話', 3)),
 
       s_l(set_deriv('マニュアル')),
       { **set_deriv('マニュアル', 1),           labels: [ 'よむのをやめる',       'ごはん',                'よしよし',                 'ほか' ] },
@@ -2667,6 +2701,42 @@ module Seeds
         effects: {}, **next_ev
       },
       {
+        **ar_key('自慢話', 0, 'つぎへ'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 1)
+      },
+      {
+        **ar_key('自慢話', 1, 'きかせて！'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 3)
+      },
+      {
+        **ar_key('自慢話', 1, 'えー'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 2)
+      },
+      {
+        **ar_key('自慢話', 1, 'きかないよ'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('自慢話', 2, 'きかせて！'), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 3)
+      },
+      {
+        **ar_key('自慢話', 2, 'えー'), trigger_conditions: prob_only(30),
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('自慢話', 2, 'えー', 2), trigger_conditions: always,
+        effects: {}, **next_ev(deriv: 2)
+      },
+      {
+        **ar_key('自慢話', 2, 'きかないよ'), trigger_conditions: always,
+        effects: {}, **next_ev
+      },
+      {
+        **ar_key('自慢話', 3, 'つぎへ'), trigger_conditions: always,
+        effects: effects_status([ "happiness_value", 1 ]), **next_ev
+      },
+      {
         **ar_key('マニュアル', 0, 'つぎへ'), trigger_conditions: always,
         effects: {}, **next_ev(deriv: 1)
       },
@@ -3321,6 +3391,20 @@ module Seeds
       { **cut_key(ar_key('つらいことがあったとき', 1, 'しゅみにぼっとう'), 2),     message: 'たしかに それがよさそうと、 〈たまご〉は いっている！',                    **image_set("temp-nikoniko2.png") },
       { **cut_key(ar_key('つらいことがあったとき', 1, 'あばれる')),               message: '〈たまご〉 「・・・。」',                                                **image_set("temp-normal.png") },
       { **cut_key(ar_key('つらいことがあったとき', 1, 'あばれる'), 2),            message: '〈たまご〉「にに？」',                                                   **image_set("temp-sounanokanaa.png") },
+
+      { **cut_key(ar_key('自慢話', 1, 'きかないよ')),    message: '〈たまご〉 「にー！ ににー！」',         **image_set("temp-okoru.png") },
+      { **cut_key(ar_key('自慢話', 1, 'えー')),         message: '〈たまご〉 「ににに～！」',              **image_set("temp-hukigen.png") },
+      { **cut_key(ar_key('自慢話', 2, 'きかないよ')),    message: '〈たまご〉 「にー！ ににー！」',         **image_set("temp-okoru.png") },
+      { **cut_key(ar_key('自慢話', 2, 'えー')),         message: '〈たまご〉 「にー！ ににー！」',         **image_set("temp-okoru.png") },
+      { **cut_key(ar_key('自慢話', 2, 'えー', 2)),      message: '〈たまご〉 「ににに～！」',              **image_set("temp-hukigen.png") },
+      { **cut_key(ar_key('自慢話', 3, 'つぎへ')),       message: '〈たまご〉は えんしゅうりつを 90ケタ あんき してるらしい！ はんぱじゃない？', **image_set("temp-nikoniko2.png"),
+      messages: [ '〈たまご〉は えんしゅうりつを 90ケタ あんき してるらしい！ はんぱじゃない？',    'このまえ ころんだけど 3びょう なかなかったらしい！ 3びょうだけ？',
+                  'さくばん、 ゆめのなかで せかいを すくったらしい！ すご！ ありがとー！',          'あきかんを けったら うちゅうまで とんでいったらしい！ えええ！',
+                  'カレーライスだったら いくらでも たべれるらしい！ たたかってみる？',              'ハンバーガーなら ひとくちで 3こ たべられるらしい！ ぼくなら 6こいけるけどね!',
+                  'さいきん ようせいさんと ともだちに なったらしい！ しょうかいして！',             'このまえ ほうきに のって つきまで いってきたらしい！ うらやましい！',
+                  'ぼくの バックには こわいおばけが ついてるんだよ といっている！ さ、 さからえない！', 'きょうりゅうと ジャンケンしたら かったらしい！ なんてつよさだ！',
+                  'オムライスを せかいではじめて つくったのは ぼくだと いっている！ あたまがあがらない！', 'このまえ きんじょを あるいてたら でんせつのけんを ひろったらしい！ でんせつって？',
+                  'このまえ うちゅうじんに サインを もらったらしい！ いまどこにいる！？',           'サッカーの リフティング、 さいこう 7かい らしい！ ぼくよりできる！' ] },
 
       { **cut_key(ar_key('マニュアル', 1, 'ごはん')),                  message: '〈たまご〉は じかんがたつと おなかがへるよ。',                 **image_set("temp-manual.png") },
       { **cut_key(ar_key('マニュアル', 1, 'ごはん'), 2),               message: 'おなかがへると ないちゃうから、ていきてきに ごはんをあげよう。', **image_set("temp-manual.png") },
