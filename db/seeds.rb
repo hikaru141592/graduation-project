@@ -294,7 +294,7 @@ module Seeds
       },
       { name: 'ヒマなの？',
         daily_limit: 1,
-        trigger_conditions: prob_only(1)
+        trigger_conditions: prob_only(2)
       },
       { name: 'オムライス',
         daily_limit: 1,
@@ -322,7 +322,7 @@ module Seeds
       },
       { name: 'うしろ！',
         daily_limit: 1,
-        trigger_conditions: prob_only(1)
+        trigger_conditions: prob_only(2)
       },
       { name: '仲直り',
         daily_limit: 1,
