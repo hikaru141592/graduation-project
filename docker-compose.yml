@@ -20,7 +20,6 @@ services:
     ports:
       - "3000:3000"
     environment:
-      # DATABASE_URL は渡さず、database.yml に委ねる
       TZ: Asia/Tokyo
     depends_on:
       - db
