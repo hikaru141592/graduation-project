@@ -11,9 +11,6 @@ class User < ApplicationRecord
   has_many :daily_limit_event_set_counts,       dependent: :destroy
   has_many :counted_event_sets, through: :daily_limit_event_set_counts, source: :event_set
 
-  # （削除予定）
-  accepts_nested_attributes_for :authentications
-
   # has_one関連要素の同時保存
   after_create :build_initial_game_states
 

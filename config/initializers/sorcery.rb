@@ -12,7 +12,7 @@ Rails.application.config.sorcery.configure do |config|
   config.line.key          = ENV["LINE_KEY"]
   config.line.secret       = ENV["LINE_SECRET"]
   if Rails.env.development?
-    config.line.callback_url = "https://2f5116df914d.ngrok-free.app/auth/line/callback"
+    config.line.callback_url = "https://7527b226ee98.ngrok-free.app/auth/line/callback"
   elsif Rails.env.production?
     config.line.callback_url = "https://www.tamago-wakuwaku.com/auth/line/callback"
   end
