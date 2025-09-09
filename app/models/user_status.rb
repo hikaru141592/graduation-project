@@ -14,6 +14,8 @@ class UserStatus < ApplicationRecord
             :japanese,        :japanese_effort,
             :science,         :science_effort,
             :social_studies,  :social_effort,
+            :vitality,        :temp_vitality,
+            presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   def clear_loop_status!
@@ -30,6 +32,14 @@ class UserStatus < ApplicationRecord
 
   def loop_timeout?
     current_loop_event_set_id.present? && !in_loop?
+  end
+
+  def record_loop_start!(next_set)
+    return if next_set.event_category.loop_minutes.blank?
+    update!(
+      current_loop_event_set_id: next_set.id,
+      current_loop_started_at: Time.current
+    )
   end
 
   def apply_automatic_update!(play_state_updated_at, last_line_update_at)
@@ -66,13 +76,5 @@ class UserStatus < ApplicationRecord
       self[attr] = new_value
     end
     save!
-  end
-
-  def record_loop_start!(next_set)
-    return if next_set.event_category.loop_minutes.blank?
-    update!(
-      current_loop_event_set_id: next_set.id,
-      current_loop_started_at: Time.current
-    )
   end
 end

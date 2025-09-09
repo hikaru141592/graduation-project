@@ -118,36 +118,11 @@ class User < ApplicationRecord
   end
 
   def build_initial_game_states
-    create_user_status!(
-      hunger_value:    50,
-      happiness_value: 10,
-      love_value:      50,
-      mood_value:      0,
-      sports_value:    0,
-      art_value:       0,
-      money:           0,
-      arithmetic:      0,
-      arithmetic_effort: 0,
-      japanese:          0,
-      japanese_effort:   0,
-      science:           0,
-      science_effort:    0,
-      social_studies:    0,
-      social_effort:     0,
-    )
+    create_user_status!
     first_set   = EventSet.find_by!(name: "イントロ")
     first_event = Event.find_by!(event_set: first_set, derivation_number: 0)
-    create_play_state!(
-      current_event:             first_event,
-      action_choices_position:   nil,
-      action_results_priority:   nil,
-      current_cut_position:      nil
-    )
-    create_event_temporary_datum!(
-      reception_count: 0,
-      success_count: 0,
-      started_at: Time.current
-    )
+    create_play_state!(current_event: first_event)
+    create_event_temporary_datum!
   end
 
   def truncate_name_to_6_chars
