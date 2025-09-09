@@ -3,29 +3,30 @@ class User < ApplicationRecord
 
   NAME_MAX_LENGTH = 6
 
-  has_one :user_status, dependent: :destroy
-  has_one :play_state, dependent: :destroy
-  has_many :authentications, dependent: :destroy
-  accepts_nested_attributes_for :authentications
-  has_many :user_event_category_invalidations, dependent: :destroy
+  has_one :user_status,           dependent: :destroy
+  has_one :play_state,            dependent: :destroy
   has_one :event_temporary_datum, dependent: :destroy
-  has_many :daily_limit_event_set_counts, dependent: :destroy
+  has_many :authentications,                    dependent: :destroy
+  has_many :user_event_category_invalidations,  dependent: :destroy
+  has_many :daily_limit_event_set_counts,       dependent: :destroy
   has_many :counted_event_sets, through: :daily_limit_event_set_counts, source: :event_set
 
+  # （削除予定）
+  accepts_nested_attributes_for :authentications
+
+  # has_one関連要素の同時保存
   after_create :build_initial_game_states
 
+  # friend_code自動生成
   before_validation :assign_friend_code, if: -> { new_record? && friend_code.blank? }
 
-  validates :email, presence: true, uniqueness: true,
-                    format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :password, length: { minimum: 6 }, confirmation: true,
+  validates :email,    presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, presence: true, length: { minimum: 6 }, confirmation: true,
             if: -> { authentications.empty? && (new_record? || changes[:crypted_password]) }
   validates :password_confirmation, presence: true,
             if: -> { authentications.empty? && (new_record? || changes[:crypted_password]) }
-  validates :name,      presence: true, length: { maximum: NAME_MAX_LENGTH }
-  validates :egg_name,
-    presence: true,
-    length: { maximum: 6 }
+  validates :name,     presence: true, length: { maximum: NAME_MAX_LENGTH }
+  validates :egg_name, presence: true, length: { maximum: 6 }
 
   # LINE認証による仮登録時のみ未登録とし、仮登録ユーザーをrootに通したりしないようにするための判断基準とする。
   validates :egg_name,
@@ -34,10 +35,16 @@ class User < ApplicationRecord
       message: "には「未登録」という文字列を使用できません"
     },
     unless: :line_registration?
+
   validates :birth_month, presence: true, inclusion: { in: 1..12 }
   validates :birth_day,   presence: true, inclusion: { in: 1..31 }
-  validates :friend_code, presence: true, uniqueness: true, format: { with: /\A\d{8}\z/ }
-  validates :reset_password_token, uniqueness: true, allow_nil: true
+  # 誕生月と誕生日の組み合わせが有効であることを確認する
+  validate  :birth_date_must_be_valid
+
+  validates :friend_code,      presence: true, uniqueness: true, format: { with: /\A\d{8}\z/ }
+  validates :reset_password_token,             uniqueness: true, allow_nil: true
+  validates :salt,             presence: true
+  validates :crypted_password, presence: true
 
   enum :role, { general: 0, admin: 1 }
   enum :name_suffix, { no_suffix: 0, chan: 1, kun: 2, sama: 3 }
@@ -72,8 +79,8 @@ class User < ApplicationRecord
   def egg_name_with_suffix
     suffix_map = {
       "no_suffix" => "",
-      "kun"       => "くん",
       "chan"      => "ちゃん",
+      "kun"       => "くん",
       "sama"      => "さま"
     }
 
@@ -148,5 +155,12 @@ class User < ApplicationRecord
 
   def truncate_name_to_6_chars
     self.name = name.each_char.take(6).join.to_s
+  end
+
+  def birth_date_must_be_valid
+    return if birth_month.blank? || birth_day.blank?
+    unless Date.valid_date?(2000, birth_month, birth_day)
+      errors.add(:birth_day, "は実在しない日付です")
+    end
   end
 end
