@@ -1,4 +1,3 @@
-# spec/rails_helper.rb
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -29,12 +28,10 @@ RSpec.configure do |config|
   config.include AuthenticationMacros, type: :system
   config.include AuthenticationMacros, type: :request
 
-  # seeds.rb を 1 度だけ読み込む
   config.before(:suite) do
     Rails.application.load_seed
   end
 
-  # System テストは headless_chrome を使用
   config.before(type: :system) do
     driven_by :headless_chrome
   end

@@ -41,14 +41,13 @@ class PlayState < ApplicationRecord
     )
   end
 
+  # 以下3つのメソッドは、user_statusの自動更新を行うためのもの
+  # 通常のuser_status自動更新                   → play_stateではupdated_atを更新
+  # lineのwebhook機能を用いてuser_status自動更新 → play_stateではlast_line_update_atを更新
+  # user_statusの自動更新は、play_stateのupdated_atとlast_line_update_atのうちの最新の方を基準に行われる
   def apply_automatic_update!(perform_touch: true)
     user_status.apply_automatic_update!(updated_at, last_line_update_at)
     touch if perform_touch
-  end
-
-  def record_last_line_update_at!
-    # update_atを変更せずにlast_line_update_atだけ更新する
-    update_column(:last_line_update_at, Time.current)
   end
 
   def line_apply_automatic_update!
@@ -56,5 +55,10 @@ class PlayState < ApplicationRecord
       apply_automatic_update!(perform_touch: false)
       record_last_line_update_at!
     end
+  end
+
+  def record_last_line_update_at!
+    # update_atを変更せずにlast_line_update_atだけ更新する
+    update_column(:last_line_update_at, Time.current)
   end
 end
