@@ -20,7 +20,7 @@ RSpec.describe EventCategory, type: :model do
   end
 
   it 'loop_minutesが整数かつ0以上なら有効' do
-    [0, 1, 100].each do |val|
+    [ 0, 1, 100 ].each do |val|
       category = build(:event_category, loop_minutes: val)
       expect(category).to be_valid
     end

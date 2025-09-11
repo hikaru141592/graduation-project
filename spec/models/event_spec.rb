@@ -74,7 +74,7 @@ RSpec.describe Event, type: :model do
     let!(:choice2) { create(:action_choice, event: event, position: 1) }
 
     it 'ordered_action_choicesはposition順で並ぶ' do
-      expect(event.ordered_action_choices.map(&:position)).to eq([1,2])
+      expect(event.ordered_action_choices.map(&:position)).to eq([ 1, 2 ])
     end
 
     it 'arithmetic_quiz_being_asked?はevent_set.nameが算数かつderivation_numberが1..4ならtrue' do
@@ -101,4 +101,3 @@ RSpec.describe Event, type: :model do
     end
   end
 end
-
