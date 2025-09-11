@@ -41,4 +41,8 @@ RSpec.configure do |config|
     PlayState.delete_all
     UserStatus.delete_all
   end
+
+  config.before(:each, type: :job) do
+    ActiveJob::Base.queue_adapter = :test
+  end
 end
