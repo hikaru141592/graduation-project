@@ -26,10 +26,6 @@ RSpec.describe 'ログイン・ログアウト機能', type: :system do
   end
 
   context 'ログアウト' do
-    before do
-      login(user)
-    end
-
     it 'ログアウトできる' do
       login(user)
       expect(page).to have_current_path root_path, ignore_query: true
