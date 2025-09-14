@@ -7,7 +7,7 @@ development:
   <<: *default
   host: db
   port: 5432
-  database: hikaru_dev
+  database: hikaru
   username: hikaru
   password: hikaru_pass
 
