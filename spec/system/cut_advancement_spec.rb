@@ -52,21 +52,13 @@ RSpec.describe 'ゲームプレイ画面 行動選択後のカット進行機能
 
       visit current_path
 
-      # ボタンの有無を確認
-      if page.has_button?('つぎへ')
-        puts "'つぎへ' ボタンが見つかりました"
-      else
-        puts "'つぎへ' ボタンが見つかりません"
-      end
-
-      save_screenshot('tmp/cut_advancement_before_click.png')
-
       click_button 'つぎへ'
 
-      save_screenshot('tmp/cut_advancement_after_click.png')
-
-      # 画面遷移を待つ（次のイベントの行動選択フェーズになるまで）
-      expect(page).to have_selector('button', text: 'つぎへ', count: 1)
+      # 行動選択可能フェーズのフォームの出現を待つ
+      # 待たない場合、DB更新前に続きの検証が走ってしまいエラーになる
+      within('turbo-frame#game_play') do
+        expect(page).to have_css("form[action='#{select_action_game_path}']")
+      end
 
       ps = user.play_state.reload
 
@@ -75,9 +67,9 @@ RSpec.describe 'ゲームプレイ画面 行動選択後のカット進行機能
       puts "DEBUG: ps.action_results_priority=#{ps.action_results_priority.inspect}"
       puts "DEBUG: ps.current_cut_position=#{ps.current_cut_position.inspect}"
 
-      expect(ps.action_choices_position).to eq nil
-      expect(ps.action_results_priority).to eq nil
-      expect(ps.current_cut_position).to eq nil
+      expect(ps.action_choices_position).to be_nil
+      expect(ps.action_results_priority).to be_nil
+      expect(ps.current_cut_position).to be_nil
     end
   end
 end

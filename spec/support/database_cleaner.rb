@@ -18,13 +18,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do |ex|
-    if ex.metadata[:type] == :system
-      DatabaseCleaner.strategy = :truncation,
-                                { only: %w[play_states user_statuses] }
-    else
-      DatabaseCleaner.strategy = :truncation,
-                                { except: SEED_TABLES }
-    end
+    DatabaseCleaner.strategy = :truncation, { except: SEED_TABLES }
     DatabaseCleaner.start
   end
 
