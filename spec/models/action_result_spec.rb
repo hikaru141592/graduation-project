@@ -66,13 +66,13 @@ RSpec.describe ActionResult, type: :model do
 
     it '派生先イベントが存在すればそれを返す' do
       event
-      expect(result.apply_derivation).to eq [event_set, event]
+      expect(result.apply_derivation).to eq [ event_set, event ]
     end
 
     it '派生先イベントが存在しなければ派生番号0のイベントを返す' do
       base_event
       result.next_derivation_number = 99
-      expect(result.apply_derivation).to eq [event_set, base_event]
+      expect(result.apply_derivation).to eq [ event_set, base_event ]
     end
   end
 end

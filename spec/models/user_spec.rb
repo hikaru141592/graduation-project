@@ -101,7 +101,7 @@ RSpec.describe User, type: :model do
       end
     end
     it '2月30日, 2月31日, 4月31日は無効' do
-      [ [2, 30], [2, 31], [4, 31] ].each do |month, day|
+      [ [ 2, 30 ], [ 2, 31 ], [ 4, 31 ] ].each do |month, day|
         user = build(:user, valid_attrs.merge(birth_month: month, birth_day: day))
         expect(user).not_to be_valid
         expect(user.errors.details[:birth_day]).to include(a_hash_including(error: "は実在しない日付です"))
@@ -113,7 +113,7 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
     it '3月31日, 12月31日は有効' do
-      [ [3, 31], [12, 31] ].each do |month, day|
+      [ [ 3, 31 ], [ 12, 31 ] ].each do |month, day|
         user = build(:user, valid_attrs.merge(birth_month: month, birth_day: day))
         expect(user).to be_valid
       end

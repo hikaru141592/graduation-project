@@ -19,6 +19,8 @@ rescue ActiveRecord::PendingMigrationError => e
   end
 end
 
+Capybara.server = :puma, { Silent: false }
+
 RSpec.configure do |config|
   config.fixture_paths = [ Rails.root.join('spec/fixtures') ]
   config.use_transactional_fixtures = false
@@ -38,7 +40,9 @@ RSpec.configure do |config|
 
   config.before(:each, type: :system) do
     puts "EventSet 件数 = #{EventSet.count}"
-    PlayState.delete_all
-    UserStatus.delete_all
+  end
+
+  config.before(:each, type: :job) do
+    ActiveJob::Base.queue_adapter = :test
   end
 end

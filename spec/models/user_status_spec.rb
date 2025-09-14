@@ -160,12 +160,12 @@ RSpec.describe UserStatus, type: :model do
     describe '#apply_effects!' do
       it 'effectsでhunger_valueが増減する' do
         before = user_status.hunger_value
-        user_status.apply_effects!({"status" => [{"attribute" => "hunger_value", "delta" => 10}]})
-        expect(user_status.hunger_value).to eq([before + 10, 100].min)
+        user_status.apply_effects!({ "status" => [ { "attribute" => "hunger_value", "delta" => 10 } ] })
+        expect(user_status.hunger_value).to eq([ before + 10, 100 ].min)
       end
       it 'effectsで負の値は0未満にならない' do
         user_status.hunger_value = 5
-        user_status.apply_effects!({"status" => [{"attribute" => "hunger_value", "delta" => -10}]})
+        user_status.apply_effects!({ "status" => [ { "attribute" => "hunger_value", "delta" => -10 } ] })
         expect(user_status.hunger_value).to eq(0)
       end
     end

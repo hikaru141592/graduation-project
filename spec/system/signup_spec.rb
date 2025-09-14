@@ -9,11 +9,11 @@ RSpec.describe "サインアップ（クライアントバリデーション）"
   end
 
   it "必須フィールドに入力せずに送信すると送信が抑制される" do
-    click_button '登録'
+    click_button I18n.t("buttons.register")
     expect(current_path).to eq(new_user_path)
   end
 
-  it "すべての入力欄に required 属性が付いている" do
+  it "すべての入力欄にrequired属性が付いている" do
     %w[
       email
       password
@@ -24,11 +24,11 @@ RSpec.describe "サインアップ（クライアントバリデーション）"
       birth_day
     ].each do |attr|
       expect(page).to have_selector("input[name='user[#{attr}]'][required]"),
-        "user[#{attr}] に required 属性が付いていません"
+        "user[#{attr}] にrequired属性が付いていません"
     end
   end
 
-  it "validationMessage が出ている" do
+  it "validationMessageが出ている" do
     is_valid = page.evaluate_script("document.querySelector('form').checkValidity()")
     expect(is_valid).to eq(false)
     msg = page.evaluate_script(

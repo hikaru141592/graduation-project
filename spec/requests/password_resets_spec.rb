@@ -7,7 +7,7 @@ RSpec.describe 'PasswordResets', type: :request do
     it '正常に表示される' do
       get new_password_reset_path
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('パスワード再発行')
+      expect(response.body).to include(I18n.t('password_resets.new.title'))
     end
   end
 
@@ -19,16 +19,8 @@ RSpec.describe 'PasswordResets', type: :request do
       follow_redirect!
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('パスワード再発行の案内メールを送信しました')
-      expect(response.body).to include('受信メールを確認してください')
-    end
-  end
-
-  describe 'GET /password_resets/create_page' do
-    it '確認ページが表示される' do
-      get create_page_password_resets_path
-      expect(response).to have_http_status(:success)
-      expect(response.body).to include('パスワード再発行')
+      expect(response.body).to include(I18n.t('flash.password_resets.create.success'))
+      expect(response.body).to include(I18n.t('password_resets.create_page.title'))
     end
   end
 
@@ -38,7 +30,7 @@ RSpec.describe 'PasswordResets', type: :request do
       get edit_password_reset_path(user.reset_password_token)
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('新しいパスワードの登録')
+      expect(response.body).to include(I18n.t('password_resets.edit.title'))
     end
   end
 
@@ -57,7 +49,7 @@ RSpec.describe 'PasswordResets', type: :request do
       follow_redirect!
 
       expect(response).to have_http_status(:success)
-      expect(response.body).to include('パスワードの再登録が完了しました。')
+      expect(response.body).to include(I18n.t('flash.password_resets.update.success'))
     end
   end
 end

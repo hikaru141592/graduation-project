@@ -1,5 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe SeasonalNotificationJob, type: :job do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "perform_laterでキューに積まれる" do
+    expect {
+      SeasonalNotificationJob.perform_later
+    }.to have_enqueued_job(SeasonalNotificationJob)
+  end
 end

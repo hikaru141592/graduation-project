@@ -95,27 +95,27 @@ RSpec.describe ActionChoice, type: :model do
       let(:false_condition) { { "type" => "status", "attribute" => "hungry_value", "operator" => ">", "value" => 100 } }
 
       it 'and: 真真→true' do
-        conds = { "operator" => "and", "conditions" => [true_condition, true_condition] }
+        conds = { "operator" => "and", "conditions" => [ true_condition, true_condition ] }
         expect(choice.send(:conditions_met?, conds, user)).to eq true
       end
       it 'and: 真偽→false' do
-        conds = { "operator" => "and", "conditions" => [true_condition, false_condition] }
+        conds = { "operator" => "and", "conditions" => [ true_condition, false_condition ] }
         expect(choice.send(:conditions_met?, conds, user)).to eq false
       end
       it 'and: 偽偽→false' do
-        conds = { "operator" => "and", "conditions" => [false_condition, false_condition] }
+        conds = { "operator" => "and", "conditions" => [ false_condition, false_condition ] }
         expect(choice.send(:conditions_met?, conds, user)).to eq false
       end
       it 'or: 真真→true' do
-        conds = { "operator" => "or", "conditions" => [true_condition, true_condition] }
+        conds = { "operator" => "or", "conditions" => [ true_condition, true_condition ] }
         expect(choice.send(:conditions_met?, conds, user)).to eq true
       end
       it 'or: 真偽→true' do
-        conds = { "operator" => "or", "conditions" => [true_condition, false_condition] }
+        conds = { "operator" => "or", "conditions" => [ true_condition, false_condition ] }
         expect(choice.send(:conditions_met?, conds, user)).to eq true
       end
       it 'or: 偽偽→false' do
-        conds = { "operator" => "or", "conditions" => [false_condition, false_condition] }
+        conds = { "operator" => "or", "conditions" => [ false_condition, false_condition ] }
         expect(choice.send(:conditions_met?, conds, user)).to eq false
       end
     end

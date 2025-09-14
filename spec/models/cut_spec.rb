@@ -44,7 +44,7 @@ RSpec.describe Cut, type: :model do
   end
 
   describe 'インスタンスメソッド#random_message' do
-    let(:cut) { build(:cut, valid_attrs.merge(messages: ["A", "B", "C"])) }
+    let(:cut) { build(:cut, valid_attrs.merge(messages: [ "A", "B", "C" ])) }
 
     it 'messagesが空ならmessageを返す' do
       cut.messages = []
@@ -54,7 +54,7 @@ RSpec.describe Cut, type: :model do
     it 'messagesがあればseedで同じ値を返す' do
       seed = Time.current
       expect(cut.random_message(seed)).to eq cut.random_message(seed)
-      expect(["A", "B", "C"]).to include(cut.random_message(seed))
+      expect([ "A", "B", "C" ]).to include(cut.random_message(seed))
     end
   end
 end
