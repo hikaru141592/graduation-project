@@ -1,8 +1,11 @@
-# Effect JSONB スキーマ
+# EventCategoryモデルにおけるeffect属性のJSONB ひな型
 
-## ひな型
+## 指定できること
+- 以下の値の増減が可能
+  - ステータス値
+  - アイテム所持数（今後実装予定）
 
-```json
+```
 {
   "status": [
     { "attribute": "hunger_value", "delta": 30 },

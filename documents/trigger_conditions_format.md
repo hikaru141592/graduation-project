@@ -1,4 +1,4 @@
-# Trigger Conditions JSONB ひな型
+# EventCategoryモデルにおけるtrigger_conditions属性のJSONB ひな型
 
 ## 指定できる条件
 - 以下の条件をAND条件かOR条件で複数指定可能
