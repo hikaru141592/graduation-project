@@ -1,4 +1,4 @@
-# EventCategoryモデルにおけるeffect属性のJSONB ひな型
+# ActionResultモデルにおけるeffect属性のJSONB ひな型
 
 ## 指定できること
 - 以下の値の増減が可能

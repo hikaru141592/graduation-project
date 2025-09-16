@@ -1,4 +1,4 @@
-# EventCategoryモデルにおけるtrigger_conditions属性のJSONB ひな型
+# EventCategoryモデルとActionResultモデルにおけるtrigger_conditions属性のJSONB ひな型
 
 ## 指定できる条件
 - 以下の条件をAND条件かOR条件で複数指定可能
@@ -11,6 +11,7 @@
   - 曜日
   - 日付の範囲
     - 年末年始をまたいで指定可能
+- 条件判定はConditionEvaluatorサービスクラスで行う
 
 ```
 {
