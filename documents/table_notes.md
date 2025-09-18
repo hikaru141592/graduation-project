@@ -1,6 +1,6 @@
 # テーブル・カラム補足
 各テーブルの意味のわかりにくいカラムのみ抜粋
-  - [ER図](https://drive.google.com/file/d/1I5AovyKQ4KPsyWEap5AUllmAagCTPRBm/view?usp=sharing)と合わせてご覧ください。
+  - [ER図](https://drive.google.com/file/d/1sA-isZ16XqxQ1aOIg4FuBQPWqhBCoNVN/view?usp=sharing)と合わせてご覧ください。
 
 ## 1. イベント関連テーブル（eventsとその先祖と子孫のテーブル群）
 
