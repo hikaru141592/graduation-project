@@ -1,9 +1,16 @@
 module AuthenticationMacros
   def login(user, password = 'password')
+    Capybara.reset_sessions!
     visit new_session_path
+    expect(page).to have_selector('form', wait: 5)
+    expect(page).to have_field(I18n.t('activerecord.attributes.user.email'),    disabled: :all, wait: 5)
+    expect(page).to have_field(I18n.t('activerecord.attributes.user.password'), disabled: :all, wait: 5)
+    expect(page).to have_field(I18n.t('activerecord.attributes.user.email'),    disabled: false, wait: 5)
+    expect(page).to have_field(I18n.t('activerecord.attributes.user.password'), disabled: false, wait: 5)
     fill_in I18n.t('activerecord.attributes.user.email'),    with: user.email
     fill_in I18n.t('activerecord.attributes.user.password'), with: password
     click_button I18n.t('buttons.login')
+    expect(page).to have_current_path(root_path, ignore_query: true, wait: 5)
   end
 
   def sign_up_as(attrs)

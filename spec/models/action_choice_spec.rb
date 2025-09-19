@@ -75,99 +75,22 @@ RSpec.describe ActionChoice, type: :model do
     let(:user)   { double('User') }
 
     it 'selected_resultメソッドは条件を満たすaction_resultを返す' do
-      allow(choice).to receive(:conditions_met?).and_return(false, true)
+      false_eval = instance_double(ConditionEvaluator, conditions_met?: false)
+      true_eval  = instance_double(ConditionEvaluator, conditions_met?: true)
+
+      allow(ConditionEvaluator).to receive(:new).and_return(false_eval, true_eval)
       result1 = create(:action_result, action_choice: choice, priority: 1)
       result2 = create(:action_result, action_choice: choice, priority: 2)
       expect(choice.selected_result(user)).to eq(result2)
     end
 
     it 'selected_resultメソッドは条件を満たすaction_resultがなければ最初のaction_resultを返す' do
-      allow(choice).to receive(:conditions_met?).and_return(false, false)
+      false_eval = instance_double(ConditionEvaluator, conditions_met?: false)
+
+      allow(ConditionEvaluator).to receive(:new).and_return(false_eval, false_eval)
       result1 = create(:action_result, action_choice: choice, priority: 1)
       result2 = create(:action_result, action_choice: choice, priority: 2)
       expect(choice.selected_result(user)).to eq(result1)
-    end
-  end
-
-  describe 'プライベートメソッド#conditions_met?' do
-    context '複数条件のand/or判定' do
-      let(:true_condition)  { { "type" => "status", "attribute" => "hungry_value", "operator" => ">", "value" => 10 } }
-      let(:false_condition) { { "type" => "status", "attribute" => "hungry_value", "operator" => ">", "value" => 100 } }
-
-      it 'and: 真真→true' do
-        conds = { "operator" => "and", "conditions" => [ true_condition, true_condition ] }
-        expect(choice.send(:conditions_met?, conds, user)).to eq true
-      end
-      it 'and: 真偽→false' do
-        conds = { "operator" => "and", "conditions" => [ true_condition, false_condition ] }
-        expect(choice.send(:conditions_met?, conds, user)).to eq false
-      end
-      it 'and: 偽偽→false' do
-        conds = { "operator" => "and", "conditions" => [ false_condition, false_condition ] }
-        expect(choice.send(:conditions_met?, conds, user)).to eq false
-      end
-      it 'or: 真真→true' do
-        conds = { "operator" => "or", "conditions" => [ true_condition, true_condition ] }
-        expect(choice.send(:conditions_met?, conds, user)).to eq true
-      end
-      it 'or: 真偽→true' do
-        conds = { "operator" => "or", "conditions" => [ true_condition, false_condition ] }
-        expect(choice.send(:conditions_met?, conds, user)).to eq true
-      end
-      it 'or: 偽偽→false' do
-        conds = { "operator" => "or", "conditions" => [ false_condition, false_condition ] }
-        expect(choice.send(:conditions_met?, conds, user)).to eq false
-      end
-    end
-
-  let(:choice) { ActionChoice.new }
-  let(:user) { double(user_status: double(hungry_value: 50)) }
-
-    it 'alwaysがtrueなら必ずtrue' do
-      conds = { "always" => true }
-      expect(choice.send(:conditions_met?, conds, user)).to eq true
-    end
-
-    it 'status条件（１つのみ）がtrueならtrue' do
-      conds = {
-        "operator" => "and",
-        "conditions" => [
-          { "type" => "status", "attribute" => "hungry_value", "operator" => ">", "value" => 10 }
-        ]
-      }
-      expect(choice.send(:conditions_met?, conds, user)).to eq true
-    end
-
-    it 'status条件（１つのみ）がtrueならfalse' do
-      conds = {
-        "operator" => "and",
-        "conditions" => [
-          { "type" => "status", "attribute" => "hungry_value", "operator" => ">", "value" => 90 }
-        ]
-      }
-      expect(choice.send(:conditions_met?, conds, user)).to eq false
-    end
-
-    it 'probability条件（１つのみ）がtrueになる場合' do
-      conds = {
-        "operator" => "and",
-        "conditions" => [
-          { "type" => "probability", "percent" => 100 }
-        ]
-      }
-      allow_any_instance_of(Object).to receive(:rand).and_return(99)
-      expect(choice.send(:conditions_met?, conds, user)).to eq true
-    end
-
-    it 'probability条件（１つのみ）がfalseになる場合' do
-      conds = {
-        "operator" => "and",
-        "conditions" => [
-          { "type" => "probability", "percent" => 0 }
-        ]
-      }
-      allow_any_instance_of(Object).to receive(:rand).and_return(0)
-      expect(choice.send(:conditions_met?, conds, user)).to eq false
     end
   end
 end
