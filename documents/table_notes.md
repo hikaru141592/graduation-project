@@ -19,6 +19,7 @@
 「派生」で関連するイベント群。
   - 派生が存在しない場合、派生0のイベントのみを所有。
   - カテゴリに属する。
+  - trigger\_conditionsのJSONBのひな型は[こちら](https://github.com/hikaru141592/graduation-project/blob/main/documents/trigger_conditions_format.md)を参照してください。
 
 | カラム               | 意味                               |
 | ------------------- | ---------------------------------- |
@@ -51,6 +52,8 @@
 
 ## action\_results
 ユーザーが選んだ行動（action\_choice）の結果候補を定義。条件に応じてどの結果が選ばれるかが決まる。
+  - trigger\_conditionsのJSONBのひな型は[こちら](https://github.com/hikaru141592/graduation-project/blob/main/documents/trigger_conditions_format.md)を参照してください。
+  - effectsのJSONBのひな型は[こちら](https://github.com/hikaru141592/graduation-project/blob/main/documents/effect_format.md)を参照してください。
 
 | カラム                    | 意味                                                                  |
 | ------------------------ | --------------------------------------------------------------------- |

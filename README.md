@@ -50,7 +50,7 @@
 - すべての行動がメッセージつきで展開するため、感情移入しやすく退屈しにくくなっています。
 
 ## 機能候補
-※ゲーム進行とロジックの詳細については、[こちら](./game_logic.md) にまとめています。
+※ゲーム進行とロジックの詳細については、[こちら](https://github.com/hikaru141592/graduation-project/blob/main/documents/game_logic.md) にまとめています。
 ### MVP（最小リリース時）
 - ユーザー登録（アカウント作成）、ログイン機能
 - ごはんをあげる・なでる・話しかけるなどのふれあい行動
@@ -125,6 +125,7 @@
 
 ## ER図リンク
 [ER図](https://drive.google.com/file/d/1sA-isZ16XqxQ1aOIg4FuBQPWqhBCoNVN/view?usp=sharing)
+- 別途テーブルやカラムに関する補足を[こちら](https://github.com/hikaru141592/graduation-project/blob/main/documents/table_notes.md)にまとめています。
 
 ### 補足
-- ゲーム進行とロジックに関して、特殊な意味を持つ用語を定義しています。詳しくは[こちら](./game_logic.md)を参照してください。
+- ゲーム進行とロジックに関して、特殊な意味を持つ用語を定義しています。詳しくは[こちら](https://github.com/hikaru141592/graduation-project/blob/main/documents/game_logic.md)を参照してください。
